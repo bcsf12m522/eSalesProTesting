@@ -1,0 +1,209 @@
+﻿
+<body id="body-index" onload="startTime()">
+
+    <div id="sticky-footer-wrap">
+
+
+        @*-----------------Top Navigation Start---------------*@
+
+        @{
+            Html.RenderPartial("Top_Navigation_View");
+        }
+
+        @*-----------------Top Navigation End---------------*@
+
+        <div class="container-fluid main-container">
+
+            @*-----------------Side Navigation Start---------------*@
+            <div class="row">
+                @{
+                    Html.RenderPartial("Side_Navigation_View");
+                }
+                @*-----------------Side Navigation End---------------*@
+
+
+
+                @*-----------------Main Container Start---------------*@
+                @*-----------------Main Container Start---------------*@
+
+                <div class="user-page-height">
+                    <div class="bggg-img">
+
+                        @*<h3 id="time_"></h3>*@
+                        <div class="empty-height"></div>
+                        <div class="col-md-12">
+                            <div class="title">
+                                @*<img src="~/img/images/triangle.png"/>*@
+                                <span class="ml-15">Data Reports</span>
+                                <a class="pull-right" href="#" data-toggle="modal" data-target=""><img src="~/img/images/i.png" style="margin: -2px 3px 0px 0;" /></a>
+
+
+
+
+                            </div>
+                            <div class="space">
+                                <div class="row">
+                                    <div class="empty-height"></div><div class="empty-height"></div>
+                                    <div class="col-md-12">
+                                        <div class="col-md-3 pull-left form-group">
+                                            <select name="supplier_name" class="form-control border_black-1px select-class-color">
+                                                <option class="option-color" value="">Order Report</option>
+                                                <option class="option-color" value="">SKU Report</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-md-3 pull-left form-group">
+                                            <select name="doc_type_id" id="doc_type_id" onchange="findByDocType(this.value)" class="form-control border_black-1px select-class-color">
+                                                <option value="-2">Please Select Any</option>
+                                                <option value="-1">Document Type -All</option>
+                                                @foreach (var type in ViewBag.docTypes)
+                                                {
+                                                    <option value="@type.Id">@type.Type</option>
+                                                }
+                                            </select>
+                                        </div>
+
+                                        <div class="col-md-3 pull-left form-group pl-0">
+                                            <input type="text" placeholder="SKU" onkeyup='findBySKU();' id="SKU" class="input_width-height_data_report" />
+                                        </div>
+
+                                        <div class="col-md-3 pull-left form-group pl-0">
+                                            <input type="text" placeholder="Customer Details" class="input_width-height_data_report" />
+                                        </div>
+
+                                    </div>
+
+                                    <div class="clearfix"></div>
+
+                                    <div class="empty-height"></div>
+
+                                    <div class="col-md-12">
+                                        <div class="col-md-3 pull-left form-group">
+                                            <select onchange="findByPayType(this.value)" name="payment_status_id" id="payment_status_id" class="form-control border_black-1px select-class-color">
+                                                <option value="-2">Please Select Any</option>
+                                                <option value="-1">Payment Status -All</option>
+                                                @foreach (var type in ViewBag.payTypes)
+                                                {
+                                                    <option value="@type.Id">@type.Status</option>
+                                                }
+
+                                            </select>
+                                        </div>
+
+                                        @*<div class="col-md-2 pull-left pl-0">*@
+                                        <label class="font-16 black-color mt-5 pull-left ml-12">Start Date :</label>
+                                        @*</div>*@
+                                        <div class="col-md-2 pull-left pl-0 ml-12">
+                                            <input required type="date" id="from_date" oninput="showToDate()" class="date-width-height-data-report" name="from_date">
+
+                                        </div>
+
+                                        @*<div class="col-md-2 pull-left pr-0">*@
+                                        <label class="font-16 black-color mt-5 pull-left end_margin_left">End Date :</label>
+                                        @*</div>*@
+                                        <div class="col-md-2 pull-left">
+                                            <input required type="date" disabled id="to_date" oninput="showDateDiv();findByDate()" class="date-width-height-data-report" name="from_date">
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="clearfix"></div>
+
+                                    <div class="empty-height"></div>
+
+                                    <div class="col-md-12">
+                                        <div class="pull-left ml-15"><label class="black-color"><input id="transaction_no_checkbox" onclick="Transaction_No_Checkboxes()" type="checkbox" checked />Transaction No</label></div>
+                                        <div class="pull-left"><label class="black-color margin_label"><input id="trans_type_checkbox" onclick="Transaction_Type_Checkboxes()" type="checkbox" checked class="margin_checkox" />Trans Type</label></div>
+                                        <div class="pull-left"><label class="black-color margin_label"><input id="buyer_name_checkbox" onclick="Buyer_Name_Checkboxes()" type="checkbox" checked class="margin_checkox" />Buyer Name</label></div>
+                                        <div class="pull-left"><label class="black-color margin_label"><input id="phone_checkbox" onclick="Phone_Checkboxes()" type="checkbox" checked class="margin_checkox" />Phone</label></div>
+                                        @*<div class="pull-left"><label class="black-color margin_label"><input id="email_checkbox" onclick="Email_Checkboxes()" type="checkbox" checked class="margin_checkox" />Email</label></div>*@
+                                        <div class="pull-left"><label class="black-color margin_label"><input id="address_checkbox" onclick="Address_Checkboxes()" type="checkbox" checked class="margin_checkox" />Address</label></div>
+                                        <div class="pull-left"><label class="black-color margin_label"><input id="sku_checkbox" onclick="SKU_Checkboxes()" type="checkbox" checked class="margin_checkox" />SKU</label></div>
+                                        <div class="pull-left"><label class="black-color margin_label"><input id="qty_checkbox" onclick="QTY_Checkboxes()" type="checkbox" checked class="margin_checkox" />Qty</label></div>
+                                        <div class="pull-left"><label class="black-color margin_label"><input id="price_checkbox" onclick="Prices_Checkboxes()" type="checkbox" checked class="margin_checkox" />Prices</label></div>
+                                        <div class="pull-left"><label class="black-color margin_label"><input id="date_checkbox" onclick="Dates_Checkboxes()" type="checkbox" checked class="margin_checkox" />Dates</label></div>
+                                        <div class="pull-left"><label class="black-color margin_label"><input id="payment_status_checkbox" onclick="Payment_Status_Checkboxes()" type="checkbox" checked class="margin_checkox" />Payment Status</label></div>
+                                    </div>
+
+                                    <div class="clearfix"></div>
+
+                                    <div class="empty-height"></div>
+
+                                    <div class="col-md-12">
+                                        <div class="col-md-3 pull-right">
+                                            <a href="#" onclick="data_report_table()" class="width-200 btn btn-primary blue-btn-style btn-mini bold pull-right">Generate Report</a>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="clearfix"></div>
+
+                                    <div class="empty-height"></div><div class="empty-height"></div>
+
+
+
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
+
+                        <div class="empty-height"></div><div class="empty-height"></div><div class="empty-height"></div>
+                        
+                            <div class="col-md-12" id="data_report_table_div" style="display:none">
+                                <table border="0" class="table table-responsive border_black" id="data_report_table">
+                                    <thead>
+
+                                        <tr class="table-heading-fonts table-main-headings">
+                                            <th class="Transaction_no_tr text-center">Transaction No.</th>
+                                            <th class="Trans_type_tr text-center">Trans Type</th>
+                                            <th class="Name_tr text-center">Name</th>
+                                            <th class="Address_tr text-center">Address</th>
+                                            <th class="Phone_tr text-center">Phone</th>
+                                            @*<th class="Email_tr text-center">Email</th>*@
+                                            <th class="SKU_tr text-center">SKU</th>
+                                            <th class="QTY_tr text-center">QTY</th>
+                                            <th class="Price_tr text-center">Price</th>
+                                            <th class="Sale_date_tr text-center">Date</th>
+                                            <th class="Status_tr text-center">Status</th>
+                                        </tr>
+
+                                    </thead>
+
+                                    <tbody class="black-color bold" id="updatedDiv">
+
+                                      
+
+
+                                    </tbody>
+
+                                </table>
+                                <div class="clearfix"></div>
+                            </div>
+
+                    </div>
+                    @*-----------------Main Container Ends---------------*@
+                </div>
+                <div id="sticky-footer-push"></div>
+            </div>
+        </div>
+
+        <footer class="black">
+
+            @{
+                Html.RenderPartial("Footer_View");
+            }
+        </footer>
+
+        
+
+        </div>
+
+
+        <script src="~/Scripts/new-js/jquery-1.11.1.min.js"></script>
+        <script src="~/Scripts/new-js/jquery.datatables.min.js"></script>
+        <script src="~/scripts/report/data_report.js"></script>
+</body>

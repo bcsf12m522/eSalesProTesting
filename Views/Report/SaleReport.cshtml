@@ -1,0 +1,562 @@
+﻿@model List<eSalesPro.Models.Invoice>
+<body id="body-index">
+    <div id="sticky-footer-wrap">
+
+        @*-----------------Top Navigation Start---------------*@
+
+        @{
+            Html.RenderPartial("Top_Navigation_View");
+        }
+
+        @*-----------------Top Navigation End---------------*@
+
+        <div class="container-fluid main-container">
+
+            @*-----------------Side Navigation Start---------------*@
+            <div class="row">
+                @{
+                    Html.RenderPartial("Side_Navigation_View");
+                }
+                @*-----------------Side Navigation End---------------*@
+
+
+
+                @*-----------------Main Container Start---------------*@@*-----------------Main Container Start---------------*@
+                <div class="user-page-height">
+                    <div class="bggg-img">
+                        <div>
+
+                            <div class="col-md-12">
+
+                                <div class="col-md-3 pl-0 pr-0">
+                                    <h3 class="bold font-23">Report Manager<small></small></h3>
+                                </div>
+                                <div class="pull-right mt-10">
+
+                                    <div class="pull-left">
+                                        <input  type="text" onkeyup='findByUser();' class="width_78_height text-center mr-7" placeholder="User..." name="stock_qty" id="User_ID">
+                                    </div>
+
+                                    <div class="pull-left">
+                                        <input type="text" onkeypress='validate(event)' class="width_78_height text-center mr-7" placeholder="Serial no..." name="stock_qty" id="login">
+                                    </div>
+
+                                    <div class="pull-left">
+                                        <input type="text" onkeyup='findByInvoice(this.value)' class="width_78_height text-center mr-7" placeholder="Sales no..." name="stock_qty" id="invoice_ID">
+                                    </div>
+                                    <div class="pull-left">
+                                        <select class="width_78_height text-center mr-7" id="docType" onchange="findByDocType(this.value)">
+                                            
+                                            <option>Please Select Any</option>
+                                            
+                                            <option value="-1">All Types</option>
+                                            @foreach (var type in ViewBag.docTypes)
+                                            {
+                                                <option value="@type.Id">@type.Type</option>
+                                            }
+
+                                        </select>
+                                      
+                                    </div>
+
+                                    <div class="pull-left">
+                                        <select class="width_78_height text-center mr-7" id="payType" onchange="findByPayType(this.value)">
+                                            
+                                            <option>Please Select Any</option>
+                                            <option value="-1">All Payment Types</option>
+                                            @foreach (var type in ViewBag.payTypes)
+                                            {
+                                                <option value="@type.Id">@type.Status</option>
+                                            }
+
+                                        </select>
+
+                                    </div>
+                                    
+                                    <div class="pull-left">
+                                        <label class="black-color mr-3 mt-5">From :</label>
+                                    </div>
+                                    <div class="pull-left">
+                                        <input required type="date" id="from_date" oninput="showToDate()" class="date-width-height mr-3" name="from_date">
+                                    </div>
+                                    <div class="pull-left">
+                                        <label class="black-color mr-3 mt-5">To :</label>
+                                    </div>
+                                    <div class="pull-left">
+                                        <input required type="date" disabled id="to_date" oninput="showDateDiv();findByDate()" class="date-width-height" name="to_date">
+                                    </div>
+
+
+
+
+
+
+                                </div>
+
+                                <div class="clearfix"></div>
+
+                            </div>
+
+                            <div class="clearfix"></div>
+                            <div class="empty-height"></div><div class="empty-height"></div>
+
+                        </div>
+
+                        <div class="clearfix"></div>
+
+                        <div class="col-md-12">
+
+                            <div class="col-md-3 pull-left pl-0">
+                                <a href="~/Home/Epos" class="btn btn-primary blue-btn-style btn-mini bold">Back to EPOS Main Panel</a>
+                            </div>
+
+                            <div class="col-md-5"></div>
+
+                            <div class="col-md-2 pull-right pr-0">
+                                <a href="#" data-toggle="modal" data-target="#ExistingModal" onclick="show_customer_summary()" class="btn btn-primary blue-btn-style btn-mini bold pull-right">Customer Summary</a>
+                            </div>
+
+                            <div class="col-md-2 pull-right pr-0">
+                                <a href="~/Sale/List_Draft" class="btn btn-success blue-btn-style btn-mini bold width-150 pull-right">Draft List</a>
+                            </div>
+
+                            
+
+                        </div>
+                        <div class="clearfix"></div>
+
+                        <div class="empty-height"></div><div class="empty-height"></div><div class="empty-height"></div><div class="empty-height"></div>
+
+                        <div class="clearfix"></div>
+
+                        @*<a href="~/Sale/List_Draft">DRAFT LIST</a>*@
+
+                        @{
+                            Html.RenderPartial("Customer_Summary");
+                        }
+
+
+                        <div class="clearfix"></div>
+
+                        <script src="~/Scripts/new-js/jquery-1.11.1.min.js"></script>
+                        <script src="~/Scripts/new-js/jquery.datatables.min.js"></script>
+
+                        <div id="date_click_div" class="">
+
+                            <div class="col-md-12">
+                                <table border="0" class="table table-responsive border_black" id="table_on_dates">
+                                    <thead>
+                                        <tr class="table-heading-fonts table-main-headings">
+                                            <th class="text-center">Order Id</th>
+                                            <th class="text-center">Customer</th>
+                                            @*<th class="text-center">Customer Type</th>*@
+                                            <th class="text-center">Payment Type</th>
+                                            <th class="text-center">Status</th>
+                                            <th class="text-center">Net</th>
+                                            <th class="text-center">VAT</th>
+                                            <th class="text-center">Gross</th>
+                                            <th class="text-center">Date</th>
+                                            <th class="text-center">Actions</th>
+
+
+                                        </tr>
+                                    </thead>
+                                    <tbody id="updatedDiv" class="black-color bold">
+
+                                     
+                                    </tbody>
+
+                                </table>
+                                <div class="clearfix"></div>
+                            </div>
+
+                            <div class="clearfix"></div>
+
+                            <!-- CLASS HIDDEN WILL BE USED 
+
+                            <div class="hidden">
+
+                                <div class="col-md-12 mt-15">
+                                    @*<section id="no-more-tables">*@
+
+                                    <div class="col-md-1"></div>
+
+                                    <div class="col-md-5 pull-left">
+
+                                        <table id="table_cash_flow" class="black-color border_black">
+                                            <tr>
+                                                <th class="">Cash flow this period (before refunds)</th>
+                                                <td class=""></td>
+                                            </tr>
+
+
+                                            <tr>
+                                                <th class="">Cash</th>
+                                                <td>£114.00</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="">Credit</th>
+                                                <td>£100.00</td>
+                                            </tr>
+
+                                            <tr>
+                                                <th class="">PayPal</th>
+                                                <td>£54.00</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="">Bank Transfer</th>
+                                                <td>£2000.00</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="">Gross</th>
+                                                <td>£99.00</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+
+
+
+                                    <div class="col-md-5 pull-left">
+
+                                        <table id="table_cash_flow" class="black-color border_black">
+                                            <tr>
+                                                <th class="">Cash flow this period (after refunds)</th>
+                                                <td class=""></td>
+                                            </tr>
+
+
+                                            <tr>
+                                                <th class="">Cash</th>
+                                                <td>£72.00</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="">Credit</th>
+                                                <td>£220.00</td>
+                                            </tr>
+
+                                            <tr>
+                                                <th class="">PayPal</th>
+                                                <td>£175.00</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="">Bank Transfer</th>
+                                                <td>£999.00</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="">Gross</th>
+                                                <td>£456.00</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+
+
+                                    <div class="col-md-1"></div>
+
+
+
+
+                                </div>
+
+                                <div class="clearfix"></div>
+
+                                <div class="col-md-12 mt-15">
+
+
+                                    <div class="col-md-1"></div>
+
+                                    <div class="col-md-5 pull-left">
+
+                                        <table id="table_cash_flow" class="black-color border_black">
+                                            <tr>
+                                                <th class="">Total takings this Period</th>
+                                                <td class=""></td>
+                                            </tr>
+
+
+                                            <tr>
+                                                <th class="">Invoices</th>
+                                                <td>£34.00</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="">Item Sale</th>
+                                                <td>£98.00</td>
+                                            </tr>
+
+                                            <tr>
+                                                <th class="">Net</th>
+                                                <td>£321.00</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="">VAT</th>
+                                                <td>£120.00</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="">Gross</th>
+                                                <td>£65.00</td>
+                                            </tr>
+
+                                            <tr>
+                                                <th class="">Due</th>
+                                                <td>£10.00</td>
+                                            </tr>
+
+                                        </table>
+                                    </div>
+
+
+                                    <div class="col-md-5 pull-left">
+
+                                        <table id="table_cash_flow" class="black-color border_black">
+                                            <tr>
+                                                <th class="">Refunds this period</th>
+                                                <td class=""></td>
+                                            </tr>
+
+
+                                            <tr>
+                                                <th class="">Cash</th>
+                                                <td>£934.00</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+
+
+                                    <div class="col-md-1"></div>
+
+                                </div>
+
+                                <div class="clearfix"></div>
+
+                            </div>
+
+                            -->
+
+                        </div>
+
+
+                    </div>
+                </div>
+                @*-----------------Main Container Ends---------------*@
+            </div>
+
+
+            @*<div id="sticky-footer-push"></div>*@
+        </div>
+    </div>
+
+    <footer class="black">
+
+        @{
+            Html.RenderPartial("Footer_View");
+        }
+    </footer>
+
+    <script src="~/scripts/customer_summary/customer_summary.js"></script>
+
+
+    <script>
+        function GetSales(ID) {
+
+            $("#PleaseWait").addClass('showDiv');
+
+            $.ajax({
+
+                url: "/Customer/Edit_Invoice/",
+                data: { id: ID },
+                cache: false,
+                type: "Get",
+                success: function (data) {
+                    alert("Kjjkh");
+                    document.getElementById("edit_invoice").innerHTML = data;
+                    $("#PleaseWait").removeClass('showDiv');
+                    $("#PleaseWait").addClass('hideDiv');
+                },
+                error: function (response) {
+                    alert("Error" + response);
+                }
+
+            })
+        }
+    </script>
+
+    
+    <script>
+     
+    </script>
+
+    <script>
+
+
+
+    </script>
+
+    <script>
+        function showToDate() {
+            var from = document.getElementById("from_date").value;
+
+            if (from == "") {
+            }
+
+            else {
+                document.getElementById("to_date").removeAttribute('disabled');
+            }
+        }
+
+
+    </script>
+
+
+    <script>
+
+        function myDate() {
+            var date = new Date(document.getElementById("to_date")).toDateString("yyyy-MM-dd");
+        }
+
+    </script>
+
+
+
+
+
+    <script>
+        $(document).ready(function () {
+            $('#example').dataTable();
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('#example1').dataTable();
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('#table_on_dates').dataTable();
+        });
+    </script>
+
+    <script>
+        function PrintBtn() {
+            $("#crud_btn_hide").addClass("none");
+            $("#side_navi_hide").addClass("none");
+
+            window.print();
+        }
+    </script>
+
+    <script>
+        function findByUser()
+        {
+            $("#customer_summary").hide();
+            $("#date_click_div").show();
+            var user = document.getElementById('User_ID').value;
+           
+            $.ajax({
+
+                url: '/Report/SaleReportByUser/',
+                data: { str: user },
+                type: 'Get',
+                cache: false,
+                success: function(data)
+                {
+                   
+                   document.getElementById('updatedDiv').innerHTML= data;
+                },
+                error: function (response) {
+            
+                }
+
+            })
+        }
+
+        function findByInvoice(id)
+        {
+            $("#customer_summary").hide();
+            $("#date_click_div").show();
+
+            $.ajax({
+
+                url: '/Report/SaleReportByInvoice/',
+                data: { invoiceId : id },
+                type: 'Get',
+                cache: false,
+                success: function (data) {
+                    document.getElementById('updatedDiv').innerHTML = data;
+                },
+                error: function (response) {
+                    
+                }
+
+            })
+        }
+
+      
+
+        function findByDocType(id) {
+            $("#customer_summary").hide();
+            $("#date_click_div").show();
+
+            $.ajax({
+
+                url: '/Report/SaleReportByDocType/',
+                data: { docTypeId: id },
+                type: 'Get',
+                cache: false,
+                success: function (data) {
+                    document.getElementById('updatedDiv').innerHTML = data;
+                },
+                error: function (response) {
+
+                }
+
+            })
+        }
+
+        function findByPayType(id) {
+            $("#customer_summary").hide();
+            $("#date_click_div").show();
+
+            $.ajax({
+
+                url: '/Report/SaleReportByPayType/',
+                data: { payTypeId: id },
+                type: 'Get',
+                cache: false,
+                success: function (data) {
+                    document.getElementById('updatedDiv').innerHTML = data;
+                },
+                error: function (response) {
+
+                }
+
+            })
+        }
+
+
+        function findByDate() {
+            $("#customer_summary").hide();
+            $("#date_click_div").show();
+
+            //alert("dsfdsdfvdfgdfgdfsgdfhbgefagdsgrgfsgsdggbwdgdsagfgfgdfg");
+            var to = document.getElementById('to_date').value;
+            var from = document.getElementById('from_date').value;
+            $.ajax({
+
+                url: '/Report/SaleReportByDate/',
+                data: { dateFrom:from,dateTo:to },
+                type: 'Get',
+                cache: false,
+                success: function (data) {
+                    document.getElementById('updatedDiv').innerHTML = data;
+                },
+                error: function (response) {
+
+                }
+
+            })
+        }
+
+    </script>
+
+</body>
