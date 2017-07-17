@@ -429,7 +429,7 @@
                                     </div>
 
                                     <div class="col-md-3">
-                                        <a href="~/Product/List" class="btn btn-primary btn-mini width-123 center-block a-cancel height-40 mt-0">Cancel</a>
+                                        <a href="#" class="btn btn-primary btn-mini width-123 center-block a-cancel height-40 mt-0" onclick="dismiss_modal()">Cancel</a>
                                     </div>
                                     <div class="col-md-3"></div>
 
@@ -918,7 +918,7 @@
                                                 <div class="">
                                                     <a href="#" class="add_new_warehouse showDiv  mb-10">
                                                         <img class="stock-transfer-img" src="~/img/images/plus.png" />
-                                                        <label class="mr-180 font-16">Add New Locations</label>
+                                                        <label class="mr-160 font-16">Add New Locations</label>
                                                     </a>
                                                 </div>
 
@@ -1240,7 +1240,7 @@
                                     </div>
 
                                     <div class="col-md-3">
-                                        <a href="~/Product/List" class="btn btn-primary btn-mini blue-btn-style-modal center-block a-cancel">Cancel</a>
+                                        <a href="#" data-dismiss="modal" class="btn btn-primary btn-mini blue-btn-style-modal center-block a-cancel">Cancel</a>
                                     </div>
                                     <div class="col-md-3"></div>
 
@@ -1832,6 +1832,7 @@
         function dismiss_modal(){
             $("#create_category_modal").hide('fast');
             $("#barcode_modal").hide('fast');
+            $("#transfer_stock").hide('fast');
         }
 
 

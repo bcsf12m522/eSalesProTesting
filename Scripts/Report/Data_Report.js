@@ -1,8 +1,4 @@
-﻿function data_report_table() {
-    $('#data_report_table_div').show();
-}
-
-function Transaction_No_Checkboxes() {
+﻿function Transaction_No_Checkboxes() {
 
     if (document.getElementById("transaction_no_checkbox").checked) {
         $('.Transaction_no_tr').show();
@@ -112,91 +108,182 @@ function Payment_Status_Checkboxes() {
     }
 }
 
+$(document).ready(function () {
+    $('#data_report_table').dataTable();
+});
 
+function findByDate() {
 
-    $(document).ready(function () {
-        $('#data_report_table').dataTable();
-    });
+    var to = document.getElementById('to_date').value;
+    var from = document.getElementById('from_date').value;
+    $.ajax({
 
-   
-    function findByDate() {
+        url: '/Report/DataReportByDate/',
+        data: { dateFrom: from, dateTo: to },
+        type: 'Get',
+        cache: false,
+        success: function (data) {
+            document.getElementById('updatedDiv').innerHTML = data;
+        },
+        error: function (response) {
 
-        alert("dsfdsdfvdfgdfgdfsgdfhbgefagdsgrgfsgsdggbwdgdsagfgfgdfg");
-        var to = document.getElementById('to_date').value;
-        var from = document.getElementById('from_date').value;
-        $.ajax({
+        }
 
-            url: '/Report/DataReportByDate/',
-            data: { dateFrom: from, dateTo: to },
-            type: 'Get',
-            cache: false,
-            success: function (data) {
-                document.getElementById('updatedDiv').innerHTML = data;
-            },
-            error: function (response) {
+    })
+}
 
-            }
+function report_dropdown() {
+    
+    var val = document.getElementById('sku_order_report_select').value;
+    //alert(val);
 
-        })
-    }
+    $.ajax({
 
-    function findBySKU() {
+        url: '/Report/DataReportBySKUDropdown/',
+        data: { id: val },
+        type: 'Get',
+        cache: false,
+        success: function (data) {
+            //alert("SUCCESS1");
+            document.getElementById('updatedDiv_SKU').innerHTML = data;
+        },
+        error: function (response) {
+            //alert("errorresponse");
+        }
+
+    })
+}
+
+function findBySKU() {
+    $("#data_report_table_div").show();
+    var sku_input = document.getElementById('SKU').value;
+    //alert(sku_input);
+
+    $.ajax({
+
+        url: '/Report/DataReportBySKU/',
+        data: { str: sku_input },
+        type: 'Get',
+        cache: false,
+        success: function (data) {
+
+            document.getElementById('updatedDiv').innerHTML = data;
+        },
+        error: function (response) {
+
+        }
+
+    })
+}
+
+function findByDocType(id) {
+    //alert(id);
+    $("#data_report_table_div").show();
+
+    $.ajax({
+
+        url: '/Report/DataReportByDocType/',
+        data: { docTypeId: id },
+        type: 'Get',
+        cache: false,
+        success: function (data) {
+            document.getElementById('updatedDiv').innerHTML = data;
+        },
+        error: function (response) {
+
+        }
+
+    })
+}
+
+function findByPayType(id) {
+    $("#data_report_table_div").show();
+
+    $.ajax({
+
+        url: '/Report/DataReportByPayType/',
+        data: { payTypeId: id },
+        type: 'Get',
+        cache: false,
+        success: function (data) {
+            document.getElementById('updatedDiv').innerHTML = data;
+        },
+        error: function (response) {
+            
+        }
+
+    })
+}
+
+function sku_order_func(id) {
+    //alert("ID" + id);
+    if (id == 1) {
         $("#data_report_table_div").show();
-        var sku_input = document.getElementById('SKU').value;
-        //alert(sku_input);
-
-        $.ajax({
-
-            url: '/Report/DataReportBySKU/',
-            data: { str: sku_input },
-            type: 'Get',
-            cache: false,
-            success: function (data) {
-
-                document.getElementById('updatedDiv').innerHTML = data;
-            },
-            error: function (response) {
-
-            }
-
-        })
+        $("#sku_report_table_div").hide();
+    }
+    else if(id==2){
+        $("#data_report_table_div").hide();
+        $("#sku_report_table_div").show();
     }
 
-    function findByDocType(id) {
-        //alert(id);
-        $("#data_report_table_div").show();
+    
+}
 
-        $.ajax({
+$('body').on('click', '.abs', function () {
+    var idd = $(this).data("id");
+    //alert("IDD" + idd);
 
-            url: '/Report/DataReportByDocType/',
-            data: { docTypeId: id },
-            type: 'Get',
-            cache: false,
-            success: function (data) {
-                document.getElementById('updatedDiv').innerHTML = data;
-            },
-            error: function (response) {
+    //window.open("dd/"+idd);
+        
 
-            }
+    var url = $("#RedirectTo").val();
+    location.href = url + "/" + idd;
+        
+      
 
-        })
-    }
+    //$.ajax({
 
-    function findByPayType(id) {
-        $("#data_report_table_div").show();
+    //    url: '/Sale/Ad/',
+    //    data: { id: idd },
+    //    type: 'Get',
+    //    cache: false,
+    //    success: function (data) {
+    //        alert("success");
+    //    },
+    //    error: function (response) {
+    //        alert("ERROR");
+    //    }
+    //})
 
-        $.ajax({
+})
 
-            url: '/Report/DataReportByPayType/',
-            data: { payTypeId: id },
-            type: 'Get',
-            cache: false,
-            success: function (data) {
-                document.getElementById('updatedDiv').innerHTML = data;
-            },
-            error: function (response) {
+function queries_query() {
+    alert("SADS");
 
-            }
+    var order_sku = $("#sku_order_report_select").val();
+    var doc_type = $("#doc_type_id").val();
+    var sku = $("#SKU").val();
+    var customer_details = $("#customer_details_id").val();
+    var paymnet = $("#payment_status_id").val();
+    var start_date = $("#from_date").val();
+    var end_date = $("#to_date").val();
 
-        })
-    }
+
+    alert("Report   " + order_sku + "    DOC_Type    " + doc_type + "     SKU    " + "     Customer Details    " + customer_details + "    Payment    " + paymnet + "    Start Date    " + start_date + "   End Date     " + end_date);
+
+    $.ajax({
+
+        url: '/Report/Search_Filter/',
+        data: { order_id: order_sku , doc_id : doc_type , sku_id : sku, customer_id: customer_details , payment_id : paymnet , start_date_id : start_date , end_date_id : end_date},
+        type: 'Get',
+        cache: false,
+        success: function (data) {
+            document.getElementById('updatedDiv').innerHTML = data;
+        },
+        error: function (response) {
+
+        }
+
+    })
+
+}

@@ -15,6 +15,8 @@ function right_click(id) {
     alert("Id" + id);
 }
 
+
+
 function GetCustomer(ID) {
     //alert("dsadasdsadsadasd");
     var page_id = $("#customer_list_edit_modal_value").val();
@@ -38,8 +40,18 @@ function GetCustomer(ID) {
             //alert("SUCCESS");
             document.getElementById("edit_customers").innerHTML = data;
 
-            $("#ExistingModal").hide();
-            //$("#hhh").show('fast');
+            $("#ExistingModal").toggle("slow");
+            
+          //  $("#hhh").toggle();
+            
+          //  $("#ExistingModal").removeClass("fade").modal("hide");
+            $("#hhh").addClass("in").show("slow");
+
+            return false;
+
+            alert("treeuiirieurewtuhughjajf");
+            
+
 
             //$("#hhh").show('fast');
 
@@ -53,6 +65,37 @@ function GetCustomer(ID) {
 
     })
 }
+
+function Different_Address() {
+    if (document.getElementById("billing_address_checkbox").checked) {
+        $(".Shipping_Address_Div").hide();
+    }
+    else {
+        $(".Shipping_Address_Div").show();
+    }
+}
+
+function Different_Address_New() {
+    if (document.getElementById("billing_address_checkbox_new").checked) {
+        $(".Shipping_Address_Div_New").hide();
+    }
+    else {
+        $(".Shipping_Address_Div_New").show();
+    }
+}
+
+function close_modal() {
+    $("#hhh").toggle();
+    //alert("CLOSE");
+}
+
+//$('.rightclick').on('contextmenu', function (e) {
+//    alert(e.target.id);
+    
+//    alert('you right clicked! congrats.');
+//    return false;
+//});
+
 
 function checkCreditLimit() {
 
@@ -140,7 +183,6 @@ function checkCreditLimit() {
     }
 }
 
-
 function payment_status() {
     var selectedValue = document.getElementById("payment_status_id").value;
 
@@ -198,16 +240,10 @@ function payment_status() {
     }
 }
 
-
-
-
-
 function hhh() {
     jQuery.noConflict();
     $("#Sold_History_Modal").modal('show');
 }
-
-
 
 function Partial_Payment() {
 
@@ -586,16 +622,18 @@ function Total(rownum) {
         //alert("i  " + i + "   totaaaal    " + totaaaal + "  a  " + a);
     }
 
+    var a_parsed = a.toFixed(2);
+
     //alert("AGYA");
 
-    $("#net_invoice").html("£" + a);
+    $("#net_invoice").html("£" + a_parsed);
 
 
-    var total_vat = (((20 / 100)) * a).toFixed(2);
+    var total_vat = (((20 / 100)) * a_parsed).toFixed(2);
 
-    var gross = +a + +total_vat;
+    var gross_without_parse = +a_parsed + +total_vat;
 
-
+    var gross = gross_without_parse.toFixed(2);
 
 
     var discounted = gross - global_discount;
@@ -604,7 +642,7 @@ function Total(rownum) {
     $("#invoice_vat").html(total_vat);
     $("#invoice_gross").html(gross);
 
-    $("#net_invoice_hidden").val(a);
+    $("#net_invoice_hidden").val(a_parsed);
     $("#vat_invoice").val(total_vat);
     $("#gross_invoice").val(gross);
 
@@ -669,11 +707,14 @@ function Total2(rownum) {
         //alert("i  " + i + "   totaaaal    " + totaaaal + "  a  " + a);
     }
 
+    var a_parsed = a.toFixed(2);
 
-    $("#net_invoice").html("£" + a);
-    var total_vat = (((20 / 100)) * a).toFixed(2);
+    $("#net_invoice").html("£" + a_parsed);
+    var total_vat = (((20 / 100)) * a_parsed).toFixed(2);
 
-    var gross = +a + +total_vat;
+    var gross_without_parse = +a_parsed + +total_vat;
+
+    var gross = gross_without_parse.toFixed(2);
 
 
 
@@ -683,7 +724,7 @@ function Total2(rownum) {
     $("#invoice_vat").html(total_vat)
     $("#invoice_gross").html(gross);
 
-    $("#net_invoice_hidden").val(a);
+    $("#net_invoice_hidden").val(a_parsed);
     $("#vat_invoice").val(total_vat);
     $("#gross_invoice").val(gross);
 

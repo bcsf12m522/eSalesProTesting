@@ -19,21 +19,21 @@
     <tbody class="black-color bold text-center">
 
 
-        @foreach(var obj in Model)
-        { 
+        @foreach (var obj in Model)
+        {
 
-        <tr>
-            <td data-title="User ID">@obj.Customer_Type.Type</td>
-            <td data-title="User ID">@obj.Name</td>
-            <td data-title="User ID">@obj.phone</td>
-            <td data-title="User ID">@obj.Email</td>
-            <td class="text-center" data-title="User ID">£ @obj.Credit_Limit</td>
-            <td class="text-center" data-title="User ID">£ @obj.Balance</td>
-            <td data-title="User ID">@obj.is_Active</td>
-        </tr>
-          
+            <tr onclick="aaa()">
+                <td data-title="User ID">@obj.Customer_Type.Type</td>
+                <td data-title="User ID">@obj.Name</td>
+                <td data-title="User ID">@obj.phone</td>
+                <td data-title="User ID">@obj.Email</td>
+                <td class="text-center" data-title="User ID">£ @obj.Credit_Limit</td>
+                <td class="text-center" data-title="User ID">£ @obj.Balance</td>
+                <td data-title="User ID">@obj.is_Active</td>
+            </tr>
+
             total = total + obj.Balance;
-            
+
         }
 
         <tr class="red">
@@ -50,7 +50,13 @@
 
 
 
-     
+
     </tbody>
 
 </table>
+
+<script>
+    function aaa() {
+        alert("asad");
+    }
+</script>

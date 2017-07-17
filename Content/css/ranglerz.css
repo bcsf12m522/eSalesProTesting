@@ -75,6 +75,19 @@
     margin-left: -20px;
 }
 
+.ml-20 {
+    margin-left: 20px;
+}
+
+.ext_margin{
+    margin:2px 4px;
+}
+
+
+.mr-23{
+    margin-right:23px;
+}
+
 .ml-15 {
     margin-left: 15px;
 }
@@ -450,9 +463,22 @@
     margin-bottom: 10px;
 }
 
+.mr-160{
+    margin-right:160px;
+}
+
 .modal-style-custom {
     background: linear-gradient(to bottom, #fafafd, #b2b2b3);
     border: 3px solid #00aeee;
+     max-height: 801px;
+    overflow-y: auto;
+    overflow-x: no-display;
+}
+
+.scroll_class{
+    max-height: 801px;
+    overflow-y: auto;
+    overflow-x: no-display;
 }
 
 .textarea-width {
@@ -939,6 +965,15 @@
 
 #kj tbody tr:hover td{
     background-color:#76c5f7;
+    cursor: pointer;
+}
+
+.row_highlighter tbody tr:hover td{
+    background-color:#76c5f7;
+}
+
+#data_report_table_div tbody tr:hover td {
+    background-color: #76c5f7;
     cursor: pointer;
 }
 

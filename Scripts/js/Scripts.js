@@ -208,12 +208,15 @@ function Add() {
 }
 
 function Different_Address() {
+    //alert("EDIT");
     if (document.getElementById("billing_address_checkbox").checked) {
-        $("#Shipping_Address_Div").addClass('none');
+        //$(".Shipping_Address_Div").addClass('none');
+        $(".Shipping_Address_Div").hide();
     }
     else {
-        $("#Shipping_Address_Div").removeClass('none');
-        $("#Shipping_Address_Div").addClass('showDiv');
+        $(".Shipping_Address_Div").show();
+        //$(".Shipping_Address_Div").removeClass('none');
+        //$(".Shipping_Address_Div").addClass('showDiv');
     }
 }
 

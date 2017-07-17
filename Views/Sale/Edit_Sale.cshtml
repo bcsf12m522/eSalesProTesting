@@ -141,21 +141,21 @@
                                                     <div class="form-group" id="invoice_number_div">
                                                         <label class="pull-left width-134" for="middle-name">Invoice Number</label>
                                                         <div class="pull-left">
-                                                            <input class="width-145 text-center" onblur="" readonly value="@ViewBag.invoice.Invoice_Number" onkeypress="validate(event)" type="text" name="invoice_number" id="invoice_number" required>
+                                                            <input class="width-145 text-center" readonly value="@ViewBag.invoice.Invoice_Number" onkeypress="validate(event)" type="text" name="invoice_number" id="invoice_number" required>
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group" id="quote_number_div" style="display:none;">
                                                         <label class="pull-left width-134" for="middle-name">Quote Number</label>
                                                         <div class="pull-left">
-                                                            <input class="width-145" type="text" onblur="checkQuoteNumber()" value="@ViewBag.quote_number" name="quote_number" id="quote_number">
+                                                            <input class="width-145 text-center" type="text" value="@ViewBag.invoice.Invoice_Number" name="" id="">
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group" id="item_sale_div" style="display:none;">
                                                         <label class="pull-left width-134" for="middle-name">Item Sale Number</label>
                                                         <div class="pull-left">
-                                                            <input class="width-145" type="text" onblur="checkItemSaleNumber()" value="@ViewBag.item_sale_number" name="item_sale_number" id="item_sale_number">
+                                                            <input class="width-145 text-center" type="text" value="@ViewBag.invoice.Invoice_Number" name="" id="">
                                                         </div>
                                                     </div>
 
@@ -258,7 +258,7 @@
 
                                                     <td class="border-right-td">
 
-                                                        <textarea class="2 description-text-area unbold width-100p text-center"
+                                                        <textarea class="2 description-text-area unbold width-100p"
                                                                   id="@String.Concat("invoice_description",counter)"
                                                                   name="@String.Concat("invoice_description",counter)" required=""
                                                                   placeholder="Description">

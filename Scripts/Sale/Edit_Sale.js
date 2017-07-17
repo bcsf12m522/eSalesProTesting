@@ -68,11 +68,8 @@ function hhh() {
 
 
 function Partial_Payment() {
-
-
-
     var gross = document.getElementById("invoice_gross").innerHTML;
-    //alert("invoice_gross" + gross);
+    alert("gross" + gross);
 
     $(".partial_paid").show();
 
@@ -94,28 +91,24 @@ function Partial_Payment() {
     $("#left_amount_hidden").val(remaining);
 
     var vat = $("#invoice_vat").text();
-    alert("VAT" + vat);
-    
-
-
-    //alert("VAT SET " + $("#vat_invoice").val(vat));
-
-    //alert("gross SET " + $("#gross_invoice").val(gross));
 
     $("#vat_invoice").val(vat)
     $("#gross_invoice").val(gross)
-
-    //$("#partial_paid_td").val(amount);
-    //alert("REMAINING" + remaining);
 
 }
 
 function Deposit_Payment() {
     $(".deposit_paid").show()
 
+    var gross = document.getElementById("invoice_gross").innerHTML;
+
+    //alert("Gross" + gross);
+
     var discount = $("#discount_value").val();
 
-    var gross = $("#gross_invoice").val();
+    //alert("Gross" + gross);
+
+    
 
     var amount = $("#partial_amount_deposit").val();
     //alert("Deposit Value:" + amount);
@@ -129,6 +122,11 @@ function Deposit_Payment() {
     document.getElementById("deposit_paid_td").innerHTML = ("£" + amount);
     document.getElementById("amount_left_td").innerHTML = remaining;
     $("#left_amount_hidden").val(remaining);
+
+    var vat = $("#invoice_vat").text();
+
+    $("#vat_invoice").val(vat)
+    $("#gross_invoice").val(gross)
     //$("#partial_paid_td").val(amount);
     //alert("REMAINING: " + " " + remaining);
 }
@@ -442,14 +440,16 @@ function Total(rownum) {
         //alert("i  " + i + "   totaaaal    " + totaaaal + "  a  " + a);
     }
 
+    var a_parsed = a.toFixed(2);
+
+    $("#net_invoice").html("£" + a_parsed);
 
 
-    $("#net_invoice").html("£" + a);
+    var total_vat = (((20 / 100)) * a_parsed).toFixed(2);
 
+    var grosswithoutpoint = +a_parsed + +total_vat;
 
-    var total_vat = (((20 / 100)) * a).toFixed(2);
-
-    var gross = +a + +total_vat;
+    var gross = grosswithoutpoint.toFixed(2);
 
     var discounted = gross - global_discount;
 
@@ -518,11 +518,15 @@ function Total2(rownum) {
         //alert("i  " + i + "   totaaaal    " + totaaaal + "  a  " + a);
     }
 
+    var a_parsed = a.toFixed(2);
 
-    $("#net_invoice").html("£" + a);
-    var total_vat = (((20 / 100)) * a).toFixed(2);
 
-    var gross = +a + +total_vat;
+    $("#net_invoice").html("£" + a_parsed);
+    var total_vat = (((20 / 100)) * a_parsed).toFixed(2);
+
+    var grosswithoutpoint = +a_parsed + +total_vat;
+
+    var gross = grosswithoutpoint.toFixed(2);
 
 
 
