@@ -229,15 +229,55 @@ function sku_order_func(id) {
     
 }
 
+
+function findByCustomerDetails() {
+    $("#loader_div").show();
+    $("#data_report_table_div").hide();
+    var customer_id = document.getElementById('customer_details_id').value;
+    //alert(sku_input);
+
+    $.ajax({
+
+        url: '/Report/DataReportByCustomerDetails/',
+        data: { str: customer_id },
+        type: 'Get',
+        cache: false,
+        success: function (data) {
+            $("#loader_div").hide();
+            $("#data_report_table_div").show();
+            document.getElementById('updatedDiv').innerHTML = data;
+        },
+        error: function (response) {
+
+        }
+
+    })
+}
+
+function loading_gif_hide() {
+    alert("adsad");
+    $("#loader_div").hide();
+}
+
 $('body').on('click', '.abs', function () {
     var idd = $(this).data("id");
     //alert("IDD" + idd);
 
     //window.open("dd/"+idd);
         
+    
+    $("#loader_div").show();
 
-    var url = $("#RedirectTo").val();
-    location.href = url + "/" + idd;
+    setTimeout(function () {
+        //alert("ADASDSDASDASDAD");
+        //
+        var url = $("#RedirectTo").val();
+        location.href = url + "/" + idd;
+
+    }, 500);
+
+
+   
         
       
 
@@ -258,32 +298,33 @@ $('body').on('click', '.abs', function () {
 })
 
 function queries_query() {
-    alert("SADS");
+    $("#print_btn").show();
+    //alert("SADS");
 
-    var order_sku = $("#sku_order_report_select").val();
-    var doc_type = $("#doc_type_id").val();
-    var sku = $("#SKU").val();
-    var customer_details = $("#customer_details_id").val();
-    var paymnet = $("#payment_status_id").val();
-    var start_date = $("#from_date").val();
-    var end_date = $("#to_date").val();
+    //var order_sku = $("#sku_order_report_select").val();
+    //var doc_type = $("#doc_type_id").val();
+    //var sku = $("#SKU").val();
+    //var customer_details = $("#customer_details_id").val();
+    //var paymnet = $("#payment_status_id").val();
+    //var start_date = $("#from_date").val();
+    //var end_date = $("#to_date").val();
 
 
-    alert("Report   " + order_sku + "    DOC_Type    " + doc_type + "     SKU    " + "     Customer Details    " + customer_details + "    Payment    " + paymnet + "    Start Date    " + start_date + "   End Date     " + end_date);
+    //alert("Report   " + order_sku + "    DOC_Type    " + doc_type + "     SKU    " + "     Customer Details    " + customer_details + "    Payment    " + paymnet + "    Start Date    " + start_date + "   End Date     " + end_date);
 
-    $.ajax({
+    //$.ajax({
 
-        url: '/Report/Search_Filter/',
-        data: { order_id: order_sku , doc_id : doc_type , sku_id : sku, customer_id: customer_details , payment_id : paymnet , start_date_id : start_date , end_date_id : end_date},
-        type: 'Get',
-        cache: false,
-        success: function (data) {
-            document.getElementById('updatedDiv').innerHTML = data;
-        },
-        error: function (response) {
+    //    url: '/Report/Search_Filter/',
+    //    data: { order_id: order_sku , doc_id : doc_type , sku_id : sku, customer_id: customer_details , payment_id : paymnet , start_date_id : start_date , end_date_id : end_date},
+    //    type: 'Get',
+    //    cache: false,
+    //    success: function (data) {
+    //        document.getElementById('updatedDiv').innerHTML = data;
+    //    },
+    //    error: function (response) {
 
-        }
+    //    }
 
-    })
+    //})
 
 }

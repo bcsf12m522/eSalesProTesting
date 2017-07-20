@@ -15,53 +15,6 @@
 
         <div class="empty-height"></div>
 
-        @*<div class="col-md-12">
-
-                <div class="form-group">
-                    <label class="text-left width-72 font-16" for="middle-name">Invoice No</label>
-                    <div class="col-md-3 col-sm-6 col-xs-12">
-                        <input class="width-145" type="text" onkeypress="" name="" value="@ViewBag.InvoiceNumber" id="">
-                    </div>
-                </div>
-
-
-                <div class="form-group">
-                    <label class="text-left width-72 font-16" for="middle-name">Price</label>
-                    <div class="col-md-3 col-sm-6 col-xs-12">
-                        <input class="width-145" type="text" name="" value="@Model.Price" id="price">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="text-left width-72 font-16" for="middle-name">VAT</label>
-                    <div class="col-md-3 col-sm-6 col-xs-12">
-                        <input class="width-145" type="text" name="" id="VAT">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="text-left width-72 font-16" for="middle-name">Price + VAT</label>
-                    <div class="col-md-3 col-sm-6 col-xs-12">
-                        <input class="width-145" type="text" name="" value="@Model.PriceVAT" id="priceVAT">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="text-left width-72 font-16" for="middle-name">Date</label>
-                    <div class="col-md-3 col-sm-6 col-xs-12">
-                        <input class="width-145" type="text" name="" value="@Model.Created_at" id="">
-                    </div>
-                </div>
-
-
-
-
-            </div>*@
-
-
-
-
-
         <div class="col-md-12">
             <table class="table table-responsive border_black" id="customer_list_table">
                 <thead>
@@ -110,14 +63,3 @@
         </div>
     </form>
 </div>
-
-<script>
-    function vat() {
-        var a = $("#price").val();
-        var b = $("#priceVAT").val();
-
-        var c = b - a;
-        alert(c);
-        $("#VAT").val(c);
-    }
-</script>

@@ -27,6 +27,10 @@
 
                             <div class="col-md-12">
 
+                                @{
+                                    Html.RenderPartial("Loader_Div");
+                                }
+
                                 <div class="empty-height"></div>
                                 <div class="col-md-4 padding-all-0">
                                     <h3 class="bold font-20 padding-0">
@@ -211,75 +215,24 @@
 
     @*----------------------------POP UP END CUSTOMER SUMMARY--------------------------------*@
 
-  
-
-    <script src="~/Scripts/new-js/jquery-1.11.1.min.js"></script>
-    <script src="~/Scripts/new-js/jquery.datatables.min.js"></script>
     <script src="~/scripts/customer_summary/customer_summary.js"></script>
-
+    <script src="~/scripts/report/credit_sale_report.js"></script>
+    
+    <!----------------------------NOT WORKING IN OTHER JS FILE------------------------->
     <script>
-        function findByDocType(id) {
-            //alert(id);
-            $("#customer_summary").hide();
-            $("#date_click_div").show();
-
-            $.ajax({
-
-                url: '/Report/CreditReportByDocType/',
-                data: { docTypeId : id },
-                type: 'Get',
-                cache: false,
-                success: function (data) {
-                    //alert("Success");
-                    document.getElementById('updatedDiv').innerHTML = data;
-                },
-                error: function (response) {
-                    //alert("Failure");
-                }
-
-            })
-        }
-
-        function findByCustomerType(id) {
-            //alert(id);
-            $("#customer_summary").hide();
-            $("#date_click_div").show();
-
-            $.ajax({
-
-                url: '/Report/CreditReportByCustomerType/',
-                data: { customerTypeId : id },
-                type: 'Get',
-                cache: false,
-                success: function (data) {
-                    //alert("Success");
-                    document.getElementById('updatedDiv').innerHTML = data;
-                },
-                error: function (response) {
-                    //alert("Failure");
-                }
-
-            })
-        }
-
+        $(document).ready(function () {
+            $('#customer_summary_table').dataTable();
+        });
     </script>
-
+    <!----------------------------NOT WORKING IN OTHER JS FILE------------------------->
+    
     <script>
-       
-    </script>
+        function PrintBtn() {
+            $("#crud_btn_hide").addClass("none");
+            $("#side_navi_hide").addClass("none");
 
-    <script>
-        function showDateDiv() {
-            var to = document.getElementById("to_date").value;
-            $("#date_click_div").removeClass("none");
-            $("#date_click_div").addClass("showDiv");
-            $("#customer_summary").addClass("none");
+            window.print();
         }
-
-
-    </script>
-
-    <script>
         function showToDate() {
             var from = document.getElementById("from_date").value;
 
@@ -290,90 +243,13 @@
                 document.getElementById("to_date").removeAttribute('disabled');
             }
         }
-
-
-    </script>
-
-
-    <script>
-
         function myDate() {
             var date = new Date(document.getElementById("to_date")).toDateString("yyyy-MM-dd");
         }
-
-    </script>
-
-
-
-
-
-    <script>
-        $(document).ready(function () {
-            $('#example').dataTable();
-        });
     </script>
 
     <script>
-        $(document).ready(function () {
-            $('#example1').dataTable();
-        });
+        
     </script>
-
-    <script>
-        $(document).ready(function () {
-            $('#table_on_dates').dataTable();
-        });
-    </script>
-
-    <script>
-        function PrintBtn() {
-            $("#crud_btn_hide").addClass("none");
-            $("#side_navi_hide").addClass("none");
-
-            window.print();
-        }
-    </script>
-
-
-
-    <script>
-
-        function findRecord(date) {
-            $("#customer_summary").hide();
-            $("#date_click_div").show();
-
-            var doc = document.getElementById('docType').value;
-            var custType = document.getElementById('customerType').value;
-
-
-            $.ajax({
-
-                url: '/Report/creditSalesRecord/',
-                data: { docType: doc, customerType: custType , dateLimit : date },
-                type: 'Post',
-                cache: false,
-                success: function (data) {
-
-                   
-                    document.getElementById('updatedDiv').innerHTML = data;
-                },
-                error: function () {
-
-                    
-                }
-
-
-            })
-        }
-
-    </script>
-
-
-
-
-
-
-
-
 
 </body>

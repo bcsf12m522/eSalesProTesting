@@ -25,7 +25,10 @@
                 <div class="user-page-height">
                     <div class="bggg-img">
                         <div>
-                            
+
+                            @{
+                                Html.RenderPartial("Loader_Div");
+                            }
 
 
                             <div class="col-md-12">
@@ -35,8 +38,8 @@
                                 </div>
                                 <div class="pull-right col-md-8 mt-10 pr-0">
 
-                                     <div class="pull-right">
-                                        <input  required type="date" disabled id="to_date" oninput="poByDate();" class="date-width-height"  name="to_date">
+                                    <div class="pull-right">
+                                        <input required type="date" disabled id="to_date" oninput="poByDate();" class="date-width-height" name="to_date">
                                     </div>
 
                                     <div class="pull-right">
@@ -53,7 +56,7 @@
                                     </div>
                                     <div class="pull-right">
                                         <select name="sale_type" required="" onchange="poByPayStatus(this.value);" class="form-control">
-                                            
+
                                             <option>Select Any</option>
                                             <option value="-1">All Types</option>
 
@@ -62,23 +65,23 @@
                                                 <option value="@obj.Id">@obj.Status_Type</option>
                                             }
                                         </select>
-                                        
+
                                     </div>
                                     <div class="pull-right">
                                         <select name="sale_type" onchange="poByPayPriority(this.value);" required="" class="form-control">
-                                            
+
                                             <option>Select Any</option>
                                             <option value="-1">All Types</option>
-                                            
+
                                             @foreach (var obj in ViewBag.payPriority)
                                             {
                                                 <option value="@obj.Id">@obj.Type</option>
                                             }
-                                          
+
                                         </select>
                                     </div>
-                                    
-                                    
+
+
 
 
 
@@ -167,11 +170,34 @@
         }
     </footer>
 
-    <script src="~/Scripts/new-js/jquery-1.11.1.min.js"></script>
-    <script src="~/Scripts/new-js/jquery.datatables.min.js"></script>
+    <script src="~/scripts/report/purchase_order_report.js"></script>
 
 
     <script>
+        function show_customer_summary() {
+            $("#customer_summary").removeClass("none");
+            $("#customer_summary").addClass("showDiv");
+            $("#date_click_div").addClass("none");
+        }
+        function showDateDiv() {
+            var to = document.getElementById("to_date").value;
+            $("#date_click_div").removeClass("none");
+            $("#date_click_div").addClass("showDiv");
+            $("#customer_summary").addClass("none");
+        }
+        function showToDate() {
+            var from = document.getElementById("from_date").value;
+
+            if (from == "") {
+            }
+
+            else {
+                document.getElementById("to_date").removeAttribute('disabled');
+            }
+        }
+        function myDate() {
+            var date = new Date(document.getElementById("to_date")).toDateString("yyyy-MM-dd");
+        }
         document.querySelector('#clickme').onclick = function () {
             swal({
                 title: "ERROR",
@@ -183,46 +209,16 @@
             function () {
             });
         };
-    </script>
-
-
-
-
-
-
-
-
-
-    <script>
-        function show_customer_summary() {
-            $("#customer_summary").removeClass("none");
-            $("#customer_summary").addClass("showDiv");
-            $("#date_click_div").addClass("none");
-        }
-    </script>
-
-    <script>
-        function showDateDiv() {
-            var to = document.getElementById("to_date").value;
-            $("#date_click_div").removeClass("none");
-            $("#date_click_div").addClass("showDiv");
-            $("#customer_summary").addClass("none");
-        }
 
 
     </script>
 
     <script>
-        function showToDate() {
-            var from = document.getElementById("from_date").value;
 
-            if (from == "") {
-            }
 
-            else {
-                document.getElementById("to_date").removeAttribute('disabled');
-            }
-        }
+    </script>
+
+    <script>
 
 
     </script>
@@ -230,9 +226,6 @@
 
     <script>
 
-        function myDate() {
-            var date = new Date(document.getElementById("to_date")).toDateString("yyyy-MM-dd");
-        }
 
     </script>
 
@@ -240,122 +233,13 @@
 
 
 
-    <script>
-        $(document).ready(function () {
-            $('#example').dataTable();
-        });
-    </script>
+   
 
-    <script>
-        $(document).ready(function () {
-            $('#example1').dataTable();
-        });
-    </script>
-
-    <script>
-        $(document).ready(function () {
-            $('#table_on_dates').dataTable();
-        });
-    </script>
-
-    <script>
-        function PrintBtn() {
-            $("#crud_btn_hide").addClass("none");
-            $("#side_navi_hide").addClass("none");
-
-            window.print();
-        }
-    </script>
+    
 
     <script>
 
-        function poByPayPriority(id) {
-       
-            $.ajax({
-
-                url: '/Report/purchaseReportByPayPriority/',
-                data: { id: id },
-                cache: false,
-                type: 'Post',
-                success: function (data) {
-                  
-                    document.getElementById('updatedDiv').innerHTML =data;
-                },
-                error: function (response) {
-
-                }
-
-
-            })
-        }
-
-        function poByPayStatus(id) {
-       
-
-            $.ajax({
-
-                url: '/Report/purchaseReportByPayStatus/',
-                data: { id: id },
-                cache: false,
-                type: 'Post',
-                success: function (data) {
-                    document.getElementById('updatedDiv').innerHTML = data;
-                },
-                error: function (response) {
-
-                }
-
-
-            })
-
-
-        }
-
-        function poByNumber(id) {
-     
-
-            $.ajax({
-
-                url: '/Report/purchaseReportByNumber/',
-                data: { id: id },
-                cache: false,
-                type: 'Post',
-                success: function (data) {
-                    document.getElementById('updatedDiv').innerHTML = data;
-                },
-                error: function (response) {
-
-                }
-
-
-            })
-
-        }
-
-        function poByDate()
-        {
-         
-
-            var to = document.getElementById('to_date').value;
-            var from = document.getElementById('from_date').value;
-
-            $.ajax({
-
-                url: '/Report/purchaseReportByDate/',
-                data: { fromDate: from , toDate : to },
-                cache: false,
-                type: 'Post',
-                success: function (data) {
-                    document.getElementById('updatedDiv').innerHTML = data;
-                },
-                error: function (response) {
-
-                }
-
-
-            })
-
-        }
+   
 
 
 

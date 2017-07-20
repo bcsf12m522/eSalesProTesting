@@ -1,4 +1,19 @@
-﻿function payment_status() {
+﻿function Edit_Sale_Onload() {
+    var doc_type_load = $("#language").val();
+    //alert(doc_type_load);
+
+
+    document.getElementById('doc_type_page_load').value = doc_type_load;
+
+    //alert("RUN INVOICE");
+
+    run_invoice();
+
+    //alert("NOT RUN INVOICE");
+}
+
+
+function payment_status() {
     var selectedValue = document.getElementById("payment_status_id").value;
 
     jQuery.noConflict();
@@ -69,7 +84,7 @@ function hhh() {
 
 function Partial_Payment() {
     var gross = document.getElementById("invoice_gross").innerHTML;
-    alert("gross" + gross);
+    //alert("gross" + gross);
 
     $(".partial_paid").show();
 

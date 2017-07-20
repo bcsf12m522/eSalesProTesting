@@ -315,8 +315,19 @@
     text-align: left;
 }
 
+#loader_div {
+  /*height: 400px;
+  position: relative;
+  background-color: gray; /* for demonstration */
+}
+.ajax_loader {
+  position: absolute;
+  left: 28%;
+  top: 100%;
+}
+
 .supplier-border {
-    border-bottom: 1px solid #000;
+    border-bottom: 2px solid #000;
     width: 93%;
     margin-bottom: 15px;
     margin-left: -16px;

@@ -21,12 +21,18 @@
 
 
 
-                @*-----------------Main Container Start---------------*@@*-----------------Main Container Start---------------*@
+                @*-----------------Main Container Start---------------*@
                 <div class="user-page-height">
                     <div class="bggg-img">
                         <div>
 
                             <div class="col-md-12">
+
+                                <div id="loader_div" class="none">
+                                    <img src="~/img/loading.gif" class="ajax_loader">
+                                </div>
+
+                                <div class="clearfix"></div>
 
                                 <div class="col-md-3 pl-0 pr-0">
                                     <h3 class="bold font-23">Report Manager<small></small></h3>
@@ -169,6 +175,10 @@
                                 </table>
                                 <div class="clearfix"></div>
                             </div>
+
+                            
+                                
+                            
 
                             <div class="clearfix"></div>
 
@@ -352,11 +362,18 @@
     </footer>
 
     <script src="~/scripts/customer_summary/customer_summary.js"></script>
-
+    <script src="~/scripts/report/sale_report.js"></script>
 
     <script>
-        function GetSales(ID) {
 
+
+        function myDate() {
+            var date = new Date(document.getElementById("to_date")).toDateString("yyyy-MM-dd");
+        }
+
+
+        function GetSales(ID) {
+            alert("DASD");
             $("#PleaseWait").addClass('showDiv');
 
             $.ajax({
@@ -377,187 +394,13 @@
 
             })
         }
-    </script>
-
-    
-    <script>
-     
-    </script>
-
-    <script>
 
 
-
-    </script>
-
-    <script>
-        function showToDate() {
-            var from = document.getElementById("from_date").value;
-
-            if (from == "") {
-            }
-
-            else {
-                document.getElementById("to_date").removeAttribute('disabled');
-            }
-        }
-
-
-    </script>
-
-
-    <script>
-
-        function myDate() {
-            var date = new Date(document.getElementById("to_date")).toDateString("yyyy-MM-dd");
-        }
-
-    </script>
-
-
-
-
-
-    <script>
-        $(document).ready(function () {
-            $('#example').dataTable();
-        });
-    </script>
-
-    <script>
-        $(document).ready(function () {
-            $('#example1').dataTable();
-        });
-    </script>
-
-    <script>
-        $(document).ready(function () {
-            $('#table_on_dates').dataTable();
-            //$('#table_on_dates').DataTable({
-            //    "ajax": '../ajax/findByUser/SaleReportPartial.cshtml'
-            //});
-        });
-    </script>
-
-    <script>
         function PrintBtn() {
             $("#crud_btn_hide").addClass("none");
             $("#side_navi_hide").addClass("none");
 
             window.print();
-        }
-    </script>
-
-    <script>
-        function findByUser()
-        {
-            $("#customer_summary").hide();
-            $("#date_click_div").show();
-            var user = document.getElementById('User_ID').value;
-           
-            $.ajax({
-
-                url: '/Report/SaleReportByUser/',
-                data: { str: user },
-                type: 'Get',
-                cache: false,
-                success: function(data)
-                {
-                   
-                   document.getElementById('updatedDiv').innerHTML= data;
-                },
-                error: function (response) {
-            
-                }
-
-            })
-        }
-
-        function findByInvoice(id)
-        {
-            $("#customer_summary").hide();
-            $("#date_click_div").show();
-
-            $.ajax({
-
-                url: '/Report/SaleReportByInvoice/',
-                data: { invoiceId : id },
-                type: 'Get',
-                cache: false,
-                success: function (data) {
-                    document.getElementById('updatedDiv').innerHTML = data;
-                },
-                error: function (response) {
-                    
-                }
-
-            })
-        }
-
-      
-
-        function findByDocType(id) {
-            $("#customer_summary").hide();
-            $("#date_click_div").show();
-
-            $.ajax({
-
-                url: '/Report/SaleReportByDocType/',
-                data: { docTypeId: id },
-                type: 'Get',
-                cache: false,
-                success: function (data) {
-                    document.getElementById('updatedDiv').innerHTML = data;
-                },
-                error: function (response) {
-
-                }
-
-            })
-        }
-
-        function findByPayType(id) {
-            $("#customer_summary").hide();
-            $("#date_click_div").show();
-
-            $.ajax({
-
-                url: '/Report/SaleReportByPayType/',
-                data: { payTypeId: id },
-                type: 'Get',
-                cache: false,
-                success: function (data) {
-                    document.getElementById('updatedDiv').innerHTML = data;
-                },
-                error: function (response) {
-
-                }
-
-            })
-        }
-
-
-        function findByDate() {
-            $("#customer_summary").hide();
-            $("#date_click_div").show();
-
-            //alert("dsfdsdfvdfgdfgdfsgdfhbgefagdsgrgfsgsdggbwdgdsagfgfgdfg");
-            var to = document.getElementById('to_date').value;
-            var from = document.getElementById('from_date').value;
-            $.ajax({
-
-                url: '/Report/SaleReportByDate/',
-                data: { dateFrom:from,dateTo:to },
-                type: 'Get',
-                cache: false,
-                success: function (data) {
-                    document.getElementById('updatedDiv').innerHTML = data;
-                },
-                error: function (response) {
-
-                }
-
-            })
         }
 
     </script>
