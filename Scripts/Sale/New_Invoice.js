@@ -468,8 +468,8 @@ function checkCreditLimit() {
 
 function payment_status() {
     var selectedValue = document.getElementById("payment_status_id").value;
-
-    jQuery.noConflict();
+    //alert(selectedValue);
+    //jQuery.noConflict();
 
     if (selectedValue == 1) {
         $("#custom_date_show_invoice").hide();
