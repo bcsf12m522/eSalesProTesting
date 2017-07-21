@@ -28,7 +28,7 @@
         <EntityTypeShape EntityType="Database1Model.Document_Type" Width="1.5" PointX="11.25" PointY="17.75" />
         <EntityTypeShape EntityType="Database1Model.Payment_Methods" Width="1.5" PointX="11.25" PointY="14.625" />
         <EntityTypeShape EntityType="Database1Model.Payment_Status" Width="1.5" PointX="11.25" PointY="0.75" />
-        <EntityTypeShape EntityType="Database1Model.Invoice" Width="1.5" PointX="13.5" PointY="7.5" />
+        <EntityTypeShape EntityType="Database1Model.Invoice" Width="2.25" PointX="13.5" PointY="7.5" />
         <EntityTypeShape EntityType="Database1Model.Sale" Width="1.5" PointX="5.25" PointY="15.875" />
         <EntityTypeShape EntityType="Database1Model.Sale_Invoice" Width="1.5" PointX="7.5" PointY="20.375" />
         <AssociationConnector Association="Database1Model.FK_Sales_Customer" />
@@ -64,6 +64,8 @@
         <EntityTypeShape EntityType="Database1Model.PO_Sale_Invoice" Width="2.125" PointX="18.75" PointY="12.875" />
         <AssociationConnector Association="Database1Model.FK_PO_Sale_Invoice_ToTable" />
         <AssociationConnector Association="Database1Model.FK_PO_Sale_Invoice_ToTable_1" />
+        <EntityTypeShape EntityType="Database1Model.Sale_Transaction_History" Width="1.75" PointX="0.75" PointY="16.75" />
+        <AssociationConnector Association="Database1Model.FK_Sale_Transaction_History_ToTable" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

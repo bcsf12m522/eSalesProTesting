@@ -58,12 +58,14 @@ function findByDocType(id) {
         type: 'Get',
         cache: false,
         success: function (data) {
+            //alert("DAta" + data);
             $("#date_click_div").show();
             document.getElementById('updatedDiv').innerHTML = data;
             $("#loader_div").hide();
         },
         error: function (response) {
-
+            
+            alert(response);
         }
 
     })
@@ -141,8 +143,6 @@ $(document).ready(function () {
     //    "ajax": '../ajax/findByUser/SaleReportPartial.cshtml'
     //});
 });
-
-
 
 function findByDate() {
     

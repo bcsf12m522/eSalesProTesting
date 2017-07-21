@@ -1,5 +1,5 @@
 ﻿function poByPayPriority(id) {
-    alert("ASASSAS");
+    //alert("ASASSAS");
     //$("#loader_div").show();
     
 

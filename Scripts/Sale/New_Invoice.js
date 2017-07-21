@@ -302,7 +302,7 @@ function GetCustomer(ID) {
           //  $("#hhh").toggle();
             
           //  $("#ExistingModal").removeClass("fade").modal("hide");
-            $("#hhh").addClass("in").show("slow");
+            $("#Edit_Customer_on_Context").addClass("in").show("slow");
 
 
             //$("#hhh").show('fast');
@@ -337,7 +337,8 @@ function Different_Address_New() {
 }
 
 function close_modal() {
-    $("#hhh").toggle();
+    $("#Edit_Customer_on_Context").toggle();
+    $("#Edit_Customer_Modal").hide();
     //alert("CLOSE");
 }
 
@@ -524,7 +525,6 @@ function payment_status() {
 }
 
 function hhh() {
-    jQuery.noConflict();
     $("#Sold_History_Modal").modal('show');
 }
 
@@ -1148,7 +1148,6 @@ function checkSoldHistory(counter) {
             document.getElementById('soldHistory').innerHTML = data;
             if (document.getElementById("sold_history_checkbox").checked && document.getElementById('soldHistory').innerHTML != "") {
                 //alert("Checked Sold History");
-                //jQuery.noConflict();
                 
                 //alert("Success Before Modal")
                 $("#Sold_History_Modal").modal('show');
@@ -1156,7 +1155,6 @@ function checkSoldHistory(counter) {
             }
             else {
                 //alert("Unchecked Sold History");
-                //jQuery.noConflict();
                 //$("#Sold_History_Modal").modal('show');
             }
 

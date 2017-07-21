@@ -2,7 +2,7 @@
 <!---->
 <div class="win text-center" id="edit_customers">
     <h3 class="black-color"><b>Edit Customer</b></h3>
-    <img class="pull-right margin-supplier ml-22" src="~/img/images/customer.png" />
+    <img class="pull-right margin-supplier ml-22" src="~/img/images/customer.png" onclick="close_modal()"/>
 
     <form id="demo-form2" action="@Url.Action("Edit", "Customer", new {id=@Model.Id })" method="post" data-parsley-validate class="form-horizontal form-label-left" enctype="multipart/form-data">
 

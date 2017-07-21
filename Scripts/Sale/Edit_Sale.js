@@ -16,7 +16,7 @@
 function payment_status() {
     var selectedValue = document.getElementById("payment_status_id").value;
 
-    jQuery.noConflict();
+    //jQuery.noConflict();
 
     if (selectedValue == 1) {
         $("#custom_date_show_invoice").hide();
@@ -76,7 +76,7 @@ function payment_status() {
 
 
 function hhh() {
-    jQuery.noConflict();
+    //jQuery.noConflict();
     $("#Sold_History_Modal").modal('show');
 }
 
@@ -558,7 +558,142 @@ function Total2(rownum) {
 
 }
 
+function close_modal() {
+    //alert("CLOSE");
+    $(".close_modal").toggle();
+    //alert("CLOSE");
+}
 
+
+function go(id, type_id) {
+
+    var name = document.getElementById('juni1' + id);
+    var phone = document.getElementById('juni2' + id);
+    var address = document.getElementById('juni3' + id);
+    var postcode = document.getElementById('juni4' + id);
+    var email = document.getElementById('juni5' + id);
+    var balance = document.getElementById('juni6' + id);
+    var credit = document.getElementById('juni7' + id);
+    var credit_limit = document.getElementById('juni8' + id).value;
+    var type1 = type_id;
+
+
+    //alert("name" + name);
+
+    //alert("credit_limit" + credit_limit);
+
+    var name1 = name.innerHTML;
+    var phone1 = phone.innerHTML;
+    var address1 = address.innerHTML;
+    var postcode1 = postcode.innerHTML;
+    var email1 = email.innerHTML;
+    var balance1 = balance.innerHTML;
+    var credit1 = credit.innerHTML;
+    var credit_limit1 = credit_limit.innerHTML;
+
+    //alert("credit_limit_new" + credit_limit1);
+    //alert("name" + name1);
+
+    //alert(name1);
+    //alert(phone1);
+    //alert(address1);
+    //alert(postcode1);
+    //alert(email1);
+    //alert(type1);
+
+    //$("#ExistingModal").hide;
+
+
+    $("#customer_name").text(name1);
+    $("#customer_address").text(phone1);
+    $("#customer_postcode").text(address1);
+    $("#customer_phone").text(postcode1);
+    $("#customer_email").text(email1);
+    $("#customer_balance").text(balance1);
+    $("#customer_credit").text(credit1);
+    $("#customer_credit_limit").text(credit_limit);
+    $("#exist_customer_id").val(id);
+    $("#credit_limit_input").val(credit_limit);
+
+
+
+    if (type1 == 1) {
+        $("#type_customer").text("Normal Customer");
+    }
+    else if (type1 == 2) {
+        $("#type_customer").text("Premium Customer");
+    }
+
+    else if (type1 == 3) {
+        $("#type_customer").text("Trade Customer");
+    }
+    else if (type1 == 4) {
+        $("#type_customer").text("Other Customer");
+    }
+
+
+    $("#customer_name_quote").text(name1);
+    $("#customer_address_quote").text(phone1);
+    $("#customer_postcode_quote").text(address1);
+    $("#customer_phone_quote").text(postcode1);
+    $("#customer_email_quote").text(email1);
+
+    if (type1 == 1) {
+        $("#type_customer_quote").text("Normal Customer");
+    }
+    else if (type1 == 2) {
+        $("#type_customer_quote").text("Premium Customer");
+    }
+
+    else if (type1 == 3) {
+        $("#type_customer_quote").text("Trade Customer");
+    }
+    else if (type1 == 4) {
+        $("#type_customer_quote").text("Other Customer");
+    }
+
+    $("#customer_name_item_sale").text(name1);
+    $("#customer_address_item_sale").text(phone1);
+    $("#customer_postcode_item_sale").text(address1);
+    $("#customer_phone_item_sale").text(postcode1);
+    $("#customer_email_item_sale").text(email1);
+
+
+    if (type1 == 1) {
+        $("#type_customer_item_sale").text("Normal Customer");
+    }
+    else if (type1 == 2) {
+        $("#type_customer_item_sale").text("Premium Customer");
+    }
+
+    else if (type1 == 3) {
+        $("#type_customer_item_sale").text("Trade Customer");
+    }
+    else if (type1 == 4) {
+        $("#type_customer_item_sale").text("Other Customer");
+    }
+
+
+
+    $("#ExistingModal").hide('slow');
+    //$("#ExistingModal").closest();
+
+
+
+
+    //var name = $("#existing_customer_name").val()
+    //alert(name);
+    //var phone = $("#existing_customer_phone").val;
+    //alert(phone);
+    //var address = $("#existing_customer_billing_address").val;
+    //alert(address);
+    //var post = $("#existing_customer_billing_postcode").val;
+    //alert(post);
+    //var mail = $("#existing_customer_email").val;
+    //alert(mail);
+    //var type = $("#c_type").val;
+    //alert(type);
+}
 
 
 
@@ -583,6 +718,55 @@ function checkInvoiceNumber() {
             alert("invoice validation Error Occured");
         }
 
+
+    })
+}
+
+
+function GetCustomer(ID) {
+    var page_id = $("#customer_list_edit_modal_value").val();
+
+
+    var e = window.event;
+
+
+
+
+    if (ID == -1) {
+        ID = document.getElementById("customer_id").value;
+    }
+
+    //alert("ID" + ID);
+    //alert("Id" + ID);
+
+    $.ajax({
+
+        url: "/Customer/Edit/",
+        data: { id: ID, page_new_id: page_id },
+        cache: false,
+        type: "Get",
+        success: function (data) {
+            //alert("SUCCESS");
+
+            document.getElementById("edit_customers").innerHTML = data;
+
+            $("#ExistingModal").toggle("slow");
+
+            //  $("#hhh").toggle();
+
+            //  $("#ExistingModal").removeClass("fade").modal("hide");
+            $("#Edit_Customer_on_Context").addClass("in").show("slow");
+
+
+            //$("#hhh").show('fast');
+
+            //$("#asa").show();
+
+
+        },
+        error: function (response) {
+            //alert("Error" + response);
+        }
 
     })
 }
@@ -642,6 +826,7 @@ function checkItemSaleNumber() {
 
 function checkSoldHistory(counter) {
 
+    $("#loader_div").show();
     //alert(counter);
     //alert("agya");
     var productID = document.getElementById("invoice_product_id" + counter).value;
@@ -657,14 +842,17 @@ function checkSoldHistory(counter) {
         type: 'Get',
         success: function (data) {
             //alert("Success");
+            $("#loader_div").hide();
             document.getElementById('soldHistory').innerHTML = data;
             if (document.getElementById("sold_history_checkbox").checked && document.getElementById('soldHistory').innerHTML != "") {
-
-                jQuery.noConflict();
-                $("#Sold_History_Modal").modal('show');
+                //alert("IF");
+                //$("#Sold_History_Modal").modal('show');
+                
+                $("#Sold_History_Modal").addClass("in").show("fast");
+                //alert("AFTER MODAL");
             }
             else {
-   
+                //alert("ELSE");
             }
 
         },

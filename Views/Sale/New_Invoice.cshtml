@@ -1046,7 +1046,7 @@
                                         @foreach (var v in ViewBag.Customer)
                                         {
                                             
-                                            <tr id="trr" class="rightclick" onclick="go(@v.Id,@v.Customer_Type_Id);customer_credit()" oncontextmenu="GetCustomer(@v.Id);" contextmenu="return false">
+                                            <tr id="trr" class="rightclick" onclick="go(@v.Id,@v.Customer_Type_Id);customer_credit()" oncontextmenu="GetCustomer(@v.Id);">
                                                 <td id="@String.Concat("juni1", v.Id)" data-title="User ID">@v.Name</td>
                                                 <td id="@String.Concat("juni2", v.Id)" data-title="First Name">@v.phone</td>
                                                 <td id="@String.Concat("juni3", v.Id)" data-title="Last Name">@v.Billing_Address</td>
@@ -1375,41 +1375,11 @@
 
     @*----------------------------POP UP EDIT CUSTOMER--------------------------------*@
 
-    <div class="modal fade" id="hhh" tabindex="" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content modal-style-custom">
-
-                <div class="title col-md-12">
-                    <span>Message</span>
-                    <img src="~/img/images/c3.png" class="close mr--13 pull-right" data-dismiss="modal" onclick="close_modal()"/>
-                </div>
-
-               
-
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                    <div class="x_panel">
-
-                        <div class="win text-center" id="edit_customers">
-                            <h3 class="black-color"><b>Edit Customer</b></h3>
-                            <img class="pull-right margin-supplier ml-22" src="~/img/images/customer.png" />
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="modal-footer">
-
-
-                </div>
-
-
-
-            </div>
-        </div>
-    </div>
-
+    @{
+        Html.RenderPartial("Edit_Customer_Modal");
+    }
+    
     @*----------------------------POP UP END EDIT CUSTOMER--------------------------------*@
-
     
 
         @*<script src="~/Scripts/new-js/jquery-1.11.1.min.js"></script>

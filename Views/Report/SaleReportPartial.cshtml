@@ -3,37 +3,97 @@
 <script src="~/Scripts/new-js/jquery-1.11.1.min.js"></script>
 <script src="~/Scripts/new-js/jquery.datatables.min.js"></script>
 
+@*<td data-title="User ID">@v.Customer.Customer_Type.Type</td>*@
+
 @foreach (var v in Model)
 {
-    if(v != null)
-    { 
-        
-    <tr class="text-center">
-        <td data-title="User ID">@v.Invoice_Number</td>
-        <td data-title="User ID">@v.Customer.Name</td>
-        @*<td data-title="User ID">@v.Customer.Customer_Type.Type</td>*@
-        <td data-title="User ID">@v.Payment_Methods.Type</td>
-        <td data-title="User ID">@v.Payment_Status.Status</td>
-        <td data-title="User ID">@v.Net_Price</td>
-        <td data-title="User ID">@v.VAT_20</td>
-        <td data-title="User ID">@v.Gross</td>
-        <td data-title="User ID">@v.Created_at.ToString("MM/dd/yyyy")</td>
+    if (v != null)
+    {
 
-        <td class="text-center width-120" style="vertical-align:middle;">
-            <a class="btn btn-sm btn-info bold" href="~/Sale/Edit_Sale/@v.Id">
-                Edit
-            </a>
+        <tr class="text-center background_blue_selected">
 
-            <a class="btn btn-sm btn-danger bold" href="" onclick="Delete_Sale(@v.Id)">
-                Delete
-            </a>
-        </td>
+            <td class="vertical_align_middle">@v.Invoice_Number</td>
+            <td class="vertical_align_middle">@v.Customer.Name</td>
 
-    </tr>
+            <td>
+                @v.Payment_Methods.Type
+
+                @foreach (var sale in ViewBag.Sale_Transaction_History)
+                {
+                    <br /><span class="sub_tr_values">@sale.Payment_Type</span>
+                }
+            </td>
+
+
+            <td width="15%">
+
+
+                @v.Payment_Status.Status
+
+                @foreach (var sale in ViewBag.Sale_Transaction_History)
+                {
+
+                    <br /><span class="sub_tr_values">@sale.Status</span>
+                }
+            </td>
+
+
+
+
+            <td>
+                @v.Net_Price
+
+                @foreach (var sale in ViewBag.Sale_Transaction_History)
+                {
+                    <br /><span class="sub_tr_values">@sale.Net_Amount</span>
+                }
+
+            </td>
+
+
+            <td>
+                @v.VAT_20
+
+                @foreach (var sale in ViewBag.Sale_Transaction_History)
+                {
+                    <br /><span class="sub_tr_values">@sale.Vat</span>
+                }
+
+            </td>
+
+            <td>
+                @v.Gross
+
+                @foreach (var sale in ViewBag.Sale_Transaction_History)
+                {
+                    <br /><span class="sub_tr_values">@sale.Gross</span>
+                }
+
+            </td>
+
+            <td width="10%">
+                @v.Created_at.ToString("MM/dd/yyyy")
+
+                @foreach (var sale in ViewBag.Sale_Transaction_History)
+                {
+                    <br /><span class="sub_tr_values">@sale.Date.ToString("dd/MM/yyyy")</span>
+                }
+            </td>
+
+
+            <td class="text-center width-120" style="vertical-align:middle;">
+
+                <a class="btn btn-sm btn-info bold" href="~/Sale/Edit_Sale/@v.Id">Edit</a>
+                <a class="btn btn-sm btn-danger bold" href="" onclick="Delete_Sale(@v.Id)">Delete</a>
+            </td>
+
+
+
+        </tr>
+
+    }
+
 }
-}
-
-
 <script src="~/Scripts/new-js/jquery-1.11.1.min.js"></script>
 <script src="~/Scripts/new-js/jquery.datatables.min.js"></script>
 
@@ -42,3 +102,4 @@
         $('#table_on_dates').dataTable();
     });
 </script>
+@*<span>£</span>*@<span></span><span></span><span></span><span></span>

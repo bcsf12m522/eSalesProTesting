@@ -28,7 +28,14 @@
                         <div id="edit_invoice">
                             <form id="demo-form2" action="@Url.Action("Edit_Sale","Sale")" method="post" data-parsley-validate class="" enctype="multipart/form-data">
 
+                                <input hidden type="text" value="-2" id="customer_list_edit_modal_value"/>
+
                                 <div class="col-md-12">
+
+                                    @{
+                                        Html.RenderPartial("Loader_Div");
+                                    }
+
                                     <div class="empty-height"></div><div class="empty-height"></div>
 
                                     <div class="form-group pull-right mb-0 margin_right_6">
@@ -374,7 +381,7 @@
 
                                         <div id="addedRows"></div>
 
-                                        <div id="productList"></div>
+                                        <div id="productList"> </div>
 
                                         <div class="clearfix"></div>
                                     </div>
@@ -562,13 +569,13 @@
 
     @*----------------------------POP UP FOR SOLD HISTORY--------------------------------*@
 
-    <div class="modal fade" id="Sold_History_Modal" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal fade close_modal" id="Sold_History_Modal" tabindex="-1" role="dialog" aria-hidden="false">
         <div class="modal-dialog modal-md">
             <div class="modal-content modal-style-custom">
 
                 <div class="title col-md-12">
                     <span>Message</span>
-                    <img src="~/img/images/c3.png" class="close mr--13 pull-right" data-dismiss="modal" />
+                    <img src="~/img/images/c3.png" class="close mr--13 pull-right" data-dismiss="" onclick="close_modal()" />
                 </div>
 
                 <div class="col-md-12 col-sm-12 col-xs-12">
@@ -1019,7 +1026,7 @@
                                     <tbody class="black-color bold" id="">
                                         @foreach (var v in ViewBag.Customer)
                                         {
-                                            <tr onclick="go(@v.Id,@v.Customer_Type_Id);customer_credit()">
+                                            <tr onclick="go(@v.Id,@v.Customer_Type_Id);customer_credit()" oncontextmenu="GetCustomer(@v.Id);">
                                                 <td id="@String.Concat("juni1", v.Id)" data-title="User ID">@v.Name</td>
                                                 <td id="@String.Concat("juni2", v.Id)" data-title="First Name">@v.phone</td>
                                                 <td id="@String.Concat("juni3", v.Id)" data-title="Last Name">@v.Billing_Address</td>
@@ -1030,7 +1037,7 @@
                                                 <td id="" data-title="Email" class="user-emails">@v.Credit_Limit_Old</td>
                                                 <td id="" data-title="Email" class="user-emails">@v.Credit_Limit</td>
                                                 @*<input type="text" id="jj" name="jj" value="@v.Balance"/>*@
-                                                <input type="text" id="@String.Concat("juni8", v.Id)" value="@v.Credit_Limit" hidden/>
+                                                <input type="text" id="@String.Concat("juni8", v.Id)" value="@v.Credit_Limit" hidden />
                                             </tr>
 
                                         }
@@ -1307,6 +1314,15 @@
     <input type="hidden" value="1" id="ApnaApnaRowNumber"/>
 
     @*----------------------------POP UP END ADD CUSTOMER--------------------------------*@
+
+
+    @*----------------------------POP UP EDIT CUSTOMER--------------------------------*@
+
+    @{
+        Html.RenderPartial("Edit_Customer_Modal");
+    }
+
+    @*----------------------------POP UP END EDIT CUSTOMER--------------------------------*@
 
     <script src="~/Scripts/Sale/Edit_Sale.js"></script>
     <script src="~/Scripts/new-js/jquery-1.11.1.min.js"></script>

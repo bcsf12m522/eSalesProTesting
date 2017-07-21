@@ -51,6 +51,16 @@
     padding-left: 0;
 }
 
+.sub_tr_values{
+    font-weight: lighter;
+    font-size: 12px;
+    /*font-family: verdana, sans-serif;*/
+}
+
+.vertical_align_middle{
+    vertical-align:middle!important;
+}
+
 .pr-0 {
     padding-right: 0;
 }
@@ -481,7 +491,7 @@
 .modal-style-custom {
     background: linear-gradient(to bottom, #fafafd, #b2b2b3);
     border: 3px solid #00aeee;
-     max-height: 801px;
+    max-height: 700px;
     overflow-y: auto;
     overflow-x: no-display;
 }
@@ -977,6 +987,15 @@
 #kj tbody tr:hover td{
     background-color:#76c5f7;
     cursor: pointer;
+}
+
+#table_on_dates tbody tr:hover td{
+    background-color:#76c5f7;
+    cursor: pointer;
+}
+
+.background_blue_selected{
+    background-color:#76c5f7!important;
 }
 
 .row_highlighter tbody tr:hover td{
