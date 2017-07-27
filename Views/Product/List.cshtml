@@ -114,12 +114,12 @@
                         <div class="clearfix"></div>
 
 
-
+                        <div class="empty-height"></div><div class="empty-height"></div>
 
 
                         @*<section id="no-more-tables">*@
 
-                        <div class="col-md-12">
+                        <div class="col-md-12" style="overflow-x:scroll;overflow-y:hidden">
                             <table border="0" class="table table-responsive border_black" id="product_list_tableeee">
                                 <thead>
                                     <tr class="table-heading-fonts font-15 table-main-headings">
@@ -132,11 +132,7 @@
                                         <th class="text-center">Other</th>
                                         <th class="text-center">Cost</th>
 
-                                        @*<th id="check-normal-price-th" class="hideDiv text-center">Total Normal Price</th>
-                                            <th id="check-trade-price-th" class="hideDiv text-center">Total Trade Price</th>
-                                            <th id="check-premium-price-th" class="hideDiv text-center">Total Premium Price</th>
-                                            <th id="check-other-price-th" class="hideDiv text-center">Total Other Price</th>
-                                            <th id="check-cost-price-th" class="hideDiv text-center">Total Cost Price</th>*@
+                                 
 
                                         <th class="normal_total text-center" style="display:none">Total Normal</th>
                                         <th class="trade_total text-center" style="display:none">Total Trade</th>
@@ -180,7 +176,7 @@
                                                         <ul class="enlarge" style="margin:0px; padding:0px;">
                                                             <li style="margin: 0px;">
                                                                 <img src="@imgsrc" class="img-circle max_width_50" alt="" />
-                                                                <span style="margin:0px; padding:0px;"><img src="@imgsrc" alt="" width="250" height="250" /></span>
+                                                                <span style="margin:0px; padding:0px;"><img src="@imgsrc" alt="" width="400" height="220" /></span>
                                                             </li>
                                                         </ul>
 
@@ -200,7 +196,7 @@
                                                 <td>
 
 
-                                                    <img class="img-circle max_width_50" src="~/img/images/no_image.png" />
+                                                    <img class="img-circle max_width_50" src="~/img/images/new_img.png" />
 
                                                     @*<img class="img-circle max_width_50" src="@imgsrc" /><span><img src="@imgsrc" /></span>*@
                                                 </td>
@@ -217,11 +213,7 @@
                                             <td data-title="Date Registered">@v.Price_Premium</td>
                                             <td class="">@v.Price_Others</td>
                                             <td class="">@v.Cost_Price</td>
-                                            @*<td id="check-normal-price-td" class="hideDiv">@v.Normal_VAT</td>
-                                                <td id="check-trade-price-td" class="hideDiv">@v.Normal_VAT</td>
-                                                <td id="check-premium-price-td" class="hideDiv">@v.Normal_VAT</td>
-                                                <td id="check-other-price-td" class="hideDiv">@v.Normal_VAT</td>
-                                                <td id="check-cost-price-td" class="hideDiv">@v.Normal_VAT</td>*@
+                                       
 
                                             <td class="normal_total" style="display:none">@v.Normal_VAT</td>
                                             <td class="trade_total" style="display:none">@v.Trade_VAT</td>
@@ -234,7 +226,7 @@
 
                                             <td>
                                                 <a href="#" data-toggle="modal" data-target="#EditModal" class="btn btn-sm btn-success bold" onclick="GetProduct(@v.Id)">Edit</a>
-                                                <a class="btn btn-sm btn-danger bold" href="">
+                                                <a class="btn btn-sm btn-danger bold" href="~/Product/Delete/@v.Id">
                                                     Delete
                                                 </a>
                                             </td>
@@ -243,7 +235,7 @@
                                 </tbody>
                             </table>
 
-
+                            <div class="empty-height"></div><div class="empty-height"></div><div class="empty-height"></div>
                          
 
                             <div class="clearfix"></div>
