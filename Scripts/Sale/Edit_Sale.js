@@ -71,7 +71,13 @@ function payment_status() {
 }
 
 
-
+function excludeVatUnchecked() {
+    if (document.getElementById("excludeVat").checked) {
+        $(".hidecolumn").hide();
+    } else {
+        $(".hidecolumn").show();
+    }
+}
 
 
 
@@ -109,6 +115,25 @@ function Partial_Payment() {
 
     $("#vat_invoice").val(vat)
     $("#gross_invoice").val(gross)
+
+
+
+    
+
+    var partial_net_price = (amount/1.2).toFixed(2)
+
+    var partial_vat_price = (amount - partial_net_price).toFixed(2);
+
+    var partial_gross = amount;
+
+    $("#partial_net_id").val(partial_net_price);
+    $("#partial_vat_price_id").val(partial_vat_price);
+    $("#partial_gross_id").val(partial_gross);
+
+    //alert("NET  " + partial_net_price + " VAT  " + partial_vat_price + " GROSS  " + partial_gross);
+
+   
+
 
 }
 

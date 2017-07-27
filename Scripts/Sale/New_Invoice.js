@@ -128,10 +128,12 @@
     //alert(type);
 }
 
-
+function image_click() {
+    //alert("asad");
+}
 
 function run_invoice() {
-    alert("Run Invoice");
+    //alert("Run Invoice");
 
     var selectedValue = document.getElementById("language").value;
 

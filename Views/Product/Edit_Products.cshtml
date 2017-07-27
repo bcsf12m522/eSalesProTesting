@@ -42,7 +42,7 @@
                         <div class="">
                             <label class="vat-texts">+VAT=</label>
                             <div class="col-md-3 col-sm-6 col-xs-12">
-                                <input id="NormalTotal" onkeypress="validate(event)" type="text" class="width-170" @Model.Normal_VAT name="normal_vat" required>
+                                <input id="NormalTotal" onkeypress="validate(event)" type="text" class="width-170" value="@Model.Normal_VAT" name="normal_vat" required>
                             </div>
                         </div>
 
@@ -399,7 +399,7 @@
 
                         <div>
 
-                            <span class="btn btn-file btn-primary btn-margin-product"><span class="fileupload-new">Select image</span><span class="fileupload-exists">Change</span><input type="file" name="image[]" id="a_image1" onchange="Checkfilesimage(1)"></span>
+                            <span class="btn btn-file btn-primary btn-margin-product"><span class="fileupload-new">Select image</span><span class="fileupload-exists">Change</span><input type="file" value="@Model.Image" name="file" id="a_image1" onchange="Checkfilesimage(1)"></span>
 
                             <a href="javascript:;" class="btn btn-primary btn-margin-product fileupload-exists" data-dismiss="fileupload">Remove</a>
 

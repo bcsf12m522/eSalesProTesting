@@ -1,4 +1,4 @@
-﻿@model List<eSalesPro.Models.Invoice>
+﻿@model List<eSalesPro.Services.Sales_History_Record>
 
 <script src="~/Scripts/new-js/jquery-1.11.1.min.js"></script>
 <script src="~/Scripts/new-js/jquery.datatables.min.js"></script>
@@ -12,82 +12,103 @@
 
         <tr class="text-center background_blue_selected">
 
-            <td class="vertical_align_middle">@v.Invoice_Number</td>
-            <td class="vertical_align_middle">@v.Customer.Name</td>
+            <td class="vertical_align_middle">@v.order_id</td>
+            <td class="vertical_align_middle">@v.customer_name</td>
 
-            <td>
-                @v.Payment_Methods.Type
+            @if (v.edit_sale_list.Count() == null || v.edit_sale_list.Count() == 0)
+            {
+                <td>@v.payment_type</td>
+                <td width="15%">@v.payment_status</td>
+                <td>@v.net</td>
+                <td>@v.vat</td>
+                <td>@v.gross</td>
+                <td width="10%">@v.date.ToString("MM/dd/yyyy")</td>
+            }
+            
+            else
+            {
 
-                @foreach (var sale in ViewBag.Sale_Transaction_History)
-                {
-                    <br /><span class="sub_tr_values">@sale.Payment_Type</span>
-                }
-            </td>
+                <td>
+                    @v.payment_type
 
+                    @foreach (var sale in v.edit_sale_list)
+                    {
 
-            <td width="15%">
-
-
-                @v.Payment_Status.Status
-
-                @foreach (var sale in ViewBag.Sale_Transaction_History)
-                {
-
-                    <br /><span class="sub_tr_values">@sale.Status</span>
-                }
-            </td>
-
-
-
-
-            <td>
-                @v.Net_Price
-
-                @foreach (var sale in ViewBag.Sale_Transaction_History)
-                {
-                    <br /><span class="sub_tr_values">@sale.Net_Amount</span>
-                }
-
-            </td>
+                        <br /><span class="sub_tr_values">@sale.Payment_Type</span>
+                    }
+                </td>
 
 
-            <td>
-                @v.VAT_20
 
-                @foreach (var sale in ViewBag.Sale_Transaction_History)
-                {
-                    <br /><span class="sub_tr_values">@sale.Vat</span>
-                }
 
-            </td>
+                <td width="15%">
 
-            <td>
-                @v.Gross
 
-                @foreach (var sale in ViewBag.Sale_Transaction_History)
-                {
-                    <br /><span class="sub_tr_values">@sale.Gross</span>
-                }
+                    @v.payment_status
 
-            </td>
+                    @foreach (var sale in v.edit_sale_list)
+                    {
+                        <br /><span class="sub_tr_values">@sale.Status</span>
+                    }
+                </td>
 
-            <td width="10%">
-                @v.Created_at.ToString("MM/dd/yyyy")
 
-                @foreach (var sale in ViewBag.Sale_Transaction_History)
-                {
-                    <br /><span class="sub_tr_values">@sale.Date.ToString("dd/MM/yyyy")</span>
-                }
-            </td>
 
+
+                <td>
+                    @v.net
+
+                    @foreach (var sale in v.edit_sale_list)
+                    {
+                        <br /><span class="sub_tr_values">@sale.Net_Amount</span>
+                    }
+                </td>
+
+
+
+
+                <td>
+                    @v.vat
+
+                    @foreach (var sale in v.edit_sale_list)
+                    {
+                        <br /><span class="sub_tr_values">@sale.Vat</span>
+                    }
+                </td>
+
+
+                <td>
+                    @v.gross
+
+                    @foreach (var sale in v.edit_sale_list)
+                    {
+                        <br /><span class="sub_tr_values">@sale.Gross</span>
+                    }
+                </td>
+
+
+
+                <td width="10%">
+                    @v.date.ToString("dd/MM/yyyy")
+
+                    @foreach (var sale in v.edit_sale_list)
+                    {
+                        <br /><span class="sub_tr_values">@sale.Date.ToString("dd/MM/yyyy")</span>
+                    }
+                </td>
+
+
+
+
+
+
+            }
 
             <td class="text-center width-120" style="vertical-align:middle;">
 
-                <a class="btn btn-sm btn-info bold" href="~/Sale/Edit_Sale/@v.Id">Edit</a>
-                <a class="btn btn-sm btn-danger bold" href="" onclick="Delete_Sale(@v.Id)">Delete</a>
+                <a class="btn btn-sm btn-info bold" href="~/Sale/Edit_Sale/@v.id">Edit</a>
+                <a class="btn btn-sm btn-danger bold" href="" onclick="Delete_Sale(@v.id)">Delete</a>
             </td>
-
-
 
         </tr>
 
@@ -101,5 +122,10 @@
     $(document).ready(function () {
         $('#table_on_dates').dataTable();
     });
+
+    function histories(id) {
+        alert(id);
+    }
+
 </script>
 @*<span>£</span>*@<span></span><span></span><span></span><span></span>

@@ -43,8 +43,8 @@
 
                                 <div class="empty-height"></div><div class="empty-height"></div>
                                 @*<div class="col-md-3">
-                                    <a href="#" data-toggle="modal" data-target="#EditModal" class="btn btn-primary blue-btn-style btn-mini width-170 product-stock-btn bold">Edit</a>
-                                </div>*@
+                                        <a href="#" data-toggle="modal" data-target="#EditModal" class="btn btn-primary blue-btn-style btn-mini width-170 product-stock-btn bold">Edit</a>
+                                    </div>*@
 
                                 <div class="col-md-2 pull-right pr-0">
                                     <a href="/Product/Stock_Taking_List" class="btn btn-primary pull-right blue-btn-style btn-mini width-170 bold">Update Stocktaking</a>
@@ -63,17 +63,17 @@
 
                         @*<div class="col-md-12">
 
-                            <div class="col-md-3 pull-left">
-                                <a href="~/Home/Epos" class="btn btn-primary blue-btn-style btn-mini supplier-epos-btn bold">Back to EPOS Main Panel</a>
-                            </div>
+                                <div class="col-md-3 pull-left">
+                                    <a href="~/Home/Epos" class="btn btn-primary blue-btn-style btn-mini supplier-epos-btn bold">Back to EPOS Main Panel</a>
+                                </div>
 
-                            <div class="col-md-3 pull-left">
-                                <a href="#" data-toggle="modal" data-target="#CreateModal" class="btn btn-primary blue-btn-style btn-mini width-200 ml--50 product-import-btn bold">Add New Item</a>
+                                <div class="col-md-3 pull-left">
+                                    <a href="#" data-toggle="modal" data-target="#CreateModal" class="btn btn-primary blue-btn-style btn-mini width-200 ml--50 product-import-btn bold">Add New Item</a>
 
-                            </div>
-                            <div class="clearfix"></div>
+                                </div>
+                                <div class="clearfix"></div>
 
-                        </div>*@
+                            </div>*@
                         <div class="empty-height"></div><div class="empty-height"></div>
                         <div class="col-md-12 col-lg-12">
 
@@ -99,10 +99,10 @@
                             <div class="row1 pull-right">
                                 <div class="pull-left bold  mr-5">Custom Fields</div>
                                 @*<div class="pull-left mr-5"><label class="unbold"><input onclick="abc()" id="checkbox-normal" type="checkbox" />Normal</label></div>
-                                <div class="pull-left mr-5"><label class="unbold"><input onclick="abc()" id="checkbox-trade" type="checkbox" />Trade</label></div>
-                                <div class="pull-left mr-5"><label class="unbold"><input onclick="abc()" id="checkbox-premium" type="checkbox" />Premium</label></div>
-                                <div class="pull-left mr-5"><label class="unbold"><input onclick="abc()" id="checkbox-other" type="checkbox" />Other</label></div>
-                                <div class="pull-left mr-5"><label class="unbold"><input onclick="abc()" id="checkbox-cost" type="checkbox" />Cost</label></div>*@
+                                    <div class="pull-left mr-5"><label class="unbold"><input onclick="abc()" id="checkbox-trade" type="checkbox" />Trade</label></div>
+                                    <div class="pull-left mr-5"><label class="unbold"><input onclick="abc()" id="checkbox-premium" type="checkbox" />Premium</label></div>
+                                    <div class="pull-left mr-5"><label class="unbold"><input onclick="abc()" id="checkbox-other" type="checkbox" />Other</label></div>
+                                    <div class="pull-left mr-5"><label class="unbold"><input onclick="abc()" id="checkbox-cost" type="checkbox" />Cost</label></div>*@
                                 <div class="pull-left mr-5"><label class="unbold"><input onclick="abc()" id="checkbox_normal" type="checkbox" />Normal</label></div>
                                 <div class="pull-left mr-5"><label class="unbold"><input onclick="abc1()" id="checkbox_trade" type="checkbox" />Trade</label></div>
                                 <div class="pull-left mr-5"><label class="unbold"><input onclick="abc2()" id="checkbox_premium" type="checkbox" />Premium</label></div>
@@ -119,84 +119,137 @@
 
                         @*<section id="no-more-tables">*@
 
-                            <div class="col-md-12">
-                                <table border="0" class="table table-responsive border_black" id="product_list_tableeee">
-                                    <thead>
-                                        <tr class="table-heading-fonts table-main-headings">
-                                            @*<th>Id</th>*@
-                                            <th class="text-center">SKU</th>
-                                            <th class="text-center">Description</th>
-                                            <th class="text-center">Normal Price</th>
-                                            <th class="text-center">Trade Price</th>
-                                            <th class="text-center">Premium Price</th>
-                                            <th class="text-center">Other Price</th>
-                                            <th class="text-center">Cost Price</th>
+                        <div class="col-md-12">
+                            <table border="0" class="table table-responsive border_black" id="product_list_tableeee">
+                                <thead>
+                                    <tr class="table-heading-fonts font-15 table-main-headings">
+                                        <th>Image</th>
+                                        <th class="text-center">SKU</th>
+                                        <th class="text-center">Description</th>
+                                        <th class="text-center">Normal</th>
+                                        <th class="text-center">Trade</th>
+                                        <th class="text-center">Premium</th>
+                                        <th class="text-center">Other</th>
+                                        <th class="text-center">Cost</th>
 
-                                            @*<th id="check-normal-price-th" class="hideDiv text-center">Total Normal Price</th>
+                                        @*<th id="check-normal-price-th" class="hideDiv text-center">Total Normal Price</th>
                                             <th id="check-trade-price-th" class="hideDiv text-center">Total Trade Price</th>
                                             <th id="check-premium-price-th" class="hideDiv text-center">Total Premium Price</th>
                                             <th id="check-other-price-th" class="hideDiv text-center">Total Other Price</th>
                                             <th id="check-cost-price-th" class="hideDiv text-center">Total Cost Price</th>*@
 
-                                            <th class="normal_total text-center" style="display:none">Total Normal Price</th>
-                                            <th class="trade_total text-center" style="display:none">Total Trade Price</th>
-                                            <th class="premium_total text-center" style="display:none">Total Premium Price</th>
-                                            <th class="other_total text-center" style="display:none">Total Other Price</th>
-                                            <th class="cost_total text-center" style="display:none">Total Cost Price</th>
+                                        <th class="normal_total text-center" style="display:none">Total Normal</th>
+                                        <th class="trade_total text-center" style="display:none">Total Trade</th>
+                                        <th class="premium_total text-center" style="display:none">Total Premium</th>
+                                        <th class="other_total text-center" style="display:none">Total Other</th>
+                                        <th class="cost_total text-center" style="display:none">Total Cost</th>
 
-                                            <th class="text-center">Actions</th>
-
-
-                                        </tr>
-                                    </thead>
+                                        <th class="text-center">Actions</th>
 
 
+                                    </tr>
+                                </thead>
 
-                                    <tbody class="bold tbody-font-style text-center">
 
-                                        @foreach (var v in Model)
-                                        {
-                                            <tr class="">
-                                                @*<td data-title="User ID">@v.Id</td>*@
-                                                <td data-title="User ID">@v.Custom_Label_</td>
-                                                <td data-title="First Name">@v.Item_Title</td>
-                                                <td data-title="Last Name">@v.Price_Normal</td>
-                                                <td data-title="Email" class="user-emails">@v.Price_Trade</td>
-                                                <td data-title="Date Registered">@v.Price_Premium</td>
-                                                <td class="">@v.Price_Others</td>
-                                                <td class="">@v.Cost_Price</td>
-                                                @*<td id="check-normal-price-td" class="hideDiv">@v.Normal_VAT</td>
+
+                                <tbody class="bold tbody-font-style font-14 text-center">
+
+                                    @foreach (var v in Model)
+                                    {
+
+
+
+
+                                        <tr class="">
+
+                                            @if (v.Image != null)
+                                            {
+                                                {
+                                                    var base64 = Convert.ToBase64String(v.Image);
+                                                    var imgsrc = string.Format("data:image/gif;base64,{0}", base64);
+
+
+                                                    <td>
+
+
+                                                        @*<img class="img-circle max_width_50" src="@imgsrc" />*@
+
+                                                        @*<img class="img-circle max_width_50" src="@imgsrc" />*@
+
+
+                                                        <ul class="enlarge" style="margin:0px; padding:0px;">
+                                                            <li style="margin: 0px;">
+                                                                <img src="@imgsrc" class="img-circle max_width_50" alt="" />
+                                                                <span style="margin:0px; padding:0px;"><img src="@imgsrc" alt="" width="250" height="250" /></span>
+                                                            </li>
+                                                        </ul>
+
+
+
+
+                                                    </td>
+                                                }
+                                            }
+
+
+
+
+
+                                            else
+                                            {
+                                                <td>
+
+
+                                                    <img class="img-circle max_width_50" src="~/img/images/no_image.png" />
+
+                                                    @*<img class="img-circle max_width_50" src="@imgsrc" /><span><img src="@imgsrc" /></span>*@
+                                                </td>
+                                            }
+
+
+
+
+
+                                            <td data-title="User ID">@v.Custom_Label_</td>
+                                            <td data-title="First Name">@v.Item_Title</td>
+                                            <td data-title="Last Name">@v.Price_Normal</td>
+                                            <td data-title="Email" class="user-emails">@v.Price_Trade</td>
+                                            <td data-title="Date Registered">@v.Price_Premium</td>
+                                            <td class="">@v.Price_Others</td>
+                                            <td class="">@v.Cost_Price</td>
+                                            @*<td id="check-normal-price-td" class="hideDiv">@v.Normal_VAT</td>
                                                 <td id="check-trade-price-td" class="hideDiv">@v.Normal_VAT</td>
                                                 <td id="check-premium-price-td" class="hideDiv">@v.Normal_VAT</td>
                                                 <td id="check-other-price-td" class="hideDiv">@v.Normal_VAT</td>
                                                 <td id="check-cost-price-td" class="hideDiv">@v.Normal_VAT</td>*@
 
-                                                <td class="normal_total" style="display:none">@v.Normal_VAT</td>
-                                                <td class="trade_total" style="display:none">@v.Trade_VAT</td>
-                                                <td class="premium_total" style="display:none">@v.Premium_VAT</td>
-                                                <td class="other_total" style="display:none">@v.Other_VAT</td>
-                                                <td class="cost_total" style="display:none">@v.Cost_VAT</td>
+                                            <td class="normal_total" style="display:none">@v.Normal_VAT</td>
+                                            <td class="trade_total" style="display:none">@v.Trade_VAT</td>
+                                            <td class="premium_total" style="display:none">@v.Premium_VAT</td>
+                                            <td class="other_total" style="display:none">@v.Other_VAT</td>
+                                            <td class="cost_total" style="display:none">@v.Cost_VAT</td>
 
 
 
 
-                                                <td>
-                                                    <a href="#" data-toggle="modal" data-target="#EditModal" class="btn btn-sm btn-success bold" onclick="GetProduct(@v.Id)">Edit</a>
-                                                    <a class="btn btn-sm btn-danger bold" href="">
-                                                        Delete
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        }
-                                    </tbody>
-                                </table>
+                                            <td>
+                                                <a href="#" data-toggle="modal" data-target="#EditModal" class="btn btn-sm btn-success bold" onclick="GetProduct(@v.Id)">Edit</a>
+                                                <a class="btn btn-sm btn-danger bold" href="">
+                                                    Delete
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
 
 
+                         
 
-                                    <div class="clearfix"></div>
+                            <div class="clearfix"></div>
 
 
-</div>
+                        </div>
 
                     </div>
                 </div>
@@ -204,7 +257,7 @@
             </div>
 
 
-            <div id="sticky-footer-push"></div>
+            <div id="" style="height:138px"></div>
         </div>
     </div>
 
@@ -234,31 +287,31 @@
                             @*<h3 class="black-color"><b>Find Supplier</b></h3>*@
 
 
-                                <div class="col-md-12">
-                                    <div class="empty-height"></div><div class="empty-height"></div><div class="empty-height"></div><div class="empty-height"></div>
-                                        <label class="font-16 text-center" for="middle-name">Are you sure you want to use this barcode ?</label>
-                                    <br/>
-                                    <label class="font-17 text-center black-color" id="barcode_label" for="middle-name">@barcode</label>
+                            <div class="col-md-12">
+                                <div class="empty-height"></div><div class="empty-height"></div><div class="empty-height"></div><div class="empty-height"></div>
+                                <label class="font-16 text-center" for="middle-name">Are you sure you want to use this barcode ?</label>
+                                <br />
+                                <label class="font-17 text-center black-color" id="barcode_label" for="middle-name">@barcode</label>
 
-                                    <div class="empty-height"></div><div class="empty-height"></div>
+                                <div class="empty-height"></div><div class="empty-height"></div>
 
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="col-md-3"></div>
+
+                                <div class="col-md-3">
+                                    <input type="button" onclick="Barcode_Ok();" value="Ok" class="btn btn-success btn-mini center-block width-123" />
                                 </div>
 
-                                <div class="col-md-12">
-                                    <div class="col-md-3"></div>
-
-                                    <div class="col-md-3">
-                                        <input type="button" onclick="Barcode_Ok();" value="Ok" class="btn btn-success btn-mini center-block width-123" />
-                                    </div>
-
-                                    <div class="col-md-3">
-                                        <a href="#" onclick="dismiss_modal()" class="btn btn-primary btn-mini width-123 center-block a-cancel height-40 mt-0 ml-22">Cancel</a>
-                                    </div>
-                                    <div class="col-md-3"></div>
-
-
-
+                                <div class="col-md-3">
+                                    <a href="#" onclick="dismiss_modal()" class="btn btn-primary btn-mini width-123 center-block a-cancel height-40 mt-0 ml-22">Cancel</a>
                                 </div>
+                                <div class="col-md-3"></div>
+
+
+
+                            </div>
 
 
                         </div>
@@ -292,7 +345,7 @@
 
     @*----------------------------POP UP for CATEGORY--------------------------------*@
 
-          <div class="modal fade bs-example-modal-md z-999999999999999999999999" id="create_category_modal" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal fade bs-example-modal-md z-999999999999999999999999" id="create_category_modal" tabindex="-1" role="dialog" aria-hidden="false">
         <div class="modal-dialog modal-lg-2">
             <div class="modal-content modal-style-custom">
 
@@ -391,10 +444,10 @@
                                             <select id="from_warehouse" name="From_Warehouse" class="form-control width-365">
                                                 <option value="">Please select any </option>
                                                 @foreach (var warehouse in ViewBag.Warehouses)
-                                                { 
-                                                <option value="@warehouse.Id">@warehouse.Name </option>
+                                                {
+                                                    <option value="@warehouse.Id">@warehouse.Name </option>
                                                 }
-                                                    </select>
+                                            </select>
                                         </div>
                                     </div>
 
@@ -414,7 +467,7 @@
                                     <div class="form-group">
                                         <label class="stock-transfer-texts" for="middle-name">QTY:</label>
                                         <div class="col-md-3 col-sm-6 col-xs-12">
-                                            <input type="text"  class="width-110"  name="stock_qty" id="quantity">
+                                            <input type="text" class="width-110" name="stock_qty" id="quantity">
                                         </div>
                                     </div>
 
@@ -461,7 +514,7 @@
 
 
     @*<----------------CATEGORY POP UP------------------>*@
-     <div class="modal fade" style="overflow:auto" id="" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal fade" style="overflow:auto" id="" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg-2" role="document">
             <div class="modal-content modal-border" style="border-radius:10px;background:#e6e6e6;">
 
@@ -490,7 +543,7 @@
 
     @*----------------------------POP UP for ADD NEW LOCATION--------------------------------*@
 
-    
+
 
 
     @*----------------------------POP UP END ADD NEW LOCATION--------------------------------*@
@@ -922,7 +975,7 @@
                                                     </a>
                                                 </div>
 
-                                                
+
 
                                             </div>
 
@@ -981,7 +1034,7 @@
 
                                             </div>
                                             <div>
-                                                <a class=""><img class="del-img-size" src="~/img/images/delete.png"/></a>
+                                                <a class=""><img class="del-img-size" src="~/img/images/delete.png" /></a>
                                             </div>
 
 
@@ -989,7 +1042,7 @@
 
 
 
-                                        
+
                                         <div class="empty-height"></div>
 
                                         <div class="product-border"></div>
@@ -1018,7 +1071,8 @@
                                                     <a href="#" onclick="" data-toggle="modal" data-target="#barcode_modal">
                                                         <img class="add-barcode-img" src="~/img/images/add_barcode.png" />
                                                     </a>
-                                                        <a><img class="print-barcode-img" src="~/img/images/barcode_print.png" />
+                                                    <a>
+                                                        <img class="print-barcode-img" src="~/img/images/barcode_print.png" />
                                                     </a>
                                                 </div>
 
@@ -1102,7 +1156,7 @@
 
 
 
-                                        
+
 
 
 
@@ -1110,7 +1164,7 @@
                                         <div id="" class="form-group">
                                             <label class="supplier-create-texts" for="middle-name">Category Name<span class="required">*</span></label>
                                             <div class="col-md-3 col-sm-6 col-xs-12">
-                                                <select  name="cat_name" required class="form-control width-360">
+                                                <select name="cat_name" required class="form-control width-360">
 
                                                     <option value="">Please select any </option>
                                                     @foreach (var name in ViewBag.Categories)
@@ -1211,7 +1265,7 @@
 
                                                 <div>
 
-                                                    <span class="btn btn-file btn-primary btn-margin-product"><span class="fileupload-new">Select image</span><span class="fileupload-exists">Change</span><input type="file" name="image[]" id="a_image1" onchange="Checkfilesimage(1)"></span>
+                                                    <span class="btn btn-file btn-primary btn-margin-product"><span class="fileupload-new">Select image</span><span class="fileupload-exists">Change</span><input type="file" name="file" id="a_image1" onchange="Checkfilesimage(1)"></span>
 
                                                     <a href="javascript:;" class="btn btn-primary btn-margin-product fileupload-exists" data-dismiss="fileupload">Remove</a>
 
@@ -1244,7 +1298,7 @@
                                     </div>
                                     <div class="col-md-3"></div>
 
-                                    
+
 
                                 </div>
 
@@ -1268,7 +1322,7 @@
     </div>
 
 
-   
+
 
     @*----------------------------POP UP END ADD PRODUCT--------------------------------*@
 
@@ -1690,7 +1744,7 @@
 
                                                 <div>
 
-                                                    <span class="btn btn-file btn-primary btn-margin-product"><span class="fileupload-new">Select image</span><span class="fileupload-exists">Change</span><input type="file" name="image[]" id="a_image1" onchange="Checkfilesimage(1)"></span>
+                                                    <span class="btn btn-file btn-primary btn-margin-product"><span class="fileupload-new">Select image</span><span class="fileupload-exists">Change</span><input type="file" name="file" id="a_image1" onchange="Checkfilesimage(1)"></span>
 
                                                     <a href="javascript:;" class="btn btn-primary btn-margin-product fileupload-exists" data-dismiss="fileupload">Remove</a>
 
@@ -1745,7 +1799,7 @@
         </div>
     </div>
 
-    
+
 
     @*----------------------------POP UP END EDIT PRODUCT--------------------------------*@
 
@@ -1753,11 +1807,11 @@
         function abc() {
             if (document.getElementById("checkbox_normal").checked) {
                 $(".normal_total").show('slow');
-           }
+            }
 
-           else {
+            else {
                 $(".normal_total").hide('slow');
-           }
+            }
         }
 
         function abc1() {
@@ -1803,7 +1857,7 @@
 
     </script>
 
-    
+
 
     <script>
         $(document).ready(function () {
@@ -1814,7 +1868,7 @@
 
     <script>
         function Barcode_Ok() {
-            var v=document.getElementById("barcode_label").textContent;
+            var v = document.getElementById("barcode_label").textContent;
             if (v == "") {
                 alert(v);
                 alert("EMPTY");
@@ -1829,7 +1883,7 @@
             }
         }
 
-        function dismiss_modal(){
+        function dismiss_modal() {
             $("#create_category_modal").hide('fast');
             $("#barcode_modal").hide('fast');
             $("#transfer_stock").hide('fast');
@@ -1848,7 +1902,7 @@
         }
 
     </script>
-    
+
     <script>
         $('.add_new_warehouse').click(function () {
             $(this).after('<div class="ml-16 remove_warehouse_div"><div class="form-group pull-left"><label class="control-label pull-left">Location:</label><select name="ware_house_name" required class="form-control width-170 pull-left">@foreach (var warehouse in ViewBag.Warehouses){<option value="@warehouse.Id">@warehouse.Name </option>}</select></div><div class="pull-left"><label class="control-label pull-left ml-22 mr-5">Shelf No :</label><select name="ware_shelf_number" required class="form-control width-94 pull-left">@foreach (var warehouse in ViewBag.Warehouses){<option value="@warehouse.Id">@warehouse.shelf_number </option>}</select></div><div id="addedRows"></div><div class="form-group pull-left"><label class="control-label pull-left ml-22">QTY:</label><input id="" class="form-control pull-left width-78 ml-5" type="text" name="ware_house_qty" placeholder="" required="" title="admin"></div><div><a class="kashif" onclick="removeWarehouse()"><img class="del-img-size" style="margin-left:-14px;" src="/img/images/delete.png" /></a></div><div class="clearfix"></div></div>');
@@ -1857,15 +1911,15 @@
         //function removeWarehouse()
 
         $(document).on('click', '.kashif', function removeWarehouse() {
-            
+
             $(this).closest(".remove_warehouse_div").remove();
 
-        //$(this).parent('div').remove();
+            //$(this).parent('div').remove();
 
 
-        //function removeWarehouse(){
-        //    $(this).closest(".remove_warehouse_div").remove();
-        //}
+            //function removeWarehouse(){
+            //    $(this).closest(".remove_warehouse_div").remove();
+            //}
 
         });
     </script>
@@ -1883,7 +1937,7 @@
     </script>
 
 
-   
+
 
     <script>
         function cancel_btn() {
@@ -1898,20 +1952,20 @@
     </script>
 
     @*<script>
-        function same_warehouse() {
+            function same_warehouse() {
 
-            var From = document.getElementById("from_warehouse").value;
-            var To = document.getElementById("to_warehouse").value;
+                var From = document.getElementById("from_warehouse").value;
+                var To = document.getElementById("to_warehouse").value;
 
-            if (From == To) {
-                Alert("Both Fields Warehouses Cannot be Same");
-                document.getElementById("from_warehouse").value = "";
-                document.getElementById("to_warehouse").value = "";
-                return false;
+                if (From == To) {
+                    Alert("Both Fields Warehouses Cannot be Same");
+                    document.getElementById("from_warehouse").value = "";
+                    document.getElementById("to_warehouse").value = "";
+                    return false;
+                }
+
             }
-
-        }
-    </script>*@
+        </script>*@
 
 
     <script>
@@ -2090,51 +2144,50 @@
 
     @*<script>
 
-        function Add() {
-            var a, b, c, d;
-            a = parseInt(document.getElementById("NormalPrice").value);
+            function Add() {
+                var a, b, c, d;
+                a = parseInt(document.getElementById("NormalPrice").value);
 
-            //
-            // If textbox value is null i.e empty, then the below mentioned if condition will
-            // come into picture and make the value to '0' to avoid errors.
-            //
-            if (isNaN(a) == true) {
-                a = 0;
+                //
+                // If textbox value is null i.e empty, then the below mentioned if condition will
+                // come into picture and make the value to '0' to avoid errors.
+                //
+                if (isNaN(a) == true) {
+                    a = 0;
+                }
+
+                var b = parseInt(document.getElementById("TradePrice").value);
+                if (isNaN(b) == true) {
+                    b = 0;
+                }
+
+                var c = parseInt(document.getElementById("PremiumPrice").value);
+                if (isNaN(c) == true) {
+                    c = 0;
+                }
+
+                var d = parseInt(document.getElementById("OtherPrice").value);
+                if (isNaN(d) == true) {
+                    d = 0;
+                }
+
+                var e = parseInt(document.getElementById("CostPrice").value);
+                if (isNaN(e) == true) {
+                    e = 0;
+                }
+
+                document.getElementById("NormalTotal").value = a + ((a * 20) / 100)
+                document.getElementById("TradeTotal").value = b + ((b * 20) / 100)
+                document.getElementById("PremiumTotal").value = c + ((c * 20) / 100)
+                document.getElementById("OtherTotal").value = d + ((d * 20) / 100)
+                document.getElementById("CostTotal").value = e + ((e * 20) / 100)
             }
-
-            var b = parseInt(document.getElementById("TradePrice").value);
-            if (isNaN(b) == true) {
-                b = 0;
-            }
-
-            var c = parseInt(document.getElementById("PremiumPrice").value);
-            if (isNaN(c) == true) {
-                c = 0;
-            }
-
-            var d = parseInt(document.getElementById("OtherPrice").value);
-            if (isNaN(d) == true) {
-                d = 0;
-            }
-
-            var e = parseInt(document.getElementById("CostPrice").value);
-            if (isNaN(e) == true) {
-                e = 0;
-            }
-
-            document.getElementById("NormalTotal").value = a + ((a * 20) / 100)
-            document.getElementById("TradeTotal").value = b + ((b * 20) / 100)
-            document.getElementById("PremiumTotal").value = c + ((c * 20) / 100)
-            document.getElementById("OtherTotal").value = d + ((d * 20) / 100)
-            document.getElementById("CostTotal").value = e + ((e * 20) / 100)
-        }
-    </script>*@
+        </script>*@
 
     <script>
 
-        function GetProduct(ID)
-        {
-           
+        function GetProduct(ID) {
+
             $("#PleaseWait").addClass('showDiv');
 
             $.ajax({
@@ -2160,17 +2213,16 @@
     </script>
 
 
-    
+
 
     <script>
 
-        function transferStock()
-        {
-            
+        function transferStock() {
+
             var From = document.getElementById("from_warehouse").value;
             var To = document.getElementById("to_warehouse").value;
             var Quantity = document.getElementById("quantity").value;
-            
+
 
             if (From == To) {
                 alert("ERROR Same Warehouses");
@@ -2184,7 +2236,7 @@
                     cache: false,
                     type: "Get",
                     success: function (data) {
-                        
+
                     },
                     error: function (response) {
 

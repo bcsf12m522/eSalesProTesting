@@ -23,6 +23,8 @@
     })
 }
 
+
+
 function findByInvoice(id) {
     $("#loader_div").show();
     $("#customer_summary").hide();
@@ -96,7 +98,7 @@ function findByPayType(id) {
 
 function Delete_Sale(ID) {
     $("#loader_div").hide();
-    alert("Id" + ID);
+    //alert("Id" + ID);
 
     $.ajax({
 

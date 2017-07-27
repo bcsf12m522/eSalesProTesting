@@ -1173,10 +1173,6 @@ div.login-inner div.form-actions {
     background-position: center;
     width:100%;
     min-height:800px;
-
-
-
-
 }
 
 .bggg-img-with-2000-height {
@@ -1194,6 +1190,11 @@ div.login-inner div.form-actions {
     background-position: center;
     width:100%;
 }
+
+.min_height_860{
+    min-height:860px !important;
+}
+
 
 .bg-jd {
     
