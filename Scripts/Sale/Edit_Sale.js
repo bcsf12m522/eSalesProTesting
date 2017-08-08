@@ -12,6 +12,88 @@
     //alert("NOT RUN INVOICE");
 }
 
+function Total_Refund(rownum) {
+
+    var quan = document.getElementById('refund_quantity' + rownum).value;
+
+    var price = document.getElementById('invoice_price' + rownum).value;
+
+    var price_vat = ((20 / 100)) * price;
+
+    var priceVatTotal = +price + +price_vat;
+
+
+    var total = quantity * price;
+
+    var totalVat = quantity * priceVatTotal;
+
+    document.getElementById('invoice_total' + rownum).value = total;
+    document.getElementById('invoice_price_vat' + rownum).value = priceVatTotal;
+    document.getElementById('invoice_total_vat' + rownum).value = totalVat;
+
+    $("#total_hidden" + rownum).val(total);
+    $("#total_vat_hidden" + rownum).val(totalVat);
+
+    var discount_enter = $("#invoice_discount" + rownum).val();
+
+
+
+
+    var after_discount_total = total - discount_enter;
+    var after_discount_total_Vat = totalVat - discount_enter;
+
+    document.getElementById('invoice_total' + rownum).value = after_discount_total.toFixed(2);
+    document.getElementById('invoice_total_vat' + rownum).value = after_discount_total_Vat.toFixed(2);
+
+
+
+    var a = 0;
+    var size = document.getElementById('rowCounterrr').value;
+    var totaaaal = 0;
+    var check = 0;
+    //alert("sizeFIRST" + size);
+    for (i = 1; i <= size ; ++i) {
+
+        check = document.getElementById('invoice_total' + i);
+
+        //alert("CHECK" + check);
+
+        if (check !== null) {
+
+            totaaaal = document.getElementById('invoice_total' + i).value;
+
+            a = +totaaaal + +a;
+        }
+        else {
+
+            size = +size + +1;
+            //alert("SIZE" + size);
+        }
+        //alert("i  " + i + "   totaaaal    " + totaaaal + "  a  " + a);
+    }
+
+    var a_parsed = a.toFixed(2);
+
+    $("#net_invoice").html("£" + a_parsed);
+
+
+    var total_vat = (((20 / 100)) * a_parsed).toFixed(2);
+
+    var grosswithoutpoint = +a_parsed + +total_vat;
+
+    var gross = grosswithoutpoint.toFixed(2);
+
+    var discounted = gross - global_discount;
+
+
+    $("#invoice_vat").html(total_vat);
+    $("#invoice_gross").html(gross);
+
+    $("#net_invoice_hidden").val(a);
+    $("#vat_invoice").val(total_vat);
+    $("#gross_invoice").val(gross);
+
+}
 
 function payment_status() {
     var selectedValue = document.getElementById("payment_status_id").value;
@@ -70,6 +152,67 @@ function payment_status() {
     }
 }
 
+function Refund_Payment_Amount() {
+    $("#refund_tr").show();
+
+    var amount = $("#refund_amount").val();
+    var date = $("#date_refund").val();
+
+    if (date == null || date == "") {
+        
+
+        swal({
+            title: "DATE NOT SELECTED",
+            text: "You have to Select Date",
+            type: "warning",
+            confirmButtonColor: '#DD6B55',
+            confirmButtonText: 'Okay',
+        })
+
+        return false;
+
+    }
+
+    $("#amount_refund_date_td").html(date);
+
+    $("#amount_refund_td").html("£" + amount);
+
+    var payment_id = $("#payment_method_refund_id").val();
+
+    //if (payment_id == 1) {
+    //    alert("IF");
+    //    document.getElementById("amount_refund_type_td").innerHTML = "Cash";
+    //}
+
+    $("#Refund_Amount_Modal").hide();
+
+    
+    var gross=$("#invoice_gross").html();
+
+    var total_after_refund = (gross - amount).toFixed(2);
+
+    $("#Total_after_refund_td").html(total_after_refund);
+    $("#Total_after_refund_tr").show();
+}
+
+function handling_fee() {
+    var refund_amount = $("#refund_total_amount").val();
+    var amount = $("#refund_total_amount").val();
+    //var amount = (amount_without_fixed - 0).toFixed(2);
+    //var amount = amount2.toFixed(2);
+    var amount_20 = 0;
+    //alert("amount")
+
+    if (document.getElementById("handling_fee_checkbox").checked) {
+        amount_20 = (amount - (0.2 * amount)).toFixed(2);
+        $("#refund_amount").val(amount_20);
+        //$("#amount_refund_td").val(amount_20);
+        //$("#amount_refund_td").html("£" + amount_20);
+    } else{
+        $("#refund_amount").val(amount);
+        
+    }
+}
 
 function excludeVatUnchecked() {
     if (document.getElementById("excludeVat").checked) {
@@ -424,6 +567,7 @@ function Total(rownum) {
 
     var quantity = document.getElementById('invoice_quantity' + rownum).value;
 
+
     var price = document.getElementById('invoice_price' + rownum).value;
 
     var price_vat = ((20 / 100)) * price;
@@ -438,6 +582,17 @@ function Total(rownum) {
     document.getElementById('invoice_total' + rownum).value = total;
     document.getElementById('invoice_price_vat' + rownum).value = priceVatTotal;
     document.getElementById('invoice_total_vat' + rownum).value = totalVat;
+
+
+    //Refund Modal Tables values Setting
+
+    document.getElementById('ref_quantity' + rownum).value = quantity;
+    document.getElementById('ref_price' + rownum).value = price;
+    document.getElementById('ref_priceVat' + rownum).value = priceVatTotal;
+    document.getElementById('ref_total' + rownum).value = total;
+    document.getElementById('ref_totalVat' + rownum).value = totalVat;
+
+    //Refund Modal Tables values Setting
 
     $("#total_hidden" + rownum).val(total);
     $("#total_vat_hidden" + rownum).val(totalVat);
@@ -518,12 +673,23 @@ function Total2(rownum) {
     document.getElementById('invoice_price_vat' + rownum).value = priceVat;
     document.getElementById('invoice_total_vat' + rownum).value = totalVat;
 
+    //Refund Modal Tables values Setting
+
+    document.getElementById('ref_quantity' + rownum).value = quantity;
+    document.getElementById('ref_price' + rownum).value = price;
+    document.getElementById('ref_priceVat' + rownum).value = priceVat;
+    document.getElementById('ref_total' + rownum).value = total;
+    document.getElementById('ref_totalVat' + rownum).value = totalVat;
+
+    //Refund Modal Tables values Setting
+
+
     $("#total_hidden" + rownum).val(total);
     $("#total_vat_hidden" + rownum).val(totalVat);
 
     var discount_enter = $("#invoice_discount" + rownum).val();
 
-
+    
 
 
     var after_discount_total = total - discount_enter;
@@ -584,11 +750,12 @@ function Total2(rownum) {
 }
 
 function close_modal() {
-    //alert("CLOSE");
     $(".close_modal").toggle();
-    //alert("CLOSE");
 }
 
+function close_modal_refund() {
+    $("#Refund_Amount_Modal").toggle();
+}
 
 function go(id, type_id) {
 

@@ -6,13 +6,45 @@
 
 
 
-    <tr>
-        <td class="text-center" data-title="User ID">@v.Invoice_Number</td>
-        <td class="text-center" data-title="User ID">@v.Payment_Methods.Type</td>
-        <td class="text-center" data-title="User ID">@v.Payment_Status.Status</td>
-        <td class="text-center" data-title="User ID">@v.Net_Price</td>
-        <td class="text-center" data-title="User ID">@v.VAT_20</td>
-        <td class="text-center" data-title="User ID">@v.Gross</td>
-        <td class="text-center" data-title="User ID">@v.Created_at.ToShortDateString()</td>
+    <tr ondblclick="double_click_edit_sale(@v.Id)">
+        @*<td id="@String.Concat("customer_invoice_td1",v.Id)" class="text-center">@v.Invoice_Number</td>
+            <td id="@String.Concat("customer_invoice_td2",v.Id)" class="text-center">@v.Payment_Methods.Type</td>
+            <td id="@String.Concat("customer_invoice_td3",v.Id)" class="text-center">@v.Payment_Status.Status</td>
+            <td id="@String.Concat("customer_invoice_td4",v.Id)" class="text-center">@v.Net_Price</td>
+            <td id="@String.Concat("customer_invoice_td5",v.Id)" class="text-center">@v.VAT_20</td>
+            <td id="@String.Concat("customer_invoice_td6",v.Id)" class="text-center">@v.Gross</td>
+            <td id="@String.Concat("customer_invoice_td7",v.Id)" class="text-center">@v.Created_at.ToShortDateString()</td>*@
+
+        <td class="text-center">@v.Invoice_Number</td>
+        <td class="text-center">@v.Payment_Methods.Type</td>
+        <td class="text-center">@v.Payment_Status.Status</td>
+        <td class="text-center">@v.Net_Price</td>
+        <td class="text-center">@v.VAT_20</td>
+        <td class="text-center">@v.Gross</td>
+        <td class="text-center">@v.Created_at.ToShortDateString()</td>
+
     </tr>
 }
+
+<script>
+ 
+
+
+    //$('body').on('click', '.abbb', function () {
+    //    var idd = $(this).data("id");
+    //    alert(idd);
+    //    //alert("IDD" + idd);
+
+    //    //window.open("dd/"+idd);
+
+
+    //    //$("#loader_div").show();
+
+    //    //alert("ADASDSDASDASDAD");
+    //    //
+    //    var url = $("#RedirectTo").val();
+    //    location.href = url + "/" + idd;
+
+    //})
+
+</script>

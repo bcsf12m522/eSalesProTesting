@@ -153,9 +153,6 @@
                                     @foreach (var v in Model)
                                     {
 
-
-
-
                                         <tr class="">
 
                                             @if (v.Image != null)
@@ -175,7 +172,7 @@
 
                                                         <ul class="enlarge" style="margin:0px; padding:0px;">
                                                             <li style="margin: 0px;">
-                                                                <img src="@imgsrc" class="img-circle max_width_50" alt="" />
+                                                                <img src="@imgsrc" class="img-circle max_width_45_height_40"/>
                                                                 <span style="margin:0px; padding:0px;"><img src="@imgsrc" alt="" width="400" height="200" /></span>
                                                             </li>
                                                         </ul>
@@ -227,7 +224,7 @@
                                             <td>
                                                 <a href="#" data-toggle="modal" data-target="#EditModal" class="btn btn-sm btn-success bold" onclick="GetProduct(@v.Id)">Edit</a>
                                                 <a class="btn btn-sm btn-danger bold" href="~/Product/Delete/@v.Id">
-                                                    Delete
+                                                    Delete                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
                                                 </a>
                                             </td>
                                         </tr>

@@ -1131,7 +1131,7 @@ function checkSoldHistory(counter) {
     //alert(counter);
     //alert("agya");
 
-    $("#loader_div").show();
+    //$("#loader_div").show();
 
     var productID = document.getElementById("invoice_product_id" + counter).value;
     //alert("proID = " + productID);
@@ -1144,7 +1144,7 @@ function checkSoldHistory(counter) {
         cache: false,
         type: 'Get',
         success: function (data) {
-            $("#loader_div").hide();
+            //$("#loader_div").hide();
             //alert("Success");
             //alert(data);
             document.getElementById('soldHistory').innerHTML = data;

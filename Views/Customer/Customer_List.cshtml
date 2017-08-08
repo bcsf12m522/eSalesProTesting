@@ -28,6 +28,10 @@
 
                             <div class="col-md-12">
 
+                                <div id="loader_div" class="none">
+                                    <img src="~/img/loading.gif" class="ajax_loader">
+                                </div>
+
                                 @*<div class="col-md-4">
                                         <h3 class="bold update-stock-margin"><small></small></h3>
                                     </div>*@
@@ -67,6 +71,7 @@
                                 <div class="col-md-2 pull-left padding-all-0">
                                     <select onchange="Custom_List()" name="customer_type" id="customer_type_dropdown" required class="form-control">
                                         <option>Please Select any</option>
+                                        <option value="-1">All Customers</option>
                                         @foreach (var customer_type in ViewBag.Customer_Type)
                                         {
                                             <option value="@customer_type.Id">@customer_type.Type</option>
@@ -285,6 +290,8 @@
 
                                                 <select id="customer_type" name="customer_type" class="form-control width-192">
                                                     <option value="">Please Select</option>
+                                                    
+
                                                     @foreach (var customer_type in ViewBag.Customer_Type)
                                                     {
                                                         <option value="@customer_type.Id">@customer_type.Type</option>
@@ -471,7 +478,9 @@
 
         function Custom_List() {
             //alert("CUSTOM_LIST")
-            $("#customer_table_div").show();
+
+            $("#loader_div").show();
+            $("#customer_table_div").hide();
             $("#customer_summary").hide();
             var type_ID = document.getElementById("customer_type_dropdown").value;
             //alert(type_ID)
@@ -481,10 +490,12 @@
                 url: '/Customer/Customer_List_Custom/',
                 data: { customer_type_id: type_ID },
                 cache: false,
-                type: 'Get',
+                type: 'GET',
                 success: function (data) {
                     //alert("Success");
                     //alert(data);
+                    $("#customer_table_div").show();
+                    $("#loader_div").hide();
                     document.getElementById('customer_table_div').innerHTML = data;
 
                 },
@@ -553,6 +564,9 @@
                 }
             });
         }
+
+
+
 
     </script>
 

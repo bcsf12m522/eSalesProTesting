@@ -3,12 +3,12 @@
 @foreach (var v in Model)
 {
     <tr>
-        <td data-title="User ID">@v.Id</td>
-        <td data-title="User ID">@v.Name</td>
-        <td data-title="First Name">@v.phone</td>
-        <td data-title="Last Name">@v.Email</td>
-        <td data-title="Email" class="user-emails">@v.Billing_Address</td>
-        <td data-title="Date Registered">@v.Billing_Postcode</td>
+        @*<td data-title="User ID">@v.Id</td>*@
+        <td class="text-center">@v.Name</td>
+        <td class="text-center">@v.phone</td>
+        <td class="text-center">@v.Email</td>
+        <td class="text-center">@v.Billing_Address</td>
+        <td class="text-center">@v.Billing_Postcode</td>
 
         @*@if (@v.Is_Active == 1)
             {*@

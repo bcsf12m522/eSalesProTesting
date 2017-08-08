@@ -2,12 +2,14 @@
 
 @foreach (var v in Model)
 {
+    @*<tr ondblclick="double_click_edit_sale(@v.Id)">*@
     <tr>
         <td class="text-center" data-title="User ID">@v.Created_at.ToShortDateString()</td>
         <td class="text-center" data-title="User ID">@v.Product.Custom_Label_</td>
+        <td class="text-center" data-title="User ID">@v.Product.Item_Title</td>
         <td class="text-center" data-title="User ID">@v.Quantity</td>
-        <td class="text-center" id="aa" data-title="User ID">@v.Price</td>
-        <td class="text-center" data-title="User ID"></td>
+        <td class="text-center" id="" data-title="User ID">@v.Price</td>
+        <td class="text-center" data-title="User ID">@{var diff = v.PriceVAT - v.Price;}@diff</td>
         <td class="text-center" data-title="User ID">@v.PriceVAT</td>
     </tr>
 }

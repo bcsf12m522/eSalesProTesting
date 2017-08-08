@@ -1,6 +1,7 @@
 ﻿function findByUser() {
-    $("#loader_div").show();
+    $("#table_div_Load").hide();
 
+    $("#loader_div").show();
     $("#customer_summary").hide();
     $("#date_click_div").hide();
     var user = document.getElementById('User_ID').value;
@@ -15,6 +16,7 @@
             $("#date_click_div").show();
             document.getElementById('updatedDiv').innerHTML = data;
             $("#loader_div").hide();
+            $('#table_on_dates').dataTable();
         },
         error: function (response) {
 
@@ -26,6 +28,9 @@
 
 
 function findByInvoice(id) {
+
+    $("#table_div_Load").hide();
+    
     $("#loader_div").show();
     $("#customer_summary").hide();
     $("#date_click_div").hide();
@@ -37,9 +42,11 @@ function findByInvoice(id) {
         type: 'Get',
         cache: false,
         success: function (data) {
+            
             $("#date_click_div").show();
             document.getElementById('updatedDiv').innerHTML = data;
             $("#loader_div").hide();
+            $('#table_on_dates').dataTable();
         },
         error: function (response) {
 
@@ -49,6 +56,10 @@ function findByInvoice(id) {
 }
 
 function findByDocType(id) {
+
+    $("#table_div_Load").hide();
+    //var table = $('#table_on_dates').DataTable();
+
     $("#loader_div").show();
     $("#customer_summary").hide();
     $("#date_click_div").hide();
@@ -61,9 +72,12 @@ function findByDocType(id) {
         cache: false,
         success: function (data) {
             //alert("DAta" + data);
+            
             $("#date_click_div").show();
             document.getElementById('updatedDiv').innerHTML = data;
             $("#loader_div").hide();
+
+            $('#table_on_dates').dataTable();
         },
         error: function (response) {
             
@@ -74,6 +88,9 @@ function findByDocType(id) {
 }
 
 function findByPayType(id) {
+
+    $("#table_div_Load").hide();
+
     $("#loader_div").show();
     $("#customer_summary").hide();
     $("#date_click_div").hide();
@@ -88,6 +105,7 @@ function findByPayType(id) {
             $("#date_click_div").show();
             document.getElementById('updatedDiv').innerHTML = data;
             $("#loader_div").hide();
+            $('#table_on_dates').dataTable();
         },
         error: function (response) {
 
@@ -97,8 +115,11 @@ function findByPayType(id) {
 }
 
 function Delete_Sale(ID) {
+
+    $("#table_div_Load").hide();
+
     $("#loader_div").hide();
-    //alert("Id" + ID);
+    //alert("IdK" + ID);
 
     $.ajax({
 
@@ -140,18 +161,17 @@ function showToDate() {
 }
 
 $(document).ready(function () {
-    $('#table_on_dates').dataTable();
-    //$('#table_on_dates').DataTable({
-    //    "ajax": '../ajax/findByUser/SaleReportPartial.cshtml'
-    //});
+    $('#table_Load').dataTable();
 });
 
 function findByDate() {
     
+    $("#table_div_Load").hide();
+
     $("#loader_div").show();
     $("#customer_summary").hide();
     $("#date_click_div").hide();
-
+    
     //alert("dsfdsdfvdfgdfgdfsgdfhbgefagdsgrgfsgsdggbwdgdsagfgfgdfg");
     var to = document.getElementById('to_date').value;
     var from = document.getElementById('from_date').value;
@@ -165,6 +185,7 @@ function findByDate() {
             $("#date_click_div").show();
             document.getElementById('updatedDiv').innerHTML = data;
             $("#loader_div").hide();
+            $('#table_on_dates').dataTable();
         },
         error: function (response) {
 

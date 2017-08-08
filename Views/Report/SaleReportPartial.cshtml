@@ -1,7 +1,7 @@
 ﻿@model List<eSalesPro.Services.Sales_History_Record>
 
-<script src="~/Scripts/new-js/jquery-1.11.1.min.js"></script>
-<script src="~/Scripts/new-js/jquery.datatables.min.js"></script>
+@*<script src="~/Scripts/new-js/jquery-1.11.1.min.js"></script>
+<script src="~/Scripts/new-js/jquery.datatables.min.js"></script>*@
 
 @*<td data-title="User ID">@v.Customer.Customer_Type.Type</td>*@
 
@@ -22,7 +22,7 @@
                 <td>@v.net</td>
                 <td>@v.vat</td>
                 <td>@v.gross</td>
-                <td width="10%">@v.date.ToString("MM/dd/yyyy")</td>
+                <td width="10%">@v.date.ToString("dd-MMM-yy")</td>
             }
             
             else
@@ -89,11 +89,13 @@
 
 
                 <td width="10%">
-                    @v.date.ToString("dd/MM/yyyy")
+                    @v.date.ToString("dd-MMM-yy")
+                    @*@v.date.ToShortDateString()*@
 
                     @foreach (var sale in v.edit_sale_list)
                     {
-                        <br /><span class="sub_tr_values">@sale.Date.ToString("dd/MM/yyyy")</span>
+                        <br /><span class="sub_tr_values">@sale.Date.ToString("dd-MMM-yy")</span>
+                        @*<br /><span class="sub_tr_values">@sale.Date.ToShortDateString()</span>*@
                     }
                 </td>
 
@@ -118,7 +120,7 @@
 <script src="~/Scripts/new-js/jquery-1.11.1.min.js"></script>
 <script src="~/Scripts/new-js/jquery.datatables.min.js"></script>
 
-<script>
+@*<script>
     $(document).ready(function () {
         $('#table_on_dates').dataTable();
     });
@@ -127,5 +129,5 @@
         alert(id);
     }
 
-</script>
-@*<span>£</span>*@<span></span><span></span><span></span><span></span>
+</script>*@
+@*<span>£</span><span></span><span></span><span></span><span></span>*@

@@ -69,7 +69,8 @@
 
                             <div class="col-md-12">
 
-
+                                <!-- SUPPLIER BORDER TD RANGLERZ.CSS  1503 COMMENTED -->
+                                
                                 <table border="0" class="table table-responsive border_black" id="supplier_table">
                                     <thead>
                                         <tr class="table-heading-fonts table-main-headings">
@@ -96,12 +97,12 @@
                                             @*<tr data-toggle="modal" data-target="#EditModal">*@
 
                                             <tr>
-                                                <td class="border-right-td" data-title="User ID">@v.Id</td>
-                                                <td class="border-right-td" data-title="User ID">@v.Name</td>
-                                                <td class="border-right-td" data-title="First Name">@v.Phone</td>
-                                                <td class="border-right-td" data-title="Last Name">@v.Email</td>
-                                                <td class="border-right-td" data-title="Email">@v.Address</td>
-                                                <td class="border-right-td" data-title="Date Registered">@v.Post_Code</td>
+                                                <td class="border-right-td text-center" data-title="User ID">@v.Id</td>
+                                                <td class="border-right-td text-center" data-title="User ID">@v.Name</td>
+                                                <td class="border-right-td text-center" data-title="First Name">@v.Phone</td>
+                                                <td class="border-right-td text-center" data-title="Last Name">@v.Email</td>
+                                                <td class="border-right-td text-center" data-title="Email">@v.Street</td>
+                                                <td class="border-right-td text-center" data-title="Date Registered">@v.Post_Code</td>
 
                                                 @if (@v.Is_Active == 1)
                                                 {
@@ -112,19 +113,22 @@
                                                     <td class="red border-right-td">Deactive</td>
                                                 }
 
-                                                <td data-title="Actions" style="min-width:191px" class="text-center buttons-block">
-                                                    <a class="btn btn-sm btn-info bold" href="" data-toggle="modal" data-target="#EditModal" onclick="GetEditedObject(@v.Id)">
+                                                <td data-title="Actions" class="text-center buttons-block width-140">
+                                                    @*<a class="btn btn-sm btn-info bold" href="" data-toggle="modal" data-target="#EditModal" onclick="GetEditedObject(@v.Id)">*@
+                                                    <a class="btn btn-sm btn-info bold" href="#" onclick="edit_supp(@v.Id)">
                                                         Edit
                                                     </a>
                                                     @*<a class="btn btn-sm btn-success bold" href="~/Supplier/Active/@v.Id">
                                                         Enable
                                                     </a>*@
-                                                    <a class="btn btn-sm btn-danger bold" href="~/Supplier/Disable/@v.Id">
+                                                    <a class="btn btn-sm btn-danger bold" onclick="delete_supplier_without_confirmation(@v.Id)" @*onclick="delete_supplier(@v.Id)" href="~/Supplier/Disable/@v.Id"*@>
                                                         Delete
                                                     </a>
+
                                                 </td>
                                             </tr>
                                         }
+
                                     </tbody>
 
                                 </table>
@@ -134,7 +138,39 @@
 
                             </div>
 
+                        <script>
 
+                            function delete_supplier_without_confirmation(Id) {
+                                window.location.href = 'Disable/' + Id;
+                            }
+
+                            //function delete_supplier(id){
+
+
+
+                            //    swal({
+                            //            title: "Are you sure?",
+                            //            text: "You will not be able to recover this Supplier!",
+                            //            type: "warning",
+                            //            showCancelButton: true,
+                            //            confirmButtonColor: "#DD6B55",
+                            //            confirmButtonText: "Yes, delete it!",
+                            //            closeOnConfirm: false
+                            //        },
+                            //        function (isConfirmed) {
+                            //            if (isConfirmed) {
+
+                            //                window.location.href='Disable/' + id;
+
+                            //                //$(".file").addClass("isDeleted");
+                            //                swal("Deleted!", "Your Supplier has been deleted.", "success");
+                            //            }
+                            //        }
+                            //      );
+
+                            //}
+
+                        </script>
 
 
 
@@ -143,9 +179,13 @@
 
                 </div>
                 </div>
+
+                <div id="updated_div"></div>
+
+
+
                 @*-----------------Main Container Ends---------------*@
             </div>
-
 
             <div id="sticky-footer-push"></div>
         </div>
@@ -158,7 +198,155 @@
         }
     </footer>
 
+    @*----------------------------POP UP for POSTCODE HOUSE NUMBER--------------------------------*@
 
+    <div style="z-index:9999999" class="modal fade" id="Postcode_House_Number" tabindex="-1" role="dialog" aria-hidden="false">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content modal-style-custom">
+
+                <div class="title col-md-12">
+                    <span>Prompt</span>
+                    <img src="~/img/images/c3.png" class="close mr--13 pull-right" data-dismiss="modal" onclick="close_modal_123()" />
+                </div>
+
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+
+                        <div id="" class="black-color">
+                            <div class="empty-height"></div>
+                            <div class="empty-height"></div>
+
+                            <div class="text-center italic">
+                                <label>Please Enter House Number</label>
+                                
+                                <input type="text" id="house_number_postcode_add" value="454564" />
+                                
+                            </div>
+
+                            <div class="empty-height"></div><div class="empty-height"></div><div class="empty-height"></div>
+
+                            <div class="col-md-12">
+
+                                <div class="col-md-3"></div>
+
+                                <div class="col-md-6">
+                                    <input type="button" onclick="House_no_Postcode_New_Supplier()" value="Add" class="btn btn-success btn-mini center-block width-95">
+                                </div>
+
+                               
+
+
+                                <div class="col-md-3"></div>
+                                    @*<input type="button" value="Cancel" class="btn btn-primary btn-mini center-block width-95" onclick="close_modal()">*@
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer"></div>
+                <div class=""></div>
+
+            </div>
+        </div>
+    </div>
+
+    @*----------------------------POP UP for POSTCODE HOUSE NUMBER--------------------------------*@
+
+
+
+    @*----------------------------POP UP for POSTCODE CONFIRMATION--------------------------------*@
+
+    <div style="z-index:99" class="modal fade" id="Postcode_Confirmation" tabindex="-1" role="dialog" aria-hidden="false">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content modal-style-custom">
+
+                <div class="title col-md-12">
+                    <span>Confirm</span>
+                    <img src="~/img/images/c3.png" class="close mr--13 pull-right" data-dismiss="modal" onclick="close_modal_123()" />
+                </div>
+
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+
+                        <div id="" class="black-color">
+                            <div class="empty-height"></div><div class="empty-height"></div>
+                            <div class="text-center"><p class="color"><b>Please confirm below address <br />If correct, press ok</b></p></div>
+
+                            <div class="empty-height"></div><div class="empty-height"></div>
+
+                            <div class="text-center italic">
+                                <label id="street_postcode"></label><br />
+                            </div>
+                            <div class="text-center italic">
+                                <label id="town_postcode"></label><br />
+                            </div>
+                            <div class="text-center italic">
+                                <label id="county_postcode"></label><br />
+                            </div>
+                            <div class="text-center italic">
+                                <label id="postcode_popup"><span> ?</span></label><br />
+                            </div>
+
+
+
+
+
+                                        <div class="empty-height"></div>
+                      
+
+
+
+
+
+                            <div class="col-md-12">
+
+                                
+                                <div class="col-md-6">
+                                    <input type="button" onclick="Add_Postcode_New_Supplier()" value="Add" class="btn btn-success btn-mini center-block width-95">
+                                </div>
+
+
+                                <script>
+                                  
+
+
+                                </script>
+
+
+                                <div class="col-md-6">
+                                    <input type="button" value="Cancel" class="btn btn-primary btn-mini center-block width-95" onclick="close_modal_123()">
+                                </div>
+                                
+
+
+
+                            </div>
+
+
+                                        <div class="col-md-12">
+                                            <div class="col-md-3"></div>
+
+
+                                            <div class="col-md-3"></div>
+
+
+
+                                        </div>
+
+
+                                    </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer"></div>
+                <div class=""></div>
+
+            </div>
+        </div>
+    </div>
+
+    @*----------------------------POP UP for POSTCODE CONFIRMATION--------------------------------*@
 
     @*----------------------------POP UP for EDIT SUPPLIER--------------------------------*@
 
@@ -351,19 +539,19 @@
                                         <div class="form-group">
                                             <label class="supplier-create-texts ml-22" for="middle-name">Address<span class="required">*</span></label>
                                             <div class="col-md-3 col-sm-6 col-xs-12">
-                                                <input type="text" class="ml--50" name="address1" id="address" required>
-                                                <input type="text" class="ml--50" name="address2">
-                                                <input type="text" class="ml--50" name="address3">
-                                                <input type="text" class="ml--50" name="address4">
-                                                <input type="text" class="ml--50" name="address5">
+                                                <input type="text" class="ml--50" name="street_postcode_edit" id="edit_street_postcode" required>
+                                                <input type="text" class="ml--50" name="town_postcode_edit" id="edit_town_postcode">
+                                                <input type="text" class="ml--50" name="county_postcode_edit" id="edit_county_postcode">
+                                                @*<input type="text" class="ml--50" name="address4">
+                                                <input type="text" class="ml--50" name="address5">*@
                                             </div>
                                         </div>
 
                                         <div class="form-group">
                                             <label class="supplier-create-texts ml-22" for="middle-name">Postcode<span class="required">*</span></label>
                                             <div class="col-md-3 col-sm-6 col-xs-12">
-                                                <input type="text" class="ml--50" name="postcode" id="postcode">
-                                                <a href="#"><img src="~/img/images/ssearch.png" id="input_img" /></a>
+                                                <input type="text" class="ml--50" name="postcode" id="postcode_edit">
+                                                <a href="#" onclick="postcode_testing_edit()"><img src="~/img/images/ssearch.png" id="input_img" /></a>
                                             </div>
                                         </div>
 
@@ -435,7 +623,8 @@
 
                                     <div class="col-md-3">
                                         <input type="hidden" id="supplier_id" value="" name="supplier_id" />
-                                        <input type="submit" value="Update" class="btn btn-success btn-mini center-block width-145" />
+                                        @*<input type="submit" value="Update" class="btn btn-success btn-mini center-block width-145"/>*@
+                                        @*<a href="~/Supplier/Edit/" class="btn btn-success btn-mini center-block width-145">Update</a>*@
                                     </div>
 
                                     <div class="col-md-3">
@@ -469,6 +658,166 @@
 
 
     @*----------------------------POP UP END EDIT SUPPLIER--------------------------------*@
+
+
+    @*----------------------------POP UP for EDIT SUPPLIER POSTCODE CONFIRMATION--------------------------------*@
+
+    <div style="z-index:9999" class="modal fade" id="Postcode_Confirmation_Edit" tabindex="-1" role="dialog" aria-hidden="false">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content modal-style-custom">
+
+                <div class="title col-md-12">
+                    <span>Confirm</span>
+                    <img src="~/img/images/c3.png" class="close mr--13 pull-right" data-dismiss="modal" onclick="close_modal_confirm_postcode()"/>
+                </div>
+
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+
+                        <div id="" class="black-color">
+                            <div class="empty-height"></div><div class="empty-height"></div>
+                            <div class="text-center"><p class="color"><b>Please confirm below address <br />If correct, press ok</b></p></div>
+
+                            <div class="empty-height"></div><div class="empty-height"></div>
+
+                            <div class="text-center italic">
+                                <label id="street_postcode_edit"></label><br />
+                            </div>
+                            <div class="text-center italic">
+                                <label id="town_postcode_edit"></label><br />
+                            </div>
+                            <div class="text-center italic">
+                                <label id="county_postcode_edit"></label><br />
+                            </div>
+                            <div class="text-center italic">
+                                <label id="postcode_popup_edit"><span> ?</span></label><br />
+                            </div>
+
+
+
+
+
+                            <div class="empty-height"></div>
+
+
+
+
+
+
+                            <div class="col-md-12">
+
+
+                                <div class="col-md-6">
+                                    <input type="button" onclick="Add_Postcode_Edit_Supplier()" value="Add" class="btn btn-success btn-mini center-block width-95">
+                                </div>
+
+
+                                <script>
+
+
+
+                                </script>
+
+
+                                <div class="col-md-6">
+                                    <input type="button" value="Cancel" class="btn btn-primary btn-mini center-block width-95" onclick="close_modal_confirm_postcode()">
+                                </div>
+
+
+
+
+                            </div>
+
+
+                            <div class="col-md-12">
+                                <div class="col-md-3"></div>
+
+
+                                <div class="col-md-3"></div>
+
+
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer"></div>
+                <div class=""></div>
+
+            </div>
+        </div>
+    </div>
+
+    @*----------------------------POP UP for EDIT SUPPLIER POSTCODE CONFIRMATION--------------------------------*@
+
+
+    @*----------------------------POP UP for EDIT SUPPLIER POSTCODE HOUSE NUMBER--------------------------------*@
+
+    <div style="z-index:99999" class="modal fade" id="Postcode_House_Number_Edit" tabindex="-1" role="dialog" aria-hidden="false">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content modal-style-custom">
+
+                <div class="title col-md-12">
+                    <span>Prompt</span>
+                    <img src="~/img/images/c3.png" class="close mr--13 pull-right" data-dismiss="modal" onclick="close_modal_confirm_postcode()" />
+                </div>
+
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+
+                        <div id="" class="black-color">
+                            <div class="empty-height"></div>
+                            <div class="empty-height"></div>
+
+                            <div class="text-center italic">
+                                <label id="">Please Enter House Number</label>
+
+                                <input type="text" id="house_number_postcode_edit"/>
+
+                            </div>
+
+                            <div class="empty-height"></div>
+
+
+
+
+
+
+
+
+                            <div class="empty-height"></div>
+                            <div class="empty-height"></div>
+
+                            <div class="col-md-12">
+
+                                <div class="col-md-3"></div>
+
+                                <div class="col-md-6">
+                                    <input type="button" onclick="House_no_Postcode_Edit_Supplier()" value="Add" class="btn btn-success btn-mini center-block width-95">
+                                </div>
+
+
+
+
+                                <div class="col-md-3"></div>
+                                @*<input type="button" value="Cancel" class="btn btn-primary btn-mini center-block width-95" onclick="close_modal()">*@
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer"></div>
+                <div class=""></div>
+
+            </div>
+        </div>
+    </div>
+
+    @*----------------------------POP UP for EDIT SUPPLIER POSTCODE HOUSE NUMBER--------------------------------*@
 
 
     @*----------------------------POP UP for EXISTING SUPPLIER--------------------------------*@
@@ -610,7 +959,7 @@
                                         {
                                             <tr onclick="existing_supplier_click(@v.Id)">
                                                 <td id="@String.Concat("suppliers1", v.Id)" data-title="User ID">@v.Name</td>
-                                                <td id="@String.Concat("suppliers2", v.Id)" data-title="Last Name">@v.Address</td>
+                                                <td id="@String.Concat("suppliers2", v.Id)" data-title="Last Name">@v.Street</td>
                                                 <td id="@String.Concat("suppliers3", v.Id)" data-title="Last Name">@v.Post_Code</td>
                                                 <td id="@String.Concat("suppliers4", v.Id)" data-title="First Name">@v.Email</td>
                                                 <td id="@String.Concat("suppliers5", v.Id)" data-title="Email" class="user-emails">@v.Mobile</td>
@@ -871,19 +1220,19 @@
                                         <div class="form-group">
                                             <label class="supplier-create-texts" for="middle-name">Address<span class="required">*</span></label>
                                             <div class="col-md-3 col-sm-6 col-xs-12">
-                                                <input class="ml--50" type="text" name="address1" required>
-                                                <input class="ml--50" type="text" name="address2">
-                                                <input class="ml--50" type="text" name="address3">
-                                                <input class="ml--50" type="text" name="address4">
-                                                <input class="ml--50" type="text" name="address5">
+                                                <input class="ml--50" type="text" name="street_postcode_new" id="add_street_postcode" required>
+                                                <input class="ml--50" type="text" name="town_postcode_new" id="add_town_postcode">
+                                                <input class="ml--50" type="text" name="county_postcode_new" id="add_county_postcode">
+                                                @*<input class="ml--50" type="text" name="address4">
+                                                <input class="ml--50" type="text" name="address5">*@
                                             </div>
                                         </div>
 
                                         <div class="form-group">
                                             <label class="supplier-create-texts" for="middle-name">Postcode<span class="required">*</span></label>
                                             <div class="col-md-3 col-sm-6 col-xs-12">
-                                                <input class="ml--50" type="text" name="postcode">
-                                                <a href="#"><img src="~/img/images/ssearch.png" id="input_img" /></a>
+                                                <input class="ml--50" type="text" name="postcode" id="postcode_add">
+                                                <a href="#" onclick="postcode_testing()" @*data-target="#Postcode_Confirmation" data-toggle="modal"*@><img src="~/img/images/ssearch.png" id="input_img" /></a>
                                             </div>
                                         </div>
 
@@ -991,20 +1340,29 @@
     @*----------------------------POP UP END ADD SUPPLIER--------------------------------*@
 
 
+
+    @*----------------------------POP UP LOGOUT SESSION--------------------------------*@
+
+
+
+    
+
+
+    
+
+
+
+    @*----------------------------POP UP LOGOUT SESSION--------------------------------*@
+
+    <script src="~/scripts/supplier/list.js"></script>
+
+
     <script src="~/Scripts/new-js/jquery-1.11.1.min.js"></script>
     <script src="~/Scripts/new-js/jquery.datatables.min.js"></script>
 
-    <script>
-        $(document).ready(function () {
-            $('#supplier_table').dataTable();
-            $('#kj').dataTable();
 
-        });
-    </script>
-
-
-    <script>
-
+    @*<script>
+        
     function GetEditedObject(Id) {
 
     var url = "/Supplier/GetSupplier/";
@@ -1053,16 +1411,6 @@
     });
     }
 
-
-
-
-    </script>
-
-
-    @*</script>
-    </script>
     </script>*@
-
-
 
 </body>
