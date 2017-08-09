@@ -84,7 +84,7 @@ function customer_invoice_list(id) {
 function customer_item_sale_list(id) {
     $("#PleaseWait").addClass('showDiv');
     var customerID = id;
-    //alert(customerID);
+    alert("addsd "+customerID);
 
     $.ajax({
         url: "/Customer/Customer_Item_Sale_List/",
@@ -117,6 +117,8 @@ function show_customer_summary() {
     //-------------FOR CREDIT SALES REPORT---------------
 
     $("#table_on_dates").hide();
+
+    $("#table_div_Load").hide();
 
     
     //$("#customer_table_div").addClass("none");

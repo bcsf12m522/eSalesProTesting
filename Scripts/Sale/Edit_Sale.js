@@ -93,6 +93,10 @@ function Total_Refund(rownum) {
     $("#vat_invoice").val(total_vat);
     $("#gross_invoice").val(gross);
 
+    //$("#partial_net_id").val(a);
+    //$("#partial_vat_price_id").val(total_vat);
+    //$("#partial_gross_id").val(gross);
+
 }
 
 function payment_status() {
@@ -269,9 +273,9 @@ function Partial_Payment() {
 
     var partial_gross = amount;
 
-    $("#partial_net_id").val(partial_net_price);
-    $("#partial_vat_price_id").val(partial_vat_price);
-    $("#partial_gross_id").val(partial_gross);
+    //$("#partial_net_id").val(partial_net_price);
+    //$("#partial_vat_price_id").val(partial_vat_price);
+    //$("#partial_gross_id").val(partial_gross);
 
     //alert("NET  " + partial_net_price + " VAT  " + partial_vat_price + " GROSS  " + partial_gross);
 
@@ -656,6 +660,10 @@ function Total(rownum) {
     $("#vat_invoice").val(total_vat);
     $("#gross_invoice").val(gross);
 
+    //$("#partial_net_id").val(a);
+    //$("#partial_vat_price_id").val(total_vat);
+    //$("#partial_gross_id").val(gross);
+
 }
 
 function Total2(rownum) {
@@ -745,6 +753,10 @@ function Total2(rownum) {
     $("#net_invoice_hidden").val(a);
     $("#vat_invoice").val(total_vat);
     $("#gross_invoice").val(gross);
+
+    //$("#partial_net_id").val(a);
+    //$("#partial_vat_price_id").val(total_vat);
+    //$("#partial_gross_id").val(gross);
 
 
 }

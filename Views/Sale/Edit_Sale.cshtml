@@ -32,9 +32,9 @@
                             <form id="demo-form2" action="@Url.Action("Edit_Sale","Sale")" method="post" data-parsley-validate class="" enctype="multipart/form-data">
 
                                 <input hidden type="text" value="-2" id="customer_list_edit_modal_value"/>
-                                <input hidden type="text" id="partial_net_id" name="partial_net_id" />
-                                <input hidden type="text" id="partial_vat_price_id" name="partial_vat_price_id" />
-                                <input hidden type="text" id="partial_gross_id" name="partial_gross_id" />
+                                <input hidden type="text" id="partial_net_id" name="partial_net_id" value="@ViewBag.invoice.Net_Price"/>
+                                <input hidden type="text" id="partial_vat_price_id" name="partial_vat_price_id" value="@ViewBag.invoice.VAT_20"/>
+                                <input hidden type="text" id="partial_gross_id" name="partial_gross_id" value="@ViewBag.invoice.Gross_Total"/>
                                 
                                 <div class="col-md-12">
 
@@ -703,9 +703,9 @@
 
                                 
                                 <input id="counters" value="" type="text" hidden />
-                                <input type="text" class="" id="net_invoice_hidden" name="net_invoice_hidden" value="@ViewBag.invoice.Net_Price" hidden/>
-                                <input type="text" class="" id="vat_invoice" name="vat_invoice_hidden" hidden/>
-                                <input type="text" class="" id="gross_invoice" name="gross_invoice_hidden" hidden/>
+                                <input type="text" id="net_invoice_hidden" name="net_invoice_hidden" value="@ViewBag.invoice.Net_Price" />
+                                <input type="text" id="vat_invoice" name="vat_invoice_hidden" value="@ViewBag.invoice.VAT_20" />
+                                <input type="text" id="gross_invoice" name="gross_invoice_hidden" value="@ViewBag.invoice.Gross_Total"  />
                                 <input type="text" class="" id="global_discount_hidden" name="global_discount_hidden" value="0" hidden />
                                 <input type="text" class="" id="total_after_discount_hidden" name="total_after_discount_hidden" hidden />
                                 <input type="text" class="" id="left_amount_hidden" name="left_amount_hidden" hidden />
