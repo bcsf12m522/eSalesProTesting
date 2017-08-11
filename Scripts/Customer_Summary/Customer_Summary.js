@@ -84,7 +84,7 @@ function customer_invoice_list(id) {
 function customer_item_sale_list(id) {
     $("#PleaseWait").addClass('showDiv');
     var customerID = id;
-    alert("addsd "+customerID);
+    //alert("addsd "+customerID);
 
     $.ajax({
         url: "/Customer/Customer_Item_Sale_List/",

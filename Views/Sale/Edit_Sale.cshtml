@@ -703,9 +703,9 @@
 
                                 
                                 <input id="counters" value="" type="text" hidden />
-                                <input type="text" id="net_invoice_hidden" name="net_invoice_hidden" value="@ViewBag.invoice.Net_Price" />
-                                <input type="text" id="vat_invoice" name="vat_invoice_hidden" value="@ViewBag.invoice.VAT_20" />
-                                <input type="text" id="gross_invoice" name="gross_invoice_hidden" value="@ViewBag.invoice.Gross_Total"  />
+                                <input type="text" id="net_invoice_hidden" name="net_invoice_hidden" value="@ViewBag.invoice.Net_Price" hidden/>
+                                <input type="text" id="vat_invoice" name="vat_invoice_hidden" value="@ViewBag.invoice.VAT_20" hidden/>
+                                <input type="text" id="gross_invoice" name="gross_invoice_hidden" value="@ViewBag.invoice.Gross_Total" hidden/>
                                 <input type="text" class="" id="global_discount_hidden" name="global_discount_hidden" value="0" hidden />
                                 <input type="text" class="" id="total_after_discount_hidden" name="total_after_discount_hidden" hidden />
                                 <input type="text" class="" id="left_amount_hidden" name="left_amount_hidden" hidden />
