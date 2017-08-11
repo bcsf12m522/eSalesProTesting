@@ -112,7 +112,10 @@ function Add_Postcode_New_Supplier() {
     $("#add_county_postcode").val(county_add);
 
     $("#Postcode_Confirmation").hide();
+    $("#CreateModal").hide();
     //$("#Postcode_Confirmation").addClass("out");
+
+    
 
     $("#Postcode_House_Number").addClass("in").show("slow");
 
@@ -131,6 +134,9 @@ function House_no_Postcode_New_Supplier() {
     }
     $("#Postcode_House_Number").hide();
     //$("#Postcode_Confirmation").hide();
+
+    $("#CreateModal").addClass("in").show("slow");
+
 }
 
 
