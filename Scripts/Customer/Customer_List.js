@@ -127,3 +127,14 @@
     //var type = $("#c_type").val;
     //alert(type);
 }
+
+
+function close_modal_confirm_postcode() {
+    $("#Postcode_Confirmation_Edit").hide();
+    $("#Postcode_House_Number_Edit").hide();
+}
+
+
+
+
+

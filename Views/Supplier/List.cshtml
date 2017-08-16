@@ -393,15 +393,15 @@
                                                 <input class="ml--50" type="text" name="street_postcode_new" id="add_street_postcode" required>
                                                 <input class="ml--50" type="text" name="town_postcode_new" id="add_town_postcode">
                                                 <input class="ml--50" type="text" name="county_postcode_new" id="add_county_postcode">
-                                                @*<input class="ml--50" type="text" name="address4">
-                                                    <input class="ml--50" type="text" name="address5">*@
+                                                <input class="ml--50" type="text" name="country_postcode_new" id="add_country_postcode">
+                                                @*<input class="ml--50" type="text" name="address5">*@
                                             </div>
                                         </div>
 
                                         <div class="form-group">
                                             <label class="supplier-create-texts" for="middle-name">Postcode<span class="required">*</span></label>
                                             <div class="col-md-3 col-sm-6 col-xs-12">
-                                                <input class="ml--50" type="text" name="postcode" id="postcode_add">
+                                                <input class="ml--50" type="text" name="postcode" id="postcode_add" onkeypress="Postcode_Enter_Click(event)">
                                                 <a href="#" onclick="postcode_testing()" @*data-target="#Postcode_Confirmation" data-toggle="modal"*@><img src="~/img/images/ssearch.png" id="input_img" /></a>
                                             </div>
                                         </div>
@@ -542,6 +542,9 @@
                                 <label id="county_postcode"></label><br />
                             </div>
                             <div class="text-center italic">
+                                <label id="country_postcode"></label><br />
+                            </div>
+                            <div class="text-center italic">
                                 <label id="postcode_popup"><span> ?</span></label><br />
                             </div>
 
@@ -618,7 +621,7 @@
 
                 <div class="title col-md-12">
                     <span>Prompt</span>
-                    <img src="~/img/images/c3.png" class="close mr--13 pull-right" data-dismiss="modal" onclick="close_modal_123()" />
+                    <img src="~/img/images/c3.png" class="close mr--13 pull-right" data-dismiss="modal" onclick="close_modal_House_Cross()" />
                 </div>
 
                 <div class="col-md-12 col-sm-12 col-xs-12">
@@ -632,7 +635,7 @@
                                 
                                 <label>Please Enter House Number</label>
 
-                                <input type="text" id="house_number_postcode_add" value="454564"/>
+                                <input type="text" id="house_number_postcode_add"/>
 
                             </div>
 
@@ -861,15 +864,15 @@
                                                 <input type="text" class="ml--50" name="street_postcode_edit" id="edit_street_postcode" required>
                                                 <input type="text" class="ml--50" name="town_postcode_edit" id="edit_town_postcode">
                                                 <input type="text" class="ml--50" name="county_postcode_edit" id="edit_county_postcode">
-                                                @*<input type="text" class="ml--50" name="address4">
-                                                <input type="text" class="ml--50" name="address5">*@
+                                                <input type="text" class="ml--50" name="country_postcode_edit" id="edit_country_postcode">
+                                                @*<input type="text" class="ml--50" name="address5">*@
                                             </div>
                                         </div>
 
                                         <div class="form-group">
                                             <label class="supplier-create-texts ml-22" for="middle-name">Postcode<span class="required">*</span></label>
                                             <div class="col-md-3 col-sm-6 col-xs-12">
-                                                <input type="text" class="ml--50" name="postcode" id="postcode_edit">
+                                                <input type="text" class="ml--50" name="postcode" id="postcode_edit" onkeypress="handle(event)">
                                                 <a href="#" onclick="postcode_testing_edit()"><img src="~/img/images/ssearch.png" id="input_img" /></a>
                                             </div>
                                         </div>
@@ -1007,6 +1010,9 @@
                             </div>
                             <div class="text-center italic">
                                 <label id="county_postcode_edit"></label><br />
+                            </div>
+                            <div class="text-center italic">
+                                <label id="country_postcode_edit"></label><br />
                             </div>
                             <div class="text-center italic">
                                 <label id="postcode_popup_edit"><span> ?</span></label><br />

@@ -192,15 +192,15 @@
                                             <input type="text" class="ml--50" name="street_postcode_edit" id="edit_street_postcode" value="@Model.Street" required>
                                             <input type="text" class="ml--50" name="town_postcode_edit" id="edit_town_postcode" value="@Model.Town">
                                             <input type="text" class="ml--50" name="county_postcode_edit" id="edit_county_postcode" value="@Model.County">
-                                            @*<input type="text" class="ml--50" name="address4">
-                                                <input type="text" class="ml--50" name="address5">*@
+                                            <input type="text" class="ml--50" name="country_postcode_edit" id="edit_country_postcode" value="@Model.Country">
+                                                @*<input type="text" class="ml--50" name="address5">*@
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="supplier-create-texts ml-22" for="middle-name">Postcode<span class="required">*</span></label>
                                         <div class="col-md-3 col-sm-6 col-xs-12">
-                                            <input type="text" class="ml--50" name="postcode" id="postcode_edit" value="@Model.Post_Code">
+                                            <input type="text" class="ml--50" name="postcode" id="postcode_edit" value="@Model.Post_Code" onkeypress="Postcode_Enter_Click_Edit(event)">
                                             <a href="#" onclick="postcode_testing_edit()"><img src="~/img/images/ssearch.png" id="input_img" /></a>
                                         </div>
                                     </div>

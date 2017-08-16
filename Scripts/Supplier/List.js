@@ -68,6 +68,7 @@ function postcode_testing() {
             $("#street_postcode").text("null");
             $("#town_postcode").text("null");
             $("#county_postcode").text("null");
+            $("#country_postcode").text("null");
             $("#postcode_popup").text(postcode);
 
             $("#Postcode_Confirmation").addClass("in").show("slow");
@@ -83,11 +84,13 @@ function postcode_testing() {
             var address = data.results[0].address_components;
             var street = address[1].long_name;
             var town = address[2].long_name;
-            var county = address[3].long_name;
+            var county = address[4].long_name;
+            var country = address[5].long_name;
 
             $("#street_postcode").text(street);
             $("#town_postcode").text(town);
             $("#county_postcode").text(county);
+            $("#country_postcode").text(country);
             $("#postcode_popup").text(postcode);
 
             //alert(address);
@@ -105,11 +108,13 @@ function Add_Postcode_New_Supplier() {
     var street_add = $("#street_postcode").html();
     var town_add = $("#town_postcode").html();
     var county_add = $("#county_postcode").html();
+    var country_add = $("#country_postcode").html();
     var postcode_add = $("#postcode_popup").html();
 
     $("#add_street_postcode").val(street_add);
     $("#add_town_postcode").val(town_add);
     $("#add_county_postcode").val(county_add);
+    $("#add_country_postcode").val(country_add);
 
     $("#Postcode_Confirmation").hide();
     $("#CreateModal").hide();
@@ -136,7 +141,12 @@ function House_no_Postcode_New_Supplier() {
     //$("#Postcode_Confirmation").hide();
 
     $("#CreateModal").addClass("in").show("slow");
+}
 
+
+function close_modal_House_Cross() {
+    $("#Postcode_House_Number").hide();
+    $("#CreateModal").addClass("in").show("slow");
 }
 
 
@@ -171,6 +181,7 @@ function postcode_testing_edit() {
             $("#street_postcode_edit").text("null");
             $("#town_postcode_edit").text("null");
             $("#county_postcode_edit").text("null");
+            $("#country_postcode_edit").text("null");
             $("#postcode_popup_edit").text(postcode);
 
             $("#Postcode_Confirmation_Edit").addClass("in").show("slow");
@@ -186,11 +197,13 @@ function postcode_testing_edit() {
             var address = data.results[0].address_components;
             var street = address[1].long_name;
             var town = address[2].long_name;
-            var county = address[3].long_name;
+            var county = address[4].long_name;
+            var country = address[5].long_name;
 
             $("#street_postcode_edit").text(street);
             $("#town_postcode_edit").text(town);
             $("#county_postcode_edit").text(county);
+            $("#country_postcode_edit").text(country);
             $("#postcode_popup_edit").text(postcode);
 
             //alert(address);
@@ -210,11 +223,13 @@ function Add_Postcode_Edit_Supplier() {
     var street_add = $("#street_postcode_edit").html();
     var town_add = $("#town_postcode_edit").html();
     var county_add = $("#county_postcode_edit").html();
+    var country_add = $("#country_postcode_edit").html();
     var postcode_add = $("#postcode_popup_edit").html();
 
     $("#edit_street_postcode").val(street_add);
     $("#edit_town_postcode").val(town_add);
     $("#edit_county_postcode").val(county_add);
+    $("#edit_country_postcode").val(country_add);
 
     $("#Postcode_Confirmation_Edit").hide();
     //$("#Postcode_Confirmation").addClass("out");
@@ -237,4 +252,20 @@ function House_no_Postcode_Edit_Supplier() {
         $("#edit_street_postcode").val(house + " " + street);
     }
     $("#Postcode_House_Number_Edit").hide();
+}
+
+function Postcode_Enter_Click(e) {
+    if (e.keyCode === 13) {
+        e.preventDefault(); // Ensure it is only this code that rusn
+        postcode_testing();
+        
+    }
+}
+
+function Postcode_Enter_Click_Edit(e) {
+    if (e.keyCode === 13) {
+        e.preventDefault(); // Ensure it is only this code that rusn
+        postcode_testing_edit();
+
+    }
 }
