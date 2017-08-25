@@ -173,7 +173,7 @@
                                                         <ul class="enlarge" style="margin:0px; padding:0px;">
                                                             <li style="margin: 0px;">
                                                                 <img src="@imgsrc" class="img-circle max_width_45_height_40"/>
-                                                                <span style="margin:0px; padding:0px;"><img src="@imgsrc" alt="" width="400" height="200" /></span>
+                                                                <span style="margin:0px; padding:0px;"><img src="@imgsrc" alt="" width="250" height="250" /></span>
                                                             </li>
                                                         </ul>
 
@@ -232,7 +232,7 @@
                                 </tbody>
                             </table>
 
-                            <div class="empty-height"></div><div class="empty-height"></div>
+                            <div class="empty-height"></div><div class="empty-height"></div><div class="empty-height"></div><div class="empty-height"></div><div class="empty-height"></div><div class="empty-height"></div><div class="empty-height"></div><div class="empty-height"></div><div class="empty-height"></div>
                          
 
                             <div class="clearfix"></div>
@@ -1341,7 +1341,7 @@
 
                                 <div id="EditProduct" class="col-md-12 text-center">
 
-                                    <div class="col-md-9">
+                                     <div class="col-md-9">
 
                                         <div class="form-group">
                                             <label class="supplier-create-texts" for="middle-name">Custom Label / SKU <span class="required">*</span></label>
@@ -1731,7 +1731,8 @@
 
                                                 <div class="fileupload-preview fileupload-exists thumbnail @*product-img*@"></div>
 
-                                                <div>
+
+                                                <div id="image_exist">
 
                                                     <span class="btn btn-file btn-primary btn-margin-product"><span class="fileupload-new">Select image</span><span class="fileupload-exists">Change</span><input type="file" name="file" id="a_image1" onchange="Checkfilesimage(1)"></span>
 
@@ -2189,6 +2190,9 @@
                     document.getElementById("EditProduct").innerHTML = data;
                     $("#PleaseWait").removeClass('showDiv');
                     $("#PleaseWait").addClass('hideDiv');
+
+                    //exist_product_image();
+
                 },
                 error: function (response) {
                     alert("Error" + response);
@@ -2197,7 +2201,7 @@
             })
         }
 
-
+        //function exist_product_image() {}
 
     </script>
 

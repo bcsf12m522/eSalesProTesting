@@ -1,7 +1,10 @@
-﻿@model List<eSalesPro.Services.Sales_History_Record>
+﻿@model List<eSalesPro.Models.Invoice>
 <body id="body-index">
     <div id="sticky-footer-wrap">
 
+        @{
+            decimal total = 0;
+        }
         @*-----------------Top Navigation Start---------------*@
 
         @{
@@ -31,6 +34,9 @@
                                 <div id="loader_div" class="none">
                                     <img src="~/img/loading.gif" class="ajax_loader">
                                 </div>
+
+
+                                <input hidden type="text" value="-2" id="customer_list_edit_modal_value" />
 
                                 <div class="clearfix"></div>
 
@@ -119,14 +125,14 @@
                             <div class="col-md-5"></div>
 
                             <div class="col-md-2 pull-right pr-0">
-                                <a href="#" data-toggle="modal" data-target="#ExistingModal" onclick="show_customer_summary()" class="btn btn-primary blue-btn-style btn-mini bold pull-right">Customer Summary</a>
+                                <a href="#" data-toggle="modal" data-target="#ExistingModal" onclick="show_customer_summary()" class="btn btn-primary width-170 blue-btn-style btn-mini bold pull-right">Customer Summary</a>
                             </div>
 
-                            <div class="col-md-2 pull-right pr-0">
-                                <a href="~/Sale/List_Draft" class="btn btn-success blue-btn-style btn-mini bold width-150 pull-right">Draft List</a>
+                            <div class="col-md-2 pull-right">
+                                <a href="~/Sale/List_Draft" class="btn btn-primary blue-btn-style btn-mini bold width-150 pull-right">Draft List</a>
                             </div>
 
-                            
+                            <input hidden type="text" id="customer_id" name="customer_id" />
 
                         </div>
                         <div class="clearfix"></div>
@@ -174,104 +180,105 @@
 
                                                 <tr class="text-center background_blue_selected_at_hover">
 
-                                                    <td class="vertical_align_middle">@v.order_id</td>
-                                                    <td class="vertical_align_middle">@v.customer_name</td>
+                                                    <td class="vertical_align_middle">@v.Invoice_Number</td>
+                                                    <td class="vertical_align_middle">@v.Customer.Name</td>
 
-                                                    @if (v.edit_sale_list.Count() == null || v.edit_sale_list.Count() == 0)
-                                                    {
-                                                        <td>@v.payment_type</td>
-                                                        <td width="15%">@v.payment_status</td>
-                                                        <td>@v.net</td>
-                                                        <td>@v.vat</td>
-                                                        <td>@v.gross</td>
-                                                        <td width="10%">@v.date.ToString("dd-MMM-yy")</td>
-                                                    }
+                                                    @*@if (Model.Count() == null || Model.Count() == 0)
+                                                        {
+                                                            <td>@v.Payment_Methods.Type</td>
+                                                            <td width="15%">@v.Payment_Status.Status</td>
+                                                            <td>@v.Net_Price</td>
+                                                            <td>@v.VAT_20</td>
+                                                            <td>@v.Gross</td>
+                                                            <td width="10%">@v.Created_at.ToString("dd-MMM-yy")</td>
+                                                        }*@
 
-                                                    else
-                                                    {
+                                                    @*else
+                                                        {*@
 
-                                                        <td>
-                                                            @v.payment_type
-
-                                                            @foreach (var sale in v.edit_sale_list)
-                                                            {
-
-                                                                <br /><span class="sub_tr_values">@sale.Payment_Type</span>
-                                                            }
-                                                        </td>
+                                                    <td>
+                                                        @v.Payment_Methods.Type
 
 
-
-
-                                                        <td width="15%">
-
-
-                                                            @v.payment_status
-
-                                                            @foreach (var sale in v.edit_sale_list)
-                                                            {
-                                                                <br /><span class="sub_tr_values">@sale.Status</span>
-                                                            }
-                                                        </td>
+                                                        @foreach (var sale in v.Sale_Transaction_History)
+                                                        {
+                                                            <br /><span class="sub_tr_values">@sale.Payment_Type</span>
+                                                        }
+                                                    </td>
 
 
 
 
-                                                        <td>
-                                                            @v.net
-
-                                                            @foreach (var sale in v.edit_sale_list)
-                                                            {
-                                                                <br /><span class="sub_tr_values">@sale.Net_Amount</span>
-                                                            }
-                                                        </td>
+                                                    <td width="15%">
 
 
+                                                        @v.Payment_Status.Status
 
-
-                                                        <td>
-                                                            @v.vat
-
-                                                            @foreach (var sale in v.edit_sale_list)
-                                                            {
-                                                                <br /><span class="sub_tr_values">@sale.Vat</span>
-                                                            }
-                                                        </td>
-
-
-                                                        <td>
-                                                            @v.gross
-
-                                                            @foreach (var sale in v.edit_sale_list)
-                                                            {
-                                                                <br /><span class="sub_tr_values">@sale.Gross</span>
-                                                            }
-                                                        </td>
-
-
-
-                                                        <td width="10%">
-                                                            @v.date.ToString("dd-MMM-yy")
-                                                            @*@v.date.ToShortDateString()*@
-
-                                                            @foreach (var sale in v.edit_sale_list)
-                                                            {
-                                                                <br /><span class="sub_tr_values">@sale.Date.ToString("dd-MMM-yy")</span>
-                                                                @*<br /><span class="sub_tr_values">@sale.Date.ToShortDateString()</span>*@
-                                                            }
-                                                        </td>
+                                                        @foreach (var sale in v.Sale_Transaction_History)
+                                                        {
+                                                            <br /><span class="sub_tr_values">@sale.Status</span>
+                                                        }
+                                                    </td>
 
 
 
 
+                                                    <td>
+                                                        @v.Net_Price
+
+                                                        @foreach (var sale in v.Sale_Transaction_History)
+                                                        {
+                                                            <br /><span class="sub_tr_values">@sale.Net_Amount</span>
+                                                        }
+                                                    </td>
 
 
-                                                    }
+
+
+                                                    <td>
+                                                        @v.VAT_20
+
+                                                        @foreach (var sale in v.Sale_Transaction_History)
+                                                        {
+                                                            <br /><span class="sub_tr_values">@sale.Vat</span>
+                                                        }
+                                                    </td>
+
+
+                                                    <td>
+                                                        @v.Gross
+
+                                                        @foreach (var sale in v.Sale_Transaction_History)
+                                                        {
+                                                            <br /><span class="sub_tr_values">@sale.Gross</span>
+                                                        }
+                                                    </td>
+
+
+
+
+                                                    <td width="10%">
+                                                        @v.Created_at.ToString("dd-MMM-yy")
+                                                        @*@v.date.ToShortDateString()*@
+
+                                                        @foreach (var sale in v.Sale_Transaction_History)
+                                                        {
+                                                            <br /><span class="sub_tr_values">@sale.Date.ToString("dd-MMM-yy")</span>
+                                                            @*<br /><span class="sub_tr_values">@sale.Date.ToShortDateString()</span>*@
+                                                        }
+                                                    </td>
+
+
+
+
+
+
+                                                    @*}*@
 
                                                     <td class="text-center width-120" style="vertical-align:middle;">
 
-                                                        <a class="btn btn-sm btn-info bold" href="~/Sale/Edit_Sale/@v.id">Edit</a>
-                                                        <a class="btn btn-sm btn-danger bold" href="" onclick="Delete_Sale(@v.id)">Delete</a>
+                                                        <a class="btn btn-sm btn-info bold" href="~/Sale/Edit_Sale/@v.Id">Edit</a>
+                                                        <a class="btn btn-sm btn-danger bold" href="" onclick="Delete_Sale_by_Ajax(@v.Id)">Delete</a>
                                                     </td>
 
                                                 </tr>
@@ -328,106 +335,106 @@
                                             if (v != null)
                                             {
 
-                                                <tr class="text-center background_blue_selected">
+                                                <tr class="text-center background_blue_selected_at_hover">
 
-                                                    <td class="vertical_align_middle">@v.order_id</td>
-                                                    <td class="vertical_align_middle">@v.customer_name</td>
+                                                    <td class="vertical_align_middle">@v.Invoice_Number</td>
+                                                    <td class="vertical_align_middle">@v.Customer.Name</td>
 
-                                                    @if (v.edit_sale_list.Count() == null || v.edit_sale_list.Count() == 0)
-                                                    {
-                                                        <td>@v.payment_type</td>
-                                                        <td width="15%">@v.payment_status</td>
-                                                        <td>@v.net</td>
-                                                        <td>@v.vat</td>
-                                                        <td>@v.gross</td>
-                                                        <td width="10%">@v.date.ToString("dd-MMM-yy")</td>
-                                                    }
+                                                    @*@if (Model.Count() == null || Model.Count() == 0)
+                                                        {
+                                                            <td>@v.Payment_Methods.Type</td>
+                                                            <td width="15%">@v.Payment_Status.Status</td>
+                                                            <td>@v.Net_Price</td>
+                                                            <td>@v.VAT_20</td>
+                                                            <td>@v.Gross</td>
+                                                            <td width="10%">@v.Created_at.ToString("dd-MMM-yy")</td>
+                                                        }*@
 
-                                                    else
-                                                    {
+                                                    @*else
+                                                        {*@
 
-                                                        <td>
-                                                            @v.payment_type
+                                                    <td>
+                                                        @v.Payment_Methods.Type
 
-                                                            @foreach (var sale in v.edit_sale_list)
-                                                            {
-
-                                                                <br /><span class="sub_tr_values">@sale.Payment_Type</span>
-                                                            }
-                                                        </td>
-
-
-
-
-                                                        <td width="15%">
-
-
-                                                            @v.payment_status
-
-                                                            @foreach (var sale in v.edit_sale_list)
-                                                            {
-                                                                <br /><span class="sub_tr_values">@sale.Status</span>
-                                                            }
-                                                        </td>
+                                                        @foreach (var sale in v.Sale_Transaction_History)
+                                                        {
+                                                            <br /><span class="sub_tr_values">@sale.Payment_Type</span>
+                                                        }
+                                                    </td>
 
 
 
 
-                                                        <td>
-                                                            @v.net
-
-                                                            @foreach (var sale in v.edit_sale_list)
-                                                            {
-                                                                <br /><span class="sub_tr_values">@sale.Net_Amount</span>
-                                                            }
-                                                        </td>
+                                                    <td width="15%">
 
 
+                                                        @v.Payment_Status.Status
 
-
-                                                        <td>
-                                                            @v.vat
-
-                                                            @foreach (var sale in v.edit_sale_list)
-                                                            {
-                                                                <br /><span class="sub_tr_values">@sale.Vat</span>
-                                                            }
-                                                        </td>
-
-
-                                                        <td>
-                                                            @v.gross
-
-                                                            @foreach (var sale in v.edit_sale_list)
-                                                            {
-                                                                <br /><span class="sub_tr_values">@sale.Gross</span>
-                                                            }
-                                                        </td>
-
-
-
-                                                        <td width="10%">
-                                                            @v.date.ToString("dd-MMM-yy")
-                                                            @*@v.date.ToShortDateString()*@
-
-                                                            @foreach (var sale in v.edit_sale_list)
-                                                            {
-                                                                <br /><span class="sub_tr_values">@sale.Date.ToString("dd-MMM-yy")</span>
-                                                                @*<br /><span class="sub_tr_values">@sale.Date.ToShortDateString()</span>*@
-                                                            }
-                                                        </td>
+                                                        @foreach (var sale in v.Sale_Transaction_History)
+                                                        {
+                                                            <br /><span class="sub_tr_values">@sale.Status</span>
+                                                        }
+                                                    </td>
 
 
 
 
+                                                    <td>
+                                                        @v.Net_Price
+
+                                                        @foreach (var sale in v.Sale_Transaction_History)
+                                                        {
+                                                            <br /><span class="sub_tr_values">@sale.Net_Amount</span>
+                                                        }
+                                                    </td>
 
 
-                                                    }
+
+
+                                                    <td>
+                                                        @v.VAT_20
+
+                                                        @foreach (var sale in v.Sale_Transaction_History)
+                                                        {
+                                                            <br /><span class="sub_tr_values">@sale.Vat</span>
+                                                        }
+                                                    </td>
+
+
+                                                    <td>
+                                                        @v.Gross
+
+                                                        @foreach (var sale in v.Sale_Transaction_History)
+                                                        {
+                                                            <br /><span class="sub_tr_values">@sale.Gross</span>
+                                                        }
+                                                    </td>
+
+
+
+
+                                                    <td width="10%">
+                                                        @v.Created_at.ToString("dd-MMM-yy")
+                                                        @*@v.date.ToShortDateString()*@
+
+                                                        @foreach (var sale in v.Sale_Transaction_History)
+                                                        {
+                                                            <br /><span class="sub_tr_values">@sale.Date.ToString("dd-MMM-yy")</span>
+                                                            @*<br /><span class="sub_tr_values">@sale.Date.ToShortDateString()</span>*@
+                                                        }
+                                                    </td>
+
+
+
+
+
+
+                                                    @*}*@
 
                                                     <td class="text-center width-120" style="vertical-align:middle;">
 
-                                                        <a class="btn btn-sm btn-info bold" href="~/Sale/Edit_Sale/@v.id">Edit</a>
-                                                        <a class="btn btn-sm btn-danger bold" href="" onclick="Delete_Sale(@v.id)">Delete</a>
+                                                        <a class="btn btn-sm btn-info bold" href="~/Sale/Edit_Sale/@v.Id">Edit</a>
+                                                        <a class="btn btn-sm btn-danger bold" href="" onclick="Delete_Sale_by_Ajax(@v.Id)">Delete</a>
                                                     </td>
 
                                                 </tr>
@@ -648,6 +655,17 @@
 
 
     <script>
+        //function abc() {
+        //    var invoice_gross = $("#invoice_gross_value").val();
+        //    var partially_gross = $("#invoice_gross_partial_value").val();
+        //    alert("invoice_gross"+invoice_gross);
+        //    alert("partially_gross" + partially_gross);
+        //    if (invoice_gross <= partially_gross) {
+        //        alert("EQUAL");
+        //        $("#payment_paid_status").val("Payment Fully Paid");
+        //    }
+        //}
+
         function myDate() {
             var date = new Date(document.getElementById("to_date")).toDateString("yyyy-MM-dd");
         }

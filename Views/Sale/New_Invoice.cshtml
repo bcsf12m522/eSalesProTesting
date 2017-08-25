@@ -27,7 +27,13 @@
                             <form id="demo-form2" action="@Url.Action("Create_Sale","Sale")" method="post" data-parsley-validate class="" enctype="multipart/form-data">
 
                                 
-                                <input hidden type="text" value="-2" id="customer_list_edit_modal_value" />
+                                <input hidden type="text" value="-4" id="customer_list_edit_modal_value" />
+
+
+                                <input hidden type="text" id="partial_net_sale_history" name="partial_net_id" />
+                                <input hidden type="text" id="partial_vat_sale_history" name="partial_vat_price_id" />
+                                <input hidden type="text" id="partial_gross_sale_history" name="partial_gross_id" />
+
 
                                 <div class="col-md-12">
 
@@ -351,11 +357,15 @@
                                                     </td>
                                                 </tr>
 
+                                                @*-----------------------------NEW INVOICE WITHOUT GIVE REFUND--------------------------------
+                                                
                                                 <tr class="">
                                                     <td class="bold"></td>
                                                     <td class=" bold text-center"><a href="#" data-target="#Give_Refund" data-toggle="modal">Give Refund</a></td>
                                                 </tr>
 
+                                                
+                                                -----------------------------NEW INVOICE WITHOUT GIVE REFUND--------------------------------*@
 
                                                 <tr class="partial_paid" id="partial_paid_tr" style="display:none">
                                                     <td class="bold">Partial Payment</td>
@@ -379,7 +389,7 @@
 
 
 
-                                                <tr>
+                                                <tr class="hide_partial_deposit_quote">
                                                     <td class="bold text-center"><a href="#" data-target="#Deposit_Modal" class="hideDiv" id="Deposit_payment_option" data-toggle="modal">Deposit Payment</a></td>
                                                     <td class=" bold text-center"><a href="#" class="hideDiv" data-target="#Partial_Payment_Modal" id="partial_payment_option" data-toggle="modal">Add Partial Payment</a></td>
 
@@ -506,77 +516,8 @@
         }
     </footer>
 
-
-
-    @*-------------------------------POP UP FOR REFUND----------------------------------*@
-
-    <div class="modal fade" id="Give_Refund" tabindex="-1" role="dialog" aria-hidden="false">
-        <div class="modal-dialog modal-md">
-            <div class="modal-content modal-style-custom">
-
-                <div class="title col-md-12">
-                    <span>Message</span>
-                    <img src="~/img/images/c3.png" class="close mr--13 pull-right" data-dismiss="modal" />
-                </div>
-
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                    <div class="x_panel">
-
-                        <div class="empty-height"></div><div class="empty-height"></div>
-
-                        <div class="win text-center">
-                            <h3 class="color"><b>Refund an item</b></h3>
-
-                            <div class="empty-height"></div><div class="empty-height"></div>
-
-                            <table class="table table-responsive border_black" id="customer_list_table">
-                                <thead>
-                                    <tr class="table-heading-fonts table-main-headings">
-                                        <th class="text-center"></th>
-                                        <th class="text-center">SKU</th>
-                                        <th class="text-center">Title</th>
-                                        <th class="text-center">QTY</th>
-                                    </tr>
-                                </thead>
-
-                                <tbody class="black-color bold" id="updated_customer_list">
-
-                                   
-                                        <tr>
-                                            <td class="text-center border-right-td"><div class="text-center"><input placeholder="0" class="unbold width-45 text-center font-18" name="" type="checkbox"></div></td>
-                                            <td class="text-center border-right-td"><div class="text-center"><input onkeypress="validate(event)" placeholder="Sku" class="unbold width-45 text-center" name="" type="text"></div></td>
-                                            <td class="border-right-td">
-                                                <textarea class="description-text-area unbold width-100p text-center" name="" id="" required="" placeholder=""></textarea>
-                                            </td>
-
-                                            <td class="text-center"><div class="text-center"><input onkeypress="validate(event)" placeholder="0" class="unbold width-45 text-center" name="" type="text"></div></td>
-                                        
-                                        </tr>
-
-                                </tbody>
-
-
-                            </table>
-
-                            <div class="col-md-12">
-
-                                <div class="clearfix"></div>
-                            </div>
-
-
-                        </div>
-                    </div>
-                </div>
-
-                <div class="modal-footer"></div>
-                <div class=""></div>
-
-            </div>
-        </div>
-    </div>
-
-    @*-------------------------------POP UP FOR REFUND----------------------------------*@
-
+    
+   
 
     @*----------------------------POP UP FOR IMAGE CLICK--------------------------------*@
 
@@ -586,7 +527,7 @@
 
                 <div class="title col-md-12">
                     <span>View Image</span>
-                    <img src="~/img/images/c3.png" class="close mr--13 pull-right" data-dismiss="modal" />
+                    <img src="~/img/images/cross_new_sale.png" class="close mr--13 pull-right" data-dismiss="modal" />
                 </div>
 
                 <div class="col-md-12 col-sm-12 col-xs-12">
@@ -1355,7 +1296,7 @@
                                         <div class="empty-height"></div>
 
 
-                                        <div id="" class="Shipping_Address_Div_New">
+                                        <div id="" class="Shipping_Address_Div_New none">
                                             <div class="form-group">
                                                 <label class="customer-create-texts width-178" for="middle-name">Shipping Address<span class="required">*</span></label>
                                                 <div class="col-md-3 col-sm-6 col-xs-12">
@@ -1617,3 +1558,74 @@
         <script src="~/Scripts/Sale/New_Invoice.js"></script>
 
 </body>
+
+@*-----------------------------NEW INVOICE WITHOUT GIVE REFUND--------------------------------
+    -------------------------------POP UP FOR REFUND----------------------------------
+
+    <div class="modal fade" id="Give_Refund" tabindex="-1" role="dialog" aria-hidden="false">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content modal-style-custom">
+
+                <div class="title col-md-12">
+                    <span>Message</span>
+                    <img src="~/img/images/c3.png" class="close mr--13 pull-right" data-dismiss="modal" />
+                </div>
+
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+
+                        <div class="empty-height"></div><div class="empty-height"></div>
+
+                        <div class="win text-center">
+                            <h3 class="color"><b>Refund an item</b></h3>
+
+                            <div class="empty-height"></div><div class="empty-height"></div>
+
+                            <table class="table table-responsive border_black" id="customer_list_table">
+                                <thead>
+                                    <tr class="table-heading-fonts table-main-headings">
+                                        <th class="text-center"></th>
+                                        <th class="text-center">SKU</th>
+                                        <th class="text-center">Title</th>
+                                        <th class="text-center">QTY</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody class="black-color bold" id="updated_customer_list">
+
+
+                                        <tr>
+                                            <td class="text-center border-right-td"><div class="text-center"><input placeholder="0" class="unbold width-45 text-center font-18" name="" type="checkbox"></div></td>
+                                            <td class="text-center border-right-td"><div class="text-center"><input onkeypress="validate(event)" placeholder="Sku" class="unbold width-45 text-center" name="" type="text"></div></td>
+                                            <td class="border-right-td">
+                                                <textarea class="description-text-area unbold width-100p text-center" name="" id="" required="" placeholder=""></textarea>
+                                            </td>
+
+                                            <td class="text-center"><div class="text-center"><input onkeypress="validate(event)" placeholder="0" class="unbold width-45 text-center" name="" type="text"></div></td>
+
+                                        </tr>
+
+                                </tbody>
+
+
+                            </table>
+
+                            <div class="col-md-12">
+
+                                <div class="clearfix"></div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer"></div>
+                <div class=""></div>
+
+            </div>
+        </div>
+    </div>
+
+    -------------------------------POP UP FOR REFUND----------------------------------
+    -----------------------------NEW INVOICE WITHOUT GIVE REFUND--------------------------------*@

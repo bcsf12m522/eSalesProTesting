@@ -21,7 +21,7 @@ function showDateDiv() {
 
 function showToDate() {
     var from = document.getElementById("from_date").value;
-
+    
     if (from == "") {
     }
 

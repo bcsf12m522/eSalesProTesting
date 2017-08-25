@@ -2,7 +2,9 @@
 
 <body id="body-index" onload="Edit_Sale_Onload()">
     <div id="sticky-footer-wrap">
-
+        @{
+            decimal sum = 0;
+        }
         @*-----------------Top Navigation Start---------------*@
 
         @{
@@ -31,10 +33,16 @@
 
                             <form id="demo-form2" action="@Url.Action("Edit_Sale","Sale")" method="post" data-parsley-validate class="" enctype="multipart/form-data">
 
-                                <input hidden type="text" value="-2" id="customer_list_edit_modal_value"/>
-                                <input hidden type="text" id="partial_net_id" name="partial_net_id" value="@ViewBag.invoice.Net_Price"/>
+                                <input hidden type="text" value="-3" id="customer_list_edit_modal_value"/>
+                                @*<input hidden type="text" id="partial_net_id" name="partial_net_id" value="@ViewBag.invoice.Net_Price"/>
                                 <input hidden type="text" id="partial_vat_price_id" name="partial_vat_price_id" value="@ViewBag.invoice.VAT_20"/>
-                                <input hidden type="text" id="partial_gross_id" name="partial_gross_id" value="@ViewBag.invoice.Gross_Total"/>
+                                <input hidden type="text" id="partial_gross_id" name="partial_gross_id" value="@ViewBag.invoice.Gross_Total"/>*@
+
+                                <input hidden value="@Model.Count"/>
+
+                                <input hidden type="text" id="partial_net_sale_history" name="partial_net_id" />
+                                <input hidden type="text" id="partial_vat_sale_history" name="partial_vat_price_id" />
+                                <input hidden type="text" id="partial_gross_sale_history" name="partial_gross_id" />
                                 
                                 <div class="col-md-12">
 
@@ -124,7 +132,7 @@
                                                 <ul class="list-style-type-custom">
                                                     <li id="type_customer" class="bold font-18 black-color">@ViewBag.invoice.Customer.Customer_Type.Type</li>
                                                     <li id="customer_name">@ViewBag.invoice.Customer.Name</li>
-                                                    <li id="customer_address">@ViewBag.invoice.Customer.Billing_Address</li>
+                                                    <li id="customer_address">@ViewBag.invoice.Customer.Billing_Street</li>
                                                     <li id="customer_postcode">@ViewBag.invoice.Customer.Billing_Postcode</li>
                                                     <li id="customer_phone">@ViewBag.invoice.Customer.phone</li>
                                                     <li id="customer_email">@ViewBag.invoice.Customer.Email</li>
@@ -200,7 +208,7 @@
                                                             <select name="payment_method_id" class="form-control border_black-1px width-145 select-class-color">
                                                                 @foreach (var method in ViewBag.Payment_Method)
                                                                 {
-                                                                    <option value="@method.Id">@method.Type</option>
+                                                                    <option value="@method.Type">@method.Type</option>
                                                                 }
 
                                                             </select>
@@ -229,7 +237,7 @@
                                     <div class="col-md-12">
 
 
-                                        <table border="0" class="table table-responsive border_black" style="width:100%" id="maintable">
+                                        <table border="0" class="table table-responsive border_black readonly_table_style" style="width:100%" id="maintable">
                                             <thead>
                                                 <tr class="table-heading-fonts-new-invoice table-main-headings">
                                                     <th class="text-center">Code</th>
@@ -554,26 +562,28 @@
                                                     <td class="bold">Gross</td>
                                                     <td id="invoice_gross" class="text-right">@ViewBag.invoice.Gross</td>
                                                 </tr>
+
+
                                                 <tr class="discount_tr" style="display:none">
                                                     <td class="bold">Discount</td>
                                                     <td id="invoice_discount_td" class="text-right">@ViewBag.invoice.Global_Discount</td>
                                                 </tr>
-                                                <tr class="discount_tr" style="display:none">
+                                                <tr class="discount_tr hide_for_quote" style="display:none">
                                                     <td class="bold">Total After Discount</td>
                                                     <td id="invoice_after_discount_td" class="text-right">@ViewBag.invoice.Total_After_Discount</td>
                                                 </tr>
-                                                <tr id="payment_status_tr">
+                                                <tr id="payment_status_tr" class="hide_for_quote">
                                                     <td class="bold">Payment Status</td>
                                                     <td class="text-right">
                                                         <select id="payment_status_id" onchange="payment_status()" name="payment_status_id" class="form-control border_black-1px min-height-32 width-180 select-class-color pull-right">
-                                                            <option value="@ViewBag.invoice.Payment_Status.Id">@ViewBag.invoice.Payment_Status.Status</option>
+                                                            <option value="@ViewBag.invoice.Payment_Status.Status">@ViewBag.invoice.Payment_Status.Status</option>
                                                             @foreach (var status in ViewBag.Payment_Status)
                                                             {
                                                                 if (ViewBag.invoice.Payment_Status.Id == status.Id)
                                                                 {
                                                                     continue;
                                                                 }
-                                                                <option value="@status.Id">@status.Status</option>
+                                                                <option value="@status.Status">@status.Status</option>
                                                             }
                                                         </select>
                                                     </td>
@@ -588,55 +598,78 @@
                                                     <td class=" bold text-center"><a href="#" data-target="#Give_Refund" data-toggle="modal">Give Refund</a></td>
                                                 </tr>*@
 
+                                                @*     WITH GIVE REFUND
                                                 <tr>
                                                     <td class="text-center bold"><a href="#" data-target="#Give_Refund" data-toggle="modal">Give Refund</a></td>
                                                     <td></td>
                                                 </tr>
 
-                                                <tr>
+                                                       WITH GIVE REFUND        *@
+
+                                                <tr class="hide_for_quote hide_quotation">
                                                     <td class="bold text-center"><a href="#" data-target="#Deposit_Modal" class="" id="Deposit_payment_option" data-toggle="modal">Deposit Payment</a></td>
                                                     <td class=" bold text-center"><a href="#" class="" data-target="#Partial_Payment_Modal" id="partial_payment_option" data-toggle="modal">Add Partial Payment</a></td>
 
                                                 </tr>
 
-                                                <tr id="refund_tr" style="display:none">
+                                                <tr id="refund_tr" style="display:none" class="hide_for_quote">
                                                     @*<td class="">Refund<br /><span>03-08-17</span></td>
             <td class=" bold pull-right">£100<br /><span>Cash</span></td>*@
                                                     <td class="">Refund <br /><span id="amount_refund_date_td"></span></td>
                                                     <td class="bold text-right" id="amount_refund_td"><br /><span class="mmm">sasas</span></td>
                                                 </tr>
 
+                                               
 
+                                                @foreach (var v in @ViewBag.invoiceList)
+                                                {
+                                                    <tr class="partial_paid hide_for_quote">
+                                                        <td class="" style="border-bottom:none!important">Partial Payment</td>
+                                                        <td id="" class="text-right bold" style="border-bottom:none!important"><span>£</span>@v.Gross</td>
+                                                    </tr>
+                                                    sum = sum + @v.Gross;
+                                                    <tr class="hide_for_quote">
+                                                        <td class="" id="">@v.Created_at.ToShortDateString()</td>
+                                                        <td id="" class="text-right bold">@v.Payment_Type</td>
+                                                    </tr>
 
-                                                <tr class="partial_paid" style="display:none">
+                                                }
+                                                <input value="@sum" id="partial_payment_sum" hidden/>
+
+                                                @{
+                                                    decimal balance = @ViewBag.invoice.Gross - sum;
+
+                                                }
+
+                                                <tr class="partial_paid hide_for_quote" style="display:none">
                                                     <td class="bold">Partial Payment</td>
                                                     <td id="partial_paid_td" class="text-right">£0</td>
                                                 </tr>
 
-                                                <tr class="deposit_paid" style="display:none">
+                                                <tr class="deposit_paid hide_for_quote" style="display:none">
                                                     <td class="bold">Deposit Payment</td>
                                                     <td id="deposit_paid_td" class="text-right">£0</td>
                                                 </tr>
 
-                                                <tr class="partial_paid" style="display:none">
+                                                <tr class="partial_paid hide_for_quote" style="display:none">
                                                     <td class="bold" id="partial_date"></td>
                                                     <td id="partial_payment_method" class="text-right"></td>
                                                 </tr>
 
-                                                <tr id="custom_date_show_invoice" style="display:none">
+                                                <tr id="custom_date_show_invoice" class="hide_for_quote" style="display:none">
                                                     <td class="bold width-134">Custom Date</td>
                                                     <td><input type="date" class="width-180" /></td>
                                                 </tr>
 
-                                                <tr id="Total_after_refund_tr" style="display:none">
+                                                <tr id="Total_after_refund_tr" class="hide_for_quote" style="display:none">
                                                     <td class="bold">Total After Refunds:</td>
                                                     <td id="Total_after_refund_td" class="text-right">£0</td>
                                                 </tr>
                                                 
 
-                                                <tr class="partial_paid deposit_paid" style="display:none">
+                                                <tr class="partial_paid deposit_paid hide_for_quote" style="">
                                                     <td class="bold">Amount left to Pay</td>
-                                                    <td id="amount_left_td" class="text-right">£0</td>
+                                                    <td id="amount_left_td" class="text-right">@{@balance}</td>
                                                 </tr>
 
 
@@ -662,10 +695,15 @@
                                     <div class="col-md-12">
 
                                         <div class="empty-height"></div><div class="empty-height"></div>
+                                        <div class="col-md-6"></div>
+                                            <div id="global_discount_div" class="col-md-3 pull-right">
+                                                <div class="col-md-8"><a href="" class="btn btn-primary blue-btn-style btn-mini bold" data-toggle="modal" data-target="#Global_Discount_Modal">Add Global Discount</a></div>
+                                            </div>
 
-                                        <div id="global_discount_div" class="col-md-3 pull-right">
-                                            <a href="" class="btn btn-primary blue-btn-style btn-mini bold" data-toggle="modal" data-target="#Global_Discount_Modal">Add Global Discount</a>
-                                        </div>
+                                            @*<div id="as" class="col-md-2 pull-right mr--13">
+                                                <a href="#" data-target="#Give_Refund" data-toggle="modal" class="btn btn-success blue-btn-style btn-mini bold">Give Refund</a>
+                                            </div>*@
+
 
                                     </div>
 
@@ -703,9 +741,9 @@
 
                                 
                                 <input id="counters" value="" type="text" hidden />
-                                <input type="text" id="net_invoice_hidden" name="net_invoice_hidden" value="@ViewBag.invoice.Net_Price" hidden/>
-                                <input type="text" id="vat_invoice" name="vat_invoice_hidden" value="@ViewBag.invoice.VAT_20" hidden/>
-                                <input type="text" id="gross_invoice" name="gross_invoice_hidden" value="@ViewBag.invoice.Gross_Total" hidden/>
+                                <input type="text" id="net_invoice_hidden" name="net_invoice_hidden" value="@ViewBag.invoice.Net_Price" hidden />
+                                <input type="text" id="vat_invoice" name="vat_invoice_hidden" value="@ViewBag.invoice.VAT_20" hidden />
+                                <input type="text" id="gross_invoice" name="gross_invoice_hidden" value="@ViewBag.invoice.Gross_Total" hidden />
                                 <input type="text" class="" id="global_discount_hidden" name="global_discount_hidden" value="0" hidden />
                                 <input type="text" class="" id="total_after_discount_hidden" name="total_after_discount_hidden" hidden />
                                 <input type="text" class="" id="left_amount_hidden" name="left_amount_hidden" hidden />
@@ -768,7 +806,7 @@
 
                             <table class="table table-responsive border_black" id="customer_list_table">
                                 <thead>
-                                    <tr class="table-heading-fonts table-main-headings">
+                                    <tr class="table-heading-fonts table-main-headings readonly_table_style">
                                         <th class="text-center"></th>
                                         <th class="text-center">SKU</th>
                                         <th class="text-center">Title</th>
@@ -1603,7 +1641,7 @@
                                             <tr onclick="go(@v.Id,@v.Customer_Type_Id);customer_credit()" oncontextmenu="GetCustomer(@v.Id);">
                                                 <td id="@String.Concat("juni1", v.Id)" data-title="User ID">@v.Name</td>
                                                 <td id="@String.Concat("juni2", v.Id)" data-title="First Name">@v.phone</td>
-                                                <td id="@String.Concat("juni3", v.Id)" data-title="Last Name">@v.Billing_Address</td>
+                                                <td id="@String.Concat("juni3", v.Id)" data-title="Last Name">@v.Billing_Street</td>
                                                 <td id="@String.Concat("juni4", v.Id)" data-title="Last Name">@v.Billing_Postcode</td>
                                                 <td id="@String.Concat("juni5", v.Id)" data-title="Email" class="user-emails">@v.Email</td>
                                                 <td id="@String.Concat("juni6", v.Id)" data-title="Email" class="user-emails">@v.Balance</td>

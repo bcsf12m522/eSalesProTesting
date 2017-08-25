@@ -145,7 +145,10 @@ function run_invoice() {
 
 
         //alert("Invoice Document");
-
+        
+        $(".hide_partial_deposit_quote").show();
+        $(".hide_partial_deposit_quote").show();
+        
 
         //Invoice Show
         $("#payment_method_div").show();
@@ -177,6 +180,8 @@ function run_invoice() {
 
         //alert("Quote Document");
 
+        $(".hide_partial_deposit_quote").hide();
+        $(".hide_partial_deposit_quote").hide();
 
         $("#hideExcludeVat").show();
         $("#net_tr").show();
@@ -207,6 +212,9 @@ function run_invoice() {
 
         //alert("Item Sale Document");
 
+        $(".hide_partial_deposit_quote").show();
+        $(".hide_partial_deposit_quote").show();
+       
         //Invoice Hide
         $("#invoice_number_div").hide();
         $("#new_invoice_heading").hide();
@@ -530,6 +538,24 @@ function hhh() {
     $("#Sold_History_Modal").modal('show');
 }
 
+function Partial_Payment_Calculation() {
+    var gross = $("#partial_amount").val();
+
+    var net = (gross / 1.2).toFixed(3);
+
+    var vat = (gross - net).toFixed(3);
+
+
+    $("#partial_net_sale_history").val(net);
+    $("#partial_vat_sale_history").val(vat);
+    $("#partial_gross_sale_history").val(gross);
+
+    //alert(" net  " + net + "           \n vat " + vat + "             \n  gross " + gross);
+}
+
+
+
+
 function Partial_Payment() {
 
     $(".partial_paid").show();
@@ -552,6 +578,8 @@ function Partial_Payment() {
     $("#left_amount_hidden").val(remaining);
     //$("#partial_paid_td").val(amount);
     //alert("REMAINING" + remaining);//alert("REMAINING" + remaining);
+
+    Partial_Payment_Calculation()
 
 }
 
@@ -1048,7 +1076,7 @@ function checkInvoiceNumber() {
         type: "Get",
         cache: false,
         success: function (data) {
-
+            alert(data);
             if (data == "False") {
 
                 document.getElementById("invoice_number").value = "";
@@ -1062,6 +1090,7 @@ function checkInvoiceNumber() {
     function () {
     });
             }
+
         },
         error: function (response) {
             alert("invoice validation Error Occured");

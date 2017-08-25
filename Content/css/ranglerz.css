@@ -13,6 +13,11 @@
     box-shadow: 2px 2px 0px #000;
 }
 
+/*.readonly_table_style{
+    font:bold;
+    background-color:#FFF;
+}*/
+
 .blue-btn-style-modal {
     box-shadow: 2px 2px 0px #000;
 }
@@ -25,6 +30,29 @@
     color: #fff;
     background-color: #cb9a89;
     border-color: #d43f3a;
+}
+
+.btn_view_payment_status {
+    color: #fff;
+    /*background-color: #cb9a89;*/
+    /*background: -webkit-linear-gradient(top, #260101, #e7423f);*/
+    background: -webkit-linear-gradient(bottom, #65091a, #6d0614);
+    border-color: #d43f3a;
+    box-shadow: 2px 2px 0px #000;
+}
+
+.btn_view_payment_status:hover, .btn_view_payment_status:focus, .btn_view_payment_status.focus, .btn_view_payment_status:active, .btn_view_payment_status.active, .open > .dropdown-toggle.btn_view_payment_status{
+    cursor: pointer;
+    /*cursor: hand;*/
+    text-shadow: #260101 0 1px 0;
+    background: #e7423f;
+    background: -webkit-gradient(linear, left top, left bottom, from(#260101), to(#260101));
+    background: -webkit-linear-gradient(bottom, #260101, #e7423f);
+    background: -moz-linear-gradient(top, #260101, #e7423f);
+    background: -ms-linear-gradient(top, #260101, #e7423f);
+    background: -o-linear-gradient(top, #260101, #e7423f);
+    background-image: -ms-linear-gradient(top, #260101 0%, #e7423f 100%);
+    color: #ffffff;
 }
 
 .width-125{
@@ -69,6 +97,10 @@
 
 .font-18 {
     font-size: 18px;
+}
+
+.margin-0{
+    margin:0;
 }
 
 .font-14 {
@@ -1291,6 +1323,11 @@
     height: 34px;
 }
 
+.date_width_height_Customer_Summary {
+    width: 140px;
+    height: 34px;
+}
+
 .date-width-height-data-report {
     width: 200px;
     height: 34px;
@@ -1619,7 +1656,7 @@ padding:2px;
 background:#ccc;
 }
 ul.enlarge li:hover span{ 
-top: -95px; /*the distance from the bottom of the thumbnail to the top of the popup image*/
+top: -80px;/*the distance from the bottom of the thumbnail to the top of the popup image*/
 left: 50px; /*distance from the left of the thumbnail to the left of the popup image*/
 }
 ul.enlarge li:hover:nth-child(2) span{

@@ -193,3 +193,25 @@ function findByDate() {
 
     })
 }
+
+
+function Delete_Sale_by_Ajax(ID) {
+
+    //alert("ID" + ID);
+
+    $.ajax({
+        url: "/Sale/Delete_Sale/",
+        data: { id: ID },
+        cache: false,
+        type: "Get",
+
+        success: function (data) {
+            //alert("ok");
+            document.getElementById("updatedDiv").innerHTML = data;
+            //$('#customer_list_table').dataTable();
+        },
+        error: function () {
+            //alert("FAILURE");
+        }
+    });
+}

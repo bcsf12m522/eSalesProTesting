@@ -7,10 +7,177 @@
 
     //alert("RUN INVOICE");
 
+    make_readonly_on_Invoice(doc_type_load);
+
     run_invoice();
 
     //alert("NOT RUN INVOICE");
 }
+
+function make_readonly_on_Invoice(doc_type) {
+    //alert("doc_type" + doc_type);
+
+
+
+
+
+    for (var i = 1 ; i < 1000   ; i++) {
+        //document.getElementById("codeforProduct" + i).readOnly = true;
+        //document.getElementById("invoice_description" + i).readOnly = true;
+        //document.getElementById("invoice_quantity" + i).readOnly = true;
+        //document.getElementById("invoice_price" + i).readOnly = true;
+        //document.getElementById("invoice_price_vat" + i).readOnly = true;
+        if (doc_type == 1 || doc_type == 3) {
+
+            $("#codeforProduct" + i).prop("disabled", true).css({ "background-color": "white" });
+            $("#invoice_description" + i).prop("disabled", true).css("background-color", "white");
+            $("#invoice_quantity" + i).prop("disabled", true).css("background-color", "white");
+            $("#invoice_price" + i).prop("disabled", true).css("background-color", "white");
+            $("#invoice_price_vat" + i).prop("disabled", true).css("background-color", "white");
+            $("#invoice_total" + i).prop("disabled", true).css("background-color", "white");
+            $("#invoice_total_vat" + i).prop("disabled", true).css("background-color", "white");
+            $("#invoice_discount" + i).prop("disabled", true).css("background-color", "white");
+
+        }
+
+        else {
+            $("#codeforProduct" + i).prop("disabled", false);
+            $("#invoice_description" + i).prop("disabled", false);
+            $("#invoice_quantity" + i).prop("disabled", false);
+            $("#invoice_price" + i).prop("disabled", false);
+            $("#invoice_price_vat" + i).prop("disabled", false);
+            $("#invoice_total" + i).prop("disabled", false);
+            $("#invoice_total_vat" + i).prop("disabled", false);
+            $("#invoice_discount" + i).prop("disabled", false);
+        }
+    }
+}
+
+
+
+function run_invoice() {
+    //alert("Run Invoice");
+
+    var selectedValue = document.getElementById("language").value;
+
+    //alert("Selected Value: " + selectedValue);
+
+    document.getElementById('doc_type_page_load').value = selectedValue;
+    
+    if (selectedValue == 1) {
+
+
+        //alert("Invoice Document");
+
+
+        //Invoice Show
+        $("#payment_method_div").show();
+        $("#payment_status_tr").show();
+        $("#invoice_number_div").show();
+        $("#new_invoice_heading").show();
+        $("#hideExcludeVat").show();
+
+        $(".hide_quotation").show();
+
+        $("#net_tr").show();
+        $("#vat_tr").show();
+
+        $(".priceVAT").show();
+
+        $("#global_discount_div").show();
+        $("#hideExcludeVat").show();
+
+        //Quote Hide
+        $("#quote_number_div").hide();
+        $("#new_quote_heading").hide();
+
+        //Item Sale Hide
+        $("#show_details").hide();
+        $("#item_sale_div").hide();
+        $("#new_item_sale_heading").hide();
+
+        make_readonly_on_Invoice(1);
+    }
+
+    else if (selectedValue == 2) {
+        //document.getElementById('doc_type_page_load').value = selectedValue;
+
+        //alert("Quote Document");
+
+
+        $("#hideExcludeVat").show();
+        $("#net_tr").show();
+        $("#vat_tr").show();
+
+        //Invoice Hide
+        $("#payment_method_div").hide();
+        $("#payment_status_tr").hide();
+        $("#invoice_number_div").hide();
+        $("#new_invoice_heading").hide();
+
+        $("#global_discount_div").hide();
+
+        $(".hide_quotation").hide();
+
+        //Item Sale Hide
+        $("#item_sale_div").hide();
+        $("#new_item_sale_heading").hide();
+
+
+        //Quote Show
+        $("#quote_number_div").show();
+        $("#new_quote_heading").show();
+        $("#show_details").show();
+        $(".priceVAT").show();
+        make_readonly_on_Invoice(2);
+    }
+
+    else if (selectedValue == 3) {
+        //document.getElementById('doc_type_page_load').value = selectedValue;
+
+        //alert("Item Sale Document");
+
+        //Invoice Hide
+        $("#invoice_number_div").hide();
+        $("#new_invoice_heading").hide();
+        $("#hideExcludeVat").hide();
+        $("#net_tr").hide();
+        $("#vat_tr").hide();
+
+
+        //Quote Hide
+        $("#quote_number_div").hide();
+        $("#new_quote_heading").hide();
+
+
+        $("#payment_method_div").show();
+        $("#global_discount_div").show();
+        $("#payment_status_tr").show();
+
+        $(".hide_quotation").show();
+
+        $(".priceVAT").hide();
+
+        $("#show_details").hide();
+        //Item Sale Show
+        $("#item_sale_div").show();
+        $("#new_item_sale_heading").show();
+
+        make_readonly_on_Invoice(3);
+
+        //$("#item_sale_id").show();
+        //$("#invoice_id").hide();
+        //$("#quote_id").hide();
+
+
+
+        //var b = $("#language option:selected").text();
+        //alert(b);
+
+        //$("#language").val("Item Sale");
+    }
+}
+
 
 function Total_Refund(rownum) {
 
@@ -236,20 +403,26 @@ function hhh() {
 
 
 function Partial_Payment() {
-    var gross = document.getElementById("invoice_gross").innerHTML;
+    var gross1 = document.getElementById("invoice_gross").innerHTML;
+    
+    var gross = document.getElementById("amount_left_td").innerHTML;
     //alert("gross" + gross);
 
     $(".partial_paid").show();
 
     var discount = $("#discount_value").val();
-     
+    //alert("discount" + discount);
     //OLD gross wasn't getting
     //var gross = $("#gross_invoice").val();
 
     var amount = $("#partial_amount").val();
 
+    //alert("amount" + amount);
+    
     var rem = gross - amount - discount;
     var remaining = rem.toFixed(2);
+
+    //alert("gross" + gross);
 
     $("#amount_paid_hidden").val(amount);
 
@@ -261,7 +434,7 @@ function Partial_Payment() {
     var vat = $("#invoice_vat").text();
 
     $("#vat_invoice").val(vat)
-    $("#gross_invoice").val(gross)
+    $("#gross_invoice").val(gross1)
 
 
 
@@ -279,7 +452,7 @@ function Partial_Payment() {
 
     //alert("NET  " + partial_net_price + " VAT  " + partial_vat_price + " GROSS  " + partial_gross);
 
-   
+    Partial_Payment_Calculation_on_Edit();
 
 
 }
@@ -1303,4 +1476,30 @@ function rowcounterMinus() {
 
     document.getElementById('rowCounterrr').value = number - 1;
     //alert("CROSS" + document.getElementById('rowCounterrr').value)
+}
+
+function Different_Address() {
+    //alert("ASASASSSSS");
+    if (document.getElementById("billing_address_checkbox").checked==true) {
+        alert("IF");
+    }
+
+    else if (document.getElementById("billing_address_checkbox").checked == false) {
+        alert("ELSE");
+    }
+}
+
+function Partial_Payment_Calculation_on_Edit() {
+    var gross = $("#partial_amount").val();
+
+    var net = (gross / 1.2).toFixed(3);
+
+    var vat = (gross - net).toFixed(3);
+
+
+    $("#partial_net_sale_history").val(net);
+    $("#partial_vat_sale_history").val(vat);
+    $("#partial_gross_sale_history").val(gross);
+
+    //alert(" net  " + net + "           \n vat " + vat + "             \n  gross " + gross);
 }
