@@ -85,8 +85,13 @@
 
                     @foreach (var sale in v.Sale_Transaction_History)
                     {
+                        //{total = total + sale.Gross;}
                         <br /><span class="sub_tr_values">@sale.Gross</span>
+                        
                     }
+
+                        @*@{total=0;}*@
+
                 </td>
                 
 

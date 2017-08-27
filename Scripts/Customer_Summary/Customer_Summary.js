@@ -1,5 +1,9 @@
 ﻿function customer_summary_list(id, type_id) {
 
+    
+    $("#loader_div").show();
+    $("#customer_summary_loading_hide").hide();
+    
 
     var name = document.getElementById('customer_value_1' + id);
     var phone = document.getElementById('customer_value_2' + id);
@@ -61,7 +65,7 @@
 }
 
 function customer_invoice_list(id) {
-    $("#PleaseWait").addClass('showDiv');
+    
     var customerID = id;
     //alert(customerID);
 
@@ -74,8 +78,7 @@ function customer_invoice_list(id) {
         success: function (data) {
             //alert("SUCCESS");
             document.getElementById("invoice_by_customer_partial_view").innerHTML = data;
-            $("#PleaseWait").removeClass('showDiv');
-            $("#PleaseWait").addClass('hideDiv');
+            
             $('#customer_invoices_table').dataTable();
             
         },
@@ -87,7 +90,7 @@ function customer_invoice_list(id) {
 }
 
 function customer_item_sale_list(id) {
-    $("#PleaseWait").addClass('showDiv');
+    
     var customerID = id;
     //alert("addsd "+customerID);
 
@@ -99,9 +102,11 @@ function customer_item_sale_list(id) {
         success: function (data) {
             //alert("SUCCESS");
             document.getElementById("hhh").innerHTML = data;
-            $("#PleaseWait").removeClass('showDiv');
-            $("#PleaseWait").addClass('hideDiv');
+            $("#loader_div").hide();
             $('#item_history_table').dataTable();
+
+            $("#customer_summary_loading_hide").show();
+
         },
         error: function (response) {
             alert("Error" + response);
@@ -151,7 +156,7 @@ function view_payment_status() {
 //$("#ExistingModal").hide();
 
 function GetCustomer(ID) {
-    alert("Aasasasasasa");
+    //alert("Aasasasasasa");
     var page_id = $("#customer_list_edit_modal_value").val();
 
     $("#PleaseWait").addClass('showDiv');
@@ -180,6 +185,32 @@ function GetCustomer(ID) {
 
     })
 }
+
+function delete_customer(ID) {
+
+    if (ID == -1) {
+        ID = document.getElementById("customer_id").value;
+    }
+
+    //alert("ID" + ID);
+
+    $.ajax({
+        url: "/Customer/Delete_Customer/",
+        data: { id: ID },
+        cache: false,
+        type: "Get",
+
+        success: function (data) {
+            //alert("ok");
+            document.getElementById("updated_customer_list").innerHTML = data;
+            $('#customer_list_table').dataTable();
+        },
+        error: function () {
+            //alert("FAILURE");
+        }
+    });
+}
+
 
 function View_Payment() {
     //alert(iDD);

@@ -11,7 +11,17 @@
 
     run_invoice();
 
+ 
+
     //alert("NOT RUN INVOICE");
+}
+
+function set_amount_left_in_partial_payment() {
+    var amount = $("#amount_left_td").html();
+    //alert(amount);
+
+    $("#partial_amount").val(amount);
+
 }
 
 function make_readonly_on_Invoice(doc_type) {
@@ -430,6 +440,13 @@ function Partial_Payment() {
     document.getElementById("partial_paid_td").innerHTML = ("£" + amount);
     document.getElementById("amount_left_td").innerHTML = remaining;
     $("#left_amount_hidden").val(remaining);
+
+    //alert("remaining" + remaining);
+
+    //if (remaining <= 0) {
+    //    $("#payment_status_id").val("Paid");
+    //}
+
 
     var vat = $("#invoice_vat").text();
 

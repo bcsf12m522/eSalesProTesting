@@ -13,15 +13,21 @@
         type: 'Get',
         cache: false,
         success: function (data) {
+
+            //alert("SUCCESS");
             $("#date_click_div").show();
             document.getElementById('updatedDiv').innerHTML = data;
             $("#loader_div").hide();
+            //$("#table_on_dates_filter").hide();
+            
             $('#table_on_dates').dataTable();
+
+            $("#table_on_dates_length").hide();
+            $("#table_on_dates_filter").hide();
         },
         error: function (response) {
-
+            alert("ERROR");
         }
-
     })
 }
 
@@ -42,21 +48,24 @@ function findByInvoice(id) {
         type: 'Get',
         cache: false,
         success: function (data) {
-            
+            //alert("SUCCESS");
+            $('#table_on_dates').dataTable();
             $("#date_click_div").show();
             document.getElementById('updatedDiv').innerHTML = data;
             $("#loader_div").hide();
-            $('#table_on_dates').dataTable();
+
+            $("#table_on_dates_length").hide();
+            $("#table_on_dates_filter").hide();
+            
         },
         error: function (response) {
-
+            //alert("ERROR");
         }
-
     })
 }
 
 function findByDocType(id) {
-
+    
     $("#table_div_Load").hide();
     //var table = $('#table_on_dates').DataTable();
 
@@ -76,7 +85,6 @@ function findByDocType(id) {
             $("#date_click_div").show();
             document.getElementById('updatedDiv').innerHTML = data;
             $("#loader_div").hide();
-
             $('#table_on_dates').dataTable();
         },
         error: function (response) {
@@ -102,13 +110,14 @@ function findByPayType(id) {
         type: 'Get',
         cache: false,
         success: function (data) {
+            
             $("#date_click_div").show();
             document.getElementById('updatedDiv').innerHTML = data;
             $("#loader_div").hide();
             $('#table_on_dates').dataTable();
         },
         error: function (response) {
-
+            
         }
 
     })

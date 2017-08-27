@@ -49,12 +49,12 @@
                                         <input  type="text" onkeyup='findByUser();' class="width_78_height text-center mr-7" placeholder="User..." name="stock_qty" id="User_ID">
                                     </div>
 
-                                    <div class="pull-left">
+                                    @*<div class="pull-left">
                                         <input type="text" onkeypress='validate(event)' readonly class="width_78_height text-center mr-7" placeholder="Serial no..." name="stock_qty" id="login">
-                                    </div>
+                                    </div>*@
 
                                     <div class="pull-left">
-                                        <input type="text" onkeyup='findByInvoice(this.value)' readonly class="width_78_height text-center mr-7" placeholder="Sales no..." name="stock_qty" id="invoice_ID">
+                                        <input type="text" onkeyup='findByInvoice(this.value)' class="width_78_height text-center mr-7" placeholder="Sales no..." name="stock_qty" id="invoice_ID">
                                     </div>
                                     <div class="pull-left">
                                         <select class="width_78_height text-center mr-7" id="docType" onchange="findByDocType(this.value)">
@@ -143,10 +143,12 @@
 
                         @*<a href="~/Sale/List_Draft">DRAFT LIST</a>*@
 
-                        @{
-                            Html.RenderPartial("Customer_Summary");
-                        }
+                        <div id="customer_summary_loading_hide">
 
+                            @{
+                                Html.RenderPartial("Customer_Summary");
+                            }
+                        </div>
 
                         <div class="clearfix"></div>
 
@@ -250,8 +252,15 @@
 
                                                         @foreach (var sale in v.Sale_Transaction_History)
                                                         {
+                                                            //{ total = total + sale.Gross; }
                                                             <br /><span class="sub_tr_values">@sale.Gross</span>
                                                         }
+
+                                                       
+
+                                                        @*@{total = 0;}*@
+
+                                                       
                                                     </td>
 
 
@@ -332,114 +341,7 @@
                                     <tbody id="updatedDiv" class="black-color bold">
                                         @foreach (var v in Model)
                                         {
-                                            if (v != null)
-                                            {
-
-                                                <tr class="text-center background_blue_selected_at_hover">
-
-                                                    <td class="vertical_align_middle">@v.Invoice_Number</td>
-                                                    <td class="vertical_align_middle">@v.Customer.Name</td>
-
-                                                    @*@if (Model.Count() == null || Model.Count() == 0)
-                                                        {
-                                                            <td>@v.Payment_Methods.Type</td>
-                                                            <td width="15%">@v.Payment_Status.Status</td>
-                                                            <td>@v.Net_Price</td>
-                                                            <td>@v.VAT_20</td>
-                                                            <td>@v.Gross</td>
-                                                            <td width="10%">@v.Created_at.ToString("dd-MMM-yy")</td>
-                                                        }*@
-
-                                                    @*else
-                                                        {*@
-
-                                                    <td>
-                                                        @v.Payment_Methods.Type
-
-                                                        @foreach (var sale in v.Sale_Transaction_History)
-                                                        {
-                                                            <br /><span class="sub_tr_values">@sale.Payment_Type</span>
-                                                        }
-                                                    </td>
-
-
-
-
-                                                    <td width="15%">
-
-
-                                                        @v.Payment_Status.Status
-
-                                                        @foreach (var sale in v.Sale_Transaction_History)
-                                                        {
-                                                            <br /><span class="sub_tr_values">@sale.Status</span>
-                                                        }
-                                                    </td>
-
-
-
-
-                                                    <td>
-                                                        @v.Net_Price
-
-                                                        @foreach (var sale in v.Sale_Transaction_History)
-                                                        {
-                                                            <br /><span class="sub_tr_values">@sale.Net_Amount</span>
-                                                        }
-                                                    </td>
-
-
-
-
-                                                    <td>
-                                                        @v.VAT_20
-
-                                                        @foreach (var sale in v.Sale_Transaction_History)
-                                                        {
-                                                            <br /><span class="sub_tr_values">@sale.Vat</span>
-                                                        }
-                                                    </td>
-
-
-                                                    <td>
-                                                        @v.Gross
-
-                                                        @foreach (var sale in v.Sale_Transaction_History)
-                                                        {
-                                                            <br /><span class="sub_tr_values">@sale.Gross</span>
-                                                        }
-                                                    </td>
-
-
-
-
-                                                    <td width="10%">
-                                                        @v.Created_at.ToString("dd-MMM-yy")
-                                                        @*@v.date.ToShortDateString()*@
-
-                                                        @foreach (var sale in v.Sale_Transaction_History)
-                                                        {
-                                                            <br /><span class="sub_tr_values">@sale.Date.ToString("dd-MMM-yy")</span>
-                                                            @*<br /><span class="sub_tr_values">@sale.Date.ToShortDateString()</span>*@
-                                                        }
-                                                    </td>
-
-
-
-
-
-
-                                                    @*}*@
-
-                                                    <td class="text-center width-120" style="vertical-align:middle;">
-
-                                                        <a class="btn btn-sm btn-info bold" href="~/Sale/Edit_Sale/@v.Id">Edit</a>
-                                                        <a class="btn btn-sm btn-danger bold" href="" onclick="Delete_Sale_by_Ajax(@v.Id)">Delete</a>
-                                                    </td>
-
-                                                </tr>
-
-                                            }
+                                            if (v != null){}
 
                                         }
                                     </tbody>
@@ -460,7 +362,7 @@
 
                              @*CLASS HIDDEN WILL BE USED*@ 
 
-                            <div class="" @*style="display:none"*@>
+                            <div class="" style="display:none">
 
                                 <div class="col-md-12 mt-15">
                                     @*<section id="no-more-tables">*@
