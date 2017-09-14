@@ -115,7 +115,7 @@ function GetCustomer(ID) {
 }
 
 function delete_customer(ID) {
-    alert("delete_customer");
+    //alert("delete_customer");
     if (ID == -1) {
         ID = document.getElementById("customer_id").value;
     }
@@ -133,8 +133,8 @@ function delete_customer(ID) {
             $('#tr_' + ID).fadeOut();
             document.getElementById("updated_customer_list").innerHTML = data;
             $('#customer_list_table').dataTable();
-            $("#customer_list_table").load();
-            alert("MUZAMMIL");
+            //$("#customer_list_table").load();
+            //alert("MUZAMMIL");
         },
         error: function () {
             //alert("FAILURE");

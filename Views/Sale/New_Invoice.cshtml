@@ -411,7 +411,7 @@
                                                 <br />
                                                 <input type="text" readonly class="input_type_custom font-18" name="outstanding_balance" value="" id="outstanding_balance" />
                                                 <br />
-                                                <a href="#" class="btn btn-primary blue-btn-style btn-mini bold" data-target="#Outstanding_modal" data-toggle="modal">Pay Outstanding</a>
+                                                <a href="#" class="btn btn-primary blue-btn-style btn-mini bold" onclick="set_outstanding_value()" data-target="#Outstanding_modal" data-toggle="modal">Pay Outstanding</a>
                                                 <div class="empty-height"></div>
                                             </div>
                                         </div>
@@ -902,7 +902,7 @@
                                     <div class="col-md-1"></div>
                                     <div class="form-group pull-left">
                                         <label class="control-label pull-left mt-5">Pay Amount</label>
-                                        <input id="outstanding_amount" class="form-control pull-left width-80 ml-5" type="text" name="outstanding_amount" placeholder="0.0" required>
+                                        <input id="outstanding_amount" class="form-control pull-left width-80 ml-5" readonly type="text" name="outstanding_amount" placeholder="0.0" required>
                                     </div>
 
 
@@ -1549,7 +1549,7 @@
 
         @*<script src="~/Scripts/new-js/jquery-1.11.1.min.js"></script>
         <script src="~/Scripts/new-js/jquery.datatables.min.js"></script>*@
-        <script src="~/Scripts/Sale/New_Invoice.js"></script>
+    <script src="~/Scripts/Sale/New_Invoice.js"></script>
     <script src="~/Scripts/Customer/Edit_Customers.js"></script>
 
 </body>

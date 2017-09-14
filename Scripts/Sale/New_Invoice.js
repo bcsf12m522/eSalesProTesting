@@ -1268,6 +1268,11 @@ function outstanding_balance_function() {
 }
 
 
+function set_outstanding_value() {
+    var amount = $("#outstanding_balance").val();
+    //alert(amount);
+    $("#outstanding_amount").val(amount);
+}
 
 
 function checkQuantityAvailable(quantiy, id) {
