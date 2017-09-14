@@ -34,7 +34,7 @@
                                 <input hidden type="text" id="partial_vat_sale_history" name="partial_vat_price_id" />
                                 <input hidden type="text" id="partial_gross_sale_history" name="partial_gross_id" />
 
-
+                                
                                 <div class="col-md-12">
 
                                     @{
@@ -125,7 +125,7 @@
                                                     <li id="customer_postcode"></li>
                                                     <li id="customer_phone"></li>
                                                     <li id="customer_email"></li>
-                                                    <li id="customer_balance" class="hidden"></li>
+                                                    <li id="customer_balance" class=""></li>
                                                     <li id="customer_credit" class="hidden"></li>
                                                     <li id="customer_credit_limit" class="hidden"></li>
                                                 </ul>
@@ -156,23 +156,23 @@
                                                     <div class="form-group" id="invoice_number_div">
                                                         <label class="pull-left width-134" for="middle-name">Invoice Number</label>
                                                         <div class="pull-left">
-                                                            <input class="width-145 text-center" onblur="checkInvoiceNumber()" value="@ViewBag.invoice_number" onkeypress="validate(event)" type="text" name="invoice_number" id="invoice_number" required>
+                                                            <input class="width-145 text-center" value="@ViewBag.invoice_number" @*onkeypress="validate(event)" onblur="checkInvoiceNumber()"*@ type="text" name="invoice_number" id="invoice_number" required readonly>
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group" id="quote_number_div" style="display:none;">
                                                         <label class="pull-left width-134" for="middle-name">Quote Number</label>
                                                         <div class="pull-left">
-                                                            @*<input class="width-145 text-center" type="text" onblur="checkQuoteNumber()" value="@ViewBag.quote_number" name="quote_number" id="quote_number">*@
-                                                            <input class="width-145 text-center" onblur="checkInvoiceNumber()" value="@ViewBag.invoice_number" onkeypress="validate(event)" type="text" name="" id="" required>
+                                                            <input class="width-145 text-center" type="text" onblur="checkQuoteNumber()" value="@ViewBag.quote_number" name="quote_number" id="quote_number" readonly>
+                                                            @*<input class="width-145 text-center" onblur="checkInvoiceNumber()" value="@ViewBag.invoice_number" onkeypress="validate(event)" type="text" name="" id="" required>*@
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group" id="item_sale_div" style="display:none;">
                                                         <label class="pull-left width-134" for="middle-name">Item Sale Number</label>
                                                         <div class="pull-left">
-                                                            @*<input class="width-145 text-center" type="text" onblur="checkItemSaleNumber()" value="@ViewBag.item_sale_number" name="item_sale_number" id="item_sale_number">*@
-                                                            <input class="width-145 text-center" onblur="checkInvoiceNumber()" value="@ViewBag.invoice_number" onkeypress="validate(event)" type="text" name="" id="" required>
+                                                            <input class="width-145 text-center" type="text" onblur="checkItemSaleNumber()" value="@ViewBag.item_sale_number" name="item_sale_number" id="item_sale_number" readonly>
+                                                            @*<input class="width-145 text-center" onblur="checkInvoiceNumber()" value="@ViewBag.invoice_number" onkeypress="validate(event)" type="text" name="" id="" required>*@
                                                         </div>
                                                     </div>
 
@@ -253,7 +253,7 @@
                                             <tbody class="black-color">
 
                                                 <tr id="rowId1" class="font-15 id remove_div">
-                                                    <td class="border-right-td"><div class="text-center"><input placeholder="Code" class="yoyo unbold width-110 text-center" id="codeforProduct1" name="yoyoyoyoyoyoyoy" onkeyup="productList(this.value);" type="text"></div></td>
+                                                    <td class="border-right-td"><div class="text-center"><input placeholder="Code" class="yoyo unbold width-110 text-center" id="codeforProduct1" name="yoyoyoyoyoyoyoy" onkeyup="productList(event,this.value);" type="text"></div></td>
                                                     <td class="border-right-td">
                                                         <textarea class="2 description-text-area unbold width-100p text-center" name="invoice_description1" id="invoice_description1" required="" placeholder="Description"></textarea>
                                                     </td>
@@ -281,7 +281,7 @@
                                                         <a href="#">
                                                             <img src="/img/images/barcode_new_sale.png">
                                                         </a>
-                                                        <a href="#" data-target="#Image_Modal" data-toggle="modal" onclick="image_click()">
+                                                        <a href="#" id="img1" data-target="#" data-toggle="modal" onclick="image_click(1)">
                                                             <img src="/img/images/findpost.png">
                                                         </a>
 
@@ -391,7 +391,7 @@
 
                                                 <tr class="hide_partial_deposit_quote">
                                                     <td class="bold text-center"><a href="#" data-target="#Deposit_Modal" class="hideDiv" id="Deposit_payment_option" data-toggle="modal">Deposit Payment</a></td>
-                                                    <td class=" bold text-center"><a href="#" class="hideDiv" data-target="#Partial_Payment_Modal" id="partial_payment_option" data-toggle="modal">Add Partial Payment</a></td>
+                                                    <td class=" bold text-center"><a href="#" class="hideDiv" onclick="set_amount_left_in_partial_payment()" data-target="#Partial_Payment_Modal" id="partial_payment_option" data-toggle="modal">Add Partial Payment</a></td>
 
                                                 </tr>
 
@@ -476,14 +476,14 @@
 
                                 </div>
 
-                                <input id="counters" value="" type="text" hidden />
+                                <input id="counters" value="" type="text" hidden/>
                                 <input type="text" class="" id="net_invoice_hidden" name="net_invoice_hidden" hidden/>
                                 <input type="text" class="" id="vat_invoice" name="vat_invoice_hidden" hidden/>
                                 <input type="text" class="" id="gross_invoice" name="gross_invoice_hidden" hidden/>
-                                <input type="text" class="" id="global_discount_hidden" name="global_discount_hidden" value="0" hidden />
-                                <input type="text" class="" id="total_after_discount_hidden" name="total_after_discount_hidden" hidden />
-                                <input type="text" class="" id="left_amount_hidden" name="left_amount_hidden" hidden />
-                                <input type="text" class="" id="amount_paid_hidden" name="amount_paid_hidden" hidden />
+                                <input type="text" class="" id="global_discount_hidden" name="global_discount_hidden" value="0" hidden/>
+                                <input type="text" class="" id="total_after_discount_hidden" name="total_after_discount_hidden" hidden/>
+                                <input type="text" class="" id="left_amount_hidden" name="left_amount_hidden" hidden/>
+                                <input type="text" class="" id="amount_paid_hidden" name="amount_paid_hidden" hidden/>
 
 
                                 <input type="text" hidden name="doc_type_page_load" id="doc_type_page_load" />
@@ -519,36 +519,30 @@
     
    
 
-    @*----------------------------POP UP FOR IMAGE CLICK--------------------------------*@
+  @*----------------------------POP UP FOR IMAGE CLICK--------------------------------*@
 
-    <div class="modal fade" id="Image_Modal" tabindex="-1" role="dialog" aria-hidden="false">
-        <div class="modal-dialog modal-md">
-            <div class="modal-content modal-style-custom">
+<div class="modal fade" id="Image_Modal" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content modal-style-custom" style="height:540px;width:600px">
 
-                <div class="title col-md-12">
-                    <span>View Image</span>
-                    <img src="~/img/images/cross_new_sale.png" class="close mr--13 pull-right" data-dismiss="modal" />
-                </div>
-
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                    <div class="x_panel">
-
-                        <div id="" class="win text-center">
-                                <img src="" id="" style="max-width:550px;max-height:600px">
-
-                            
-
-                        </div>
-                    </div>
-                </div>
-
-                <div class="modal-footer"></div>
-                <div class=""></div>
-
+            <div class="title col-md-12">
+                <span>View Image</span>
+                <img src="~/img/images/cross_new_sale.png" class="close mr--13 pull-right" data-dismiss="modal" onclick="close_image_modal()"/>
             </div>
+
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel mt-20">
+                    <div id="updated_div" class="win text-center"></div>
+                </div>
+            </div>
+
+            <div class="modal-footer"></div>
+            <div class=""></div>
+
         </div>
     </div>
-    @*----------------------------POP UP END IMAGE CLICK--------------------------------*@
+</div>
+@*----------------------------POP UP END IMAGE CLICK--------------------------------*@
 
 
     @*----------------------------POP UP FOR SOLD HISTORY--------------------------------*@
@@ -1262,7 +1256,7 @@
 
 
 
-                                    <div class="col-md-6">
+                                    <div class="col-md-6">`
 
                                         <div class="form-group">
                                             <label class="customer-create-texts width-178" for="middle-name">Address<span class="required">*</span></label>
@@ -1278,7 +1272,7 @@
                                         <div class="form-group">
                                             <label class="customer-create-texts width-178" for="middle-name">Postcode<span class="required">*</span></label>
                                             <div class="col-md-3 col-sm-6 col-xs-12">
-                                                <input class="ml--50" type="text" id="postcode_add" name="billing_postcode">
+                                                <input class="ml--50" type="text" id="postcode_add" name="billing_postcode" onkeypress="Postcode_Enter_Click(event)">
                                                 <a href="#" onclick="postcode_testing()"><img src="~/img/images/ssearch.png" id="input_img"/></a>
                                             </div>
                                         </div>
@@ -1556,6 +1550,7 @@
         @*<script src="~/Scripts/new-js/jquery-1.11.1.min.js"></script>
         <script src="~/Scripts/new-js/jquery.datatables.min.js"></script>*@
         <script src="~/Scripts/Sale/New_Invoice.js"></script>
+    <script src="~/Scripts/Customer/Edit_Customers.js"></script>
 
 </body>
 

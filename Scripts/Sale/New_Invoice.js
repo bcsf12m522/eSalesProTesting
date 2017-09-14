@@ -128,9 +128,73 @@
     //alert(type);
 }
 
-function image_click() {
-    //alert("asad");
+function image_click(counter) {
+    //alert("counter" + counter);
+    var p_name = $("#codeforProduct" + counter).val();
+
+    //alert("Name " + p_name);
+
+    if (p_name == null || p_name == "") {
+        //alert(p_name);
+
+        swal({
+            title: "NO PRODUCT SELECTED",
+            text: "Please Select the Product to view the Image",
+            type: "warning",
+            confirmButtonColor: '#DD6B55',
+            confirmButtonText: 'Okay',
+        },
+
+        function () {
+        });
+        return false;
+    }
+
+    else {
+
+        $.ajax({
+
+            url: "/Sale/SearchProductbyName/",
+            data: { name: p_name },
+            cache: false,
+            type: "Get",
+            success: function (data) {
+                //alert("SUCCESS");
+                //alert(data);
+                document.getElementById("updated_div").innerHTML = data;
+                $("#Image_Modal").addClass("in").show("slow");
+
+                //$("#ExistingModal").toggle("slow");
+
+                //  $("#hhh").toggle();
+
+                //  $("#ExistingModal").removeClass("fade").modal("hide");
+                
+
+
+                //$("#hhh").show('fast');
+
+                //$("#asa").show();
+
+
+            },
+            error: function (response) {
+                alert("Error" + response);
+            }
+
+        })
+
+
+
+
+    }
+
 }
+
+function close_image_modal(){
+    $("#Image_Modal").hide();
+}
+
 
 function run_invoice() {
     //alert("Run Invoice");
@@ -162,7 +226,7 @@ function run_invoice() {
 
         $(".priceVAT").show();
 
-        $("#global_discount_div").show();
+        $("#global_dicsount_div").show();
         $("#hideExcludeVat").show();
 
         //Quote Hide
@@ -257,7 +321,13 @@ function run_invoice() {
     }
 }
 
+function set_amount_left_in_partial_payment() {
+    var amount = document.getElementById("invoice_gross").innerHTML;
+    //alert(amount);
 
+    $("#partial_amount").val(amount);
+
+}
 
 
 function submitResult() {
@@ -278,55 +348,6 @@ function right_click(id) {
 }
 
 
-
-function GetCustomer(ID) {
-    //alert("dsadasdsadsadasd");
-    var page_id = $("#customer_list_edit_modal_value").val();
-
-
-     var e = window.event;
-    
-
-    
-
-    if (ID == -1) {
-        ID = document.getElementById("customer_id").value;
-    }
-
-    //alert("ID" + ID);
-    //alert("Id" + ID);
-
-    $.ajax({
-
-        url: "/Customer/Edit/",
-        data: { id: ID, page_new_id: page_id },
-        cache: false,
-        type: "Get",
-        success: function (data) {
-            //alert("SUCCESS");
-         
-            document.getElementById("edit_customers").innerHTML = data;
-
-            $("#ExistingModal").toggle("slow");
-            
-          //  $("#hhh").toggle();
-            
-          //  $("#ExistingModal").removeClass("fade").modal("hide");
-            $("#Edit_Customer_on_Context").addClass("in").show("slow");
-
-
-            //$("#hhh").show('fast');
-
-            //$("#asa").show();
-
-
-        },
-        error: function (response) {
-            //alert("Error" + response);
-        }
-
-    })
-}
 
 function Different_Address() {
     if (document.getElementById("billing_address_checkbox").checked) {
@@ -349,6 +370,8 @@ function Different_Address_New() {
 function close_modal() {
     $("#Edit_Customer_on_Context").toggle();
     $("#Edit_Customer_Modal").hide();
+    
+
     //alert("CLOSE");
 }
 
@@ -497,6 +520,11 @@ function payment_status() {
         $("#custom_date_show_invoice").hide();
         $("#partial_payment_option").show();
         $("#Deposit_payment_option").hide();
+
+        var amount = document.getElementById("invoice_gross").innerHTML;
+        //alert(amount);
+
+        $("#partial_amount").val(amount);
 
         $("#Partial_Payment_Modal").modal("show");
     }
@@ -809,25 +837,28 @@ function addNewRow() {
     })
 }
 
+function spacebar(e) {
+    if (e.keyCode == 32) {
+        alert("spacebar");
+    }
+    else {
+        alert("ELSE");
+    }
 
-function productList(char, serialnumber) {
-    
-    //var e = window.event;
-    
-    //if (e.which == 32)
-    //{
-    //    alert("e value            " + e.value);
-    //    //alert("WHICH SPACE");
-    //}
-    //else if (e.button == 32) {        
-    //    alert("BUTTON SPACE");
-    //}
-    //else {
-    //    alert("ELSE");
-    //}
-    
+}
 
 
+function productList(e, char, serialnumber) {
+
+
+    var url = '/Product/GetProducts/';
+    var flag_value = 0;
+
+
+    if (e.ctrlKey && e.keyCode == 32) {
+        flag_value = 1;
+        //alert("CONTROL & SPACEBAR");
+    }
 
     if (serialnumber == "" || serialnumber == null) {
 
@@ -846,24 +877,16 @@ function productList(char, serialnumber) {
         }
         //alert("Product List Counter ="+  Count)
 
-
         $("#productList").show();
 
-
-
-
         $.ajax({
-            url: '/Product/GetProducts/',
-            data: { ch: char, counte: Count, SR: serialnumber },
+            url: url,
+            data: { ch: char, counte: Count, SR: serialnumber, flag:flag_value },
             cache: false,
             type: "Get",
             success: function (data) {
 
                 document.getElementById('productList').innerHTML = data;
-
-
-
-
             },
             error: function (response) {
                 //alert("productList");
@@ -886,6 +909,13 @@ function productList(char, serialnumber) {
     }
 }
 
+
+//function Postcode_Enter_Click(e) {
+//    if (e.keyCode === 13) {
+//        e.preventDefault(); // Ensure it is only this code that rusn
+//        postcode_testing_edit();
+//    }
+//}
 
 
 
@@ -1076,7 +1106,7 @@ function checkInvoiceNumber() {
         type: "Get",
         cache: false,
         success: function (data) {
-            alert(data);
+            //alert(data);
             if (data == "False") {
 
                 document.getElementById("invoice_number").value = "";
@@ -1144,7 +1174,16 @@ function checkItemSaleNumber() {
             if (data == "False") {
 
                 document.getElementById("item_sale_number").value = "";
-                alert("item_sale_number already exist !")
+                //alert("item_sale_number already exist !")
+                swal({
+                    title: "ITEM SALE NUMBER EXIST",
+                    text: "Item Sale Number Exist, Enter Some other Number",
+                    type: "warning",
+                    confirmButtonColor: '#DD6B55',
+                    confirmButtonText: 'Okay',
+                },
+   function () {
+   });
             }
         },
         error: function (response) {
@@ -1161,40 +1200,42 @@ function checkSoldHistory(counter) {
     //alert("agya");
 
     //$("#loader_div").show();
+    if (document.getElementById("sold_history_checkbox").checked) {
+        //alert("IF");
+        var productID = document.getElementById("invoice_product_id" + counter).value;
+        //alert("proID = " + productID);
+        var customerID = document.getElementById("exist_customer_id").value;
+        //alert("customID = " + customerID);
+        $.ajax({
 
-    var productID = document.getElementById("invoice_product_id" + counter).value;
-    //alert("proID = " + productID);
-    var customerID = document.getElementById("exist_customer_id").value;
-    //alert("customID = " + customerID);
-    $.ajax({
+            url: '/Sale/SoldHistory/',
+            data: { productId: productID, customerId: customerID },
+            cache: false,
+            type: 'Get',
+            success: function (data) {
+                //$("#loader_div").hide();
+                //alert("Success");
+                //alert(data);
+                document.getElementById('soldHistory').innerHTML = data;
+                if (document.getElementById("sold_history_checkbox").checked && document.getElementById('soldHistory').innerHTML != "") {
+                    //alert("Checked Sold History");
 
-        url: '/Sale/SoldHistory/',
-        data: { productId: productID, customerId: customerID },
-        cache: false,
-        type: 'Get',
-        success: function (data) {
-            //$("#loader_div").hide();
-            //alert("Success");
-            //alert(data);
-            document.getElementById('soldHistory').innerHTML = data;
-            if (document.getElementById("sold_history_checkbox").checked && document.getElementById('soldHistory').innerHTML != "") {
-                //alert("Checked Sold History");
-                
-                //alert("Success Before Modal")
-                $("#Sold_History_Modal").modal('show');
-                //alert("Success After Modal")
+                    //alert("Success Before Modal")
+                    $("#Sold_History_Modal").modal('show');
+                    //alert("Success After Modal")
+                }
+                else {
+                    //alert("Unchecked Sold History");
+                    //$("#Sold_History_Modal").modal('show');
+                }
+
+            },
+            error: function (response) {
+                alert("Error");
             }
-            else {
-                //alert("Unchecked Sold History");
-                //$("#Sold_History_Modal").modal('show');
-            }
 
-        },
-        error: function (response) {
-            alert("Error");
-        }
-
-    })
+        })
+    }
 }
 
 

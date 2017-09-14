@@ -1,5 +1,10 @@
 ﻿@model List<eSalesPro.Models.Sale_Invoice>
 
+@{
+    var kamran = 0;
+}
+
+
 <body id="body-index" onload="Edit_Sale_Onload()">
     <div id="sticky-footer-wrap">
         @{
@@ -55,7 +60,7 @@
                                     <div class="form-group pull-right mb-0 margin_right_6">
                                         <label class="width-134 pull-left mt-5" for="middle-name">Document Type</label>
                                         <div class="pull-left">
-                                            <select id="language" oninput="run_invoice();" name="document_type" class="select-class-color form-control border_black-1px width-145">
+                                            <select id="language" value="@ViewBag.invoice.Document_Type.Id" oninput="run_invoice();" @*oninput="run_invoice();checkQuoteNumber()"*@ onblur="" name="document_type" class="select-class-color form-control border_black-1px width-145" disabled style="background:#bcbcc5">
 
 
                                                 <option value="@ViewBag.invoice.Document_Type.Id">@ViewBag.invoice.Document_Type.Type</option>
@@ -162,7 +167,7 @@
 
                                                     <div class="form-group" id="invoice_number_div">
                                                         <label class="pull-left width-134" for="middle-name">Invoice Number</label>
-                                                        <div class="pull-left">
+                                                        <div class="pull-left" id="quote_to_invoice">
                                                             <input class="width-145 text-center" readonly value="@ViewBag.invoice.Invoice_Number" onkeypress="validate(event)" type="text" name="invoice_number" id="invoice_number" required>
                                                         </div>
                                                     </div>
@@ -170,14 +175,14 @@
                                                     <div class="form-group" id="quote_number_div" style="display:none;">
                                                         <label class="pull-left width-134" for="middle-name">Quote Number</label>
                                                         <div class="pull-left">
-                                                            <input class="width-145 text-center" type="text" value="@ViewBag.invoice.Invoice_Number" name="" id="">
+                                                            <input class="width-145 text-center" type="text" value="@ViewBag.invoice.Quote_Number" onblur="checkQuoteNumber()" name="" id="">
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group" id="item_sale_div" style="display:none;">
                                                         <label class="pull-left width-134" for="middle-name">Item Sale Number</label>
                                                         <div class="pull-left">
-                                                            <input class="width-145 text-center" type="text" value="@ViewBag.invoice.Invoice_Number" name="" id="">
+                                                            <input class="width-145 text-center" type="text" value="@ViewBag.invoice.Item_Sale_Number" name="item_sale_number" id="item_sale">
                                                         </div>
                                                     </div>
 
@@ -187,10 +192,10 @@
                                                     <div class="form-group">
                                                         <label class="pull-left width-134" for="middle-name">Date</label>
                                                         <div class="pull-left">
-                                                            <input class="width-145 text-center height-28" type="text" name="invoice_date" value="@ViewBag.invoice.Created_at" required>
+                                                            <input class="width-145 height-28" type="date" id="edit_date" name="invoice_date">
                                                         </div>
                                                     </div>
-
+                                                    
                                                     <div class="clearfix"></div>
 
                                                     <div class="form-group">
@@ -270,7 +275,7 @@
 
                                                             <input placeholder="Code" value="@obj.Sale.Product.Custom_Label_" class="yoyo unbold width-110 text-center"
                                                                    id="@String.Concat("codeforProduct",counter)" name="yoyoyoyoyoyoyoy"
-                                                                   onkeyup="productList(this.value,@counter);Total(counter)" type="text">
+                                                                   onkeyup="productList(event,this.value,@counter);Total(counter)" type="text">
 
                                                         </div>
 
@@ -371,7 +376,7 @@
                                                             <img src="/img/images/barcode_new_sale.png">
                                                         </a>
                                                         <a href="#">
-                                                            <img src="/img/images/findpost.png">
+                                                            <img src="/img/images/findpost.png" onclick="image_click(@counter)">
                                                         </a>
                                                     </td>
 
@@ -404,6 +409,7 @@
 
                                             <tbody class="black-color bold" id="after_refund_tr" style="display:none">
 
+                                                
                                                 @for (var j = 1; j < 4; j++)
                                                 {
 
@@ -481,7 +487,7 @@
                                                         </td>
 
                                                         @*<td class="text-center border-right-td width-68"><div id="@String.Concat("invoice_total",counter)" class="6 total_invoice_background text-center">£0</div></td>
-        <td class="border-right-td text-center width-78 hidecolumn"><div id="@String.Concat("invoice_total_vat",counter)" class="7 total_invoice_background text-center">£0</div></td>*@
+                <td class="border-right-td text-center width-78 hidecolumn"><div id="@String.Concat("invoice_total_vat",counter)" class="7 total_invoice_background text-center">£0</div></td>*@
 
 
 
@@ -518,7 +524,7 @@
 
 
                                                     </tr>
-                                                    b = b + 1; 
+                                                    b = b + 1;
 
 
                                                 }
@@ -575,41 +581,34 @@
                                                 <tr id="payment_status_tr" class="hide_for_quote">
                                                     <td class="bold">Payment Status</td>
                                                     <td class="text-right">
-                                                        <select id="payment_status_id" onchange="payment_status()" name="payment_status_id" class="form-control border_black-1px min-height-32 width-180 select-class-color pull-right">
-                                                            <option value="@ViewBag.invoice.Payment_Status.Status">@ViewBag.invoice.Payment_Status.Status</option>
+                                                        <select id="payment_status_id" onchange="payment_status()" name="one" class="form-control border_black-1px min-height-32 width-180 select-class-color pull-right">
+                                                            <option value="@ViewBag.invoice.Payment_Status.Id">@ViewBag.invoice.Payment_Status.Status</option>
                                                             @foreach (var status in ViewBag.Payment_Status)
                                                             {
                                                                 if (ViewBag.invoice.Payment_Status.Id == status.Id)
                                                                 {
                                                                     continue;
                                                                 }
-                                                                <option value="@status.Status">@status.Status</option>
+                                                                <option value="@status.Id">@status.Status</option>
                                                             }
                                                         </select>
                                                     </td>
                                                 </tr>
 
-                                               
-
-                                              
-
-                                                @*<tr class="">
+                                                <input type="text" hidden id="payment_status_value_after_disabled" name="payment_status_value_after_disabled" />
+                                                       @*<tr class="">
                                                     <td class="bold"></td>
                                                     <td class=" bold text-center"><a href="#" data-target="#Give_Refund" data-toggle="modal">Give Refund</a></td>
                                                 </tr>*@
+                                                       @*     WITH GIVE REFUND
+    <tr>
+        <td class="text-center bold"><a href="#" data-target="#Give_Refund" data-toggle="modal">Give Refund</a></td>
+        <td></td>
+    </tr>
 
-                                                @*     WITH GIVE REFUND
-                                                <tr>
-                                                    <td class="text-center bold"><a href="#" data-target="#Give_Refund" data-toggle="modal">Give Refund</a></td>
-                                                    <td></td>
-                                                </tr>
-
-                                                       WITH GIVE REFUND        *@
-
-                                                <tr class="hide_for_quote hide_quotation">
-                                                    <td class="bold text-center"><a href="#" data-target="#Deposit_Modal" class="" id="Deposit_payment_option" data-toggle="modal">Deposit Payment</a></td>
-                                                    <td class=" bold text-center"><a href="#" class="" onclick="set_amount_left_in_partial_payment()" data-target="#Partial_Payment_Modal" id="partial_payment_option" data-toggle="modal">Add Partial Payment</a></td>
-
+           WITH GIVE REFUND       > *@          <tr class="hide_for_quote hide_quotation">
+                                                    <td class="bold text-center"><a hidden href="#" data-target="#Deposit_Modal" class="" id="Deposit_payment_option" data-toggle="modal">Deposit Payment</a></td>
+                                                    <td class="bold text-center"><a href="#" class="" onclick="set_amount_left_in_partial_payment()" data-target="#Partial_Payment_Modal" id="partial_payment_option" data-toggle="modal">Add Partial Payment</a></td>
                                                 </tr>
 
                                                 <tr id="refund_tr" style="display:none" class="hide_for_quote">
@@ -667,11 +666,11 @@
                                                 </tr>
                                                 
 
-                                                <tr class="partial_paid deposit_paid hide_for_quote" style="">
+                                                <tr class="partial_paid deposit_paid hide_for_quote hide_quotation" style="">
                                                     <td class="bold">Amount left to Pay</td>
                                                     <td id="amount_left_td" class="text-right">@{@balance}</td>
                                                 </tr>
-
+                                                <input type="hidden" value="@balance" id="amount_left_input_field" />
 
 
                                             </table>
@@ -700,9 +699,9 @@
                                                 <div class="col-md-8"><a href="" class="btn btn-primary blue-btn-style btn-mini bold" data-toggle="modal" data-target="#Global_Discount_Modal">Add Global Discount</a></div>
                                             </div>
 
-                                            @*<div id="as" class="col-md-2 pull-right mr--13">
+                                            <div id="Give_Refund_Div" class="col-md-2 pull-right mr--13">
                                                 <a href="#" data-target="#Give_Refund" data-toggle="modal" class="btn btn-success blue-btn-style btn-mini bold">Give Refund</a>
-                                            </div>*@
+                                            </div>
 
 
                                     </div>
@@ -741,20 +740,25 @@
 
                                 
                                 <input id="counters" value="" type="text" hidden />
-                                <input type="text" id="net_invoice_hidden" name="net_invoice_hidden" value="@ViewBag.invoice.Net_Price" hidden />
-                                <input type="text" id="vat_invoice" name="vat_invoice_hidden" value="@ViewBag.invoice.VAT_20" hidden />
-                                <input type="text" id="gross_invoice" name="gross_invoice_hidden" value="@ViewBag.invoice.Gross_Total" hidden />
-                                <input type="text" class="" id="global_discount_hidden" name="global_discount_hidden" value="0" hidden />
-                                <input type="text" class="" id="total_after_discount_hidden" name="total_after_discount_hidden" hidden />
-                                <input type="text" class="" id="left_amount_hidden" name="left_amount_hidden" hidden />
-                                <input type="text" class="" id="amount_paid_hidden" name="amount_paid_hidden" hidden />
+                                <input type="text" id="net_invoice_hidden" name="net_invoice_hidden" value="@ViewBag.invoice.Net_Price" hidden/>
+                                <input type="text" id="vat_invoice" name="vat_invoice_hidden" value="@ViewBag.invoice.VAT_20" hidden/>
+                                <input type="text" id="gross_invoice" name="gross_invoice_hidden" value="@ViewBag.invoice.Gross_Total" hidden/>
+                                <input type="text" class="" id="global_discount_hidden" name="global_discount_hidden" value="0" hidden/>
+                                <input type="text" class="" id="total_after_discount_hidden" name="total_after_discount_hidden" hidden/>
+                                <label>Left Amount Hidden</label>
+                                <input type="text" class="" id="left_amount_hidden" name="left_amount_hidden"/>
+                                <label>Amount Paid</label>
+                                <input type="text" class="" id="amount_paid_hidden" name="amount_paid_hidden"/>
 
                                 @*<input id="refund_rows_count" type="text" />*@
+                                
+                                <input type="text" hidden name="old_document_type" id="doc_type_on_page_load_not_change" />
+                                <input type="text" hidden name="doc_type_page_load" id="doc_type_page_load" />
+                                <input type="text" hidden name="new_document_type" id="new_document_type_changed" />
+                                <input type="text" hidden name="refund_total_amount" id="refund_total_amount" />
 
                             </form>
-
-                            <input type="text" hidden name="doc_type_page_load" id="doc_type_page_load" />
-                            <input type="text" hidden name="refund_total_amount" id="refund_total_amount" />
+                           
                             
                            
 
@@ -781,6 +785,31 @@
         }
     </footer>
     
+
+    @*----------------------------POP UP FOR IMAGE CLICK--------------------------------*@
+
+    <div class="modal fade" id="Image_Modal" tabindex="-1" role="dialog" aria-hidden="false">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content modal-style-custom" style="height:540px;width:600px">
+
+                <div class="title col-md-12">
+                    <span>View Image</span>
+                    <img src="~/img/images/cross_new_sale.png" class="close mr--13 pull-right" data-dismiss="modal" onclick="close_image_modal()" />
+                </div>
+
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel mt-20">
+                        <div id="updated_div" class="win text-center"></div>
+                    </div>
+                </div>
+
+                <div class="modal-footer"></div>
+                <div class=""></div>
+
+            </div>
+        </div>
+    </div>
+    @*----------------------------POP UP END IMAGE CLICK--------------------------------*@
 
 
     @*-------------------------------POP UP FOR REFUND----------------------------------*@
@@ -826,7 +855,7 @@
 
                                     @foreach (var obj in Model)
                                     {
-                                        
+
                                         <tr class="font-15 id remove_div">
 
                                             <td class="text-center border-right-td">
@@ -834,7 +863,7 @@
                                                     <input placeholder="0" class="unbold text-center font-18" id="@String.Concat("checkbox_id",a)" type="checkbox">
                                                 </div>
                                             </td>
-                                            
+
                                             <td class="border-right-td width-180">
 
                                                 <div class="text-center">
@@ -911,7 +940,7 @@
 
                                 </tbody>
 
-                                
+
                             </table>
 
 
@@ -922,7 +951,7 @@
                                 <div>
 
                                     <div class="col-md-3"></div>
-                                   
+
 
 
                                     <div class="col-md-3 pull-left">
@@ -949,12 +978,12 @@
                                     var total = 0;
                                     var table_count = $("#rowNumber").val();
                                     var table_plus_plus = table_count;
-                                    var count = 0 ;
+                                    var count = 0;
                                     //alert(table_count);
-                                    
-                                    for (i = 1; i <table_count; i++) {
+
+                                    for (i = 1; i < table_count; i++) {
                                         //alert("FOR  " + i);
-                                        if(document.getElementById("checkbox_id" + i).checked) {
+                                        if (document.getElementById("checkbox_id" + i).checked) {
                                             //alert("IF");
                                             var sku = $("#ref_sku" + i).val();
                                             var descriptions = $("#ref_description" + i).val();
@@ -967,7 +996,7 @@
                                             var priceeVAT = $("#ref_priceVat" + i).val();
                                             var Totall = $("#ref_total" + i).val();
                                             var TotallVAT = $("#ref_totalVat" + i).val();
-                                            
+
                                             total = +total + +TotallVAT;
 
                                             var negative_total = Totall * (-1);
@@ -975,7 +1004,7 @@
 
                                             //alert(" sku   "+sku+"descriptions    "+descriptions+"quantum_minus    "+quantum_minus);
 
-                                            
+
 
                                             $("#code_after_refund" + table_plus_plus).val(sku);
                                             $("#description_after_refund" + table_plus_plus).val(descriptions);
@@ -987,11 +1016,23 @@
                                             $("#totalVat_after_refund" + table_plus_plus).val(negative_totalVat);
 
                                             count = +count + +1;
-                                            
+
                                             table_plus_plus = +table_plus_plus + +1;
                                         }
-                                        
+
+
                                     }
+                                    //b = table_count + 1;
+
+
+
+                                    //alert("Count " + count);
+                                    @*@{kamran = counter}*@
+
+                                    //$('#cvcv').replaceWith("for (var j = 1; j <" + count+ "; j++)");
+
+
+
 
                                     if (count == null || count == 0) {
 
@@ -1041,7 +1082,7 @@
                                         }
 
                                     })
-                                    
+
                                 }
 
                             </script>
@@ -1368,7 +1409,7 @@
 
                 <div class="title col-md-12">
                     <span>Message</span>
-                    <img src="~/img/images/c3.png" class="close mr--13 pull-right" data-dismiss="modal" />
+                    <img src="~/img/images/c3.png" class="close mr--13 pull-right" data-dismiss="modal" onclick="close_partial_payment_modal()"/>
                 </div>
 
                 <div class="col-md-12 col-sm-12 col-xs-12">
@@ -1423,7 +1464,7 @@
                                 </div>
 
                                 <div class="col-md-5">
-                                    <a href="" data-dismiss="modal" class="btn btn-primary btn-mini width-80 center-block height-40 mt-0">Cancel</a>
+                                    <a href="#" data-dismiss="modal" onclick="close_partial_payment_modal()" class="btn btn-primary btn-mini width-80 center-block height-40 mt-0">Cancel</a>
                                 </div>
                                 <div class="col-md-1"></div>
 

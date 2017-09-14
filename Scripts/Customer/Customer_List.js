@@ -135,6 +135,35 @@ function close_modal_confirm_postcode() {
 }
 
 
+function Custom_List() {
+    //alert("CUSTOM_LIST")
+
+    $("#loader_div").show();
+    $("#customer_table_div").hide();
+    $("#customer_summary").hide();
+    var type_ID = document.getElementById("customer_type_dropdown").value;
+    //alert(type_ID)
+
+    $.ajax({
+
+        url: '/Customer/Customer_List_Custom/',
+        data: { customer_type_id: type_ID },
+        cache: false,
+        type: 'GET',
+        success: function (data) {
+            //alert("Success");
+            //alert(data);
+            $("#customer_table_div").show();
+            $("#loader_div").hide();
+            document.getElementById('updated_customer_list').innerHTML = data;
+            $('#chuss').DataTable();
 
 
+        },
+        error: function (response) {
+            //alert("Error");
+        }
+
+    })
+}
 

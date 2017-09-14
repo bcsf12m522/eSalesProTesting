@@ -92,6 +92,7 @@ function SetDate() {
 }
 
 
+
 function SetDatePurchaseOrder() {
 
     var date = new Date();
@@ -172,44 +173,44 @@ function excludeVatQuote() {
 
 
 
-function Add() {
-    var a, b, c, d;
-    a = parseInt(document.getElementById("NormalPrice").value);
+//function Add() {
+//    var a, b, c, d;
+//    a = parseInt(document.getElementById("NormalPrice").value);
 
-    //
-    // If textbox value is null i.e empty, then the below mentioned if condition will
-    // come into picture and make the value to '0' to avoid errors.
-    //
-    if (isNaN(a) == true) {
-        a = 0;
-    }
+//    //
+//    // If textbox value is null i.e empty, then the below mentioned if condition will
+//    // come into picture and make the value to '0' to avoid errors.
+//    //
+//    if (isNaN(a) == true) {
+//        a = 0;
+//    }
 
-    var b = parseInt(document.getElementById("TradePrice").value);
-    if (isNaN(b) == true) {
-        b = 0;
-    }
+//    var b = parseInt(document.getElementById("TradePrice").value);
+//    if (isNaN(b) == true) {
+//        b = 0;
+//    }
 
-    var c = parseInt(document.getElementById("PremiumPrice").value);
-    if (isNaN(c) == true) {
-        c = 0;
-    }
+//    var c = parseInt(document.getElementById("PremiumPrice").value);
+//    if (isNaN(c) == true) {
+//        c = 0;
+//    }
 
-    var d = parseInt(document.getElementById("OtherPrice").value);
-    if (isNaN(d) == true) {
-        d = 0;
-    }
+//    var d = parseInt(document.getElementById("OtherPrice").value);
+//    if (isNaN(d) == true) {
+//        d = 0;
+//    }
 
-    var e = parseInt(document.getElementById("CostPrice").value);
-    if (isNaN(e) == true) {
-        e = 0;
-    }
+//    var e = parseInt(document.getElementById("CostPrice").value);
+//    if (isNaN(e) == true) {
+//        e = 0;
+//    }
 
-    document.getElementById("NormalTotal").value = a + ((a * 20) / 100)
-    document.getElementById("TradeTotal").value = b + ((b * 20) / 100)
-    document.getElementById("PremiumTotal").value = c + ((c * 20) / 100)
-    document.getElementById("OtherTotal").value = d + ((d * 20) / 100)
-    document.getElementById("CostTotal").value = e + ((e * 20) / 100)
-}
+//    document.getElementById("NormalTotal").value = a + ((a * 20) / 100)
+//    document.getElementById("TradeTotal").value = b + ((b * 20) / 100)
+//    document.getElementById("PremiumTotal").value = c + ((c * 20) / 100)
+//    document.getElementById("OtherTotal").value = d + ((d * 20) / 100)
+//    document.getElementById("CostTotal").value = e + ((e * 20) / 100)
+//}
 
 function Different_Address() {
     //alert("EDIT");

@@ -204,23 +204,39 @@ function findByDate() {
 }
 
 
-function Delete_Sale_by_Ajax(ID) {
-
+function Delete_Sale_by_Ajax(ID,del_id) {
+    //alert("del_id" + del_id);
     //alert("ID" + ID);
-
+    $("#table_div_Load").hide();
+    $("#loader_div").show();
+    $("#date_click_div").hide();
     $.ajax({
         url: "/Sale/Delete_Sale/",
-        data: { id: ID },
+        data: { id: ID , page:del_id },
         cache: false,
-        type: "Get",
-
+        type: "Post",
+        
         success: function (data) {
-            //alert("ok");
-            document.getElementById("updatedDiv").innerHTML = data;
-            //$('#customer_list_table').dataTable();
+            document.getElementById('updatedDiv').innerHTML = data;
+            
+            $("#loader_div").hide();
+            if (del_id == 1) {
+                //alert(del_id);
+                $('#tr_' + ID).fadeOut();
+                $("#table_div_Load").show();
+
+                $('#table_Load').dataTable();
+            }
+            else {
+                //alert(del_id);
+                $('#Partial_tr' + ID).fadeOut();
+                $("#date_click_div").show();
+                $('#table_on_dates').dataTable();
+                del_id = 2;
+            }
         },
         error: function () {
-            //alert("FAILURE");
+            alert("FAILURE");
         }
     });
 }

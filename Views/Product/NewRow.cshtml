@@ -7,7 +7,7 @@
 {
 
     <tr id="@String.Concat("rowId"+counter)" class="font-15 id remove_div">
-    <td class="border-right-td"><div class="text-center"><input placeholder="Code" class="yoyo unbold width-110 text-center" id="@String.Concat("codeforProduct",counter)" name="yoyoyoyoyoyoyoy" onkeyup="productList(this.value,@ViewBag.serialNumber);Total(counter)" type="text"></div></td>
+    <td class="border-right-td"><div class="text-center"><input placeholder="Code" class="yoyo unbold width-110 text-center" id="@String.Concat("codeforProduct",counter)" name="yoyoyoyoyoyoyoy" onkeyup="productList(event,this.value,@ViewBag.serialNumber);Total(counter)" type="text"></div></td>
 
 
 
@@ -53,7 +53,7 @@
 else
 {
     <tr id="@String.Concat("rowId"+counter)" class="font-15 id remove_div">
-        <td class="border-right-td"><div class="text-center"><input placeholder="Code" class="yoyo unbold width-110 text-center" id="@String.Concat("codeforProduct",counter)" name="yoyoyoyoyoyoyoy" onkeyup="productList(this.value,@ViewBag.serialNumber);Total(counter)" type="text"></div></td>
+        <td class="border-right-td"><div class="text-center"><input placeholder="Code" class="yoyo unbold width-110 text-center" id="@String.Concat("codeforProduct",counter)" name="yoyoyoyoyoyoyoy" onkeyup="productList(event,this.value,@ViewBag.serialNumber);Total(counter)" type="text"></div></td>
 
 
 
@@ -84,8 +84,8 @@ else
             <a href="#">
                 <img src="/img/images/barcode_new_sale.png">
             </a>
-            <a href="#" data-target="#Image_Modal" data-toggle="modal" onclick="image_click()">
-            <img src="~/img/images/findpost.png"/>
+            <a href="#" data-target="#" data-toggle="modal" id="@String.Concat("img",counter)" onclick="image_click(@counter)">
+                <img src="~/img/images/findpost.png" />
             </a>
         </td>
 

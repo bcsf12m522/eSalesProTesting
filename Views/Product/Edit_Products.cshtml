@@ -35,14 +35,14 @@
                         <div class="">
                             <label class="supplier-create-texts" for="middle-name">Normal Price <span class="required">*</span></label>
                             <div class="col-md-3 col-sm-6 col-xs-12">
-                                <input id="NormalPrice" onkeypress="validate(event)" onkeyup="javascript:Add();" value="@Model.Price_Normal" class="width-170" type="text" name="normal_price" required>
+                                <input id="NormalPriceEdit" onkeypress="validate(event)" onkeyup="Normal_Price_Calculating_VAT(2);" value="@Model.Price_Normal" class="width-170" type="text" name="normal_price" required>
                             </div>
                         </div>
 
                         <div class="">
                             <label class="vat-texts">+VAT=</label>
                             <div class="col-md-3 col-sm-6 col-xs-12">
-                                <input id="NormalTotal" onkeypress="validate(event)" type="text" class="width-170" value="@Model.Normal_VAT" name="normal_vat" required>
+                                <input id="NormalTotalEdit" onkeypress="validate(event)" onkeyup="Normal_Price_by_Vat(2)" type="text" class="width-170" value="@Model.Normal_VAT" name="normal_vat" required>
                             </div>
                         </div>
 
@@ -61,14 +61,14 @@
                         <div class="">
                             <label class="supplier-create-texts" for="middle-name">Trade Price <span class="required">*</span></label>
                             <div class="col-md-3 col-sm-6 col-xs-12">
-                                <input id="TradePrice" onkeypress="validate(event)" onkeyup="javascript:Add();" value="@Model.Price_Trade" class="width-170" type="text" name="trade_price" required>
+                                <input id="TradePriceEdit" onkeypress="validate(event)" onkeyup="Trade_Price_Calculating_VAT(2);" value="@Model.Price_Trade" class="width-170" type="text" name="trade_price" required>
                             </div>
                         </div>
 
                         <div class="">
                             <label class="vat-texts">+VAT=</label>
                             <div class="col-md-3 col-sm-6 col-xs-12">
-                                <input id="TradeTotal" onkeypress="validate(event)" type="text" class="width-170" value="@Model.Trade_VAT" name="trade_vat" required>
+                                <input id="TradeTotalEdit" onkeypress="validate(event)" type="text" onkeyup="Trade_Price_by_Vat(2)" class="width-170" value="@Model.Trade_VAT" name="trade_vat" required>
                             </div>
                         </div>
 
@@ -86,14 +86,14 @@
                         <div class="">
                             <label class="supplier-create-texts" for="middle-name">Premium Price <span class="required">*</span></label>
                             <div class="col-md-3 col-sm-6 col-xs-12">
-                                <input id="PremiumPrice" onkeypress="validate(event)" class="width-170" value="@Model.Price_Premium" onkeyup="javascript:Add();" type="text" name="premium_price" required>
+                                <input id="PremiumPriceEdit" onkeypress="validate(event)" onkeyup="Premium_Price_Calculating_VAT(2)" class="width-170" value="@Model.Price_Premium" type="text" name="premium_price" required>
                             </div>
                         </div>
 
                         <div class="">
                             <label class="vat-texts">+VAT=</label>
                             <div class="col-md-3 col-sm-6 col-xs-12">
-                                <input id="PremiumTotal" onkeypress="validate(event)" type="text" value="@Model.Premium_VAT" class="width-170" name="premium_vat" required>
+                                <input id="PremiumTotalEdit" onkeypress="validate(event)" onkeyup="Premium_Price_by_Vat(2)" type="text" value="@Model.Premium_VAT" class="width-170" name="premium_vat" required>
                             </div>
                         </div>
 
@@ -113,14 +113,14 @@
                         <div class="">
                             <label class="supplier-create-texts" for="middle-name">Other Price <span class="required">*</span></label>
                             <div class="col-md-3 col-sm-6 col-xs-12">
-                                <input id="OtherPrice" onkeypress="validate(event)" class="width-170" value="@Model.Price_Others" onkeyup="javascript:Add();" type="text" name="other_price" required>
+                                <input id="OtherPriceEdit" onkeypress="validate(event)" onkeyup="Other_Price_Calculating_VAT(2);" class="width-170" value="@Model.Price_Others" type="text" name="other_price" required>
                             </div>
                         </div>
 
                         <div class="">
                             <label class="vat-texts">+VAT=</label>
                             <div class="col-md-3 col-sm-6 col-xs-12">
-                                <input id="OtherTotal" onkeypress="validate(event)" type="text" value="@Model.Other_VAT" class="width-170" name="other_vat" required>
+                                <input id="OtherTotalEdit" onkeypress="validate(event)" onkeyup="Other_Price_by_Vat(2)" type="text" value="@Model.Other_VAT" class="width-170" name="other_vat" required>
                             </div>
                         </div>
 
@@ -254,14 +254,14 @@
                         <div class="">
                             <label class="supplier-create-texts" for="middle-name">Cost Price <span class="required">*</span></label>
                             <div class="col-md-3 col-sm-6 col-xs-12">
-                                <input id="CostPrice" onkeyup="Add()" class="width-170" value="@Model.Cost_Price" onkeypress="validate(event)" type="text" name="cost_price" required>
+                                <input id="CostPriceEdit" onkeyup="Cost_Price_Calculating_VAT(2)" class="width-170 CostPrice" value="@Model.Cost_Price" onkeypress="validate(event)" type="text" name="cost_price" required>
                             </div>
                         </div>
 
                         <div class="">
                             <label class="vat-texts">+VAT=</label>
                             <div class="col-md-3 col-sm-6 col-xs-12">
-                                <input id="CostTotal" type="text" onkeypress="validate(event)" value="@Model.Cost_VAT" class="width-170" name="cost_vat" required>
+                                <input id="CostTotalEdit" type="text" onkeypress="validate(event)" onkeyup="Cost_Price_by_Vat(2)" value="@Model.Cost_VAT" class="width-170 CostTotal" name="cost_vat" required>
                             </div>
                         </div>
 
@@ -300,10 +300,10 @@
                     <label class="supplier-create-texts" for="middle-name">Category Name<span class="required">*</span></label>
                     <div class="col-md-3 col-sm-6 col-xs-12">
                         <select name="cat_name" required class="form-control width-400">
-                            <option value="@Model.Product_Categories.Id">@Model.Product_Categories.Type </option>
+                            <option value="@Model.Product_Categories.Id">@Model.Product_Categories.Type</option>
                             @foreach (var name in ViewBag.Categories)
                             {
-                                <option value="@name.Id">@name.Type </option>
+                                <option value="@name.Id">@name.Type</option>
                             }
                         </select>
                     </div>

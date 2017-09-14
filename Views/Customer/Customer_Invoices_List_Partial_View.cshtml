@@ -15,7 +15,18 @@
                 <td id="@String.Concat("customer_invoice_td6",v.Id)" class="text-center">@v.Gross</td>
                 <td id="@String.Concat("customer_invoice_td7",v.Id)" class="text-center">@v.Created_at.ToShortDateString()</td>*@
 
-            <td class="text-center vertical_align_middle ">@v.Invoice_Number</td>
+            @if (@v.Doc_Type_ID == 1)
+            {
+                <td class="text-center vertical_align_middle">@v.Invoice_Number</td>
+            }
+            else if (@v.Doc_Type_ID == 2)
+            {
+                <td class="text-center vertical_align_middle">@v.Quote_Number</td>
+            }
+            else if (@v.Doc_Type_ID == 3)
+            {
+                <td class="text-center vertical_align_middle">@v.Item_Sale_Number</td>
+            }
 
             <td class="text-center">
                 @v.Payment_Methods.Type

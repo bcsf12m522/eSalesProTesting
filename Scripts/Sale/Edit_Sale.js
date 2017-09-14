@@ -2,10 +2,28 @@
     var doc_type_load = $("#language").val();
     //alert(doc_type_load);
 
-
+    var status_type = $("#payment_status_id").val();
+    //alert(status_type);
+    if (status_type != 3) {
+        $("#partial_payment_option").hide();
+    }
     document.getElementById('doc_type_page_load').value = doc_type_load;
-
+    $("#doc_type_on_page_load_not_change").val(doc_type_load);
     //alert("RUN INVOICE");
+
+    var date = new Date();
+
+    var day = date.getDate();
+    var month = date.getMonth() + 1;
+    var year = date.getFullYear();
+
+    if (month < 10) month = "0" + month;
+    if (day < 10) day = "0" + day;
+
+    var today = day + "-" + month + "-" + year;
+
+    document.getElementById('edit_date').valueAsDate = new Date();
+
 
     make_readonly_on_Invoice(doc_type_load);
 
@@ -16,8 +34,11 @@
     //alert("NOT RUN INVOICE");
 }
 
+
+
+
 function set_amount_left_in_partial_payment() {
-    var amount = $("#amount_left_td").html();
+    var amount = $("#amount_left_input_field").val();
     //alert(amount);
 
     $("#partial_amount").val(amount);
@@ -25,11 +46,6 @@ function set_amount_left_in_partial_payment() {
 }
 
 function make_readonly_on_Invoice(doc_type) {
-    //alert("doc_type" + doc_type);
-
-
-
-
 
     for (var i = 1 ; i < 1000   ; i++) {
         //document.getElementById("codeforProduct" + i).readOnly = true;
@@ -47,6 +63,7 @@ function make_readonly_on_Invoice(doc_type) {
             $("#invoice_total" + i).prop("disabled", true).css("background-color", "white");
             $("#invoice_total_vat" + i).prop("disabled", true).css("background-color", "white");
             $("#invoice_discount" + i).prop("disabled", true).css("background-color", "white");
+            //$("#language").prop("disabled", true).css({ "background-color": "#8B0000", "color": "#fff" });
 
         }
 
@@ -65,6 +82,55 @@ function make_readonly_on_Invoice(doc_type) {
 
 
 
+function image_click(counter) {
+    //alert("counter" + counter);
+    var p_name = $("#codeforProduct" + counter).val();
+
+    //alert("Name " + p_name);
+
+    if (p_name == null || p_name == "") {
+        //alert(p_name);
+
+        swal({
+            title: "NO PRODUCT SELECTED",
+            text: "Please Select the Product to view the Image",
+            type: "warning",
+            confirmButtonColor: '#DD6B55',
+            confirmButtonText: 'Okay',
+        },
+
+        function () {
+        });
+        return false;
+    }
+    else {
+
+        $.ajax({
+
+            url: "/Sale/SearchProductbyName/",
+            data: { name: p_name },
+            cache: false,
+            type: "Get",
+            success: function (data) {
+                //alert("SUCCESS");
+                //alert(data);
+                document.getElementById("updated_div").innerHTML = data;
+                $("#Image_Modal").addClass("in").show("slow");
+            },
+            error: function (response) {
+                alert("Error" + response);
+            }
+
+        })
+    }
+}
+
+function close_image_modal() {
+    $("#Image_Modal").hide();
+
+}
+
+
 function run_invoice() {
     //alert("Run Invoice");
 
@@ -73,6 +139,7 @@ function run_invoice() {
     //alert("Selected Value: " + selectedValue);
 
     document.getElementById('doc_type_page_load').value = selectedValue;
+    document.getElementById('new_document_type_changed').value = selectedValue;
     
     if (selectedValue == 1) {
 
@@ -96,7 +163,8 @@ function run_invoice() {
 
         $("#global_discount_div").show();
         $("#hideExcludeVat").show();
-
+        $("#Give_Refund_Div").show();
+        
         //Quote Hide
         $("#quote_number_div").hide();
         $("#new_quote_heading").hide();
@@ -111,7 +179,7 @@ function run_invoice() {
 
     else if (selectedValue == 2) {
         //document.getElementById('doc_type_page_load').value = selectedValue;
-
+        $(".hide_for_quote").hide();
         //alert("Quote Document");
 
 
@@ -126,7 +194,7 @@ function run_invoice() {
         $("#new_invoice_heading").hide();
 
         $("#global_discount_div").hide();
-
+        $("#Give_Refund_Div").hide();
         $(".hide_quotation").hide();
 
         //Item Sale Hide
@@ -162,6 +230,7 @@ function run_invoice() {
 
         $("#payment_method_div").show();
         $("#global_discount_div").show();
+        $("#Give_Refund_Div").show();
         $("#payment_status_tr").show();
 
         $(".hide_quotation").show();
@@ -185,9 +254,49 @@ function run_invoice() {
         //alert(b);
 
         //$("#language").val("Item Sale");
+
+        
     }
 }
 
+
+function checkQuoteNumber() {
+    //alert("SASASSAS");
+    //alert("number");
+
+    var number = document.getElementById("doc_type_page_load").value;
+
+    var old_doc_type = $("#doc_type_on_page_load_not_change").val();
+
+    
+
+    if ((old_doc_type == 2 && number == 1) || ((old_doc_type == 2 && number == 3))) {
+        alert("   old_doc_type : " + old_doc_type + "  number : " + number);
+        $.ajax({
+
+            url: '/Sale/Changing_Quote_Number_to_Invoice/',
+            data: { doct_type: number },
+            type: "Get",
+            cache: false,
+            success: function (data) {
+                //alert(data);    
+                if (number == 1) {
+                    document.getElementById('invoice_number').value = data;
+                }
+                else if (number == 3) {
+                    document.getElementById('item_sale').value = data;
+                }
+                //alert(data);
+
+            },
+            error: function (response) {
+                alert("Quote validation Error Occured");
+            }
+
+
+        })
+    }
+}
 
 function Total_Refund(rownum) {
 
@@ -278,8 +387,10 @@ function Total_Refund(rownum) {
 
 function payment_status() {
     var selectedValue = document.getElementById("payment_status_id").value;
-
+    //alert("selectedValue  " + selectedValue);
     //jQuery.noConflict();
+
+    $("#payment_status_value_after_disabled").val(selectedValue);
 
     if (selectedValue == 1) {
         $("#custom_date_show_invoice").hide();
@@ -296,6 +407,12 @@ function payment_status() {
         $("#custom_date_show_invoice").hide();
         $("#partial_payment_option").show();
         $("#Deposit_payment_option").hide();
+
+        var amount = $("#amount_left_input_field").val();
+        //alert(amount);
+
+        $("#partial_amount").val(amount);
+        $("#Partial_Payment_Modal").addClass("in").show("slow");
 
         $("#Partial_Payment_Modal").modal("show");
     }
@@ -415,7 +532,10 @@ function hhh() {
 function Partial_Payment() {
     var gross1 = document.getElementById("invoice_gross").innerHTML;
     
-    var gross = document.getElementById("amount_left_td").innerHTML;
+    //var gross = document.getElementById("amount_left_td").innerHTML;
+
+    var gross = $("#amount_left_input_field").val();
+    
     //alert("gross" + gross);
 
     $(".partial_paid").show();
@@ -468,7 +588,21 @@ function Partial_Payment() {
     //$("#partial_gross_id").val(partial_gross);
 
     //alert("NET  " + partial_net_price + " VAT  " + partial_vat_price + " GROSS  " + partial_gross);
+    
+    //alert("ID " + payment_status);
+    $("#payment_status_id").prop("disabled", true).css({ "background-color": "#8B0000", "color": "#fff" });
 
+    //document.getElementById("payment_status_id").readonly = true;
+    //document.getElementById("payment_status_id").readOnly = true;
+
+
+    //document.getElementById("payment_status_id").style.backgroundColor = "#8B0000";
+    //document.getElementById("payment_status_id").style.color = "#FFF";
+    
+    //alert("STATUS ID  " + $("#payment_status_id"));
+    var payment_status = $("#payment_status_id").val();
+    $("#payment_status_value_after_disabled").val(payment_status);
+    //alert("ID " + payment_status);
     Partial_Payment_Calculation_on_Edit();
 
 
@@ -692,13 +826,25 @@ function addNewRow() {
 }
 
 
-function productList(char, serialnumber) {
+function productList(e, char, serialnumber) {
 
+    var Variable = '<%= ServerVaraible %>';
+
+    var url = '/Product/GetProducts/';
+    var flag_value = 0;
+
+
+    if (e.ctrlKey && e.keyCode == 32) {
+        flag_value = 1;
+        //alert("CONTROL & SPACEBAR");
+    }
 
     if (serialnumber == "" || serialnumber == null) {
 
         serialnumber = 1;
     }
+
+    //alert("SUCCESS");
 
     var customerID = document.getElementById("exist_customer_id").value;
 
@@ -710,24 +856,16 @@ function productList(char, serialnumber) {
         }
         //alert("Product List Counter ="+  Count)
 
-
         $("#productList").show();
 
-
-
-
         $.ajax({
-            url: '/Product/GetProducts/',
-            data: { ch: char, counte: Count, SR: serialnumber },
+            url: url,
+            data: { ch: char, counte: Count, SR: serialnumber, flag: flag_value },
             cache: false,
             type: "Get",
             success: function (data) {
 
                 document.getElementById('productList').innerHTML = data;
-
-
-
-
             },
             error: function (response) {
                 //alert("productList");
@@ -1167,30 +1305,30 @@ function GetCustomer(ID) {
 
 
 
-function checkQuoteNumber() {
-    var number = document.getElementById("quote_number").value;
+//function checkQuoteNumber() {
+//    var number = document.getElementById("quote_number").value;
 
-    $.ajax({
+//    $.ajax({
 
-        url: '/Sale/QuoteNumberValidation/',
-        data: { quote: number },
-        type: "Get",
-        cache: false,
-        success: function (data) {
+//        url: '/Sale/QuoteNumberValidation/',
+//        data: { quote: number },
+//        type: "Get",
+//        cache: false,
+//        success: function (data) {
 
-            if (data == "False") {
+//            if (data == "False") {
 
-                document.getElementById("quote_number").value = "";
-                alert("Quote_number already exist !")
-            }
-        },
-        error: function (response) {
-            alert("Quote validation Error Occured");
-        }
+//                document.getElementById("quote_number").value = "";
+//                alert("Quote_number already exist !")
+//            }
+//        },
+//        error: function (response) {
+//            alert("Quote validation Error Occured");
+//        }
 
 
-    })
-}
+//    })
+//}
 
 function checkItemSaleNumber() {
     var number = document.getElementById("item_sale_number").value;
@@ -1220,7 +1358,7 @@ function checkItemSaleNumber() {
 
 function checkSoldHistory(counter) {
 
-    $("#loader_div").show();
+    //$("#loader_div").show();
     //alert(counter);
     //alert("agya");
     var productID = document.getElementById("invoice_product_id" + counter).value;
@@ -1236,7 +1374,7 @@ function checkSoldHistory(counter) {
         type: 'Get',
         success: function (data) {
             //alert("Success");
-            $("#loader_div").hide();
+            //$("#loader_div").hide();
             document.getElementById('soldHistory').innerHTML = data;
             if (document.getElementById("sold_history_checkbox").checked && document.getElementById('soldHistory').innerHTML != "") {
                 //alert("IF");
@@ -1251,7 +1389,7 @@ function checkSoldHistory(counter) {
 
         },
         error: function (response) {
-            alert("Error");
+            //alert("Error");
         }
 
     })
@@ -1285,8 +1423,6 @@ function outstanding_balance_function() {
 
 
 }
-
-
 
 
 function checkQuantityAvailable(quantiy, id) {
@@ -1324,12 +1460,6 @@ function checkQuantityAvailable(quantiy, id) {
 
     })
 }
-
-
-
-
-
-
 
 
 function submitResult() {
@@ -1518,5 +1648,11 @@ function Partial_Payment_Calculation_on_Edit() {
     $("#partial_vat_sale_history").val(vat);
     $("#partial_gross_sale_history").val(gross);
 
+    $("#Partial_Payment_Modal").hide();
+
     //alert(" net  " + net + "           \n vat " + vat + "             \n  gross " + gross);
+}
+
+function close_partial_payment_modal() {
+    $("#Partial_Payment_Modal").hide();
 }

@@ -1,6 +1,6 @@
 ﻿function customer_summary_list(id, type_id) {
 
-    
+    //alert("asdd");
     $("#loader_div").show();
     $("#customer_summary_loading_hide").hide();
     
@@ -134,11 +134,9 @@ function show_customer_summary() {
     //$("#customer_table_div").addClass("none");
 }
 
-
 $(document).ready(function () {
     $('#customer_summary_table').dataTable();
 });
-
 
 function double_click_edit_sale(id) {
     //alert(id);
@@ -154,63 +152,6 @@ function view_payment_status() {
 
 //jQuery.noConflict();
 //$("#ExistingModal").hide();
-
-function GetCustomer(ID) {
-    //alert("Aasasasasasa");
-    var page_id = $("#customer_list_edit_modal_value").val();
-
-    $("#PleaseWait").addClass('showDiv');
-
-    if (ID == -1) {
-        ID = document.getElementById("customer_id").value;
-    }
-
-    //alert("ID" + ID);
-
-    $.ajax({
-
-        url: "/Customer/Edit/",
-        data: { id: ID, page_new_id: page_id },
-        cache: false,
-        type: "Get",
-        success: function (data) {
-            document.getElementById("edit_customers").innerHTML = data;
-            $("#PleaseWait").removeClass('showDiv');
-            $("#PleaseWait").addClass('hideDiv');
-
-        },
-        error: function (response) {
-            alert("Error" + response);
-        }
-
-    })
-}
-
-function delete_customer(ID) {
-
-    if (ID == -1) {
-        ID = document.getElementById("customer_id").value;
-    }
-
-    //alert("ID" + ID);
-
-    $.ajax({
-        url: "/Customer/Delete_Customer/",
-        data: { id: ID },
-        cache: false,
-        type: "Get",
-
-        success: function (data) {
-            //alert("ok");
-            document.getElementById("updated_customer_list").innerHTML = data;
-            $('#customer_list_table').dataTable();
-        },
-        error: function () {
-            //alert("FAILURE");
-        }
-    });
-}
-
 
 function View_Payment() {
     //alert(iDD);

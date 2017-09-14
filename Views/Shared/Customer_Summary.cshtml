@@ -109,9 +109,9 @@
                 <a href="" onclick="delete_customer(-1)" class="btn btn-primary btn-mini ml--20 blue-btn-style bold width-150">Delete Customer</a>
             </div>
 
-            <div class="col-md-2 pull-left">
+            @*<div class="col-md-2 pull-left">
                 <a href="#" class="btn btn-primary ml--20 btn-mini blue-btn-style bold">Set Custom Prices</a>
-            </div>
+            </div>*@
 
             <div class="col-md-2 pull-left">
                 <a href="~/Sale/New_Invoice" class="btn ml--20 btn-primary blue-btn-style btn-mini bold width-150">New Sale</a>
@@ -222,7 +222,7 @@
                                 <tbody class="black-color bold">
                                     @foreach (var v in ViewBag.Customer)
                                     {
-                                        <tr onclick="customer_summary_list(@v.Id,@v.Customer_Type_Id);">
+                                        <tr onclick="customer_summary_list(@v.Id,@v.Customer_Type_Id)">
                                             <td id="@String.Concat("customer_value_1", v.Id)" data-title="User ID">@v.Name</td>
                                             <td id="@String.Concat("customer_value_2", v.Id)" data-title="First Name">@v.phone</td>
                                             <td id="@String.Concat("customer_value_3", v.Id)" data-title="Last Name">@v.Billing_Street</td>
