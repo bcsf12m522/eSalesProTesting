@@ -83,7 +83,7 @@ function findByDocType(id) {
             //alert("DAta" + data);
             
             $("#date_click_div").show();
-            document.getElementById('updatedDiv').innerHTML = data;
+            document.getElementById('date_click_div').innerHTML = data;
             $("#loader_div").hide();
             $('#table_on_dates').dataTable();
         },
@@ -239,4 +239,36 @@ function Delete_Sale_by_Ajax(ID,del_id) {
             alert("FAILURE");
         }
     });
+}
+
+
+function Loading_Sales_Report() {
+    //alert("ASASASAS");
+    $("#table_div_Load").hide();
+
+    $("#loader_div").show();
+    $("#customer_summary").hide();
+    $("#date_click_div").hide();
+
+    $.ajax({
+
+        url: '/Report/SaleReportToday_Yesterday/',
+        data: {  },
+        type: 'Get',
+        cache: false,
+        success: function (data) {
+            //alert("SUCCESS");
+            $('#table_on_dates').dataTable();
+            $("#date_click_div").show();
+            document.getElementById('date_click_div').innerHTML = data;
+            $("#loader_div").hide();
+
+            $("#table_on_dates_length").hide();
+            $("#table_on_dates_filter").hide();
+
+        },
+        error: function (response) {
+            //alert("ERROR");
+        }
+    })
 }

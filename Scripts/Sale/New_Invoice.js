@@ -504,8 +504,11 @@ function payment_status() {
     var selectedValue = document.getElementById("payment_status_id").value;
     //alert(selectedValue);
     //jQuery.noConflict();
+    var gross = $("#gross_invoice").val();
+    $("#amount_paid_hidden").val(0);
 
     if (selectedValue == 1) {
+        $("#amount_paid_hidden").val(gross);
         $("#custom_date_show_invoice").hide();
         $("#partial_payment_option").hide();
         $("#Deposit_payment_option").hide();
@@ -1007,7 +1010,7 @@ function Total(rownum) {
     $("#vat_invoice").val(total_vat);
     $("#gross_invoice").val(gross);
 
-
+    $("#amount_paid_hidden").val(gross);
 }
 
 function Total2(rownum) {
@@ -1089,7 +1092,8 @@ function Total2(rownum) {
     $("#vat_invoice").val(total_vat);
     $("#gross_invoice").val(gross);
 
-
+    $("#amount_paid_hidden").val(gross);
+    //alert("ASASSASAS");
 }
 
 
