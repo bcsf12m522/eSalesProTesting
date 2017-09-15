@@ -16,7 +16,7 @@
 
             //alert("SUCCESS");
             $("#date_click_div").show();
-            document.getElementById('updatedDiv').innerHTML = data;
+            document.getElementById('date_click_div').innerHTML = data;
             $("#loader_div").hide();
             //$("#table_on_dates_filter").hide();
             
@@ -51,7 +51,7 @@ function findByInvoice(id) {
             //alert("SUCCESS");
             $('#table_on_dates').dataTable();
             $("#date_click_div").show();
-            document.getElementById('updatedDiv').innerHTML = data;
+            document.getElementById('date_click_div').innerHTML = data;
             $("#loader_div").hide();
 
             $("#table_on_dates_length").hide();
@@ -112,7 +112,7 @@ function findByPayType(id) {
         success: function (data) {
             
             $("#date_click_div").show();
-            document.getElementById('updatedDiv').innerHTML = data;
+            document.getElementById('date_click_div').innerHTML = data;
             $("#loader_div").hide();
             $('#table_on_dates').dataTable();
         },
@@ -192,7 +192,7 @@ function findByDate() {
         cache: false,
         success: function (data) {
             $("#date_click_div").show();
-            document.getElementById('updatedDiv').innerHTML = data;
+            document.getElementById('date_click_div').innerHTML = data;
             $("#loader_div").hide();
             $('#table_on_dates').dataTable();
         },
@@ -217,7 +217,7 @@ function Delete_Sale_by_Ajax(ID,del_id) {
         type: "Post",
         
         success: function (data) {
-            document.getElementById('updatedDiv').innerHTML = data;
+            document.getElementById('date_click_div').innerHTML = data;
             
             $("#loader_div").hide();
             if (del_id == 1) {
@@ -258,13 +258,15 @@ function Loading_Sales_Report() {
         cache: false,
         success: function (data) {
             //alert("SUCCESS");
-            $('#table_on_dates').dataTable();
+            
             $("#date_click_div").show();
             document.getElementById('date_click_div').innerHTML = data;
             $("#loader_div").hide();
 
-            $("#table_on_dates_length").hide();
-            $("#table_on_dates_filter").hide();
+            $('#table_on_dates').dataTable();
+
+            //$("#table_on_dates_length").hide();
+            //$("#table_on_dates_filter").hide();
 
         },
         error: function (response) {
