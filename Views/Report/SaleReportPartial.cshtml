@@ -278,7 +278,15 @@
                             <td class="text-center width-120" style="vertical-align:middle;">
 
                                 <a class="btn btn-sm btn-info bold" href="~/Sale/Edit_Sale/@v.Id">Edit</a>
-                                <a class="btn btn-sm btn-danger bold" href="#" onclick="Delete_Sale_by_Ajax(@v.Id,2)">Delete</a>
+                                @*@if (@v.Amount_Left==0)
+                                {
+                                    <a class="btn btn-sm btn-danger bold" href="#"  onclick="Delete_Sale_Error()">Delete</a>
+                                }
+                                else
+                                {*@
+                                    <a class="btn btn-sm btn-danger bold" href="#" onclick="Delete_Sale_by_Ajax(@v.Id,2)">Delete</a>
+                                @*}*@
+                                
                             </td>
 
                         </tr>
@@ -407,16 +415,22 @@
                             <td class=""></td>
                         </tr>
 
+                        @if (invoice_total != 0)
+                        {
+                            <tr>
+                                <th class="">Invoices</th>
+                                <td><span>£</span>@invoice_total</td>
+                            </tr>
+                        }
 
-                        <tr>
-                            <th class="">Invoices</th>
-                            <td><span>£</span>@invoice_total</td>
-                        </tr>
-                        <tr>
-                            <th class="">Item Sale</th>
-                            <td><span>£</span>@item_sale_total</td>
-                        </tr>
-
+                        @if (item_sale_total != 0)
+                        {
+                            <tr>
+                                <th class="">Item Sale</th>
+                                <td><span>£</span>@item_sale_total</td>
+                            </tr>
+                        }
+                        
                         <tr>
                             <th class="">Net</th>
                             <td><span>£</span> @net_price</td>

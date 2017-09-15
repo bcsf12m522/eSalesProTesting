@@ -274,3 +274,15 @@ function Loading_Sales_Report() {
         }
     })
 }
+
+function Delete_Sale_Error() {
+    swal({
+        title: "CANNOT DELETE THE SALE",
+        text: "You have to clear all Dues Before Deleting it.",
+        type: "warning",
+        confirmButtonColor: '#DD6B55',
+        confirmButtonText: 'Okay',
+    })
+
+    return false;
+}
