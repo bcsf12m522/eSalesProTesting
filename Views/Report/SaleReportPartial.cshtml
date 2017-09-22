@@ -70,6 +70,7 @@
                         {
                             cash = cash + v.Amount_Paid;
                         }
+                            
                         else if (count == 0 && @v.Pay_Method_ID == 2 && @v.Doc_Type_ID != 2)
                         {
                             card = card + v.Amount_Paid;
@@ -94,7 +95,7 @@
                         {
                             other = other + v.Amount_Paid;
                         }
-
+                        
                         <!--Calculations Against Payment Methods-->
 
                         <tr id=@String.Concat("Partial_tr",@v.Id) class="text-center background_blue_selected_at_hover">
@@ -135,7 +136,6 @@
 
                                     cash = cash + v.Amount_Paid;
                                 }*@
-
                             <td>
                                 @v.Payment_Methods.Type
 
@@ -144,56 +144,8 @@
                                     <br /><span class="sub_tr_values">@sale.Payment_Type</span>
 
 
-                                     <!--Calculations Against Document Types-->
-                                    
-                                    if ( @v.Doc_Type_ID == 1)
-                                    {
-                                        invoice_total_paid = invoice_total_paid + sale.Gross;
-                                        
-                                    }
-                                    else if (@v.Doc_Type_ID == 3)
-                                    {
-                                        item_sale_paid = item_sale_paid + sale.Gross;
-                                    }
-
-                                     <!--Calculations Against Document Types-->
-
-
-
-                                    <!----------Calculations Against Payment Methods---------->
-
-                                    if (sale.Payment_Type == "Cash")
-                                    {
-                                        { cash = cash + sale.Gross; }
-                                    }
-                                    else if (sale.Payment_Type == "Card")
-                                    {
-                                        { card = card + sale.Gross; }
-                                    }
-                                    else if (sale.Payment_Type == "Cheque")
-                                    {
-                                        { cheque = cheque + sale.Gross; }
-                                    }
-                                    else if (sale.Payment_Type == "Bank Transfer")
-                                    {
-                                        { bank_transfer = bank_transfer + sale.Gross; }
-                                    }
-                                    else if (sale.Payment_Type == "Paypal")
-                                    {
-                                        { paypal = paypal + sale.Gross; }
-                                    }
-                                    else if (sale.Payment_Type == "Credit")
-                                    {
-                                        { credit = credit + sale.Gross; }
-                                    }
-                                    else if (sale.Payment_Type == "Other")
-                                    {
-                                        { other = other + sale.Gross; }
-                                    }
-                                    <!----------Calculations Against Payment Methods---------->
                                 }
                             </td>
-
 
 
                             <td width="15%">
@@ -204,7 +156,7 @@
 
                                 @if (total == @v.Gross)
                                 {
-                                    <span>Payment Paid</span>
+                                    <span>Paid</span>
                                 }
                                 else
                                 {
@@ -234,6 +186,57 @@
                                 @foreach (var sale in v.Sale_Transaction_History)
                                 {
                                     <br /><span class="sub_tr_values">@sale.Net_Amount</span>
+
+
+                                     <!--Calculations Against Document Types-->
+
+                                    if (@v.Doc_Type_ID == 1)
+                                    {
+                                        invoice_total_paid = invoice_total_paid + sale.Gross;
+
+                                    }
+                                    else if (@v.Doc_Type_ID == 3)
+                                    {
+                                        item_sale_paid = item_sale_paid + sale.Gross;
+                                    }
+
+                                     <!--Calculations Against Document Types-->
+
+
+
+                                    <!----------Calculations Against Payment Methods---------->
+
+                                    if (sale.Payment_Type == "Cash")
+                                    {
+                                        { cash = cash + sale.Gross; }
+                                        
+                                    }
+                                    else if (sale.Payment_Type == "Card")
+                                    {
+                                        { card = card + sale.Gross; }
+                                    }
+                                    else if (sale.Payment_Type == "Cheque")
+                                    {
+                                        { cheque = cheque + sale.Gross; }
+                                    }
+                                    else if (sale.Payment_Type == "Bank Transfer")
+                                    {
+                                        { bank_transfer = bank_transfer + sale.Gross; }
+                                    }
+                                    else if (sale.Payment_Type == "Paypal")
+                                    {
+                                        { paypal = paypal + sale.Gross; }
+                                    }
+                                    else if (sale.Payment_Type == "Credit")
+                                    {
+                                        { credit = credit + sale.Gross; }
+                                    }
+                                    else if (sale.Payment_Type == "Other")
+                                    {
+                                        { other = other + sale.Gross; }
+                                    }
+                                    <!----------Calculations Against Payment Methods---------->
+
                                 }
                             </td>
 

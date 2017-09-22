@@ -229,7 +229,7 @@
                                     </div>
                                     <hr class="hr_customer" />
 
-
+                                    
                                     <div class="col-md-12">
 
 
@@ -253,29 +253,29 @@
                                             <tbody class="black-color">
 
                                                 <tr id="rowId1" class="font-15 id remove_div">
-                                                    <td class="border-right-td"><div class="text-center"><input placeholder="Code" class="yoyo unbold width-110 text-center" id="codeforProduct1" name="yoyoyoyoyoyoyoy" onkeyup="productList(event,this.value);" type="text"></div></td>
+                                                    <td class="border-right-td"><div class="text-center"><input placeholder="Code" class="yoyo unbold width-110 text-center" id="codeforProduct1" name="yoyoyoyoyoyoyoy" onkeyup="productList(event,this.value);" type="text" required></div></td>
                                                     <td class="border-right-td">
                                                         <textarea class="2 description-text-area unbold width-100p text-center" name="invoice_description1" id="invoice_description1" required="" placeholder="Description"></textarea>
                                                     </td>
-                                                    <td class="border-right-td"><div class="text-center"><input onkeypress="validate(event)" id="invoice_quantity1" onkeyup="Total(1);checkQuantityAvailable(this.value,1)" placeholder="0" class="3 unbold width-45 text-center" name="invoice_quantity1" type="text"></div></td>
-                                                    <td id="" class="border-right-td priceVAT"><div class="text-center"><input onkeypress="validate(event)" id="invoice_price1" onkeyup="Total(1)" placeholder="0.0" class="4 new-invoice-width-boxes unbold width-68 text-center" name="invoice_price1" type="text"></div></td>
-                                                    <td class="border-right-td hidecolumn text-center"><input onkeypress="validate(event)" id="invoice_price_vat1" onkeyup="Total2(1)" placeholder="0.0" class="5 new-invoice-width-boxes unbold width-78 text-center" name="invoice_price_vat1" type="text"></td>
-                                                    <td class="border-right-td priceVAT text-center"><input readonly id="invoice_total1" placeholder="0.0" class="6 new-invoice-width-boxes unbold width-68 text-center" name="" type="text"></td>
-                                                    <td class="border-right-td hidecolumn text-center"><input readonly id="invoice_total_vat1" placeholder="0.0" class="7 new-invoice-width-boxes unbold width-78 text-center" name="" type="text"></td>
+                                                    <td class="border-right-td"><div class="text-center"><input onkeypress="validate(event)" id="invoice_quantity1" onkeyup="Total(1);checkQuantityAvailable(this.value,1)" placeholder="0" class="3 unbold width-45 text-center" name="invoice_quantity1" type="text" required></div></td>
+                                                    <td id="" class="border-right-td priceVAT"><div class="text-center"><input onkeypress="validate(event)" id="invoice_price1" onkeyup="Total(1)" placeholder="0.0" class="4 new-invoice-width-boxes unbold width-68 text-center" name="invoice_price1" type="text" required></div></td>
+                                                    <td class="border-right-td hidecolumn text-center"><input onkeypress="validate(event)" id="invoice_price_vat1" onkeyup="Total2(1)" placeholder="0.0" class="5 new-invoice-width-boxes unbold width-78 text-center" name="invoice_price_vat1" type="text" required></td>
+                                                    <td class="border-right-td priceVAT text-center"><input readonly id="invoice_total1" placeholder="0.0" class="6 new-invoice-width-boxes unbold width-68 text-center" name="" type="text" required></td>
+                                                    <td class="border-right-td hidecolumn text-center"><input readonly id="invoice_total_vat1" placeholder="0.0" class="7 new-invoice-width-boxes unbold width-78 text-center" name="" type="text" required></td>
 
                                                     @*<td class="text-center border-right-td width-68"><div id="invoice_total1" class="6 total_invoice_background text-center">£0</div></td>*@
                                                     @*<td class="border-right-td text-center width-78 hidecolumn"><div id="invoice_total_vat1" class="7 total_invoice_background text-center">£0</div></td>*@
 
                                                     <td class="border-right-td text-center"><input onkeyup="Total(1);" onkeypress="validate(event)" id="invoice_discount1" placeholder="0.0" class="8 unbold width-45 text-center" name="invoice_discount1" type="text"></td>
 
-                                                    <td class="hidden"><input type="text" class="hidden" id="invoice_product_id1" name="invoice_product_id1" /></td>
+                                                    <td class="hidden"><input type="text" class="hidden" id="invoice_product_id1" name="invoice_product_id1"/></td>
                                                     
                                                     
                                                     <td class="text-center width-27p" style="vertical-align:middle;">
                                                         <a href="#" onclick="addNewRow(); rowcounterPlus();" class="showdiv">
                                                             <img src="/img/images/plus_new_sale.png">
                                                         </a>
-                                                        <a href="#" class="remove" onclick="">
+                                                        <a href="#" class="remove" onclick="Clear_Row_Values()">
                                                             <img src="/img/images/cross_new_sale.png">
                                                         </a>
                                                         <a href="#">
@@ -348,7 +348,7 @@
                                                 <tr id="payment_status_tr">
                                                     <td class="bold">Payment Status</td>
                                                     <td class="text-right">
-                                                        <select id="payment_status_id" onchange="payment_status()" name="payment_status_id" class="form-control border_black-1px min-height-32 width-180 select-class-color pull-right">
+                                                        <select id="payment_status_id" onchange="payment_status()"  name="payment_status_id" class="form-control border_black-1px min-height-32 width-180 select-class-color pull-right">
                                                             @foreach (var status in ViewBag.Payment_Status)
                                                             {
                                                                 <option value="@status.Id">@status.Status</option>
@@ -409,7 +409,7 @@
 
                                                 <span class=" font-18 text-center red bold">Outstanding Balance</span>
                                                 <br />
-                                                <input type="text" readonly class="input_type_custom font-18" name="outstanding_balance" value="" id="outstanding_balance" />
+                                                <input type="text" readonly class="input_type_custom font-18" name="outstanding_balance" value="" id="outstanding_balance"/>
                                                 <br />
                                                 <a href="#" class="btn btn-primary blue-btn-style btn-mini bold" onclick="set_outstanding_value()" data-target="#Outstanding_modal" data-toggle="modal">Pay Outstanding</a>
                                                 <div class="empty-height"></div>
@@ -476,7 +476,7 @@
 
                                 </div>
 
-                                <input id="counters" value="" type="text" hidden/>
+                                <input id="counters" value="" hidden type="text"/>
                                 <input type="text" class="" id="net_invoice_hidden" name="net_invoice_hidden" hidden/>
                                 <input type="text" class="" id="vat_invoice" name="vat_invoice_hidden" hidden/>
                                 <label hidden> Gross </label><input type="text" class="" id="gross_invoice" name="gross_invoice_hidden" hidden/>
@@ -909,7 +909,7 @@
                                     <div class="pull-left">
                                         <label class="control-label pull-left mt-5 ml-15 mr-7">Pay Method</label>
 
-                                        <select name="payment_method_id" class="form-control border_black-1px width-145 select-class-color">
+                                        <select name="payment_method_id" id="payment_method_id_outstanding_balance" class="form-control border_black-1px width-145 select-class-color">
                                             @foreach (var method in ViewBag.Payment_Method)
                                             {
                                                 <option value="@method.Id">@method.Type</option>

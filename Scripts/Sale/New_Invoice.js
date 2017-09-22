@@ -731,6 +731,9 @@ function tbody_add_record(id, count) {
     //alert(price_inner);
 
     //alert("ITEM SALE2");
+
+    //$("#payment_status_id").prop("disabled", false);
+
     checkSoldHistory(count);
     Total(count);
 
@@ -813,10 +816,11 @@ function addNewRow() {
 
     var doc_value = $("#doc_type_page_load").val();
     //alert("doc_value       " + doc_value);
-
+    
     arguments.callee.myStaticVar = arguments.callee.myStaticVar || 2;
     var count = arguments.callee.myStaticVar++;
     document.getElementById("counters").value = count;
+
 
     var hrRowkoUsKaNumberDeneKLiye = document.getElementById('ApnaApnaRowNumber').value;
     document.getElementById('ApnaApnaRowNumber').value = +hrRowkoUsKaNumberDeneKLiye + +1;
@@ -878,6 +882,8 @@ function productList(e, char, serialnumber) {
         if (Count == "") {
             Count = 1;
         }
+     
+
         //alert("Product List Counter ="+  Count)
 
         $("#productList").show();
@@ -913,12 +919,17 @@ function productList(e, char, serialnumber) {
 }
 
 
-//function Postcode_Enter_Click(e) {
-//    if (e.keyCode === 13) {
-//        e.preventDefault(); // Ensure it is only this code that rusn
-//        postcode_testing_edit();
-//    }
-//}
+function Clear_Row_Values() {
+    $("#codeforProduct1").val("");
+    $("#invoice_description1").val("");
+    $("#invoice_quantity1").val("");
+    $("#invoice_price1").val("");
+    $("#invoice_price_vat1").val("");
+    $("#invoice_total1").val("");
+    $("#invoice_total_vat1").val("");
+    $("#invoice_discount1").val("");
+
+}
 
 
 
@@ -1011,6 +1022,8 @@ function Total(rownum) {
     $("#gross_invoice").val(gross);
 
     $("#amount_paid_hidden").val(gross);
+    $("#payment_status_id").val(1);
+    $("#partial_payment_option").hide();
 }
 
 function Total2(rownum) {
@@ -1094,6 +1107,8 @@ function Total2(rownum) {
 
     $("#amount_paid_hidden").val(gross);
     //alert("ASASSASAS");
+    $("#payment_status_id").val(1);
+    $("#partial_payment_option").hide();
 }
 
 
@@ -1245,19 +1260,24 @@ function checkSoldHistory(counter) {
 
 function outstanding_balance_function() {
     //alert("Outstanding Balance");
+    var payment_method = $("#payment_method_id_outstanding_balance").val();
+    //alert("payment_method " + payment_method);
     var customer_id = $("#exist_customer_id").val();
-    //alert(customer_id);
-    var amount = $("#outstanding_amount").val();
+    //alert("customer_id "+customer_id);
+    //var amount = $("#outstanding_amount").val();
+    //alert("amount " + amount);
 
+    var amount = $("#customer_balance").text();
+    //alert("amount " + amount);
 
     $.ajax({
 
         url: '/Customer/Paying_Outstanding_Balance/',
-        data: { amount_paid: amount, id: customer_id },
+        data: { amount_paid: amount, id : customer_id, method_id : payment_method },
         cache: false,
         type: "Get",
         success: function (data) {
-            //alert("Success");
+            //alert(data);
             $("#outstanding_balance").val("£" + data);
 
         },
