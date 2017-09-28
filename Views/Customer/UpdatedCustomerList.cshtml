@@ -5,6 +5,7 @@
     <tr id="@String.Concat("tr_"+@v.Id)">
         @*<td data-title="User ID">@v.Id</td>*@
         <td class="text-center">@v.Name</td>
+        <td class="text-center">@v.Company.Company_Name</td>
         <td class="text-center">@v.phone</td>
         <td class="text-center">@v.Email</td>
         <td class="text-center">@v.Billing_Street</td>
@@ -12,7 +13,7 @@
 
         @*@if (@v.Is_Active == 1)
             {*@
-        <td class="gg">Active</td>
+        @*<td class="gg">Active</td>*@
         @*}
             else
             {

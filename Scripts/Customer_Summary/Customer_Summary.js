@@ -83,7 +83,7 @@ function customer_invoice_list(id) {
             
         },
         error: function (response) {
-            alert("Error" + response);
+            //alert("Error" + response);
         }
 
     })
@@ -100,7 +100,7 @@ function customer_item_sale_list(id) {
         cache: false,
         type: "Get",
         success: function (data) {
-            alert("SUCCESS");
+            //alert("SUCCESS");
             document.getElementById("hhh").innerHTML = data;
             $("#loader_div").hide();
             $('#item_history_table').dataTable();
@@ -109,7 +109,7 @@ function customer_item_sale_list(id) {
 
         },
         error: function (response) {
-            alert("Error" + response);
+            //alert("Error" + response);
         }
 
     })

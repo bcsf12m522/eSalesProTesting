@@ -1642,16 +1642,7 @@ function rowcounterMinus() {
     //alert("CROSS" + document.getElementById('rowCounterrr').value)
 }
 
-function Different_Address() {
-    //alert("ASASASSSSS");
-    if (document.getElementById("billing_address_checkbox").checked==true) {
-        alert("IF");
-    }
 
-    else if (document.getElementById("billing_address_checkbox").checked == false) {
-        alert("ELSE");
-    }
-}
 
 function Partial_Payment_Calculation_on_Edit() {
     var gross = $("#partial_amount").val();

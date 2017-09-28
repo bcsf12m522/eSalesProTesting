@@ -76,13 +76,13 @@
 
 
                                         <div class="col-md-2 pull-left pl-0 pr-0">
-                                            <input type="text" name="exist_customer_idd" class="hidden" id="exist_customer_id"/>
-                                            
-                                            <input type="text" name="" class="hidden" id=""/>
-                                            <input type="text" id="credit_limit_input" name="credit_limit_input" hidden/>
-                                            <input type="text" id="supplier_IDD" hidden name="supplier_IDD"/>
-                                            <input type="text" id="supplier_code" hidden name="supplier_code"/>
-                                            
+                                            <input type="text" name="exist_customer_idd" class="hidden" id="exist_customer_id" />
+
+                                            <input type="text" name="" class="hidden" id="" />
+                                            <input type="text" id="credit_limit_input" name="credit_limit_input" hidden />
+                                            <input type="text" id="supplier_IDD" hidden name="supplier_IDD" />
+                                            <input type="text" id="supplier_code" hidden name="supplier_code" />
+
                                             <ul class="list-style-type-custom">
                                                 @*<li id="type_customer" class="bold font-18 black-color"></li>*@
                                                 <li id="supplier_names"></li>
@@ -155,7 +155,7 @@
                                                         <select name="payment_method_id" class="form-control border_black-1px width-145 select-class-color">
                                                             @foreach (var method in ViewBag.Payment_Method)
                                                             {
-                                                                <option value="@method.Id">@method.Type</option>
+                                                            <option value="@method.Id">@method.Type</option>
                                                             }
 
                                                         </select>
@@ -232,16 +232,16 @@
                                                             <img src="/img/images/cross_new_sale.png">
                                                         </a>
                                                         @*<a href="#">
-                                                            <img src="/img/images/barcode_new_sale.png">
-                                                        </a>
-                                                        <a href="#">
-                                                            <img src="/img/images/findpost.png">
-                                                        </a>*@
+                                                                <img src="/img/images/barcode_new_sale.png">
+                                                            </a>
+                                                            <a href="#">
+                                                                <img src="/img/images/findpost.png">
+                                                            </a>*@
 
                                                     </td>
 
-                                                    <input type="text" id="total_hidden1" name="total_hidden1" hidden/>
-                                                    <input type="text" id="total_vat_hidden1" name="total_vat_hidden1" hidden/>
+                                                    <input type="text" id="total_hidden1" name="total_hidden1" hidden />
+                                                    <input type="text" id="total_vat_hidden1" name="total_vat_hidden1" hidden />
 
 
 
@@ -251,7 +251,7 @@
                                             @for (int i = 1; i <= 1000; i++)
                                             {
 
-                                                <tbody class="black-color" id="@String.Concat("newrow",i)"></tbody>
+                                            <tbody class="black-color" id="@String.Concat("newrow",i)"></tbody>
                                             }
                                         </table>
 
@@ -297,13 +297,14 @@
                                                 </tr>
 
                                                 <tr class="border_bottom_black_2px">
-                                                    <td></td><td></td>
+                                                    <td></td>
+                                                    <td></td>
                                                 </tr>
 
-                                                    <tr id="" class="received_div" style="display:none">
-                                                        <td class="bold font-18">Received</td>
-                                                        <td id="" class="text-right bold"></td>
-                                                    </tr>
+                                                <tr id="" class="received_div" style="display:none">
+                                                    <td class="bold font-18">Received</td>
+                                                    <td id="" class="text-right bold"></td>
+                                                </tr>
                                                 <tr id="received_sub_total_tr" class="received_div" style="display:none">
                                                     <td class="">Subtotal</td>
                                                     <td id="received_sub_total_td" class="bold text-right">£0</td>
@@ -332,7 +333,7 @@
                                                             @*<option>Please Select Any</option>*@
                                                             @foreach (var status in ViewBag.Payment_Status)
                                                             {
-                                                                <option value="@status.Id">@status.Status</option>
+                                                            <option value="@status.Id">@status.Status</option>
                                                             }
                                                         </select>
                                                     </td>
@@ -344,7 +345,7 @@
                                                         <select id="payment_piriority_id" onchange="payment_piriority()" name="payment_piriority_id" class="form-control border_black-1px min-height-32 width-180 select-class-color pull-right">
                                                             @foreach (var piriority in ViewBag.Payment_Piriority)
                                                             {
-                                                                <option value="@piriority.Id">@piriority.Type</option>
+                                                            <option value="@piriority.Id">@piriority.Type</option>
                                                             }
                                                         </select>
                                                     </td>
@@ -362,7 +363,7 @@
                                                         <select id="po_status" onchange="PO__Status();" name="po_status_id" class="form-control border_black-1px min-height-32 width-180 select-class-color pull-right">
                                                             @foreach (var status in ViewBag.PO_Status)
                                                             {
-                                                                <option value="@status.Id">@status.Status_Type</option>
+                                                            <option value="@status.Id">@status.Status_Type</option>
                                                             }
                                                         </select>
                                                     </td>
@@ -409,7 +410,7 @@
                                                     <td><input type="date" class="width-180" /></td>
                                                 </tr>
 
-                                              
+
 
                                                 <tr class="partial_paid deposit_paid" style="display:none">
                                                     <td class="bold">Amount left to Pay</td>
@@ -440,9 +441,9 @@
 
                                         @*<div class="empty-height"></div><div class="empty-height"></div>
 
-                                        <div id="global_discount_div" class="col-md-3 pull-right">
-                                            <a href="" class="btn btn-primary blue-btn-style btn-mini bold" data-toggle="modal" data-target="#Global_Discount_Modal">Add Global Discount</a>
-                                        </div>*@
+                                            <div id="global_discount_div" class="col-md-3 pull-right">
+                                                <a href="" class="btn btn-primary blue-btn-style btn-mini bold" data-toggle="modal" data-target="#Global_Discount_Modal">Add Global Discount</a>
+                                            </div>*@
 
                                     </div>
 
@@ -480,19 +481,19 @@
 
                                 <input id="counters" value="" type="text" hidden />
 
-                                <input type="text" class="" id="order_sub_total_hidden" placeholder="order Subtotal" name="order_sub_total_hidden" hidden/>
-                                <input type="text" class="" id="order_vat_hidden" name="order_vat_hidden" placeholder="order vat" hidden/>
-                                <input type="text" class="" id="order_total_hidden" name="order_total_hidden" placeholder="order total" hidden/>
+                                <input type="text" class="" id="order_sub_total_hidden" placeholder="order Subtotal" name="order_sub_total_hidden" hidden />
+                                <input type="text" class="" id="order_vat_hidden" name="order_vat_hidden" placeholder="order vat" hidden />
+                                <input type="text" class="" id="order_total_hidden" name="order_total_hidden" placeholder="order total" hidden />
 
 
 
-                                <input type="text" class="" id="received_sub_total_hidden" name="received_sub_total_hidden" placeholder="received Subtotal" hidden/>
-                                <input type="text" class="" id="received_vat_hidden" name="received_vat_hidden" placeholder="received vat" hidden/>
-                                <input type="text" class="" id="received_total_hidden" name="received_total_hidden" placeholder="received total" hidden/>
+                                <input type="text" class="" id="received_sub_total_hidden" name="received_sub_total_hidden" placeholder="received Subtotal" hidden />
+                                <input type="text" class="" id="received_vat_hidden" name="received_vat_hidden" placeholder="received vat" hidden />
+                                <input type="text" class="" id="received_total_hidden" name="received_total_hidden" placeholder="received total" hidden />
 
 
-                                <input type="text" class="" id="amount_paid_hidden" name="amount_paid_hidden" placeholder="Amount Paid" hidden/>
-                                <input type="text" class="" id="left_amount_hidden" name="left_amount_hidden" placeholder="Left Amount" hidden/>
+                                <input type="text" class="" id="amount_paid_hidden" name="amount_paid_hidden" placeholder="Amount Paid" hidden />
+                                <input type="text" class="" id="left_amount_hidden" name="left_amount_hidden" placeholder="Left Amount" hidden />
                             </form>
 
 
@@ -503,6 +504,7 @@
 
                     </div>
                 </div>
+
                 @*-----------------Main Container Ends---------------*@
             </div>
 
@@ -570,7 +572,7 @@
                                         <select name="payment_method_id" class="form-control border_black-1px width-145 ml-15 select-class-color pull-left">
                                             @foreach (var method in ViewBag.Payment_Method)
                                             {
-                                                <option value="@method.Id">@method.Type</option>
+                                            <option value="@method.Id">@method.Type</option>
                                             }
 
                                         </select>
@@ -615,9 +617,13 @@
     @*----------------------------POP UP END PARTIAL PAYMENT--------------------------------*@
 
 
+    @{
+        Html.RenderPartial("Edit_Supplier_Modal");
+    }
 
 
 
+    
 
 
 
@@ -660,10 +666,13 @@
                                         </tr>
                                     </thead>
 
+                                    
+
                                     <tbody class="black-color bold" id="">
                                         @foreach (var v in ViewBag.Supplier)
                                         {
-                                            <tr onclick="existing_supplier_click(@v.Id)">
+
+                                            <tr onclick="existing_supplier_click(@v.Id)" class="disableRightClick" oncontextmenu="edit_supp(@v.Id,'Purchase')">
                                                 <td id="@String.Concat("suppliers1", v.Id)" data-title="User ID">@v.Name</td>
                                                 <td id="@String.Concat("suppliers2", v.Id)" data-title="Last Name">@v.Street</td>
                                                 <td id="@String.Concat("suppliers3", v.Id)" data-title="Last Name">@v.Post_Code</td>
@@ -671,7 +680,7 @@
                                                 <td id="@String.Concat("suppliers5", v.Id)" data-title="Email" class="user-emails">@v.Mobile</td>
                                                 <td id="" data-title="Email" class="user-emails">@v.Credit_Limit_Old</td>
 
-                                                <input type="text" id="@String.Concat("suppliers6", v.Id)" value="@v.Credit_Limit" hidden/>
+                                                <input type="text" id="@String.Concat("suppliers6", v.Id)" value="@v.Credit_Limit" hidden />
 
                                                 @*<td id="@String.Concat("supp5", v.Id)" data-title="Email" class="user-emails">@v.</td>*@
 
@@ -1044,19 +1053,52 @@
         </div>
     </div>
 
-    <input type="hidden" value="1" id="rowCounterrr"/>
-    <input type="hidden" value="1" id="ApnaApnaRowNumber"/>
+    <input type="hidden" value="1" id="rowCounterrr" />
+    <input type="hidden" value="1" id="ApnaApnaRowNumber" />
 
     @*----------------------------POP UP END ADD SUPPLIER--------------------------------*@
 
 
+    @*----------------------------POP UP EDIT CUSTOMER--------------------------------*@
 
+
+
+
+
+    @*----------------------------POP UP END EDIT CUSTOMER--------------------------------*@
 
 
     <script src="~/scripts/purchase/New_Purchase_Order.js"></script>
+    <script src="~/scripts/Supplier/List.js"></script>
+    <script src="~/Scripts/Common_JS_Functions/Common_JS.js"></script>
 
+    <!--
     <script>
-      
-    </script>
+        function edit_supp(Id) {
+            //alert("ID +++++" + Id);
+            $.ajax({
 
+                url: '/Supplier/Edit_Supplier_Values/',
+                data: { id: Id },
+                cache: false,
+                type: 'Get',
+                success: function (data) {
+                    //alert(data);
+
+                    document.getElementById('aaa').innerHTML = data;
+
+                    $("#Existing_Supplier_Modal").hide();
+                    $("#JunaidSheikh").addClass("in").show('slow');
+                    //alert("ASSSSASSASAS");
+                },
+                error: function (response) {
+                    alert("ERROR");
+                }
+
+
+            })
+
+        }
+    </script>
+        -->
 </body>

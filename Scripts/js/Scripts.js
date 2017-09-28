@@ -10,6 +10,8 @@
     }
 }
 
+
+
 function showDateDiv() {
     var to = document.getElementById("to_date").value;
     $("#date_click_div").removeClass("none");

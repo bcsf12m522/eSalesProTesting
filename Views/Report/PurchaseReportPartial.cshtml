@@ -8,10 +8,10 @@
         <tr class="table-heading-fonts table-main-headings">
             <th class="text-center">PO ID</th>
             <th class="text-center">Supplier Name</th>
-            <th class="text-center">Ordered Total+Vat</th>
-            <th class="text-center">Received Total+Vat</th>
-            <th class="text-center">Date</th>
-            <th class="text-center">Payment Method</th>
+            <th class="text-center">Ordered + Vat</th>
+            <th class="text-center">Received + Vat</th>
+            <th class="text-center" style="width: 95px;">Date</th>
+            <th class="text-center">Pay Method</th>
             <th class="text-center">Pay Status</th>
             <th class="text-center">PO Status</th>
             <th class="text-center">Actions</th>
@@ -38,7 +38,7 @@
             
             <tr>
             @*<tr onclick="foo(@v.Id)">*@
-                <td class="text-center" data-title="User ID">@v.Purchase_Number</td>
+                <td class="text-center" style="width:67px" data-title="User ID">@v.Purchase_Number</td>
                 <td class="text-center" data-title="User ID">@v.Supplier.Name</td>
                 <td class="text-center" data-title="User ID">@v.Total</td>
                 <td class="text-center" data-title="User ID">@v.Received_Total</td>

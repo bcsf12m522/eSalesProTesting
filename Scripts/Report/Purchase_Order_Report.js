@@ -1,7 +1,7 @@
 ﻿function poByPayPriority(id) {
     //alert("ASASSAS");
     //$("#loader_div").show();
-    
+    $("#loader_div").show();
 
     $.ajax({
 
@@ -12,8 +12,11 @@
         success: function (data) {
 
             document.getElementById('updatedDiv').innerHTML = data;
+            //$("#loader_div").hide();
             $("#loader_div").hide();
-            
+            //$("#table_on_dates_filter").hide();
+
+            $('#table_on_dates').dataTable();
         },
         error: function (response) {
 
@@ -37,6 +40,7 @@ function poByPayStatus(id) {
             document.getElementById('updatedDiv').innerHTML = data;
             $("#loader_div").hide();
             $("#date_click_div").show();
+            $('#table_on_dates').dataTable();
         },
         error: function (response) {
 
@@ -62,6 +66,7 @@ function poByNumber(id) {
             document.getElementById('updatedDiv').innerHTML = data;
             $("#loader_div").hide();
             $("#date_click_div").show();
+            $('#table_on_dates').dataTable();
         },
         error: function (response) {
 
@@ -89,6 +94,7 @@ function poByDate() {
             document.getElementById('updatedDiv').innerHTML = data;
             $("#loader_div").hide();
             $("#date_click_div").show();
+            $('#table_on_dates').dataTable();
         },
         error: function (response) {
 

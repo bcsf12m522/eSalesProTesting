@@ -112,7 +112,8 @@
                                         <th class="text-center">Phone</th>
                                         <th class="text-center">Email</th>
                                         <th class="text-center">Address</th>
-                                        <th class="text-center">Status</th>
+                                        <th class="text-center">Postcode</th>
+                                        @*<th class="text-center">Status</th>*@
 
                                         @*<th>Pay Rate</th>
                         <th>Role</th>
@@ -160,57 +161,11 @@
     <script src="~/Scripts/Customer/Customer_List.js"></script>
     <script src="~/scripts/customer_summary/customer_summary.js"></script>
     <script src="~/Scripts/Customer/Edit_Customers.js"></script>
+    <script src="~/Scripts/Postcode_Customer/Edit_Customer_Postcode.js"></script>
 
     @*----------------------------POP UP for CUSTOMER SUMMARY--------------------------------*@
 
-    <div class="modal fade" id="customer_modal" tabindex="-1" role="dialog" aria-hidden="false">
-        <div class="modal-dialog modal-md">
-            <div class="modal-content modal-style-custom">
-
-                <div class="title col-md-12">
-                    <span>Message</span>
-                    <img src="~/img/images/c3.png" class="close mr--13 pull-right" data-dismiss="modal" />
-                </div>
-
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                    <div class="x_panel">
-
-                        <div class="win text-center">
-                            <h3 class="black-color"><b>Find Customer</b></h3>
-
-                            <form id="demo-form2" action="#" method="post" data-parsley-validate class="form-horizontal form-label-left mt-30" enctype="multipart/form-data">
-
-                                <div class="col-md-12">
-
-                                    <div class="form-group">
-                                        <div class="">
-                                            <div class="pull-left">
-                                                <input type="text" name="customer" class="width-320">
-                                                <a href="~/Report/SaleReport" class="btn-primary btn-mini center-block btn-existing-supplier-cancel" style="">Cancel</a>
-                                                <input data-dismiss="modal" onclick="show_customer_summary()" type="button" class="btn-success btn-mini center-block btn-existing-supplier-search" value="Search" />
-
-                                            </div>
-                                        </div>
-
-                                        <div class="clear"></div>
-
-                                    </div>
-
-                                </div>
-                            </form>
-
-
-                        </div>
-
-
-                    </div>
-                </div>
-
-                <div class="modal-footer"></div>
-
-            </div>
-        </div>
-    </div>
+    
 
     @*----------------------------POP UP END CUSTOMER SUMMARY--------------------------------*@
 

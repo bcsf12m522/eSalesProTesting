@@ -1016,367 +1016,31 @@
 
 
 
+@*----------------------------POP UP EXISTING CUSTOMER--------------------------------*@
+
+@{
+    Html.RenderPartial("Customer_Modal/Existing_Customer_Modal");
+}
+
+@*----------------------------POP UP END EXISTING CUSTOMER--------------------------------*
 
 
-
-    @*----------------------------POP UP for EXISTING CUSTOMER--------------------------------*@
-
-    <div class="modal fade" id="ExistingModal" tabindex="-1" role="dialog" aria-hidden="false">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content modal-style-custom">
-
-                <div class="title col-md-12">
-                    <span>Message</span>
-                    <img src="~/img/images/c3.png" class="close mr--13 pull-right" data-dismiss="modal" />
-                </div>
-
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                    <div class="x_panel">
-
-                        <div class="win text-center">
-                            <h3 class="color"><b>Find Customer</b></h3>
-
-                            <div class="empty-height"></div><div class="empty-height"></div>
-
-
-
-                            <div class="col-md-12">
-                                <table border="0" class="table table-responsive border_black" id="kj">
-                                    <thead>
-                                        <tr class="table-heading-fonts table-main-headings">
-                                            <th class="text-center">Name</th>
-                                            <th class="text-center">Phone</th>
-                                            <th class="text-center">Address</th>
-                                            <th class="text-center">Postcode</th>
-                                            <th class="text-center">Email</th>
-                                            <th class="text-center">Balance</th>
-                                            <th class="text-center">Credit</th>
-                                            <th class="text-center">Total Credit Limit</th>
-                                            <th class="text-center">Available Credit Limit</th>
-                                        </tr>
-                                    </thead>
-
-
-                                    <tbody class="black-color bold" id="">
-                                        @foreach (var v in ViewBag.Customer)
-                                        {
-                                            
-                                            <tr id="trr" class="rightclick" onclick="go(@v.Id,@v.Customer_Type_Id);customer_credit()" oncontextmenu="GetCustomer(@v.Id);">
-                                                <td id="@String.Concat("juni1", v.Id)" data-title="User ID">@v.Name</td>
-                                                <td id="@String.Concat("juni2", v.Id)" data-title="First Name">@v.phone</td>
-                                                <td id="@String.Concat("juni3", v.Id)" data-title="Last Name">@v.Billing_Street</td>
-                                                <td id="@String.Concat("juni4", v.Id)" data-title="Last Name">@v.Billing_Postcode</td>
-                                                <td id="@String.Concat("juni5", v.Id)" data-title="Email" class="user-emails">@v.Email</td>
-                                                <td id="@String.Concat("juni6", v.Id)" data-title="Email" class="user-emails">@v.Balance</td>
-                                                <td id="@String.Concat("juni7", v.Id)" data-title="Email" class="user-emails">@v.Credit</td>
-                                                <td id="" data-title="Email" class="user-emails">@v.Credit_Limit_Old</td>
-                                                <td id="" data-title="Email" class="user-emails">@v.Credit_Limit</td>
-                                                @*<input type="text" id="jj" name="jj" value="@v.Balance"/>*@
-                                                <input type="text" id="@String.Concat("juni8", v.Id)" value="@v.Credit_Limit" hidden />
-
-                                            </tr>
-
-                                        }
-                                    </tbody>
-                                </table>
-                                <div class="clearfix"></div>
-                            </div>
-
-
-                            @*<table id="00" class="table table-responsive border_black">*@
-                            @*<table border="0" class="table table-responsive border_black" id="kj">
-                                    <thead>
-                                        <tr class="table-heading-fonts table-main-headings">
-                                            <th class="text-center">Name</th>
-                                            <th class="text-center">Phone</th>
-                                            <th class="text-center">Address</th>
-                                            <th class="text-center">Postcode</th>
-                                            <th class="text-center">Email</th>
-                                        </tr>
-                                    </thead>
-
-                                    <tbody class="black-color bold" id="">
-                                        @foreach (var v in ViewBag.Customer)
-                                    {
-                                            <tr onclick="go(@v.Id)">
-                                                <td id="@String.Concat("juni1", v.Id)" data-title="User ID">@v.Name</td>
-                                                <td id="@String.Concat("juni2", v.Id)" data-title="First Name">@v.phone</td>
-                                                <td id="@String.Concat("juni3", v.Id)" data-title="Last Name">@v.Billing_Address</td>
-                                                <td id="@String.Concat("juni4", v.Id)" data-title="Last Name">@v.Billing_Postcode</td>
-                                                <td id="@String.Concat("juni5", v.Id)" data-title="Email" class="user-emails">@v.Email</td>
-                                                <td id="@String.Concat("juni6", v.Id)" class="hidden">@v.Customer_Type_Id</td>
-                                            </tr>
-                                    }
-                                    </tbody>
-                                </table>*@
-
-
-
-
-                        </div>
-                    </div>
-                </div>
-
-                <div class="modal-footer"></div>
-                <div class=""></div>
-
-            </div>
-        </div>
-    </div>
-
-    @*----------------------------POP UP END EXISTING CUSTOMER--------------------------------*@
 
 
 
     @*----------------------------POP UP ADD CUSTOMER--------------------------------*@
 
-    <div class="modal fade" id="CreateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content modal-style-custom">
-
-                <div class="title col-md-12">
-                    <span>Message</span>
-                    <img src="~/img/images/c3.png" class="close mr--13 pull-right" data-dismiss="modal" />
-                </div>
-
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                    <div class="x_panel">
-
-                        <div class="win text-center">
-                            <h3 class="black-color"><b>New Customer</b></h3>
-                            <img class="pull-right margin-supplier ml-22" src="~/img/images/customer.png" />
-
-                            <form id="demo-form2" action="@Url.Action("Create","Customer")" method="post" data-parsley-validate class="form-horizontal form-label-left" enctype="multipart/form-data">
-
-
-
-                                <div class="col-md-12 text-center">
-
-                                    <div class="col-md-6">
-
-                                        <div class="form-group">
-                                            <label class="customer-create-texts" for="middle-name">Name <span class="required">*</span></label>
-                                            <div class="col-md-3 col-sm-6 col-xs-12">
-                                                <input type="text" name="name" required>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label class="customer-create-texts" for="middle-name">Company Name <span class="required">*</span></label>
-                                            <div class="col-md-3 col-sm-6 col-xs-12">
-                                                <input type="text" name="company_name" required>
-                                            </div>
-                                        </div>
-
-
-
-                                        <div class="customer-border"></div>
-
-                                        <div class="form-group">
-                                            <label class="customer-create-texts" for="middle-name">Phone <span class="required">*</span></label>
-                                            <div class="col-md-3 col-sm-6 col-xs-12">
-                                                <input type="text" name="phone" required>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label class="customer-create-texts" for="middle-name">Email <span class="required">*</span></label>
-                                            <div class="col-md-3 col-sm-6 col-xs-12">
-                                                <input type="text" name="email" required>
-                                            </div>
-                                        </div>
-
-
-                                        @*<div class="form-group">
-                                                <label class="customer-create-texts" for="middle-name">Bank<span class="required">*</span></label>
-                                                <div class="col-md-3 col-sm-6 col-xs-12">
-
-                                                    <select id="" name="bank_name" class="form-control width-192">
-                                                        <option value="">Please select any </option>
-                                                        @foreach (var banks in ViewBag.Bank)
-                                                        {
-                                                            <option value="@banks.Id">@banks.Bank_Name</option>
-                                                        }
-                                                    </select>
-
-
-                                                </div>
-                                            </div>*@
-
-
-                                        <div class="form-group">
-                                            <label class="customer-create-texts" for="middle-name">Account No<span class="required">*</span></label>
-                                            <div class="col-md-3 col-sm-6 col-xs-12">
-                                                <input type="text" name="account_no" required>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label class="customer-create-texts" for="">Notes<span class="required">*</span></label>
-                                            <div class="col-md-3 col-sm-6 col-xs-12">
-                                                <textarea class="width-193" name="notes" required></textarea>
-                                            </div>
-                                        </div>
-
-
-
-                                        <div class="empty-height"></div>
-
-                                        <div class="form-group">
-                                            <label class="customer-create-texts" for="middle-name">Type<span class="required">*</span></label>
-                                            <div class="col-md-3 col-sm-6 col-xs-12">
-
-                                                <select id="customer_type" name="customer_type" class="form-control width-192">
-                                                    <option value="">Please select any </option>
-                                                    @foreach (var customer_type in ViewBag.Customer_Type)
-                                                    {
-                                                        <option value="@customer_type.Id">@customer_type.Type</option>
-                                                    }
-                                                </select>
-
-
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label class="customer-create-texts" for="middle-name">Opening Balance<span class="required">*</span></label>
-                                            <div class="col-md-3 col-sm-6 col-xs-12">
-                                                <input type="text" name="opening_balance" required>
-                                            </div>
-                                        </div>
-
-
-                                        <div class="form-group">
-                                            <label class="customer-create-texts" for="middle-name">Credit Limit<span class="required">*</span></label>
-                                            <div class="col-md-3 col-sm-6 col-xs-12">
-                                                <input type="text" name="credit_limit" required>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-
-                                    <div class="col-md-6">`
-
-                                        <div class="form-group">
-                                            <label class="customer-create-texts width-178" for="middle-name">Address<span class="required">*</span></label>
-                                            <div class="col-md-3 col-sm-6 col-xs-12">
-                                                <input class="ml--50" type="text" name="billing_street" id="add_street_postcode" required>
-                                                <input class="ml--50" type="text" name="billing_town" id="add_town_postcode">
-                                                <input class="ml--50" type="text" name="billing_county" id="add_county_postcode">
-                                                <input class="ml--50" type="text" name="billing_country" id="add_country_postcode">
-                                                @*<input class="ml--50" type="text" name="address5">*@
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label class="customer-create-texts width-178" for="middle-name">Postcode<span class="required">*</span></label>
-                                            <div class="col-md-3 col-sm-6 col-xs-12">
-                                                <input class="ml--50" type="text" id="postcode_add" name="billing_postcode" onkeypress="Postcode_Enter_Click(event)">
-                                                <a href="#" onclick="postcode_testing()"><img src="~/img/images/ssearch.png" id="input_img"/></a>
-                                            </div>
-                                        </div>
-
-
-                                        <div class="customer-border"></div>
-
-                                        <div class="clearfix"></div>
-
-                                        <div class="pull-left ml-9">
-                                            <label><input type="checkbox" id="billing_address_checkbox_new" checked="checked" onclick="Different_Address_New()" />Use this as billing and shipping address</label>
-                                        </div>
-
-                                        <div class="clearfix"></div>
-                                        <div class="empty-height"></div>
-
-
-                                        <div id="" class="Shipping_Address_Div_New none">
-                                            <div class="form-group">
-                                                <label class="customer-create-texts width-178" for="middle-name">Shipping Address<span class="required">*</span></label>
-                                                <div class="col-md-3 col-sm-6 col-xs-12">
-                                                    <input class="ml--50" type="text" name="shipping_street" id="shipping_street_add" required>
-                                                    <input class="ml--50" type="text" name="shipping_town" id="shipping_town_add">
-                                                    <input class="ml--50" type="text" name="shipping_county" id="shipping_county_add">
-                                                    <input class="ml--50" type="text" name="shipping_country" id="shipping_country_add">
-                                                    @*<input class="ml--50" type="text" name="shipping_street">*@
-                                                </div>
-                                            </div>
-
-
-
-
-                                            <div class="form-group">
-                                                <label class="customer-create-texts width-178" for="middle-name">Postcode<span class="required">*</span></label>
-                                                <div class="col-md-3 col-sm-6 col-xs-12">
-                                                    <input class="ml--50" type="text" name="shipping_postcode" id="shipping_postcode_add">
-                                                    <a href="#"><img src="~/img/images/ssearch.png" id="input_img" /></a>
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-
-
-
-                                <div class="clearfix"></div><div class="empty-height"></div><div class="empty-height"></div><div class="empty-height"></div>
-
-                                <div class="col-md-12">
-                                    <p class="font-12 black-color text-center">
-                                        NOTE: Opening Balance use - values if customer owed to seller and + values if seller owed to customer.
-                                        <br /> Add (-1) for unlimited Credit
-                                    </p>
-                                </div>
-
-                                <div class="clearfix"></div><div class="empty-height"></div><div class="empty-height"></div><div class="empty-height"></div>
-
-                                <div class="clearfix"></div>
-
-                                @*<div class="col-md-5 col-sm-6 col-xs-12 col-md-offset-3" style="margin-bottom:15px">
-                                        <input type="submit" value="Add Product" class="btn btn-success" />
-                                    </div>*@
-                                <div class="col-md-12">
-                                    <div class="col-md-3"></div>
-
-                                    <div class="col-md-3">
-                                        <input type="submit" value="Add" class="btn btn-success btn-mini center-block width-145" />
-                                    </div>
-
-                                    <div class="col-md-3">
-                                        @*<a href="" class="btn btn-primary btn-mini center-block" style="width:135px">Cancel</a>*@
-                                        <a href="~/Sale/New_Invoice" class="btn btn-primary blue-btn-style-modal btn-mini center-block a-cancel">Cancel</a>
-                                    </div>
-                                    <div class="col-md-3"></div>
-
-                                </div>
-
-                                <div class="clearfix"></div>
-
-                            </form>
-
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="modal-footer">
-
-
-                </div>
-
-
-
-            </div>
-        </div>
-    </div>
+    
+    @{
+        Html.RenderPartial("Customer_Modal/Add_New_Customer_Modal");
+    }
+
+    @*----------------------------POP UP END ADD CUSTOMER--------------------------------*@
 
     <input type="hidden" value="1" id="rowCounterrr"/>
     <input type="hidden" value="1" id="ApnaApnaRowNumber"/>
 
-    @*----------------------------POP UP END ADD CUSTOMER--------------------------------*@
+    
 
     @*----------------------------POP UP EDIT CUSTOMER--------------------------------*@
 
@@ -1388,162 +1052,14 @@
     
 
 
-    @*----------------------------POP UP for POSTCODE CONFIRMATION--------------------------------*@
+  @*----------------------------POP UP for POSTCODE CONFIRMATION--------------------------------*@
 
-    <div style="z-index:99999;" class="modal fade" id="Postcode_Confirmation" tabindex="-1" role="dialog" aria-hidden="false">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content modal-style-custom">
+    @{
+        Html.RenderPartial("Customer_Modal/Add_Customer_Postcode");
+    }
 
-                <div class="title col-md-12">
-                    <span>Confirm</span>
-                    <img src="~/img/images/c3.png" class="close mr--13 pull-right" data-dismiss="modal" onclick="close_modal_new_Customer()" />
-                </div>
+  @*----------------------------POP UP END for POSTCODE CONFIRMATION--------------------------------*@
 
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                    <div class="x_panel">
-
-                        <div id="" class="black-color">
-                            <div class="empty-height"></div><div class="empty-height"></div>
-                            <div class="text-center"><p class="color"><b>Please confirm below address <br />If correct, press ok</b></p></div>
-
-                            <div class="empty-height"></div><div class="empty-height"></div>
-
-                            <div class="text-center italic">
-                                <label id="street_postcode"></label><br />
-                            </div>
-                            <div class="text-center italic">
-                                <label id="town_postcode"></label><br />
-                            </div>
-                            <div class="text-center italic">
-                                <label id="county_postcode"></label><br />
-                            </div>
-                            <div class="text-center italic">
-                                <label id="country_postcode"></label><br />
-                            </div>
-                            <div class="text-center italic">
-                                <label id="postcode_popup"><span> ?</span></label><br />
-                            </div>
-
-
-
-
-
-                            <div class="empty-height"></div>
-
-
-
-
-
-
-                            <div class="col-md-12">
-
-
-                                <div class="col-md-6">
-                                    <input type="button" onclick="Add_Postcode_New_Supplier()" value="Add" class="btn btn-success btn-mini center-block width-95">
-                                </div>
-
-
-                                <script>
-
-
-
-                                </script>
-
-
-                                <div class="col-md-6">
-                                    <input type="button" value="Cancel" class="btn btn-primary btn-mini center-block width-95" onclick="close_modal_new_Customer()">
-                                </div>
-
-
-
-
-                            </div>
-
-
-                            <div class="col-md-12">
-                                <div class="col-md-3"></div>
-
-
-                                <div class="col-md-3"></div>
-
-
-
-                            </div>
-
-
-                        </div>
-                    </div>
-                </div>
-
-                <div class="modal-footer"></div>
-                <div class=""></div>
-
-            </div>
-        </div>
-    </div>
-
-    @*----------------------------POP UP for POSTCODE CONFIRMATION--------------------------------*@
-
-
-    <div class="clearfix"></div>
-
-
-    @*----------------------------POP UP for POSTCODE HOUSE NUMBER--------------------------------*@
-
-
-    <div style="z-index:999999;" class="modal fade" id="Postcode_House_Number" tabindex="-1" role="dialog" aria-hidden="false">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content modal-style-custom">
-
-                <div class="title col-md-12">
-                    <span>Prompt</span>
-                    <img src="~/img/images/c3.png" class="close mr--13 pull-right" data-dismiss="modal" onclick="close_modal_cancel_Customer()" />
-                </div>
-
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                    <div class="x_panel">
-
-                        <div id="" class="black-color">
-                            <div class="empty-height"></div>
-                            <div class="empty-height"></div>
-
-                            <div class="text-center italic">
-
-                                <label>Please Enter House Number</label>
-
-                                <input type="text" id="house_number_postcode_add" />
-
-                            </div>
-
-                            <div class="empty-height"></div><div class="empty-height"></div><div class="empty-height"></div>
-
-                            <div class="col-md-12">
-
-                                <div class="col-md-3"></div>
-
-                                <div class="col-md-6">
-                                    <input type="button" onclick="House_no_Postcode_New_Supplier()" value="Add" class="btn btn-success btn-mini center-block width-95">
-                                </div>
-
-
-
-
-                                <div class="col-md-3"></div>
-                                @*<input type="button" value="Cancel" class="btn btn-primary btn-mini center-block width-95" onclick="close_modal()">*@
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-                <div class="modal-footer"></div>
-                <div class=""></div>
-
-            </div>
-        </div>
-    </div>
-
-    @*----------------------------POP UP for POSTCODE HOUSE NUMBER--------------------------------*@
 
 
 
@@ -1551,6 +1067,9 @@
         <script src="~/Scripts/new-js/jquery.datatables.min.js"></script>*@
     <script src="~/Scripts/Sale/New_Invoice.js"></script>
     <script src="~/Scripts/Customer/Edit_Customers.js"></script>
+    <script src="~/Scripts/Common_JS_Functions/Common_JS.js"></script>
+    <script src="~/Scripts/Postcode_Customer/Add_Customer_Postcode.js"></script>
+    <script src="~/Scripts/Postcode_Customer/Edit_Customer_Postcode.js"></script>
 
 </body>
 
