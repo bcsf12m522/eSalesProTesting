@@ -361,7 +361,7 @@ function Different_Address() {
 
 function close_modal() {
     $("#Edit_Customer_on_Context").toggle();
-    $("#Edit_Customer_Modal").hide();
+    //$("#Edit_Customer_Modal").hide();
     
 
     //alert("CLOSE");

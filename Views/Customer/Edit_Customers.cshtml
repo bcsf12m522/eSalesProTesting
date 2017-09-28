@@ -7,7 +7,6 @@
     <form id="demo-form2" action="@Url.Action("Edit", "Customer", new {id=@Model.Id })" method="post" data-parsley-validate class="form-horizontal form-label-left" enctype="multipart/form-data">
 
 
-
         <div class="col-md-12 text-center">
 
             <div class="col-md-6">
@@ -218,7 +217,7 @@
             <div class="col-md-3">
                 @*<a href="" class="btn btn-primary btn-mini center-block" style="width:135px">Cancel</a>*@
                 
-                <a href="" onclick="close_modal()"  class="btn btn-primary blue-btn-style-modal btn-mini center-block a-cancel">Cancel</a>
+                <a href="#" onclick="close_modal_every_edit()"  class="btn btn-primary blue-btn-style-modal btn-mini center-block a-cancel">Cancel</a>
                 
             </div>
             <div class="col-md-3"></div>

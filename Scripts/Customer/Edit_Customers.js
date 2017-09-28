@@ -91,14 +91,19 @@ function GetCustomer(ID) {
         success: function (data) {
             //alert("SUCCESS");
 
+            //alert(data);
+
+            $("#ExistingModal").hide();
             document.getElementById("edit_customers").innerHTML = data;
+            $("#Edit_Customer_on_Context").addClass("in").show("slow");
+            
 
-            $("#ExistingModal").toggle("slow");
-
+            
+            
             //  $("#hhh").toggle();
 
             //  $("#ExistingModal").removeClass("fade").modal("hide");
-            $("#Edit_Customer_on_Context").addClass("in").show("slow");
+            
 
 
             //$("#hhh").show('fast');

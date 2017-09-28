@@ -4,7 +4,7 @@ $('.disableRightClick').on("contextmenu", function (e) {
     return false;
 });
 
-$('#disableRightClick').on("contextmenu", function (e) {
+//$('#disableRightClick').on("contextmenu", function (e) {
 
-    return false;
-});
+//    return false;
+//});//});//});
