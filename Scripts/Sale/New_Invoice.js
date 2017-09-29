@@ -129,7 +129,7 @@
 }
 
 function image_click(counter) {
-    //alert("counter" + counter);
+    alert("counter" + counter);
     var p_name = $("#codeforProduct" + counter).val();
 
     //alert("Name " + p_name);

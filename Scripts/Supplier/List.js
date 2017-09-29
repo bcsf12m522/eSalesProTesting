@@ -1,4 +1,7 @@
-﻿function edit_supp(Id,page) {
+﻿function edit_supp(Id) {
+    var page = $("#")
+    
+
     //alert("ASASASDADADASDAS");
     //alert("Page" + page);
     $.ajax({
