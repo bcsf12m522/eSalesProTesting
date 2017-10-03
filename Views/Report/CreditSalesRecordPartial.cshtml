@@ -2,7 +2,7 @@
 @{
     decimal total = 0;
 }
-<table border="0" class="table table-responsive border_black" id="table_on_dates">
+<table border="0" class="table table-responsive border_black hide_credit_sales_report" id="table_on_dates">
     <thead>
         <tr class="table-heading-fonts table-main-headings">
             <th class="text-center">Type</th>
@@ -22,12 +22,12 @@
         @foreach (var obj in Model)
         {
 
-            <tr onclick="aaa()">
+            <tr ondblclick="customer_summary_list(@obj.Id,@obj.Customer_Type_Id)">
                 <td data-title="User ID">@obj.Customer_Type.Type</td>
                 <td data-title="User ID">@obj.Name</td>
                 <td data-title="User ID">@obj.phone</td>
                 <td data-title="User ID">@obj.Email</td>
-                <td class="text-center" data-title="User ID">£ @obj.Credit_Limit</td>
+                <td class="text-center" data-title="User ID">£ @obj.Credit_Limit_Old</td>
                 <td class="text-center" data-title="User ID">£ @obj.Balance</td>
                 <td data-title="User ID">@obj.is_Active</td>
             </tr>

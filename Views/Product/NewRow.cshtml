@@ -45,6 +45,7 @@
 
     <input type="hidden" id="@String.Concat("total_hidden", counter)" name="@String.Concat("total_hidden", counter)" />
     <input type="hidden" id="@String.Concat("total_vat_hidden", counter)" name="@String.Concat("total_vat_hidden", counter)" />
+    <input hidden type="text" class="remove_div" id="@String.Concat("serial_number_value_input_checkbox", counter)" name="@String.Concat("serial_number_value_input_checkbox", counter)" value="0" />
 
 </tr>
 
@@ -70,7 +71,7 @@ else
         @*<td class="text-center border-right-td width-68"><div id="@String.Concat("invoice_total",counter)" class="6 total_invoice_background text-center">£0</div></td>
             <td class="border-right-td text-center width-78 hidecolumn"><div id="@String.Concat("invoice_total_vat",counter)" class="7 total_invoice_background text-center">£0</div></td>*@
 
-
+        
 
         <td class="border-right-td"><div class="text-center"><input onkeypress="validate(event)" onkeyup="Total(@counter);" id="@String.Concat("invoice_discount",@counter)" placeholder="0.0" class="8 unbold width-45 text-center" name="@String.Concat("invoice_discount",counter)" type="text"></div></td>
         <td class="hidden"><input type="text" class="hidden" name="@String.Concat("invoice_product_id",counter)" id="@String.Concat("invoice_product_id",counter)" /></td>
@@ -89,8 +90,10 @@ else
             </a>
         </td>
 
-        <input type="hidden" id="@String.Concat("total_hidden", counter)" name="@String.Concat("total_hidden", counter)" />
-        <input type="hidden" id="@String.Concat("total_vat_hidden", counter)" name="@String.Concat("total_vat_hidden", counter)" />
+        <input type="hidden" id="@String.Concat("total_hidden", counter)" name="@String.Concat("total_hidden", counter)"/>
+        <input type="hidden" id="@String.Concat("total_vat_hidden", counter)" name="@String.Concat("total_vat_hidden", counter)"/>
+
+        <input hidden type="text" class="remove_div" id="@String.Concat("serial_number_value_input_checkbox", counter)" name="@String.Concat("serial_number_value_input_checkbox", counter)" value="0"/>
 
     </tr>
 }

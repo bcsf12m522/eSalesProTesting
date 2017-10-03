@@ -32,6 +32,57 @@
 }
 
 
+function findBySerial(e) {
+
+    var serial = document.getElementById('serial_number_id').value;
+
+    if (e.keyCode === 13) {
+        alert("dsadadsada " + serial);
+    
+
+    $("#table_div_Load").hide();
+
+    $("#loader_div").show();
+    $("#customer_summary").hide();
+    $("#date_click_div").hide();
+    
+
+    $.ajax({
+
+        url: '/Report/SaleReportBySerial/',
+        data: { str: serial },
+        type: 'Get',
+        cache: false,
+        success: function (data) {
+
+            alert("SUCCESS");
+            $("#date_click_div").show();
+            document.getElementById('date_click_div').innerHTML = data;
+            $("#loader_div").hide();
+            //$("#table_on_dates_filter").hide();
+
+              $('#table_on_dates').dataTable();
+
+            //$("#table_on_dates_length").hide();
+            //$("#table_on_dates_filter").hide();
+        },
+        error: function (response) {
+            swal({
+                title: "CANNOT FIND THE SERIAL NUMBER",
+                text: "No Serial Number Available.",
+                type: "warning",
+                confirmButtonColor: '#DD6B55',
+                confirmButtonText: 'Okay',
+            })
+            $("#loader_div").hide();
+            return false;
+        }
+    })
+    }
+}
+
+
+
 
 function findByInvoice(id) {
 

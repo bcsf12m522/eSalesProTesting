@@ -72,6 +72,9 @@
         <AssociationConnector Association="Database1Model.FK_Invoice_Document_To_Invoice" />
         <AssociationConnector Association="Database1Model.FK_Item_Sale_Document_To_Invoice" />
         <AssociationConnector Association="Database1Model.FK_Quote_Document_To_Invoice" />
+        <EntityTypeShape EntityType="Database1Model.Serial_Number_Table" Width="1.5" PointX="19.5" PointY="16.5" />
+        <AssociationConnector Association="Database1Model.FK_Serial_Number_Table_ToTable" />
+        <AssociationConnector Association="Database1Model.FK_Serial_Number_Table_ToTable_1" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

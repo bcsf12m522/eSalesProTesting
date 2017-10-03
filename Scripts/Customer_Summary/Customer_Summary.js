@@ -3,7 +3,7 @@
     //alert("asdd");
     $("#loader_div").show();
     $("#customer_summary_loading_hide").hide();
-    
+    $(".hide_credit_sales_report").hide();
 
     var name = document.getElementById('customer_value_1' + id);
     var phone = document.getElementById('customer_value_2' + id);

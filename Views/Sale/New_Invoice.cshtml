@@ -26,8 +26,6 @@
                         <div id="edit_invoice">
                             <form id="demo-form2" action="@Url.Action("Create_Sale","Sale")" method="post" data-parsley-validate class="" enctype="multipart/form-data">
 
-                                <a href="#" data-toggle="modal" data-target="#Serial_Number_Modal">SERIAL NUMBER</a>
-
                                 
                                 <input hidden type="text" value="-4" id="customer_list_edit_modal_value" />
 
@@ -218,7 +216,7 @@
                                                     <div class="form-group">
                                                         <label class="pull-left width-134" for="middle-name">Purchase Order No</label>
                                                         <div class="pull-left">
-                                                            <input class="width-145 text-center" type="text" value="ABC" name="invoice_purchase_no" id="purchase_number" placeholder="N/A">
+                                                            <input class="width-145 text-center" type="text" name="invoice_purchase_no" id="purchase_number" placeholder="N/A">
                                                         </div>
                                                     </div>
 
@@ -271,7 +269,7 @@
                                                     <td class="border-right-td text-center"><input onkeyup="Total(1);" onkeypress="validate(event)" id="invoice_discount1" placeholder="0.0" class="8 unbold width-45 text-center" name="invoice_discount1" type="text"></td>
 
                                                     <td class="hidden"><input type="text" class="hidden" id="invoice_product_id1" name="invoice_product_id1"/></td>
-                                                    
+                                                    <input hidden type="text" id="@String.Concat("serial_number_value_input_checkbox1")" name="@String.Concat("serial_number_value_input_checkbox1")" value="0" />
                                                     
                                                     <td class="text-center width-27p" style="vertical-align:middle;">
                                                         <a href="#" onclick="addNewRow(); rowcounterPlus();" class="showdiv">
@@ -487,6 +485,7 @@
                                 <input type="text" class="" id="left_amount_hidden" name="left_amount_hidden" hidden/>
                                 <label hidden>Amount Paid</label><input type="text" class="" id="amount_paid_hidden" name="amount_paid_hidden" hidden/>
 
+                                
 
                                 <input type="text" hidden name="doc_type_page_load" id="doc_type_page_load"/>
 
@@ -1175,8 +1174,8 @@
 
                     <div class="win text-center">
                         <span class="bold black-color">Please Enter Serial Number for Item</span>
-                        <label class="bold black-color"><input readonly type="checkbox" id="batch_scan_checkbox" onchange="batch_scan_function(1)" value="" />Batch Scan :</label>
-                        <input onkeypress="Serial_Number_Enter_Click(event)" id="serial_number_value" class="txt" type="text" style="width:100%;text-align:center">
+                        @*<label class="bold black-color"><input readonly type="checkbox" id="batch_scan_checkbox" onchange="batch_scan_function(1)" value="" />Batch Scan :</label>*@
+                        <input readonly onkeypress="Serial_Number_Enter_Click(event)" id="serial_number_value" class="txt" type="text" style="width:100%;text-align:center">
 
                         <div class="empty-height"></div><div class="empty-height"></div>
 
@@ -1188,10 +1187,12 @@
                                
                                 
                             </div>*@
-                            <label>Quantity Count </label><input type="text" id="quantity_for_loop"/>
-                            <label>Row Counter Count </label><input type="text" id="rowCounterSerialNumber" />
-                            <label>Enter Count </label><input type="text" id="EnterCounterSerialNumber" />
+                            <label hidden>Quantity Count </label><input hidden type="text" id="quantity_for_loop" />
+                            <label>Row Counter Count </label><input  type="text" id="rowCounterSerialNumber" />
+                            <label hidden>Enter Count </label><input hidden type="text" id="EnterCounterSerialNumber" />
 
+                            <label class="font-13">Check to Enter Serial Number<input type="checkbox" value="0" id="serial_number_checkedbox" name="serial_number_checkedbox" onchange="serial_number_checkbox()" /></label>
+                            
                             @*<div class="">
                                 <a class="btn btn-success blue-btn-style btn-mini bold width-120">
                                     Ok
@@ -1217,102 +1218,27 @@
 </div>
 
 <script>
-    function serial_number_click(counter) {
+
+    //function batch_scan_function(quant) {
         
-        $("#EnterCounterSerialNumber").val(0);
-        $("#rowCounterSerialNumber").val(counter);
-        var quantity = $("#invoice_quantity" + counter).val();
+    //    var loop_size = $("#quantity_for_loop").val();
         
+    //    var checkbox = document.getElementById("batch_scan_checkbox");
 
-
-        if (quantity == null || quantity == "") {
-            //alert(p_name);
-
-            swal({
-                title: "NO PRODUCT SELECTED",
-                text: "Please Select the Product to view the Image",
-                type: "warning",
-                confirmButtonColor: '#DD6B55',
-                confirmButtonText: 'Okay',
-            },
-
-            function () {
-            });
-            return false;
-        }
-
-        else {
-            $("#Serial_Number_Modal").addClass("in").show("slow");
-
-            $("#quantity_for_loop").val(quantity);
-
-            batch_scan_function(1);
-            //alert("Quantity " + quantity);
-        }
-
-    }
-
-    function batch_scan_function(quant) {
-        
-        var loop_size = $("#quantity_for_loop").val();
-        
-        var checkbox = document.getElementById("batch_scan_checkbox");
-
-        if(loop_size != 1 || loop_size != 0 ){
-            //alert("IF loop_size " + loop_size);
-            $('#batch_scan_checkbox').prop('checked', true);
+    //    if(loop_size != 1 || loop_size != 0 ){
+    //        //alert("IF loop_size " + loop_size);
+    //        $('#batch_scan_checkbox').prop('checked', true);
 
           
-        }
-        else{
-            loop_size = 1;
-            $('#batch_scan_checkbox').prop('checked', false);
-            //alert("ELSE loop_size " + loop_size);
-        }
-    }
+    //    }
+    //    else{
+    //        loop_size = 1;
+    //        $('#batch_scan_checkbox').prop('checked', false);
+    //        //alert("ELSE loop_size " + loop_size);
+    //    }
+    //}
 
-
-    function Serial_Number_Enter_Click(e) {
-
-        //alert("Serial Number");
-
-        var counter = $("#rowCounterSerialNumber").val();
-        var loop_size = $("#quantity_for_loop").val();
-        var enter_count = $("#EnterCounterSerialNumber").val();
-
-        //alert("enter_count " + enter_count + "  loop_size  " + loop_size)
-
-        if (enter_count != loop_size) {
-        //    alert("IF COUNT");
-
-            if (e.keyCode === 13) {
-                //alert("ENTER");
-                //e.preventDefault(); // Ensure it is only this code that rusn
-
-                //alert("variable " + variable);
-
-                var variable = " (Serial No. " + $("#serial_number_value").val() + ")";
-                var box = $("#invoice_description" + counter);
-                box.val(box.val() + variable);
-
-                enter_count = +enter_count + +1;
-
-                $("#EnterCounterSerialNumber").val(enter_count);
-
-                $("#serial_number_value").val("")
-                if (enter_count == loop_size) {
-                    $("#Serial_Number_Modal").hide();
-                }
-                //alert($("#invoice_description" + counter).append($.trim(variable).text()));
-                //$("#invoice_description"+counter).append(variable);
-            }
-        }
-    }
-
-
-    function close_serial_number_modal() {
-        $("#Serial_Number_Modal").hide();
-    }
+   
 
 
 </script>

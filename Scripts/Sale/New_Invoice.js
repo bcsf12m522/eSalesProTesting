@@ -631,11 +631,12 @@ function Deposit_Payment() {
 }
 
 function RemoveAddedRow(id) {
+    alert(id);
     var total = document.getElementById("invoice_total" + id).value;
     var net = $("#net_invoice_hidden").val();
 
     //var vat = $("#vat_invoice").val();
-
+    
 
     var new_net = net - total;
     var vat = (new_net * 0.2);
@@ -657,6 +658,11 @@ function RemoveAddedRow(id) {
     $("#rowId" + id).closest(".remove_div").remove();
     rowcounterMinus();
     
+    //$("#serial_number_value_input_checkbox" + id).val(0);
+
+    //$("#serial_number_value_input_checkbox" + id).closest(".remove_div").remove();
+
+
     //alert("NET" + a);
 }
 
@@ -1356,6 +1362,167 @@ function rowcounterMinus() {
 }
 
 
+//----------------------------SERIAL NUMBER JS FUNCTIONS------------------------------------
+
+function serial_number_click(counter) {
+    alert(counter);
+    $("#EnterCounterSerialNumber").val(0);
+    $("#rowCounterSerialNumber").val(counter);
+    var quantity = $("#invoice_quantity" + counter).val();
 
 
 
+    if (quantity == null || quantity == "") {
+        //alert(p_name);
+
+        swal({
+            title: "NO PRODUCT SELECTED",
+            text: "Please Select the Product to view the Image",
+            type: "warning",
+            confirmButtonColor: '#DD6B55',
+            confirmButtonText: 'Okay',
+        },
+
+        function () {
+        });
+        return false;
+    }
+
+    else {
+        $("#Serial_Number_Modal").addClass("in").show("slow");
+
+        $("#quantity_for_loop").val(quantity);
+
+        document.getElementById("serial_number_checkedbox").checked = false;
+        $("#serial_number_value").prop("readonly", true);
+
+
+        batch_scan_function(1);
+        //alert("Quantity " + quantity);
+    }
+
+}
+
+
+function Serial_Number_Enter_Click(e) {
+
+    //alert("Serial Number");
+
+    var counter = $("#rowCounterSerialNumber").val();
+    var loop_size = $("#quantity_for_loop").val();
+    var enter_count = $("#EnterCounterSerialNumber").val();
+
+    //alert("enter_count " + enter_count + "  loop_size  " + loop_size)
+
+    if (enter_count != loop_size) {
+        //    alert("IF COUNT");
+
+        if (e.keyCode === 13) {
+            //alert("ENTER");
+            //e.preventDefault(); // Ensure it is only this code that rusn
+
+            //alert("variable " + variable);
+
+            var variable = " (Serial No." + $("#serial_number_value").val() + ")";
+            var box = $("#invoice_description" + counter);
+            box.val(box.val() + variable);
+
+            enter_count = +enter_count + +1;
+
+            $("#EnterCounterSerialNumber").val(enter_count);
+
+            $("#serial_number_value").val("")
+            if (enter_count == loop_size) {
+                $("#Serial_Number_Modal").hide();
+            }
+            //alert($("#invoice_description" + counter).append($.trim(variable).text()));
+            //$("#invoice_description"+counter).append(variable);
+        }
+    }
+    
+
+}
+
+
+function close_serial_number_modal() {
+    $("#Serial_Number_Modal").hide();
+}
+
+
+function serial_number_checkbox() {
+    //alert("sadsadsadas");
+    var value = $("#serial_number_checkedbox").val();
+    var row_count = $("#rowCounterSerialNumber").val();
+    
+
+
+    if (document.getElementById("serial_number_checkedbox").checked) {
+        //alert("IF");
+        $("#serial_number_value_input_checkbox" + row_count).val(1);
+        $("#serial_number_value").prop("readonly", false);
+    }
+    else {
+        $("#serial_number_value_input_checkbox" + row_count).val(0);
+        //alert("ELSE");
+    }
+
+
+    //if (value == 1) {
+    //    $("#serial_number_value").prop("readonly", false);
+    //}
+
+    //else {
+    //    var value = $("#serial_number_checkedbox").val(0);
+    //}
+
+}
+
+
+
+//----------------------------SERIAL NUMBER JS FUNCTIONS------------------------------------
+
+
+
+
+
+//function Serial_Number_Enter_Click(e) {
+
+//    //alert("Serial Number");
+
+//    var counter = $("#rowCounterSerialNumber").val();
+//    var loop_size = $("#quantity_for_loop").val();
+//    var enter_count = $("#EnterCounterSerialNumber").val();
+
+//    //alert("enter_count " + enter_count + "  loop_size  " + loop_size)
+
+//    if (enter_count != loop_size) {
+//        //    alert("IF COUNT");
+
+//        if (e.keyCode === 13) {
+//            //alert("ENTER");
+//            //e.preventDefault(); // Ensure it is only this code that rusn
+
+//            //alert("variable " + variable);
+
+//            var variable = " (Serial No. " + $("#serial_number_value").val() + ")";
+//            var box = $("#invoice_description" + counter);
+//            box.val(box.val() + variable);
+
+//            enter_count = +enter_count + +1;
+
+//            $("#EnterCounterSerialNumber").val(enter_count);
+
+//            $("#serial_number_value").val("")
+//            if (enter_count == loop_size) {
+//                $("#Serial_Number_Modal").hide();
+//            }
+//            //alert($("#invoice_description" + counter).append($.trim(variable).text()));
+//            //$("#invoice_description"+counter).append(variable);
+//        }
+//    }
+//}
+
+
+//function close_serial_number_modal() {
+//    $("#Serial_Number_Modal").hide();
+//}
