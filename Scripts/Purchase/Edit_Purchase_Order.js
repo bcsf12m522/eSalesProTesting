@@ -811,26 +811,32 @@ function payment_status() {
 
     //alert("ddsaadssaasd");
     var value = $("#payment_status_id").val();
+    var gross = $("#order_total_hidden").val();
+
 
     if (value == 1) {
+        $("#amount_paid_hidden").val(gross);
+        $("#left_amount_hidden").val(0);
         $("#payment_piriority_tr").hide();
         $("#partial_payment_option").hide();
     }
 
     else if (value == 2) {
+        $("#amount_paid_hidden").val(0);
+        $("#left_amount_hidden").val(gross);
         $("#payment_piriority_tr").show();
         $("#partial_payment_option").hide();
     }
 
-    else if (value == 3) {
-        //$("#Partial_Payment_Modal").modal("show");
-        //alert("3");
-        $("#Partial_Payment_Modal").modal("show");
-        $("#payment_piriority_tr").show();
-        $("#partial_payment_option").show();
+    //else if (value == 3) {
+    //    //$("#Partial_Payment_Modal").modal("show");
+    //    //alert("3");
+    //    $("#Partial_Payment_Modal").modal("show");
+    //    $("#payment_piriority_tr").show();
+    //    $("#partial_payment_option").show();
 
 
-    }
+    //}
 }
 function Partial_Payment() {
 
@@ -879,7 +885,7 @@ function checkCreditLimit() {
 
     //alert("check_credit_limit");
     var limits = document.getElementById('credit_limit_input').value;
-    //alert("Credit Limit" + limits);
+    alert("Credit Limit" + limits);
 
     var order_total1 = document.getElementById("order_total_hidden").value;
     var payment_status = document.getElementById("payment_status_id").value;
@@ -889,84 +895,65 @@ function checkCreditLimit() {
     var limit_float = limits - 0;
 
 
+
     var limit = limit_float.toFixed(2);
     //alert("total" + order_total);
     //alert("limit" + limit);
 
 
-    if (payment_status != 1) {
+    if (payment_status == 1) {
         //alert("NOT 1");
         //alert("LIMIT" + limit);
         //alert("Amount Left" + amount_left);
-        if (payment_status == 3) {
-            //alert("3");
-            var amount_left1 = document.getElementById("left_amount_hidden").value;
-
-            var amount_left2 = amount_left1 - 0;
-            var amount_left = amount_left2.toFixed(2);
+        //alert("payment_status " + payment_status);
+        return true;
 
 
-            //alert("limit" + limit);
-            //alert("total" + order_total);
-            //alert("Amount Left" + amount_left);
-
-
-
-            if (parseFloat(amount_left) <= parseFloat(limit)) {
-                //alert("Amount Left" + amount_left);
-                //alert("Partial Payment Not Reached your Credit Limit");
-                return true;
-            }
-            else {
-
-                swal({
-                    title: "LIMIT REACHED",
-                    text: "Reached to your Credit Limit, Please update your Credit Limit",
-                    type: "warning",
-                    confirmButtonColor: '#DD6B55',
-                    confirmButtonText: 'Okay',
-                },
-       function () {
-       });
-
-                //alert("Partial Payment You have Reached your Credit Limit\nYou have to Update your Credit Limit");
-                return false;
-            }
-        }
-
-        else {
-            //alert("else 3");
-            //alert("limit" + limit);
-            //alert("total" + order_total);
-            if (parseFloat(order_total) > parseFloat(limit)) {
-                //alert("if 2");
-                //alert("Gross" + gross);
-                //alert("Limit" + limit);
-                //alert("You have Reached your Credit Limit\nYou have to Update your Credit Limit");
-
-                swal({
-                    title: "LIMIT REACHED",
-                    text: "Reached to your Credit Limit, Please update your Credit Limit",
-                    type: "warning",
-                    confirmButtonColor: '#DD6B55',
-                    confirmButtonText: 'Okay',
-                },
-    function () {
-    });
-
-                return false;
-            }
-            else {
-                //alert("else 2");
-                //alert("Else limit" + limit);
-                //alert("Else total" + order_total);
-                //alert("Not Reached your Credit Limit");
-                return true;
-            }
-        }
     }
     else {
-        //alert("else 1");
-        return true;
+
+        //alert("payment_status " + payment_status);
+        //alert("else 3");
+        //alert("total" + order_total);
+        //alert("limit" + limit);
+
+        if (parseFloat(order_total) > parseFloat(limit)) {
+            //alert("if 2");
+            //alert("Gross" + gross);
+            //alert("Limit" + limit);
+            //alert("You have Reached your Credit Limit\nYou have to Update your Credit Limit");
+
+            swal({
+                title: "LIMIT REACHED",
+                text: "Reached to your Credit Limit, Please update your Credit Limit",
+                type: "warning",
+                confirmButtonColor: '#DD6B55',
+                confirmButtonText: 'Okay',
+            },
+function () {
+});
+
+            return false;
+        }
+        else {
+            //alert("else 2");
+            //alert("Else limit" + limit);
+            //alert("Else total" + order_total);
+            //alert("Not Reached your Credit Limit");
+            return true;
+        }
     }
+
+
+
+
+
+
+
+
+
+
+
 }
+
+

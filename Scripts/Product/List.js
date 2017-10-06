@@ -1,4 +1,6 @@
-﻿//---------------Price & VAT Calculations onkeypress ---------------//
+﻿
+
+//---------------Price & VAT Calculations onkeypress ---------------//
 
 function Normal_Price_Calculating_VAT(id) {
     if (id == 1) {

@@ -1,6 +1,6 @@
 ﻿@model List<eSalesPro.Models.PO_Sale_Invoice>
 
-<body id="body-index">
+<body id="body-index" @*onload="payment_status()"*@>
     <div id="sticky-footer-wrap">
 
 
@@ -82,7 +82,7 @@
                                             <input type="text" name="exist_customer_idd" class="hidden" id="exist_customer_id" />
 
                                             <input type="text" name="" class="hidden" id="" />
-                                            <input type="text" id="credit_limit_input" name="credit_limit_input" hidden />
+                                            <input type="text" id="credit_limit_input" name="credit_limit_input" value="@ViewBag.purchase.Supplier.Credit_Limit"/>
                                             <input type="text" id="supplier_IDD" hidden name="supplier_IDD" value="@ViewBag.purchase.Supplier.Id" />
                                             <input type="text" id="supplier_code" hidden name="supplier_code" />
 
@@ -106,19 +106,52 @@
 
 
                                             <div class="col-md-5">
-                                                @*<label><input type="checkbox" id="sold_history_checkbox" value="" />Check Sold History</label><br />
-                                                    <label id="hideExcludeVat"><input type="checkbox" id="excludeVat" value="" onclick="excludeVatUnchecked();" />Exclude VAT</label>
-                                                    <label hidden id="show_details"><input type="checkbox" id="show_details" value="" />Show Details</label>*@
+
+                                                <div>
+                                                    <h5 class="bold mt-0">Invoice Image</h5>
+                                                    <div class="fileupload fileupload-new" style="max-width:80px" data-provides="fileupload" align="center">
+
+                                                        @if (@ViewBag.purchase.Image_Invoice != null)
+                                                        {
+                                                            {
+                                                                var base64 = Convert.ToBase64String(@ViewBag.purchase.Image_Invoice);
+                                                                var imgsrc = string.Format("data:image/gif;base64,{0}", base64);
+
+                                                                <div class="fileupload-new thumbnail"><img src="@imgsrc" class="product-img" /></div>
+                                                            }
+
+
+
+                                                        }
+
+                                                        else
+                                                        {
+                                                            <div class="fileupload-new thumbnail"><img src="~/img/images/default-image.jpg" class="product-img" /></div>
+                                                        }
+
+                                                        <div class="fileupload-preview fileupload-exists thumbnail @*product-img*@" style="max-width:80px;max-height:80px"></div>
+
+                                                        <div>
+
+                                                            <span class="btn btn-file btn-primary btn-margin-product" style="max-height:20px;font-size:11px;padding:3px"><span class="fileupload-new">Select</span><span class="fileupload-exists">Change</span><input type="file" name="file" id="a_image1" onchange="Checkfilesimage(1)"></span>
+
+                                                            <a href="javascript:;" class="btn btn-primary btn-margin-product fileupload-exists" style="padding: 1px;font-size:11px" data-dismiss="fileupload">Remove</a>
+
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
                                             </div>
+
+
+
+
                                             <div class="col-md-7 pl-0 pr-0">
 
-
-
-
-
                                                 @*<div class="form-group pull-left">
-                                                        <label><input type="checkbox" value="" />Filter Supplier</label>
-                                                    </div>*@
+                    <label><input type="checkbox" value="" />Filter Supplier</label>
+                </div>*@
 
                                                 <label class="pull-left"><input type="checkbox" value="" id="filter_supplier_checkbox" />Filter Supplier</label>
 
@@ -407,6 +440,10 @@
                                                             <option value="@ViewBag.purchase.Payment_Status_Id">@ViewBag.purchase.Payment_Status.Status</option>
                                                             @foreach (var status in ViewBag.Payment_Status)
                                                             {
+                                                                if (@ViewBag.purchase.Payment_Status_Id == status.Id)
+                                                                {
+                                                                    continue;
+                                                                }
                                                                 <option value="@status.Id">@status.Status</option>
                                                             }
                                                         </select>
@@ -495,12 +532,21 @@
                                                 </tr>
 
 
-
-                                                <tr class="partial_paid deposit_paid" style="display:none">
+                                                @*@if (@ViewBag.purchase.Amount_Left != 0)
+                                                { }*@
+                                                
+                                                <tr class="partial_paid deposit_paid">
                                                     <td class="bold">Amount left to Pay</td>
-                                                    <td id="amount_left_td" class="text-right">@ViewBag.purchase.</td>
+                                                    <td id="amount_left_td" class="text-right">@ViewBag.purchase.Amount_Left</td>
                                                 </tr>
 
+                                                @*<tr class="partial_paid deposit_paid">
+                                                    <td class="bold">Amount left to Pay</td>
+                                                    <td id="amount_left_td" class="text-right">@ViewBag.purchase.Amount_Left</td>
+                                                </tr>*@
+
+
+                                                
 
 
                                             </table>
@@ -565,9 +611,9 @@
 
                                 <input id="counters" value="" type="text" hidden/>
 
-                                <input type="text" class="" id="order_sub_total_hidden" placeholder="order Subtotal" name="order_sub_total_hidden" hidden />
-                                <input type="text" class="" id="order_vat_hidden" name="order_vat_hidden" placeholder="order vat" hidden />
-                                <input type="text" class="" id="order_total_hidden" name="order_total_hidden" placeholder="order total" hidden />
+                                <input type="text" class="" id="order_sub_total_hidden" value="@ViewBag.purchase.Sub_Total" placeholder="order Subtotal" name="order_sub_total_hidden" hidden/>
+                                <input type="text" class="" id="order_vat_hidden" value="@ViewBag.purchase.VAT" name="order_vat_hidden" placeholder="order vat" hidden/>
+                                <input type="text" class="" id="order_total_hidden" value="@ViewBag.purchase.Total" name="order_total_hidden" placeholder="order total" hidden/>
 
 
 
@@ -576,8 +622,8 @@
                                 <input type="text" class="" id="received_total_hidden" name="received_total_hidden" placeholder="received total" hidden />
 
 
-                                <input type="text" class="" id="amount_paid_hidden" name="amount_paid_hidden" placeholder="Amount Paid" hidden />
-                                <input type="text" class="" id="left_amount_hidden" name="left_amount_hidden" placeholder="Left Amount" hidden />
+                                <input type="text" class="" id="amount_paid_hidden" name="amount_paid_hidden" value="@ViewBag.purchase.Amount_Paid" placeholder="Amount Paid" />
+                                <input type="text" class="" id="left_amount_hidden" name="left_amount_hidden" value="@ViewBag.purchase.Amount_Left" placeholder="Left Amount" />
                             </form>
 
 

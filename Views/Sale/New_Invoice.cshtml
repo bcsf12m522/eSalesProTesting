@@ -267,7 +267,7 @@
                                                     @*<td class="border-right-td text-center width-78 hidecolumn"><div id="invoice_total_vat1" class="7 total_invoice_background text-center">£0</div></td>*@
 
                                                     <td class="border-right-td text-center"><input onkeyup="Total(1);" onkeypress="validate(event)" id="invoice_discount1" placeholder="0.0" class="8 unbold width-45 text-center" name="invoice_discount1" type="text"></td>
-
+                                                    
                                                     <td class="hidden"><input type="text" class="hidden" id="invoice_product_id1" name="invoice_product_id1"/></td>
                                                     <input hidden type="text" id="@String.Concat("serial_number_value_input_checkbox1")" name="@String.Concat("serial_number_value_input_checkbox1")" value="0" />
                                                     
@@ -278,7 +278,7 @@
                                                         <a href="#" class="remove" onclick="Clear_Row_Values()">
                                                             <img src="/img/images/cross_new_sale.png">
                                                         </a>
-                                                        <a href="#" onclick="serial_number_click(1)">
+                                                        <a href="#" id="@String.Concat("serial_number1")" onclick="serial_number_click(1)">
                                                             <img src="/img/images/barcode_new_sale.png">
                                                         </a>
                                                         <a href="#" id="img1" data-target="#" data-toggle="modal" onclick="image_click(1)">
@@ -1164,7 +1164,7 @@
 
             <div class="title col-md-12">
                 <span>Message</span>
-                <img src="~/img/images/c3.png" class="close mr--13 pull-right" onclick="close_serial_number_modal()"/>
+                <img src="~/img/images/c3.png" class="close mr--13 pull-right hide_close_btn_on_checked" onclick="close_serial_number_modal()" />
             </div>
 
             <div class="col-md-12 col-sm-12 col-xs-12">
@@ -1217,6 +1217,10 @@
     </div>
 </div>
 
+
+
+
+@*----------------------------POP UP END SERIAL NUMBER CUSTOMER--------------------------------*@
 <script>
 
     //function batch_scan_function(quant) {
@@ -1243,4 +1247,3 @@
 
 </script>
 
-@*----------------------------POP UP END SERIAL NUMBER CUSTOMER--------------------------------*@

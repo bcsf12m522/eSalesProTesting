@@ -106,6 +106,27 @@
                                                 @*<label><input type="checkbox" id="sold_history_checkbox" value="" />Check Sold History</label><br />
                                                     <label id="hideExcludeVat"><input type="checkbox" id="excludeVat" value="" onclick="excludeVatUnchecked();" />Exclude VAT</label>
                                                     <label hidden id="show_details"><input type="checkbox" id="show_details" value="" />Show Details</label>*@
+
+                                                <div>
+                                                    <h5 class="bold mt-0">Invoice Image</h5>
+                                                    <div class="fileupload fileupload-new" style="max-width:80px" data-provides="fileupload" align="center">
+
+                                                        <div class="fileupload-new thumbnail"><img src="~/img/images/default-image.jpg" class="product-img" /></div>
+
+                                                        <div class="fileupload-preview fileupload-exists thumbnail @*product-img*@" style="max-width:80px;max-height:80px"></div>
+
+                                                        <div>
+
+                                                            <span class="btn btn-file btn-primary btn-margin-product" style="max-height:20px;font-size:11px;padding:3px"><span class="fileupload-new">Select</span><span class="fileupload-exists">Change</span><input type="file" name="file" id="a_image1" onchange="Checkfilesimage(1)"></span>
+
+                                                            <a href="javascript:;" class="btn btn-primary btn-margin-product fileupload-exists" style="padding: 1px;font-size:11px" data-dismiss="fileupload">Remove</a>
+
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+
                                             </div>
                                             <div class="col-md-7 pl-0 pr-0">
 
@@ -168,7 +189,7 @@
                                                 <div class="form-group">
                                                     <label class="pull-left width-134" for="middle-name">Invoice No</label>
                                                     <div class="pull-left">
-                                                        <input class="width-145 text-center" type="text" name="purchase_invoice_no" id="purchase_invoice_no" required>
+                                                        <input placeholder="Enter Invoice No." class="width-145 text-center" type="text" name="purchase_invoice_no" id="purchase_invoice_no" required>
                                                     </div>
                                                 </div>
 
@@ -182,7 +203,7 @@
 
 
                                     <div class="col-md-12">
-
+                                          
 
                                         <table border="0" class="table table-responsive border_black" style="width:100%" id="maintable">
                                             <thead>
@@ -204,15 +225,15 @@
                                             <tbody class="black-color">
 
                                                 <tr id="rowId1" class="font-15 id remove_div">
-                                                    <td class="border-right-td"><div class="text-center"><input placeholder="Code" class="yoyo unbold width-110 text-center" id="codeforProduct1" name="yoyoyoyoyoyoyoy1" onkeyup="productList(this.value);" type="text"></div></td>
-                                                    <td class="border-right-td"><div class="text-center"><input onkeypress="validate(event)" id="supplier_code1" onkeyup="" placeholder="Supplier" class="4 new-invoice-width-boxes unbold width-68 text-center" name="supplier_code1" type="text"></div></td>
+                                                    <td class="border-right-td"><div class="text-center"><input placeholder="Code" class="yoyo unbold width-110 text-center" id="codeforProduct1" name="yoyoyoyoyoyoyoy1" onkeyup="productList(event,this.value);" type="text" required></div></td>
+                                                    <td class="border-right-td"><div class="text-center"><input onkeypress="validate(event)" id="supplier_code1" onkeyup="" placeholder="Supplier" class="4 new-invoice-width-boxes unbold width-68 text-center" name="supplier_code1" type="text" required></div></td>
                                                     <td class="border-right-td">
                                                         <textarea class="2 description-text-area unbold width-100p text-center" name="invoice_description1" id="invoice_description1" required="" placeholder="Description"></textarea>
                                                     </td>
-                                                    <td class="border-right-td"><div class="text-center"><input onkeypress="validate(event)" id="invoice_quantity1" onkeyup="Total(1);checkQuantityAvailable(this.value,1)" placeholder="0" class="3 unbold width-45 text-center" name="invoice_quantity1" type="text"></div></td>
+                                                    <td class="border-right-td"><div class="text-center"><input onkeypress="validate(event)" id="invoice_quantity1" onkeyup="Total(1);checkQuantityAvailable(this.value,1)" placeholder="0" class="3 unbold width-45 text-center" name="invoice_quantity1" type="text" required></div></td>
                                                     <td class="border-right-td received_div" style="display:none"><div class="text-center"><input onkeypress="validate(event)" id="invoice_receieved_quantity1" onkeyup="TotalReceived1(1);" placeholder="0" class="3 unbold width-65 text-center" name="invoice_receieved_quantity1" type="text"></div></td>
-                                                    <td class="border-right-td"><div class="text-center"><input onkeypress="validate(event)" id="invoice_price1" onkeyup="Total(1);TotalReceived1(1)" placeholder="0.0" class="4 new-invoice-width-boxes unbold width-68 text-center" name="invoice_price1" type="text"></div></td>
-                                                    <td class="border-right-td hidecolumn text-center"><input onkeypress="validate(event)" id="invoice_price_vat1" onkeyup="Total2(1);TotalReceived2(1)" placeholder="0.0" class="5 new-invoice-width-boxes unbold width-78 text-center" name="invoice_price_vat1" type="text"></td>
+                                                    <td class="border-right-td"><div class="text-center"><input onkeypress="validate(event)" id="invoice_price1" onkeyup="Total(1);TotalReceived1(1)" placeholder="0.0" class="4 new-invoice-width-boxes unbold width-68 text-center" name="invoice_price1" type="text" required></div></td>
+                                                    <td class="border-right-td hidecolumn text-center"><input onkeypress="validate(event)" id="invoice_price_vat1" onkeyup="Total2(1);TotalReceived2(1)" placeholder="0.0" class="5 new-invoice-width-boxes unbold width-78 text-center" name="invoice_price_vat1" type="text" required></td>
                                                     <td class="border-right-td  text-center"><input readonly id="invoice_total1" placeholder="0.0" class="6 new-invoice-width-boxes unbold width-68 text-center" name="invoice_total1" type="text"></td>
                                                     <td class="border-right-td hidecolumn text-center"><input readonly id="invoice_total_vat1" placeholder="0.0" class="7 new-invoice-width-boxes unbold width-78 text-center" name="invoice_total_vat1" type="text"></td>
 
@@ -231,6 +252,12 @@
                                                         <a href="#" class="remove" onclick="">
                                                             <img src="/img/images/cross_new_sale.png">
                                                         </a>
+
+                                                        </a>
+                                                        <a href="#" id="@String.Concat("serial_number1")" onclick="serial_number_click(1)">
+                                                            <img src="/img/images/barcode_new_sale.png">
+                                                        </a>
+
                                                         @*<a href="#">
                                                                 <img src="/img/images/barcode_new_sale.png">
                                                             </a>
@@ -243,6 +270,7 @@
                                                     <input type="text" id="total_hidden1" name="total_hidden1" hidden />
                                                     <input type="text" id="total_vat_hidden1" name="total_vat_hidden1" hidden />
 
+                                                    <input hidden type="text" id="@String.Concat("serial_number_value_input_checkbox1")" name="@String.Concat("serial_number_value_input_checkbox1")" value="0" />
 
 
                                                 </tr>
@@ -452,7 +480,7 @@
                                 </div>
 
                                 <div class="col-md-12">
-                                    <div class="col-md-5"></div>
+                                    <div class="col-md-4"></div>
 
 
                                     <div class="col-md-1 pr-0 text-center">
@@ -467,8 +495,20 @@
 
                                     </div>
 
+                                    <div class="col-md-1 pr-0 text-center">
+                                        <a>
+                                            <span class=""><img src="/img/images/draft.png"></span><br>
+
+
+                                        </a>
+
+                                        <input type="submit" name="SubmitionType" onclick="draft_saved()" value="Draft">
+
+
+                                    </div>
+
                                     <div class="col-md-1 text-center">
-                                        <a href="~/Sale/New_Invoice">
+                                        <a href="~/Purchase/New_Purchase_Order">
                                             <span class=""><img src="~/img/images/exit.png" /></span><br />
                                             <input type="button" value="Exit" />
                                             @*<span class="bold ml--7">Exit</span>*@
@@ -492,8 +532,8 @@
                                 <input type="text" class="" id="received_total_hidden" name="received_total_hidden" placeholder="received total" hidden />
 
 
-                                <input type="text" class="" id="amount_paid_hidden" name="amount_paid_hidden" placeholder="Amount Paid" hidden />
-                                <input type="text" class="" id="left_amount_hidden" name="left_amount_hidden" placeholder="Left Amount" hidden />
+                                <label>Amount Paid</label><input type="text" class="" id="amount_paid_hidden" name="amount_paid_hidden" placeholder="Amount Paid"  />
+                                <label>Amount Left</label><input type="text" class="" id="left_amount_hidden" name="left_amount_hidden" placeholder="Left Amount"  />
                             </form>
 
 
@@ -663,6 +703,75 @@
     }
     
     @*---------------------------POP UP END EDIT SUPPLIER--------------------------------*@
+
+
+
+    @*----------------------------POP UP SERIAL NUMBER CUSTOMER--------------------------------*@
+
+
+    <div class="modal fade" id="Serial_Number_Modal" tabindex="-1" role="dialog" aria-hidden="false">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content modal-style-custom">
+
+                <div class="title col-md-12">
+                    <span>Message</span>
+                    <img src="~/img/images/c3.png" class="close mr--13 pull-right hide_close_btn_on_checked" onclick="close_serial_number_modal()" />
+                </div>
+
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+
+                        <div class="empty-height"></div><div class="empty-height"></div>
+
+                        <div class="win text-center">
+                            <span class="bold black-color">Please Enter Serial Number for Item</span>
+                            @*<label class="bold black-color"><input readonly type="checkbox" id="batch_scan_checkbox" onchange="batch_scan_function(1)" value="" />Batch Scan :</label>*@
+                            <input readonly onkeypress="Serial_Number_Enter_Click(event)" id="serial_number_value" class="txt" type="text" style="width:100%;text-align:center">
+
+                            <div class="empty-height"></div><div class="empty-height"></div>
+
+                            <div>
+                                @*<div class="pull-left">
+                                        <a class="btn blue-btn-style btn_logout_session_expire bold width-120">
+                                            Logout
+                                        </a>
+
+
+                                    </div>*@
+                                <label hidden>Quantity Count </label><input hidden type="text" id="quantity_for_loop" />
+                                <label>Row Counter Count </label><input type="text" id="rowCounterSerialNumber" />
+                                <label hidden>Enter Count </label><input hidden type="text" id="EnterCounterSerialNumber" />
+
+                                <label class="font-13">Check to Enter Serial Number<input type="checkbox" value="0" id="serial_number_checkedbox" name="serial_number_checkedbox" onchange="serial_number_checkbox()" /></label>
+
+                                @*<div class="">
+                                        <a class="btn btn-success blue-btn-style btn-mini bold width-120">
+                                            Ok
+                                        </a>
+                                    </div>*@
+                            </div>
+
+                            <div class="col-md-12">
+
+                                <div class="clearfix"></div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer"></div>
+                <div class=""></div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+    @*----------------------------POP UP END SERIAL NUMBER CUSTOMER--------------------------------*@
 
 
     <script src="~/scripts/purchase/New_Purchase_Order.js"></script>

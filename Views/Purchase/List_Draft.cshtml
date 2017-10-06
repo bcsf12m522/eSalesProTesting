@@ -1,5 +1,5 @@
 ﻿@model List<eSalesPro.Models.Purchase_Order>
-<body id="body-index" onload="Loading_Purchase_Report()">
+<body id="body-index">
     <div id="sticky-footer-wrap">
 
         @*-----------------Top Navigation Start---------------*@
@@ -31,65 +31,16 @@
 
                             <div class="col-md-12">
 
-                                @*@{
+                                @{
                                     Html.RenderPartial("Loader_Div");
-                                }*@
-                                <div id="loader_div" class="">
-                                    <img src="~/img/loading.gif" class="ajax_loader">
-                                </div>
+                                }
 
-                                <div class="col-md-3 pl-0">
-                                    <h3 class="bold font-20">Purchase Order Report<small></small></h3>
+                                <div class="col-md-5 pl-0">
+                                    <h3 class="bold font-20">Purchase Order Draft List<small></small></h3>
                                 </div>
                                 <div class="pull-right col-md-9 mt-10 pr-0">
 
-                                    <div class="pull-right">
-                                        <input required type="date" disabled id="to_date" oninput="poByDate();" class="date-width-height" name="to_date">
-                                    </div>
-
-                                    <div class="pull-right">
-                                        <label class="black-color mr-3 mt-5">To :</label>
-                                    </div>
-                                    <div class="pull-right">
-                                        <input required type="date" id="from_date" oninput="showToDate()" class="date-width-height mr-3" name="from_date">
-                                    </div>
-                                    <div class="pull-right">
-                                        <label class="black-color mr-3 mt-5">From :</label>
-                                    </div>
-                                    <div class="pull-right">
-                                        <input type="text" onkeypress='validate(event)' onkeyup="poByNumber(this.value);" class="width_78_height text-center mr-7" placeholder="Number" name="stock_qty" id="login">
-                                    </div>
-
-                                    @*<div class="pull-right">
-                                            <input placeholder="Serial No" class="width_78_height mr-3"/>
-                                        </div>*@
-
-                                    <div class="pull-right">
-                                        <select name="sale_type" required="" onchange="poByPayStatus(this.value);" class="form-control">
-
-                                            <option>Select Any</option>
-                                            <option value="-1">All Types</option>
-
-                                            @foreach (var obj in ViewBag.payStatus)
-                                            {
-                                                <option value="@obj.Id">@obj.Status_Type</option>
-                                            }
-                                        </select>
-
-                                    </div>
-                                    <div class="pull-right">
-                                        <select name="sale_type" onchange="poByPayPriority(this.value);" required="" class="form-control">
-
-                                            <option>Select Any</option>
-                                            <option value="-1">All Types</option>
-
-                                            @foreach (var obj in ViewBag.payPriority)
-                                            {
-                                                <option value="@obj.Id">@obj.Type</option>
-                                            }
-
-                                        </select>
-                                    </div>
+                                   
 
 
 
@@ -119,7 +70,7 @@
 
                             <div class="col-md-3"></div>
                             <div class="col-md-2 pull-right pr-0 mb-20">
-                                <a href="/Purchase/List_Draft" class="btn btn-primary blue-btn-style btn-mini bold pull-right width-195">Draft List</a>
+                                @*<a href="#" class="btn btn-primary blue-btn-style btn-mini bold pull-right width-195">Print</a>*@
                             </div>
 
                             <div class="col-md-4 pull-right">
@@ -140,7 +91,72 @@
                         <div id="date_click_div" class="">
 
                             <div id="updatedDiv" class="col-md-12">
+                                <table border="0" class="table table-responsive border_black" id="table_on_dates">
+                                    <thead>
+                                        <tr class="table-heading-fonts table-main-headings">
+                                            <th class="text-center">PO ID</th>
+                                            <th class="text-center">Supplier Name</th>
+                                            <th class="text-center">Ordered + Vat</th>
+                                            <th class="text-center">Received + Vat</th>
+                                            <th class="text-center" style="width: 95px;">Date</th>
+                                            <th class="text-center">Pay Method</th>
+                                            <th class="text-center">Pay Status</th>
+                                            <th class="text-center">PO Status</th>
+                                            <th class="text-center">Actions</th>
 
+
+                                        </tr>
+                                    </thead>
+                                    <tbody class="black-color bold" id="">
+
+
+
+
+
+                                        @foreach (var v in Model)
+                                        {
+
+                                            if (v == null)
+                                            {
+                                                continue;
+                                            }
+
+                                            //onclick="location.href = '@(Url.Action("Edit_Purchase_Order", "Purchase", new { id = v.Id }))'"
+                                            @*<tr onclick="foo(@v.Id)">*@
+
+                                            <tr>
+                                                @*<tr onclick="foo(@v.Id)">*@
+                                                <td class="text-center" style="width:78px" data-title="User ID">@v.Purchase_Number</td>
+                                                <td class="text-center" data-title="User ID">@v.Supplier.Name</td>
+                                                <td class="text-center" data-title="User ID">@v.Total</td>
+                                                <td class="text-center" data-title="User ID">@v.Received_Total</td>
+                                                <td class="text-center" data-title="User ID">@v.Created_at.ToString("MM/dd/yyyy")</td>
+                                                <td class="text-center" data-title="User ID">@v.Payment_Methods.Type</td>
+                                                <td class="text-center" data-title="User ID">@v.Payment_Status.Status</td>
+                                                <td class="text-center" data-title="User ID">@v.Purchase_Order_Status.Status_Type</td>
+
+                                                <td class="text-center width-120" style="vertical-align:middle;">
+                                                    <a class="btn btn-sm btn-info bold" href="~/Purchase/Edit_Purchase_Order/@v.Id">
+                                                        Edit
+                                                    </a>
+
+                                                    <a class="btn btn-sm btn-danger bold" href="">
+                                                        Delete
+                                                    </a>
+                                                </td>
+
+                                            </tr>
+
+
+
+                                        }
+
+
+
+
+                                    </tbody>
+
+                                </table>
                                 <div class="clearfix"></div>
 
 

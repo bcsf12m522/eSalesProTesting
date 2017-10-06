@@ -1,4 +1,38 @@
-﻿function poByPayPriority(id) {
+﻿function Loading_Purchase_Report() {
+    //alert("ASASASAS");
+    //$("#table_div_Load").hide();
+
+    $("#loader_div").show();
+    $("#date_click_div").hide();
+
+    $.ajax({
+
+        url: '/Report/PurchaseReportToday_Yesterday/',
+        data: {},
+        type: 'Get',
+        cache: false,
+        success: function (data) {
+            //alert("SUCCESS");
+
+            $("#date_click_div").show();
+            document.getElementById('updatedDiv').innerHTML = data;
+            $("#loader_div").hide();
+
+            $('#table_on_dates').dataTable();
+
+            //$("#table_on_dates_length").hide();
+            //$("#table_on_dates_filter").hide();
+
+        },
+        error: function (response) {
+            //alert("ERROR");
+        }
+    })
+}
+
+
+
+function poByPayPriority(id) {
     //alert("ASASSAS");
     //$("#loader_div").show();
     $("#loader_div").show();

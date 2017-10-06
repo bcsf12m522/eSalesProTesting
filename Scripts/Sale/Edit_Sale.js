@@ -56,7 +56,7 @@ function make_readonly_on_Invoice(doc_type) {
         if (doc_type == 1 || doc_type == 3) {
 
             $("#codeforProduct" + i).prop("disabled", true).css({ "background-color": "white" });
-            $("#invoice_description" + i).prop("disabled", true).css("background-color", "white");
+            $("#invoice_description" + i).prop("readonly", true).css("background-color", "white");
             $("#invoice_quantity" + i).prop("disabled", true).css("background-color", "white");
             $("#invoice_price" + i).prop("disabled", true).css("background-color", "white");
             $("#invoice_price_vat" + i).prop("disabled", true).css("background-color", "white");
@@ -69,7 +69,7 @@ function make_readonly_on_Invoice(doc_type) {
 
         else {
             $("#codeforProduct" + i).prop("disabled", false);
-            $("#invoice_description" + i).prop("disabled", false);
+            $("#invoice_description" + i).prop("readonly", false);
             $("#invoice_quantity" + i).prop("disabled", false);
             $("#invoice_price" + i).prop("disabled", false);
             $("#invoice_price_vat" + i).prop("disabled", false);

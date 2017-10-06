@@ -75,6 +75,10 @@
         <EntityTypeShape EntityType="Database1Model.Serial_Number_Table" Width="1.5" PointX="19.5" PointY="16.5" />
         <AssociationConnector Association="Database1Model.FK_Serial_Number_Table_ToTable" />
         <AssociationConnector Association="Database1Model.FK_Serial_Number_Table_ToTable_1" />
+        <EntityTypeShape EntityType="Database1Model.Serial_Number_Purchase_Table" Width="2.5" PointX="23.625" PointY="8.625" />
+        <AssociationConnector Association="Database1Model.FK_Serial_Number_Purchase_Table_ToTable_2" />
+        <AssociationConnector Association="Database1Model.FK_Serial_Number_Purchase_Table_ToTable" />
+        <AssociationConnector Association="Database1Model.FK_Serial_Number_Purchase_Table_ToTable_1" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

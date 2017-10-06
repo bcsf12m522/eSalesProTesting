@@ -389,8 +389,39 @@
             </div>
 
             <div class="col-md-3">
-                <div>
-                    <h3 class="bold mt-0">Item Images</h3>
+                <h3 class="bold mt-0">Item Images</h3>
+
+                @if (@Model.Image != null)
+                {
+                    {
+                        var base64 = Convert.ToBase64String(@Model.Image);
+                        var imgsrc = string.Format("data:image/gif;base64,{0}", base64);
+
+
+
+                        <div class="fileupload fileupload-new" data-provides="fileupload" align="center">
+
+                            <div class="fileupload-new thumbnail"><img id="ass" src="@imgsrc" class="product-img"></div>
+                            
+                            <div class="fileupload-preview fileupload-exists thumbnail @*product-img*@"></div>
+
+                            <div>
+
+                                @*<a href="#" class="btn btn_view_payment_status btn-margin-product mr-5" style="box-shadow:none!important;">Remove</a>*@
+                                <span class="ml-5 btn btn-file btn-primary btn-margin-product"><span class="fileupload-new">Change</span><span class="fileupload-exists">Change</span><input type="file" value="Change" name="file" id="a_image1" onchange="Checkfilesimage(1);"></span>
+
+                                <a href="javascript:;" class="btn btn-primary btn-margin-product fileupload-exists" data-dismiss="fileupload">Remove</a>
+
+                            </div>
+
+                        </div>
+
+                        @*<img src="@imgsrc" class="img-circle max_width_50" style="border:2px solid dimgray" />*@
+
+                    }
+                }
+                else
+                {
                     <div class="fileupload fileupload-new" data-provides="fileupload" align="center">
 
                         <div class="fileupload-new thumbnail"><img src="~/img/images/default-image.jpg" class="product-img" /></div>
@@ -399,14 +430,19 @@
 
                         <div>
 
-                            <span class="btn btn-file btn-primary btn-margin-product"><span class="fileupload-new">Select image</span><span class="fileupload-exists">Change</span><input type="file" value="@Model.Image" name="file" id="a_image1" onchange="Checkfilesimage(1)"></span>
+                            <span class="btn btn-file btn-primary btn-margin-product"><span class="fileupload-new">Select Image</span><span class="fileupload-exists">Change</span><input type="file" value="Change" name="file" id="a_image1" onchange="Checkfilesimage(1);"></span>
 
                             <a href="javascript:;" class="btn btn-primary btn-margin-product fileupload-exists" data-dismiss="fileupload">Remove</a>
 
                         </div>
 
                     </div>
-                </div>
+                }
+               
+                @*<div>
+                <h3 class="bold mt-0">Change Image</h3>
+
+            </div>*@
 
 
 

@@ -1,5 +1,5 @@
 ﻿function edit_supp(Id) {
-    var page = $("#")
+    var page = $("#pageValue").val();
     
 
     //alert("ASASASDADADASDAS");

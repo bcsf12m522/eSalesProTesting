@@ -265,13 +265,20 @@ function PO__Status() {
 
 
 
-function productList(char, serialnumber) {
+function productList(e, char, serialnumber) {
 
     //alert("ENTER");
     //arguments.callee.counter = arguments.callee.counter || 1;
     //var productID = document.getElementById("invoice_product_id" + counter).value;
     
     //alert("Supplier ID" + Supplier_ID);
+
+    var url = '/Purchase/GetProducts/';
+    var flag_value = 0;
+
+
+  
+
 
     if (serialnumber == "" || serialnumber == null) {
 
@@ -311,9 +318,15 @@ function productList(char, serialnumber) {
         else {
             $("#productList").show();
 
+            if (e.ctrlKey && e.keyCode == 32) {
+                flag_value = 1;
+                //alert("CONTROL & SPACEBAR");
+            }
+
+            //alert(flag_value);
             $.ajax({
                 url: '/Purchase/GetProducts/',
-                data: { ch: char, counter: Count, SR: serialnumber },
+                data: { ch: char, counter: Count, SR: serialnumber, flag: flag_value },
                 cache: false,
                 type: "Get",
                 success: function (data) {
@@ -443,6 +456,9 @@ function Total(rownum) {
     $("#order_vat_hidden").val(total_vat);
     $("#order_total_hidden").val(gross);
 
+    $("#amount_paid_hidden").val(gross);
+
+
     //$("#received_sub_total_hidden").val(a1);
     //$("#received_vat_hidden").val(total_vat);
     //$("#received_total_hidden").val(gross);
@@ -535,6 +551,8 @@ function Total2(rownum) {
     $("#order_sub_total_hidden").val(a1);
     $("#order_vat_hidden").val(total_vat);
     $("#order_total_hidden").val(gross);
+
+    $("#amount_paid_hidden").val(gross);
 
     //$("#received_sub_total_hidden").val(a1);
     //$("#received_vat_hidden").val(total_vat);
@@ -809,32 +827,49 @@ function payment_piriority() {
     }
 }
 
+function draft_saved() {
+    alert("dadadsads");
 
+    $("#payment_status_id").val(2);
+    $("#po_status").val(1);
+    
+    payment_status();
+}
 
 function payment_status() {
     
     //alert("ddsaadssaasd");
-    var value=$("#payment_status_id").val();
+    var value = $("#payment_status_id").val();
+
+    var gross = $("#order_total_hidden").val();
+    //alert("GROSS " + gross);
+    
+    //$("#left_amount_hidden").val(0);
+
 
     if (value == 1) {
+        $("#amount_paid_hidden").val(gross);
+        $("#left_amount_hidden").val(0);
         $("#payment_piriority_tr").hide();
         $("#partial_payment_option").hide();
     }
 
     else if (value == 2) {
+        $("#amount_paid_hidden").val(0);
+        $("#left_amount_hidden").val(gross);
         $("#payment_piriority_tr").show();
         $("#partial_payment_option").hide();
     }
 
-    else if (value == 3) {
-        //$("#Partial_Payment_Modal").modal("show");
-        //alert("3");
-        $("#Partial_Payment_Modal").modal("show");
-        $("#payment_piriority_tr").show();
-        $("#partial_payment_option").show();
+    //else if (value == 3) {
+    //    //$("#Partial_Payment_Modal").modal("show");
+    //    //alert("3");
+    //    $("#Partial_Payment_Modal").modal("show");
+    //    $("#payment_piriority_tr").show();
+    //    $("#partial_payment_option").show();
         
         
-    }
+    //}
 }
 
 
@@ -895,86 +930,183 @@ function checkCreditLimit() {
     var order_total = order_total2.toFixed(2);
     var limit_float = limits - 0;
 
+    
 
     var limit = limit_float.toFixed(2);
     //alert("total" + order_total);
     //alert("limit" + limit);
 
 
-    if (payment_status != 1) {
+    if (payment_status == 1) {
         //alert("NOT 1");
         //alert("LIMIT" + limit);
         //alert("Amount Left" + amount_left);
-        if (payment_status == 3) {
-            //alert("3");
-            var amount_left1 = document.getElementById("left_amount_hidden").value;
-
-            var amount_left2 = amount_left1 - 0;
-            var amount_left = amount_left2.toFixed(2);
+        //alert("payment_status " + payment_status);
+        return true;
 
 
-            //alert("limit" + limit);
-            //alert("total" + order_total);
-            //alert("Amount Left" + amount_left);
-            
-            
-
-            if (parseFloat(amount_left) <= parseFloat(limit)) {
-                //alert("Amount Left" + amount_left);
-                //alert("Partial Payment Not Reached your Credit Limit");
-                return true;
-            }
-            else {
-
-                swal({
-                    title: "LIMIT REACHED",
-                    text: "Reached to your Credit Limit, Please update your Credit Limit",
-                    type: "warning",
-                    confirmButtonColor: '#DD6B55',
-                    confirmButtonText: 'Okay',
-                },
-       function () {
-       });
-
-                //alert("Partial Payment You have Reached your Credit Limit\nYou have to Update your Credit Limit");
-                return false;
-            }
-        }
-
-        else {
-            //alert("else 3");
-            //alert("total" + order_total);
-            //alert("limit" + limit);
-            
-            if (parseFloat(order_total) > parseFloat(limit)) {
-                //alert("if 2");
-                //alert("Gross" + gross);
-                //alert("Limit" + limit);
-                //alert("You have Reached your Credit Limit\nYou have to Update your Credit Limit");
-
-                swal({
-                    title: "LIMIT REACHED",
-                    text: "Reached to your Credit Limit, Please update your Credit Limit",
-                    type: "warning",
-                    confirmButtonColor: '#DD6B55',
-                    confirmButtonText: 'Okay',
-                },
-    function () {
-    });
-
-                return false;
-            }
-            else {
-                //alert("else 2");
-                //alert("Else limit" + limit);
-                //alert("Else total" + order_total);
-                //alert("Not Reached your Credit Limit");
-                return true;
-            }
-        }
     }
     else {
-        //alert("else 1");
-        return true;
+
+        //alert("payment_status " + payment_status);
+        //alert("else 3");
+        //alert("total" + order_total);
+        //alert("limit" + limit);
+
+        if (parseFloat(order_total) > parseFloat(limit)) {
+            //alert("if 2");
+            //alert("Gross" + gross);
+            //alert("Limit" + limit);
+            //alert("You have Reached your Credit Limit\nYou have to Update your Credit Limit");
+
+            swal({
+                title: "LIMIT REACHED",
+                text: "Reached to your Credit Limit, Please update your Credit Limit",
+                type: "warning",
+                confirmButtonColor: '#DD6B55',
+                confirmButtonText: 'Okay',
+            },
+function () {
+});
+
+            return false;
+        }
+        else {
+            //alert("else 2");
+            //alert("Else limit" + limit);
+            //alert("Else total" + order_total);
+            //alert("Not Reached your Credit Limit");
+            return true;
+        }
     }
+
+
+
+
+
+
+
+
+
+
+
+}
+
+
+
+function serial_number_click(counter) {
+    //alert(counter);
+    $("#EnterCounterSerialNumber").val(0);
+    $("#rowCounterSerialNumber").val(counter);
+    var quantity = $("#invoice_quantity" + counter).val();
+
+
+
+
+    if (quantity == null || quantity == "") {
+        //alert(p_name);
+
+        swal({
+            title: "NO PRODUCT SELECTED",
+            text: "Please Select the Product to view the Image",
+            type: "warning",
+            confirmButtonColor: '#DD6B55',
+            confirmButtonText: 'Okay',
+        },
+
+        function () {
+        });
+        return false;
+    }
+
+    else {
+        $("#Serial_Number_Modal").addClass("in").show("slow");
+
+        $("#quantity_for_loop").val(quantity);
+
+        document.getElementById("serial_number_checkedbox").checked = false;
+        $("#serial_number_value").prop("readonly", true);
+
+        $('#serial_number' + counter).css('pointer-events', 'none');
+
+        $("#invoice_quantity" + counter).prop("readonly", true);
+        //alert("Quantity " + quantity);
+    }
+
+}
+
+function Serial_Number_Enter_Click(e) {
+
+    //alert("Serial Number");
+
+    var counter = $("#rowCounterSerialNumber").val();
+    var loop_size = $("#quantity_for_loop").val();
+    var enter_count = $("#EnterCounterSerialNumber").val();
+
+    //alert("enter_count " + enter_count + "  loop_size  " + loop_size)
+
+    if (enter_count != loop_size) {
+        //    alert("IF COUNT");
+
+        if (e.keyCode === 13) {
+            //alert("ENTER");
+            //e.preventDefault(); // Ensure it is only this code that rusn
+
+            //alert("variable " + variable);
+
+            var variable = " (Serial No." + $("#serial_number_value").val() + ")";
+            var box = $("#invoice_description" + counter);
+            box.val(box.val() + variable);
+
+            enter_count = +enter_count + +1;
+
+            $("#EnterCounterSerialNumber").val(enter_count);
+
+            $("#serial_number_value").val("")
+            if (enter_count == loop_size) {
+                $("#Serial_Number_Modal").hide();
+            }
+            //alert($("#invoice_description" + counter).append($.trim(variable).text()));
+            //$("#invoice_description"+counter).append(variable);
+        }
+    }
+
+
+}
+
+
+function close_serial_number_modal() {
+    $("#Serial_Number_Modal").hide();
+}
+
+
+function serial_number_checkbox() {
+    //alert("sadsadsadas");
+    var value = $("#serial_number_checkedbox").val();
+    var row_count = $("#rowCounterSerialNumber").val();
+
+
+
+    if (document.getElementById("serial_number_checkedbox").checked) {
+        //alert("IF");
+        $("#serial_number_value_input_checkbox" + row_count).val(1);
+        $("#serial_number_value").prop("readonly", false);
+        $(".hide_close_btn_on_checked").hide();
+    }
+    else {
+        $("#serial_number_value_input_checkbox" + row_count).val(0);
+        $("#serial_number_value").prop("readonly", true);
+        $(".hide_close_btn_on_checked").show();
+        //alert("ELSE");
+    }
+
+
+    //if (value == 1) {
+    //    $("#serial_number_value").prop("readonly", false);
+    //}
+
+    //else {
+    //    var value = $("#serial_number_checkedbox").val(0);
+    //}
+
 }

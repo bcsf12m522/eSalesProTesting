@@ -129,7 +129,7 @@
 }
 
 function image_click(counter) {
-    alert("counter" + counter);
+    //alert("counter" + counter);
     var p_name = $("#codeforProduct" + counter).val();
 
     //alert("Name " + p_name);
@@ -1358,18 +1358,19 @@ function rowcounterMinus() {
     var number = document.getElementById('rowCounterrr').value;
 
     document.getElementById('rowCounterrr').value = number - 1;
-    //alert("CROSS" + document.getElementById('rowCounterrr').value)
+    alert("CROSS" + document.getElementById('rowCounterrr').value)
 }
 
 
 //----------------------------SERIAL NUMBER JS FUNCTIONS------------------------------------
 
 function serial_number_click(counter) {
-    alert(counter);
+    //alert(counter);
     $("#EnterCounterSerialNumber").val(0);
     $("#rowCounterSerialNumber").val(counter);
     var quantity = $("#invoice_quantity" + counter).val();
 
+    
 
 
     if (quantity == null || quantity == "") {
@@ -1396,8 +1397,9 @@ function serial_number_click(counter) {
         document.getElementById("serial_number_checkedbox").checked = false;
         $("#serial_number_value").prop("readonly", true);
 
+        $('#serial_number' + counter).css('pointer-events', 'none');
 
-        batch_scan_function(1);
+        $("#invoice_quantity" + counter).prop("readonly", true);
         //alert("Quantity " + quantity);
     }
 
@@ -1460,9 +1462,12 @@ function serial_number_checkbox() {
         //alert("IF");
         $("#serial_number_value_input_checkbox" + row_count).val(1);
         $("#serial_number_value").prop("readonly", false);
+        $(".hide_close_btn_on_checked").hide();
     }
     else {
         $("#serial_number_value_input_checkbox" + row_count).val(0);
+        $("#serial_number_value").prop("readonly", true);
+        $(".hide_close_btn_on_checked").show();
         //alert("ELSE");
     }
 
