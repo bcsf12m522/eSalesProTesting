@@ -29,7 +29,7 @@
 
     run_invoice();
 
- 
+    $("#payment_status_value_after_disabled").val(status_type);
 
     //alert("NOT RUN INVOICE");
 }
@@ -1553,6 +1553,7 @@ function checkCreditLimit() {
 
 
     var limit = limit_float.toFixed(2);
+
     //alert("gross" + gross);
     //alert("limit" + limit);
 
@@ -1593,6 +1594,8 @@ function checkCreditLimit() {
         }
 
         else {
+
+
             if (parseFloat(gross) > parseFloat(limit)) {
 
                 //alert("Gross" + gross);
@@ -1612,7 +1615,6 @@ function checkCreditLimit() {
                 return false;
             }
             else {
-                //alert("Not Reached your Credit Limit");
                 return true;
             }
         }

@@ -133,7 +133,7 @@
 
                                             <div class="col-md-2 pull-left pl-0 pr-0">
                                                 <input type="text" name="exist_customer_idd" class="hidden" id="exist_customer_id" value="@ViewBag.invoice.Customer.Id" />
-                                                <input type="text" name="credit_limit_input" class="hidden" id="credit_limit_input" />
+                                                <input type="text" name="credit_limit_input" class="" id="credit_limit_input" value="@ViewBag.invoice.Customer.Credit_Limit"/>
                                                 <ul class="list-style-type-custom">
                                                     <li id="type_customer" class="bold font-18 black-color">@ViewBag.invoice.Customer.Customer_Type.Type</li>
                                                     <li id="customer_name">@ViewBag.invoice.Customer.Name</li>
@@ -596,7 +596,7 @@
                                                     </td>
                                                 </tr>
 
-                                                <input type="text" hidden id="payment_status_value_after_disabled" name="payment_status_value_after_disabled" />
+                                                <input type="text"  id="payment_status_value_after_disabled" name="payment_status_value_after_disabled" />
                                                 @*<tr class="">
                                                         <td class="bold"></td>
                                                         <td class=" bold text-center"><a href="#" data-target="#Give_Refund" data-toggle="modal">Give Refund</a></td>
@@ -719,7 +719,7 @@
                                     <div class="col-md-1 pr-0 text-center">
                                         <a>
                                             <span class=""><img src="~/img/images/save.png" /></span><br />
-                                            <input type="submit" value="Save" />
+                                            <input type="submit" onclick="return submitResult();" value="Save" />
 
                                         </a>
 

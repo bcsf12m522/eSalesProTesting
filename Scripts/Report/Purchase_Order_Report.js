@@ -87,6 +87,8 @@ function poByPayStatus(id) {
 }
 
 function poByNumber(id) {
+    id = +id + +1;
+    //alert("ID " + id)
     $("#loader_div").show();
     $("#date_click_div").hide();
 

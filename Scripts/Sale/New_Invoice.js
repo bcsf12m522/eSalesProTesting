@@ -492,6 +492,17 @@ function checkCreditLimit() {
     }
 }
 
+function draft_saved() {
+    alert("DRAFT");
+
+    $("#payment_status_id").val(2);
+    //$("#po_status").val(1);
+    var paid= $("#amount_paid_hidden").val();
+    $("#left_amount_hidden").val(paid);
+    $("#amount_paid_hidden").val(0);
+    //payment_status();
+}
+
 function payment_status() {
     var selectedValue = document.getElementById("payment_status_id").value;
     //alert(selectedValue);
@@ -501,6 +512,7 @@ function payment_status() {
 
     if (selectedValue == 1) {
         $("#amount_paid_hidden").val(gross);
+        $("#left_amount_hidden").val(0);
         $("#custom_date_show_invoice").hide();
         $("#partial_payment_option").hide();
         $("#Deposit_payment_option").hide();
