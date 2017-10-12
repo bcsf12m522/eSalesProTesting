@@ -32,7 +32,7 @@
         <a href="#" class="showdiv">
             <img src="/img/images/plus_new_sale.png">
         </a>
-        <a href="#" class="remove" @*onclick="RemoveAddedRow(@counter)"*@>
+        <a href="#" class="remove" onclick="RemoveAddedRow(@counter)">
             <img src="/img/images/cross_new_sale.png">
         </a>
         <a href="#">
@@ -45,7 +45,7 @@
 
     <input type="hidden" id="@String.Concat("total_hidden", counter)" name="@String.Concat("total_hidden", counter)" />
     <input type="hidden" id="@String.Concat("total_vat_hidden", counter)" name="@String.Concat("total_vat_hidden", counter)" />
-    <input hidden type="text" class="remove_div" id="@String.Concat("serial_number_value_input_checkbox", counter)" name="@String.Concat("serial_number_value_input_checkbox", counter)" value="0" />
+    <input type="text" class="remove_div" id="@String.Concat("serial_number_value_input_checkbox", counter)" name="@String.Concat("serial_number_value_input_checkbox", counter)" value="0" hidden/>
 
 </tr>
 
@@ -79,7 +79,7 @@ else
             <a href="#" class="showdiv">
                 <img src="/img/images/plus_new_sale.png">
             </a>
-            <a href="#" class="remove" @*onclick="RemoveAddedRow(@counter)"*@>
+            <a href="#" class="remove" onclick="RemoveAddedRow(@counter)">
                 <img src="/img/images/cross_new_sale.png">
             </a>
             <a href="#" id="@String.Concat("serial_number",counter)" onclick="serial_number_click(@counter)">
@@ -93,7 +93,7 @@ else
         <input type="hidden" id="@String.Concat("total_hidden", counter)" name="@String.Concat("total_hidden", counter)"/>
         <input type="hidden" id="@String.Concat("total_vat_hidden", counter)" name="@String.Concat("total_vat_hidden", counter)"/>
 
-        <input hidden type="text" class="remove_div" id="@String.Concat("serial_number_value_input_checkbox", counter)" name="@String.Concat("serial_number_value_input_checkbox", counter)" value="0"/>
+        <input type="text" class="remove_div" id="@String.Concat("serial_number_value_input_checkbox", counter)" name="@String.Concat("serial_number_value_input_checkbox", counter)" value="0" hidden/>
 
     </tr>
 }

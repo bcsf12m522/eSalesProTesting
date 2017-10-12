@@ -79,6 +79,7 @@
         <AssociationConnector Association="Database1Model.FK_Serial_Number_Purchase_Table_ToTable_2" />
         <AssociationConnector Association="Database1Model.FK_Serial_Number_Purchase_Table_ToTable" />
         <AssociationConnector Association="Database1Model.FK_Serial_Number_Purchase_Table_ToTable_1" />
+        <EntityTypeShape EntityType="Database1Model.Config_Settings" Width="1.5" PointX="13.375" PointY="19.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

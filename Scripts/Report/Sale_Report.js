@@ -37,7 +37,7 @@ function findBySerial(e) {
     var serial = document.getElementById('serial_number_id').value;
 
     if (e.keyCode === 13) {
-        alert("dsadadsada " + serial);
+        //alert("dsadadsada " + serial);
     
 
     $("#table_div_Load").hide();
@@ -55,7 +55,7 @@ function findBySerial(e) {
         cache: false,
         success: function (data) {
 
-            alert("SUCCESS");
+            //alert("SUCCESS");
             $("#date_click_div").show();
             document.getElementById('date_click_div').innerHTML = data;
             $("#loader_div").hide();

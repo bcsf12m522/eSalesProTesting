@@ -12,6 +12,10 @@ function rowcounterMinus() {
 
     document.getElementById('rowCounterrr').value = number - 1;
     //alert("CROSS" + document.getElementById('rowCounterrr').value)
+    //Total(number);
+    //Total2(number);
+    //TotalReceived1(number);
+    //TotalReceived2(number);
 }
 
 
@@ -73,22 +77,29 @@ function RemoveAddedRow(id) {
 
     //alert("DONE");
 
-    var total = document.getElementById("invoice_total" + id).value;
-    var net = $("#order_sub_total_hidden").val();
+    var total = document.getElementById("invoice_price_vat" + id).value;
+    var net = $("#order_total_hidden").val();
     
     var received_total1 = document.getElementById("received_total" + id).value;
     var received_net = $("#received_sub_total_hidden").val();
 
-    var received_new_net = received_net - received_total1;
-    var received_vat = (received_new_net * 0.2);
-    var received_gross = +(received_new_net * 0.2) + +received_new_net;
+    var received_new_net = (received_net - received_total1).toFixed(2);
+    var received_vat = (received_new_net * 0.2).toFixed(2);
+    var received_gross = (+(received_new_net * 0.2) + +received_new_net).toFixed(2);
+
+
+
     //var vat = $("#vat_invoice").val();
     //alert("DONE1");
 
 
-    var order_new_net = net - total;
-    var order_vat = (order_new_net * 0.2);
-    var order_gross = +(order_new_net * 0.2) + +order_new_net;
+    //var order_new_net = (net - total).toFixed(2);
+    //var order_vat = (order_new_net / 1.2).toFixed(2);
+    //var order_gross = (+(order_vat) + +order_new_net).toFixed(2);
+
+    var order_gross = (net - total).toFixed(2);
+    var order_new_net = (order_gross / 1.2).toFixed(2);
+    var order_vat = (order_gross - order_new_net).toFixed(2);
 
     //alert("DONE2");
 
@@ -117,6 +128,9 @@ function RemoveAddedRow(id) {
 
     $("#rowId" + id).closest(".remove_div").remove();
     rowcounterMinus();
+
+    $("#serial_number_value_input_checkbox" + id).val(0);
+    payment_status();
 }
 
 function hhh() {
@@ -477,8 +491,8 @@ function Total2(rownum) {
     var quantity = document.getElementById('invoice_quantity' + rownum).value;
 
     var priceVat = document.getElementById('invoice_price_vat' + rownum).value;
-    var price = (5 / 6) * (priceVat);
-
+    var price = (priceVat / 1.2);
+    //alert("Price " + price);
     //alert("PRICE VAt" + priceVat);
     //alert("PRICE" + price);
 
@@ -828,7 +842,7 @@ function payment_piriority() {
 }
 
 function draft_saved() {
-    alert("dadadsads");
+    //alert("dadadsads");
 
     $("#payment_status_id").val(2);
     $("#po_status").val(1);

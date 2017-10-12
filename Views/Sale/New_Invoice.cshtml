@@ -22,7 +22,11 @@
 
                 @*-----------------Main Container Start---------------*@
                 <div class="user-page-height">
-                    <div class="bggg-img">
+
+                    <div id="loader_div" style="display:none">
+                        <img src="~/img/loading.gif" style="position: absolute;left: 38%;top: 27%;">
+                    </div>
+                    <div class="bggg-img hide_invoice">
                         <div id="edit_invoice">
                             <form id="demo-form2" action="@Url.Action("Create_Sale","Sale")" method="post" data-parsley-validate class="" enctype="multipart/form-data">
 
@@ -37,9 +41,12 @@
                                 
                                 <div class="col-md-12">
 
-                                    @{
+                                    @*@{
                                         Html.RenderPartial("Loader_Div");
-                                    }
+                                    }*@
+
+
+                                 
 
                                     <div class="empty-height"></div><div class="empty-height"></div>
 
@@ -476,15 +483,15 @@
 
                                 </div>
 
-                                <input id="counters" value="" hidden type="text"/>
-                                <input type="text" class="" id="net_invoice_hidden" name="net_invoice_hidden" hidden/>
-                                <input type="text" class="" id="vat_invoice" name="vat_invoice_hidden" hidden/>
-                                <label hidden> Gross </label><input type="text" class="" id="gross_invoice" name="gross_invoice_hidden" hidden/>
+                                <input id="counters" value="" name="products_row_counts" type="text" hidden/>
+                                <label hidden>Net Hidden</label><input type="text" class="" id="net_invoice_hidden" name="net_invoice_hidden" hidden />
+                                <label hidden>VAT Hidden</label><input type="text" class="" id="vat_invoice" name="vat_invoice_hidden" hidden />
+                                <label hidden>GROSS Hidden</label><label hidden> Gross </label><input type="text" class="" id="gross_invoice" name="gross_invoice_hidden" hidden />
                                 <input type="text" class="" id="global_discount_hidden" name="global_discount_hidden" value="0" hidden/>
                                 <input type="text" class="" id="total_after_discount_hidden" name="total_after_discount_hidden" hidden/>
                                 
-                                <label>Amount Paid</label><input type="text" class="" id="amount_paid_hidden" name="amount_paid_hidden" />
-                                <label>Amount Left</label><input type="text" class="" id="left_amount_hidden" name="left_amount_hidden" />
+                                <label hidden>Amount Paid</label><input type="text" class="" id="amount_paid_hidden" name="amount_paid_hidden" hidden />
+                                <label hidden>Amount Left</label><input type="text" class="" id="left_amount_hidden" name="left_amount_hidden" hidden/>
                                 
 
                                 <input type="text" hidden name="doc_type_page_load" id="doc_type_page_load"/>
@@ -1038,7 +1045,7 @@
 
     @*----------------------------POP UP END ADD CUSTOMER--------------------------------*@
 
-    <input type="hidden" value="1" id="rowCounterrr"/>
+    <label hidden>Rowcounter</label><input type="text" value="1" id="rowCounterrr" hidden/>
     <input type="hidden" value="1" id="ApnaApnaRowNumber"/>
 
     
@@ -1188,10 +1195,10 @@
                                 
                             </div>*@
                             <label hidden>Quantity Count </label><input hidden type="text" id="quantity_for_loop" />
-                            <label>Row Counter Count </label><input  type="text" id="rowCounterSerialNumber" />
+                            <label hidden>Row Counter Count </label><input  type="text" id="rowCounterSerialNumber" hidden/>
                             <label hidden>Enter Count </label><input hidden type="text" id="EnterCounterSerialNumber" />
 
-                            <label class="font-13">Check to Enter Serial Number<input type="checkbox" value="0" id="serial_number_checkedbox" name="serial_number_checkedbox" onchange="serial_number_checkbox()" /></label>
+                            <label class="font-13" style="color:green">Check to Enter Serial Number<input type="checkbox" value="0" id="serial_number_checkedbox" name="serial_number_checkedbox" onchange="serial_number_checkbox()" /></label>
                             
                             @*<div class="">
                                 <a class="btn btn-success blue-btn-style btn-mini bold width-120">

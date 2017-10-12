@@ -133,7 +133,7 @@
 
                                             <div class="col-md-2 pull-left pl-0 pr-0">
                                                 <input type="text" name="exist_customer_idd" class="hidden" id="exist_customer_id" value="@ViewBag.invoice.Customer.Id" />
-                                                <input type="text" name="credit_limit_input" class="" id="credit_limit_input" value="@ViewBag.invoice.Customer.Credit_Limit"/>
+                                                <input type="text" name="credit_limit_input" class="hidden" id="credit_limit_input" value="@ViewBag.invoice.Customer.Credit_Limit"/>
                                                 <ul class="list-style-type-custom">
                                                     <li id="type_customer" class="bold font-18 black-color">@ViewBag.invoice.Customer.Customer_Type.Type</li>
                                                     <li id="customer_name">@ViewBag.invoice.Customer.Name</li>
@@ -596,7 +596,7 @@
                                                     </td>
                                                 </tr>
 
-                                                <input type="text"  id="payment_status_value_after_disabled" name="payment_status_value_after_disabled" />
+                                                <input type="text"  id="payment_status_value_after_disabled" name="payment_status_value_after_disabled" hidden/>
                                                 @*<tr class="">
                                                         <td class="bold"></td>
                                                         <td class=" bold text-center"><a href="#" data-target="#Give_Refund" data-toggle="modal">Give Refund</a></td>
@@ -846,7 +846,7 @@
                                         <th hidden class="text-center">Price</th>
                                         <th hidden class="text-center">Price+Vat</th>
                                         <th hidden class="text-center">Total</th>
-                                        <th hidden class="text-center">Total+Vat</th>
+                                        <th  class="text-center">Total+Vat</th>
                                     </tr>
                                 </thead>
 
@@ -863,7 +863,7 @@
 
                                             <td class="text-center border-right-td">
                                                 <div class="text-center">
-                                                    <input placeholder="0" class="unbold text-center font-18" id="@String.Concat(" checkbox_id",a)" type="checkbox">
+                                                    <input placeholder="0" class="unbold text-center font-18" id="@String.Concat("checkbox_id",a)" type="checkbox">
                                                 </div>
                                             </td>
 
@@ -871,7 +871,7 @@
 
                                                 <div class="text-center">
                                                     <input placeholder="Code" value="@obj.Sale.Product.Custom_Label_" class="unbold width-160 text-center" type="text"
-                                                           id="@String.Concat(" ref_sku",a)">
+                                                           id="@String.Concat("ref_sku",a)">
                                                 </div>
 
                                             </td>
@@ -880,7 +880,7 @@
                                             <td class="border-right-td">
 
                                                 <textarea class="2 description-text-area unbold width-100p"
-                                                          placeholder="Description" id="@String.Concat(" ref_description",a)">
+                                                          placeholder="Description" id="@String.Concat("ref_description",a)">
                                                     @obj.Sale.Description
                                                 </textarea>
 
@@ -890,7 +890,7 @@
 
                                                 <div class="text-center">
 
-                                                    <input onkeypress="validate(event);" id="@String.Concat(" ref_quantity",a)"
+                                                    <input onkeypress="validate(event);" id="@String.Concat("ref_quantity",a)"
                                                            onkeyup="Total_Refund(a);" placeholder="0"
                                                            class="3 unbold width-72 text-center" value="@obj.Sale.Quantity" type="text">
 
@@ -902,7 +902,7 @@
 
                                                 <div class="text-center">
                                                     <input placeholder="Code" value="@obj.Sale.Price" class="unbold width-110 text-center"
-                                                           type="text" id="@String.Concat(" ref_price",a)">
+                                                           type="text" id="@String.Concat("ref_price",a)">
                                                 </div>
 
                                             </td>
@@ -911,7 +911,7 @@
 
                                                 <div class="text-center">
                                                     <input placeholder="Code" value="@obj.Sale.PriceVAT" class="unbold width-110 text-center"
-                                                           type="text" id="@String.Concat(" ref_pricevat",a)">
+                                                           type="text" id="@String.Concat("ref_pricevat",a)">
                                                 </div>
 
                                             </td>
@@ -920,16 +920,16 @@
 
                                                 <div class="text-center">
                                                     <input placeholder="Code" value="@obj.Sale.Total" class="unbold width-110 text-center"
-                                                           type="text" id="@String.Concat(" ref_total",a)">
+                                                           type="text" id="@String.Concat("ref_total",a)">
                                                 </div>
 
                                             </td>
 
-                                            <td class="border-right-td" hidden>
+                                            <td class="border-right-td" >
 
                                                 <div class="text-center">
                                                     <input value="@obj.Sale.Total_VAT" class="unbold width-110 text-center"
-                                                           type="text" id="@String.Concat(" ref_totalvat",a)">
+                                                           type="text" id="@String.Concat("ref_totalVat",a)">
                                                 </div>
 
                                             </td>
@@ -992,15 +992,22 @@
                                             var descriptions = $("#ref_description" + i).val();
                                             var quantum = $("#ref_quantity" + i).val();
                                             var negative_quantity = quantum * (-1);
-
                                             //alert("BEFORE");
 
                                             var pricee = $("#ref_price" + i).val();
                                             var priceeVAT = $("#ref_priceVat" + i).val();
                                             var Totall = $("#ref_total" + i).val();
                                             var TotallVAT = $("#ref_totalVat" + i).val();
+                                            
+                                            //var abc = $("#aaa" + i).val();
+
+                                            //alert("abc " + abc);
+
+
+                                            //alert("TotallVAT " + TotallVAT);
 
                                             total = +total + +TotallVAT;
+                                            //alert("total " + total);
 
                                             var negative_total = Totall * (-1);
                                             var negative_totalVat = TotallVAT * (-1);
@@ -1054,6 +1061,7 @@
 
                                     $("#refund_total_amount").val(total_fixed);
                                     $("#refund_amount").val(total_fixed);
+                                    //alert("total " + total_fixed);
                                     //alert("counter" + count);
                                     $("#Give_Refund").hide();
                                     $("#after_refund_tr").show();
@@ -1169,8 +1177,8 @@
 
                                 @*<div class="text-center">
                                     <input placeholder="0" class="unbold text-center font-18" id="@String.Concat("checkbox_id",a)" type="checkbox">
-                                    </div>*@<div class="text-center">
-                                    <input placeholder="0" class="unbold text-center font-18" id="@String.Concat(" checkbox_id",a)" type="checkbox">
+                                    </div>*@@*<div class="text-center">
+                                    <input placeholder="0" class="unbold text-center font-18" id="@String.Concat("checkbox_id",a)" type="checkbox">*@
                                 </div>
 
                                 <div class="">
@@ -1196,7 +1204,7 @@
                                 </div>
 
                                 <div class="col-md-4">
-                                    @*<a href="" data-dismiss="modal" class="btn btn-primary btn-mini width-80 center-block height-40 mt-0">Cancel</a>*@<a href="" data-dismiss="modal" class="btn btn-primary btn-mini width-80 center-block height-40 mt-0"></a>
+                                    @*<a href="" data-dismiss="modal" class="btn btn-primary btn-mini width-80 center-block height-40 mt-0">Cancel</a>*@@*<a href="" data-dismiss="modal" class="btn btn-primary btn-mini width-80 center-block height-40 mt-0"></a>*@
                                     <input type="button" data-dismiss="modal" value="Cancel" class="btn btn-primary btn-mini center-block width-145" onclick="close_modal_refund()" />
                                 </div>
                                 <div class="col-md-2"></div>

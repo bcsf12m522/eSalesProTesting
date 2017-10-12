@@ -145,7 +145,7 @@
                                                 <div class="form-group" id="">
                                                     <label class="pull-left width-134" for="middle-name">Number</label>
                                                     <div class="pull-left">
-                                                        <input class="width-145 text-center" onblur="checkPurchaseNumber()" value="@ViewBag.purchase_number" onkeypress="validate(event)" type="text" name="purchase_number" id="purchase_number" required>
+                                                        <input class="width-145 text-center" @*onblur="checkPurchaseNumber()"*@ value="@ViewBag.purchase_number" readonly type="text" name="purchase_number" id="purchase_number" required>
                                                     </div>
                                                 </div>
 
@@ -212,7 +212,7 @@
                                                     <th class="text-center">Supplier</th>
                                                     <th class="text-center width-53p">Description</th>
                                                     <th class="text-center">Quantity</th>
-                                                    <th class="text-center received_div" style="display:none">Receieved Qty</th>
+                                                    <th class="text-center received_div" style="display:none">Rec Qty</th>
                                                     <th width="10%" class="text-center">Price</th>
                                                     <th class="text-center hidecolumn">Price+VAT</th>
                                                     <th width="2%" class="text-center">Total</th>
@@ -225,7 +225,7 @@
                                             <tbody class="black-color">
 
                                                 <tr id="rowId1" class="font-15 id remove_div">
-                                                    <td class="border-right-td"><div class="text-center"><input placeholder="Code" class="yoyo unbold width-110 text-center" id="codeforProduct1" name="yoyoyoyoyoyoyoy1" onkeyup="productList(event,this.value);" type="text" required></div></td>
+                                                    <td class="border-right-td"><div class="text-center"><input style="max-width:90px" placeholder="Code" class="yoyo unbold text-center" id="codeforProduct1" name="yoyoyoyoyoyoyoy1" onkeyup="productList(event,this.value);" type="text" required></div></td>
                                                     <td class="border-right-td"><div class="text-center"><input onkeypress="validate(event)" id="supplier_code1" onkeyup="" placeholder="Supplier" class="4 new-invoice-width-boxes unbold width-68 text-center" name="supplier_code1" type="text" required></div></td>
                                                     <td class="border-right-td">
                                                         <textarea class="2 description-text-area unbold width-100p text-center" name="invoice_description1" id="invoice_description1" required="" placeholder="Description"></textarea>
@@ -519,11 +519,11 @@
 
                                 </div>
 
-                                <input id="counters" value="" type="text" hidden />
+                                <input id="counters" value="" name="products_row_counts" type="text" hidden/>
 
-                                <input type="text" class="" id="order_sub_total_hidden" placeholder="order Subtotal" name="order_sub_total_hidden" hidden />
-                                <input type="text" class="" id="order_vat_hidden" name="order_vat_hidden" placeholder="order vat" hidden />
-                                <input type="text" class="" id="order_total_hidden" name="order_total_hidden" placeholder="order total" hidden />
+                                <label hidden>Sub</label><input type="text" class="" id="order_sub_total_hidden" placeholder="order Subtotal" name="order_sub_total_hidden" hidden/>
+                                <label hidden>VAT</label><input type="text" class="" id="order_vat_hidden" name="order_vat_hidden" placeholder="order vat" hidden/>
+                                <label hidden>Total</label><input type="text" class="" id="order_total_hidden" name="order_total_hidden" placeholder="order total" hidden/>
 
 
 
@@ -532,8 +532,8 @@
                                 <input type="text" class="" id="received_total_hidden" name="received_total_hidden" placeholder="received total" hidden />
 
 
-                                <label>Amount Paid</label><input type="text" class="" id="amount_paid_hidden" name="amount_paid_hidden" placeholder="Amount Paid"  />
-                                <label>Amount Left</label><input type="text" class="" id="left_amount_hidden" name="left_amount_hidden" placeholder="Left Amount"  />
+                                <label hidden>Amount Paid</label><input type="text" class="" id="amount_paid_hidden" name="amount_paid_hidden" placeholder="Amount Paid" hidden/>
+                                <label hidden>Amount Left</label><input type="text" class="" id="left_amount_hidden" name="left_amount_hidden" placeholder="Left Amount" hidden/>
                             </form>
 
 
@@ -739,10 +739,10 @@
 
                                     </div>*@
                                 <label hidden>Quantity Count </label><input hidden type="text" id="quantity_for_loop" />
-                                <label>Row Counter Count </label><input type="text" id="rowCounterSerialNumber" />
+                                <label hidden>Row Counter Count </label><input type="text" id="rowCounterSerialNumber" hidden/>
                                 <label hidden>Enter Count </label><input hidden type="text" id="EnterCounterSerialNumber" />
 
-                                <label class="font-13">Check to Enter Serial Number<input type="checkbox" value="0" id="serial_number_checkedbox" name="serial_number_checkedbox" onchange="serial_number_checkbox()" /></label>
+                                <label class="font-13" style="color:green">Check to Enter Serial Number<input type="checkbox" value="0" id="serial_number_checkedbox" name="serial_number_checkedbox" onchange="serial_number_checkbox()" /></label>
 
                                 @*<div class="">
                                         <a class="btn btn-success blue-btn-style btn-mini bold width-120">

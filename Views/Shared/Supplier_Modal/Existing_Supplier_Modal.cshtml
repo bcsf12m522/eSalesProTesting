@@ -125,6 +125,8 @@
                                         <th class="text-center">Postcode</th>
                                         <th class="text-center">Email</th>
                                         <th class="text-center">Phone</th>
+                                        @*<th class="text-center">Balance</th>
+                                        <th class="text-center">Credit</th>*@
                                         <th class="text-center">Available Credit Limit</th>
                                         <th class="text-center">Credit Limit</th>
                                         @*<th class="text-center">Balance</th>
@@ -142,6 +144,8 @@
                                             <td id="@String.Concat("suppliers3", v.Id)" data-title="Last Name">@v.Post_Code</td>
                                             <td id="@String.Concat("suppliers4", v.Id)" data-title="First Name">@v.Email</td>
                                             <td id="@String.Concat("suppliers5", v.Id)" data-title="Email" class="user-emails">@v.Mobile</td>
+                                            @*<td>@v.Balance</td>
+                                            <td>@v.Credit</td>*@
                                             <td>@v.Credit_Limit</td>
                                             <td id="" data-title="Email" class="user-emails">@v.Credit_Limit_Old</td>
 

@@ -300,7 +300,7 @@ function productList(char, serialnumber) {
             })
         }
         else {
-            alert("ENTER2");
+            //alert("ENTER2");
             $("#productList").show();
 
             $.ajax({

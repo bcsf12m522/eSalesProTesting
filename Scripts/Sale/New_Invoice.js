@@ -493,7 +493,7 @@ function checkCreditLimit() {
 }
 
 function draft_saved() {
-    alert("DRAFT");
+    //alert("DRAFT");
 
     $("#payment_status_id").val(2);
     //$("#po_status").val(1);
@@ -643,16 +643,20 @@ function Deposit_Payment() {
 }
 
 function RemoveAddedRow(id) {
-    alert(id);
-    var total = document.getElementById("invoice_total" + id).value;
-    var net = $("#net_invoice_hidden").val();
+    //alert(id);
+    var total = document.getElementById("invoice_total_vat" + id).value;
+    var net = $("#gross_invoice").val();
 
     //var vat = $("#vat_invoice").val();
     
 
-    var new_net = net - total;
-    var vat = (new_net * 0.2);
-    var gross = +(new_net * 0.2) + +new_net;
+    //var new_net = net - total;
+    //var vat = (new_net * 0.2);
+    //var gross = +(new_net * 0.2) + +new_net;
+
+    var gross = (net - total).toFixed(2);
+    var new_net = (gross / 1.2).toFixed(2);
+    var vat = (gross - new_net).toFixed(2);
 
     $("#net_invoice_hidden").val(new_net);
     $("#net_invoice").html("£" + new_net);
@@ -669,7 +673,10 @@ function RemoveAddedRow(id) {
     //alert("NEW NET" + new_net);
     $("#rowId" + id).closest(".remove_div").remove();
     rowcounterMinus();
-    
+    $("#serial_number_value_input_checkbox" + id).val(0);
+
+    payment_status();
+
     //$("#serial_number_value_input_checkbox" + id).val(0);
 
     //$("#serial_number_value_input_checkbox" + id).closest(".remove_div").remove();
@@ -1044,7 +1051,9 @@ function Total2(rownum) {
     var quantity = document.getElementById('invoice_quantity' + rownum).value;
 
     var priceVat = document.getElementById('invoice_price_vat' + rownum).value;
-    var price = (5 / 6) * (priceVat);
+    var price = ((priceVat) / 1.2).toFixed(2);
+
+    
 
     var total = quantity * price;
     var totalVat = quantity * priceVat;
@@ -1076,13 +1085,13 @@ function Total2(rownum) {
     //alert("sizeFIRST" + size);
     for (i = 1; i <= size ; ++i) {
 
-        check = document.getElementById('invoice_total' + i);
+        check = document.getElementById('invoice_total_vat' + i);
 
         //alert("CHECK" + check);
 
         if (check !== null) {
 
-            totaaaal = document.getElementById('invoice_total' + i).value;
+            totaaaal = document.getElementById('invoice_total_vat' + i).value;
 
             a = +totaaaal + +a;
         }
@@ -1096,26 +1105,55 @@ function Total2(rownum) {
 
     var a_parsed = a.toFixed(2);
 
-    $("#net_invoice").html("£" + a_parsed);
-    var total_vat = (((20 / 100)) * a_parsed).toFixed(2);
+    //$("#net_invoice").html("£" + a_parsed);
+    //var total_vat = (((20 / 100)) * a_parsed).toFixed(2);
 
-    var gross_without_parse = +a_parsed + +total_vat;
+    //var gross_without_parse = +a_parsed + +total_vat;
 
-    var gross = gross_without_parse.toFixed(2);
+    //var gross = gross_without_parse.toFixed(2);
 
 
 
-    var discounted = gross - global_discount;
+    //var discounted = gross - global_discount;
+
+
+    //$("#invoice_vat").html(total_vat)
+    //$("#invoice_gross").html(gross);
+
+    //$("#net_invoice_hidden").val(a_parsed);
+    //$("#vat_invoice").val(total_vat);
+    //$("#gross_invoice").val(gross);
+
+    //$("#amount_paid_hidden").val(gross);
+    ////alert("ASASSASAS");
+    //$("#payment_status_id").val(1);
+    //$("#partial_payment_option").hide();
+
+
+
+    
+    var net_pr = (a_parsed / 1.2).toFixed(2);
+    $("#net_invoice").html("£" + net_pr);
+    
+    var total_vat = (a_parsed - net_pr).toFixed(2);
+
+    //var gross_without_parse = +a_parsed + +total_vat;
+
+    //var gross = gross_without_parse.toFixed(2);
+
+
+
+    var discounted = a_parsed - global_discount;
 
 
     $("#invoice_vat").html(total_vat)
-    $("#invoice_gross").html(gross);
+    $("#invoice_gross").html(a_parsed);
 
-    $("#net_invoice_hidden").val(a_parsed);
+    $("#net_invoice_hidden").val(net_pr);
     $("#vat_invoice").val(total_vat);
-    $("#gross_invoice").val(gross);
+    $("#gross_invoice").val(a_parsed);
 
-    $("#amount_paid_hidden").val(gross);
+    $("#amount_paid_hidden").val(a_parsed);
     //alert("ASASSASAS");
     $("#payment_status_id").val(1);
     $("#partial_payment_option").hide();
@@ -1269,6 +1307,8 @@ function checkSoldHistory(counter) {
 
 
 function outstanding_balance_function() {
+    $(".hide_invoice").hide();
+    $("#loader_div").show();
     //alert("Outstanding Balance");
     var payment_method = $("#payment_method_id_outstanding_balance").val();
     //alert("payment_method " + payment_method);
@@ -1288,8 +1328,10 @@ function outstanding_balance_function() {
         type: "Get",
         success: function (data) {
             //alert(data);
+            $(".hide_invoice").show();
+            $("#loader_div").hide();
             $("#outstanding_balance").val("£" + data);
-
+            location.reload();
         },
         error: function (response) {
             alert("Error");
@@ -1368,9 +1410,9 @@ function rowcounterPlus() {
 
 function rowcounterMinus() {
     var number = document.getElementById('rowCounterrr').value;
-
+    
     document.getElementById('rowCounterrr').value = number - 1;
-    alert("CROSS" + document.getElementById('rowCounterrr').value)
+    //alert("CROSS" + document.getElementById('rowCounterrr').value)
 }
 
 
