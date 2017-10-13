@@ -111,10 +111,13 @@
 
                 if (@config.Image != null)
                 {
+                    if (@ViewBag.invoice.Doc_Type_ID != 3)
                     {
-                        var base64 = Convert.ToBase64String(@config.Image);
-                        var imgsrc = string.Format("data:image/gif;base64,{0}", base64);
-                        <img src="@imgsrc" alt="" class="logo" />
+                        {
+                            var base64 = Convert.ToBase64String(@config.Image);
+                            var imgsrc = string.Format("data:image/gif;base64,{0}", base64);
+                            <img src="@imgsrc" alt="" class="logo" />
+                        }
                     }
                 }
                 else
@@ -160,22 +163,31 @@
                         <td>@ViewBag.invoice.Created_at.ToShortDateString()</td>
                     </tr>
                     <tr>
-                        <td>Account No:</td>
-                        <td>@ViewBag.invoice.Customer.Account_No</td>
+                        @if (@ViewBag.invoice.Doc_Type_ID != 3)
+                        {
+                            <td>Account No:</td>
+                            <td>@ViewBag.invoice.Customer.Account_No</td>
+                        }
                     </tr>
                     <tr>
-                        <td>Purchase Order No:</td>
-                        <td>@ViewBag.invoice.Purchase_Order_Number</td>
+                        @if (@ViewBag.invoice.Doc_Type_ID != 3)
+                        {
+                            <td>Purchase Order No:</td>
+                            <td>@ViewBag.invoice.Purchase_Order_Number</td>
+                        }
                     </tr>
                 </table>
                 <div class="clearfix"></div>
                 <div>&nbsp;</div>
-                <table cellpadding="5" cellspacing="0" border="1" class="infotablesecond pull-right">
-                    <tr>
-                        <td class="bgcolor" width="140px">Served By:</td>
-                        <td width="150px">@ViewBag.invoice.User.display_name</td>
-                    </tr>
-                </table>
+                @if (@ViewBag.invoice.Doc_Type_ID != 3)
+                {
+                    <table cellpadding="5" cellspacing="0" border="1" class="infotablesecond pull-right">
+                        <tr>
+                            <td class="bgcolor" width="140px">Served By:</td>
+                            <td width="150px">@ViewBag.invoice.User.display_name</td>
+                        </tr>
+                    </table>
+                }
                 <div class="clearfix"></div>
                 <div>&nbsp;</div>
                 <table cellpadding="5" cellspacing="0" border="1" class="infotablethird pull-right">
@@ -356,8 +368,11 @@
 
                 <p align="center" style="margin-top:10px;"><strong>THANKS FOR YOUR BUSINESS!</strong></p>
                 <hr style="height: 1px; background-color: #000; margin-top:0px!important" />
-                <p align="center" style="font-size: 10px;"><strong>COMPNAY REG NUMBER: @config.Company_Number INCORPORATED IN ENGLAND AND WALES VAT REG NO: @config.Vat_Number</strong></p>
-
+                
+                @if (@ViewBag.invoice.Doc_Type_ID != 3)
+                {
+                    <p align="center" style="font-size: 10px;"><strong>COMPANY REG NUMBER: @config.Company_Number INCORPORATED IN ENGLAND AND WALES VAT REG NO: @config.Vat_Number</strong></p>
+                }
             </div>
 
 

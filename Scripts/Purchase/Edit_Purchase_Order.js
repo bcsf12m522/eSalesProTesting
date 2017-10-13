@@ -543,82 +543,107 @@ function TotalReceived1(rownum) {
 
     //alert("ROWCount TotalReceived1" + document.getElementById('rowCounterrr').value);
     var received_quantity = document.getElementById('invoice_receieved_quantity' + rownum).value;
+    var invoice_quantity = document.getElementById('invoice_quantity' + rownum).value;
+
+
     //alert("RCVD" + received_quantity);
     var price = document.getElementById('invoice_price' + rownum).value;
     //alert(price);
 
+    if (received_quantity <= invoice_quantity) {
 
 
-    var total = received_quantity * price;
+        var total = received_quantity * price;
 
-    document.getElementById('received_total' + rownum).value = total;
+        //alert(total);
 
-    var a1 = 0;
-    var a = a1.toFixed(2);
-    var sum_received = a;
-    var totaaaal = 0;
-    //alert("SUM" + sum_received);
-    var size = document.getElementById('rowCounterrr').value;
-    //var size = rownum;
-    var check = 0;
-    for (i = 1; i <= size; i++) {
-        
-        check = document.getElementById('received_total' + i);
+        document.getElementById('received_total' + rownum).value = total;
 
-        if (check !== null) {
+        var a1 = 0;
+        var a = a1.toFixed(2);
+        var sum_received = a;
+        var totaaaal = 0;
+        //alert("SUM" + sum_received);
+        var size = document.getElementById('rowCounterrr').value;
+        //alert("Size" + size);
+        //var size = rownum;
+        var check = 0;
+        for (i = 1; i <= rownum; ++i) {
 
-            totaaaal = document.getElementById('received_total' + i).value;
-            sum_received = +totaaaal + +sum_received;
-            //alert("totaaaal" + totaaaal);
-            //alert("sum_received" + sum_received);
+            check = document.getElementById('received_total' + i);
+
+            if (check != 0) {
+
+                totaaaal = document.getElementById('received_total' + i).value;
+                sum_received = +totaaaal + +sum_received;
+                //alert("totaaaal" + totaaaal);
+                //alert("sum_received" + sum_received);
+
+            }
+            else {
+
+                size = +size + +1;
+                //alert("SIZE" + size);
+            }
+            //received_total
         }
-        else {
 
-            size = +size + +1;
-            //alert("SIZE" + size);
-        }
-        //received_total
+        var a = sum_received - 0;
+        var total_sum = a.toFixed(2);
+
+        //alert("SUM" + sum_received);
+
+        $("#received_sub_total_td").html("£" + total_sum);
+
+
+        var total_vat1 = (((20 / 100)) * total_sum);
+
+        var total_vat2 = total_vat1 - 0;
+        var total_vat = total_vat2.toFixed(2);
+
+        var gross1 = +total_sum + +total_vat;
+
+        var gross2 = gross1 - 0;
+
+        var gross = gross2.toFixed(2);
+
+        //alert("VAT:" + total_vat);
+        //alert("Total" + gross);
+
+        //alert("GLOBAL VALUE :" + global_discount);
+        //var discounted = gross - global_discount;
+
+        //alert("VAT" + total_vat);
+        //alert("Total" + gross);
+
+        $("#received_vat_td").html(total_vat);
+        $("#received_total_td").html(gross);
+
+
+
+
+
+        $("#received_sub_total_hidden").val(a);
+        $("#received_vat_hidden").val(total_vat);
+        $("#received_total_hidden").val(gross);
     }
+    else {
+        $('#invoice_receieved_quantity' + rownum).val("0");
+        $('#invoice_receieved_quantity' + rownum).val("");
 
-    var a = sum_received - 0;
-    var total_sum = a.toFixed(2);
+        swal({
+            title: "QUANTITY EXCEEDED",
+            text: "Recieved Quantity cannot be more than Ordered Quantity",
+            type: "warning",
+            confirmButtonColor: '#DD6B55',
+            confirmButtonText: 'Okay',
 
-    //alert("SUM" + sum_received);
+        }
 
-    $("#received_sub_total_td").html("£" + total_sum);
-
-
-    var total_vat1 = (((20 / 100)) * total_sum);
-
-    var total_vat2 = total_vat1 - 0;
-    var total_vat = total_vat2.toFixed(2);
-
-    var gross1 = +total_sum + +total_vat;
-
-    var gross2 = gross1 - 0;
-
-    var gross = gross2.toFixed(2);
-
-    //alert("VAT:" + total_vat);
-    //alert("Total" + gross);
-
-    //alert("GLOBAL VALUE :" + global_discount);
-    //var discounted = gross - global_discount;
-
-    //alert("VAT" + total_vat);
-    //alert("Total" + gross);
-
-    $("#received_vat_td").html(total_vat);
-    $("#received_total_td").html(gross);
-
-
-
-
-
-    $("#received_sub_total_hidden").val(a);
-    $("#received_vat_hidden").val(total_vat);
-    $("#received_total_hidden").val(gross);
-
+      
+  );
+       
+    }
 
 }
 
@@ -885,7 +910,7 @@ function checkCreditLimit() {
 
     //alert("check_credit_limit");
     var limits = document.getElementById('credit_limit_input').value;
-    alert("Credit Limit" + limits);
+    //alert("Credit Limit" + limits);
 
     var order_total1 = document.getElementById("order_total_hidden").value;
     var payment_status = document.getElementById("payment_status_id").value;
