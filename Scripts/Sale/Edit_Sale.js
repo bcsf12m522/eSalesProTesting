@@ -78,6 +78,7 @@ function make_readonly_on_Invoice(doc_type) {
             $("#invoice_discount" + i).prop("disabled", false);
         }
     }
+
 }
 
 
@@ -137,10 +138,14 @@ function run_invoice() {
     var selectedValue = document.getElementById("language").value;
 
     //alert("Selected Value: " + selectedValue);
-
-    document.getElementById('doc_type_page_load').value = selectedValue;
+    
+    //document.getElementById('doc_type_page_load').value = selectedValue;
+    var old_doc = $("#doc_type_page_load").val();
     document.getElementById('new_document_type_changed').value = selectedValue;
     
+
+
+
     if (selectedValue == 1) {
 
 
@@ -174,11 +179,35 @@ function run_invoice() {
         $("#item_sale_div").hide();
         $("#new_item_sale_heading").hide();
 
+        if (old_doc == 1 && selectedValue == 1) {
+            $("#invoice_number_div").show();
+            $("#item_sale_max").hide();
+        }
+
+        if (old_doc == 3 && selectedValue == 1) {
+            $("#item_sale_div").hide();
+            $("#invoice_number_max").show();
+        }
+
+        if (old_doc == 2 && selectedValue == 1) {
+            //alert("selectedValue == 1");
+            $("#quote_number_div").hide();
+            $("#item_sale_max").hide();
+            $("#invoice_number_max").show();
+        }
+
         make_readonly_on_Invoice(1);
+
     }
 
     else if (selectedValue == 2) {
         //document.getElementById('doc_type_page_load').value = selectedValue;
+
+
+      
+
+       
+
         $(".hide_for_quote").hide();
         //alert("Quote Document");
 
@@ -207,6 +236,26 @@ function run_invoice() {
         $("#new_quote_heading").show();
         $("#show_details").show();
         $(".priceVAT").show();
+
+        if (old_doc == 2 && selectedValue == 1) {
+            alert("selectedValue == 1");
+            $("#quote_number_div").hide();
+            $("#invoice_number_max").show();
+        }
+
+        if (old_doc == 2 && selectedValue == 3) {
+            alert("selectedValue == 3");
+            $("#quote_number_div").hide();
+            $("#item_sale_max").show();
+        }
+
+
+        if (old_doc == 2 && selectedValue == 2) {
+            $("#quote_number_div").show();
+            $("#invoice_number_max").hide();
+            $("#item_sale_max").hide();
+        }
+
         make_readonly_on_Invoice(2);
     }
 
@@ -241,6 +290,26 @@ function run_invoice() {
         //Item Sale Show
         $("#item_sale_div").show();
         $("#new_item_sale_heading").show();
+
+        if (old_doc == 1 && selectedValue == 3) {
+            $("#invoice_number_div").hide();
+            $("#item_sale_max").show();
+        }
+
+        if (old_doc == 2 && selectedValue == 3) {
+            //alert("selectedValue == 3");
+            $("#quote_number_div").hide();
+            $("#invoice_number_max").hide();
+            $("#item_sale_max").show();
+        }
+
+
+        if (old_doc == 3 && selectedValue == 3) {
+            $("#item_sale_div").show();
+            $("#invoice_number_max").hide();
+            //$("#invoice_number_div").show();
+            //$("#item_sale_max").hide();
+        }
 
         make_readonly_on_Invoice(3);
 
@@ -389,10 +458,15 @@ function payment_status() {
     var selectedValue = document.getElementById("payment_status_id").value;
     //alert("selectedValue  " + selectedValue);
     //jQuery.noConflict();
+    var gross = $("#gross_invoice").val();
+    $("#amount_paid_hidden").val(0);
 
     $("#payment_status_value_after_disabled").val(selectedValue);
 
     if (selectedValue == 1) {
+        $("#amount_paid_hidden").val(gross);
+        $("#left_amount_hidden").val(0);
+
         $("#custom_date_show_invoice").hide();
         $("#partial_payment_option").hide();
         $("#Deposit_payment_option").hide();
