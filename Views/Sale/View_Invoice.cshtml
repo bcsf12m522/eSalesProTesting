@@ -1,8 +1,10 @@
 ﻿@model List<eSalesPro.Models.Sale_Invoice>
 @{
 
-    var base_url_live = eSalesPro.AppConstants.AppConstant.base_url;
+    var base_url_live = eSalesPro.AppConstants.AppConstant.base_url_sheikh;
+    var base_url_client = eSalesPro.AppConstants.AppConstant.base_url_client;
     var base_url_local = eSalesPro.AppConstants.AppConstant.base_url_local;
+    
 }
 
 <script>
@@ -1165,22 +1167,22 @@
             </textarea>*@
                                         @*<textarea class="col-md-12 email_textarea pl-0 pr-0" id="email_textarea" name="email_textarea"></textarea>*@
 
+                                        
+                                        <textarea name="ck_body" id="editor" class="ck_textarea">
+                                            <a style="font-family:Comic Sans MS !important;font-weight:bold" href="@String.Concat(@base_url_client, "/Home/Print_Document/" + @ViewBag.invoice.Id)">Click here for a copy of the Invoice for your reference.</a>
 
-                                        <textarea name="ck_body" id="editor" class="" style="background-color:#FFF;text-align:left;padding-top:15px;min-height:1000px">
-                                            <a class="pl_5" style="font-size:25px !important;" href="@String.Concat(@base_url_local, "/Home/Print_Document/" + @ViewBag.invoice.Id)">Click here for a copy of the Invoice for your reference.</a>
-                                            
-                                            
-                                            
+
+
                                             @*<a class="pl_5" style="font-size:25px" href="/Home/Print_Document/@ViewBag.invoice.Id">Click here for a copy of the Invoice for your reference.</a>*@
 
-                                            
 
-                                            <div class="pt-30 pl_5">
-                                                <p><span style="color:red;font-size:20px;"><b>PLEASE NOTE: </b></span><span style="color:blue; font-size:19px; padding-left:5px">DO NOT REPLY TO THIS EMAIL AS YOUR REPLY WILL NOT BE READ OR ANSWERED</span></p>
+
+                                            <div>
+                                                <p><span style="color:red;"><b>PLEASE NOTE: </b></span><span style="color:blue;font-size:15px!important;">DO NOT REPLY TO THIS EMAIL AS YOUR REPLY WILL NOT BE READ OR ANSWERED</span></p>
                                             </div>
 
-                                            <div class="pt-30 pl_5">
-                                                <p><span style="color:blue; padding-left:5px;font-size:19px">This is an Automated email from our</span><span style="color:green;font-size:19px"> Sales Manager Software</span></p>
+                                            <div>
+                                                <p><span style="color:blue;">This is an Automated email from our</span><span style="color:green;"> <b>eSalesPro</b> Software</span></p>
                                             </div>
 
 
@@ -1209,7 +1211,7 @@
 
                                         <div class="col-md-3">
                                             @*<a href="#" class="btn btn-primary btn-mini center-block mt-0">Ok</a>*@
-                                            <button type="submit" class="btn btn-primary btn-mini center-block">OK</button>
+                                            <button type="submit" class="btn btn-primary btn-mini center-block" style="width:100%;">OK</button>
                                         </div>
 
                                         <div class="col-md-3">
@@ -2168,6 +2170,7 @@
 
     <script src="~/content/ckeditor/ckeditor.js"></script>
     <script src="~/content/ckeditor/samples/js/sample.js"></script>
+    <link rel="stylesheet" href="~/Content/ckeditor/contents.css"/>
     
 
 
