@@ -194,6 +194,9 @@ function run_invoice() {
             $("#quote_number_div").hide();
             $("#item_sale_max").hide();
             $("#invoice_number_max").show();
+            $("#payment_status_id").val(1);
+            payment_status();
+            //alert("3");
         }
 
         make_readonly_on_Invoice(1);
@@ -301,6 +304,9 @@ function run_invoice() {
             $("#quote_number_div").hide();
             $("#invoice_number_max").hide();
             $("#item_sale_max").show();
+
+            $("#payment_status_id").val(1);
+            payment_status();
         }
 
 

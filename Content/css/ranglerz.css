@@ -108,6 +108,10 @@
     font-size: 18px;
 }
 
+.font-19 {
+    font-size: 19px;
+}
+
 .margin-0{
     margin:0;
 }
@@ -243,6 +247,15 @@
 .ml-9 {
     margin-left: 18px;
 }
+
+.ml--14{
+    margin-left:-14px;
+}
+
+.ml-8{
+    margin-left:8px;
+}
+
 
 .pl-40{
     padding-left:40px;
@@ -1681,4 +1694,12 @@ left: -200px;
 /**IE Hacks - see http://css3pie.com/ for more info on how to use CS3Pie and to download the latest version**/
 ul.enlarge img, ul.enlarge span{
 behavior: url(pie/PIE.htc); 
+}
+
+.pl_5{
+    padding-left:5px;
+}
+
+.pt-30{
+    padding-top:30px;
 }
