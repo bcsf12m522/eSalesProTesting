@@ -1172,7 +1172,7 @@
                                             </label>
                                         </div>
                                         <div class="col-md-5">
-                                            <input class="height-28 width-300 text-center" name="subject" value="@String.Concat("Invoice for ", @ViewBag.invoice.Customer.Name)" />
+                                            <input class="height-28 width-300 text-center" name="subject" value="@String.Concat(@ViewBag.invoice.Document_Type.Type, " for ", @ViewBag.invoice.Customer.Name)" />
                                             @*<input class="height-28 width-300 text-center" name="subject" value="@ViewBag.invoice.Customer.Name" />*@
                                         </div>
                                         <div class="col-md-2"></div>
