@@ -237,6 +237,10 @@ function run_invoice() {
         $("#show_details").hide();
         $("#item_sale_div").hide();
         $("#new_item_sale_heading").hide();
+
+        $("#input_view_detail").val(0);
+        document.getElementById("view_details").checked = false;
+        
     }
 
     else if (selectedValue == 2) {
@@ -304,6 +308,8 @@ function run_invoice() {
         $("#item_sale_div").show();
         $("#new_item_sale_heading").show();
 
+        $("#input_view_detail").val(0);
+        document.getElementById("view_details").checked = false;
 
         //$("#item_sale_id").show();
         //$("#invoice_id").hide();
@@ -754,7 +760,8 @@ function tbody_add_record(id, count) {
     checkSoldHistory(count);
     Total(count);
 
-
+    addNewRow();
+    rowcounterPlus();
 
 
 }
@@ -831,6 +838,7 @@ function global_discount() {
 
 function addNewRow() {
 
+    //alert("ADD_NEW_ROW")
     var doc_value = $("#doc_type_page_load").val();
     //alert("doc_value       " + doc_value);
     
@@ -913,9 +921,10 @@ function productList(e, char, serialnumber) {
             success: function (data) {
 
                 document.getElementById('productList').innerHTML = data;
+                
             },
             error: function (response) {
-                //alert("productList");
+                //alert("ERRORRRRRRRRRRRRRRRRRRRRR");
             }
         })
     }
@@ -1173,7 +1182,7 @@ function checkInvoiceNumber() {
         type: "Get",
         cache: false,
         success: function (data) {
-            alert(data);
+            //alert(data);
             $("#custom_document_type_value").val(data);
             if (data == "False") {
 
@@ -1721,3 +1730,12 @@ $(wrapper).on('click', '.remove_button', function (e) {
     e.preventDefault();
     $(this).closest('.r').remove();
 });
+
+function view_detail_click() {
+    if (document.getElementById("view_details").checked) {
+        $("#input_view_detail").val(1);
+    }
+    else {
+        $("#input_view_detail").val(0);
+    }
+}
