@@ -48,8 +48,8 @@
     $("#exist_customer_id").val(id);
     $("#credit_limit_input").val(credit_limit);
 
-
-
+    
+    
     if (type1 == 1) {
         $("#type_customer").text("Normal Customer");
     }
@@ -106,7 +106,7 @@
         $("#type_customer_item_sale").text("Other Customer");
     }
 
-
+    $("#customer_type_selected").val(type1);
 
     $("#ExistingModal").hide('slow');
     //$("#ExistingModal").closest();
@@ -697,10 +697,10 @@ function RemoveAddedRow(id) {
 
 function tbody_add_record(id, count) {
 
-    //alert("ITEM SALE");
-    //alert("2222-----" + count);
-
     //alert("count" + count);
+
+    var c_type = $("#customer_type_selected").val();
+    //alert("c_type " + c_type);
 
     var sku = document.getElementById('partial_row1' + id);
     $("#invoice_product_id" + count).val(id);
@@ -714,11 +714,31 @@ function tbody_add_record(id, count) {
 
     var quantity = document.getElementById('partial_row3' + id);
     var quantity_inner = quantity.innerHTML;
-    //            $("#invoice_quantity" + count).val(quantity_inner);
+    //$("#invoice_quantity" + count).val(quantity_inner);
+    if (c_type == 1) {
+        var price = document.getElementById('partial_row3' + id);
+        var price_inner = price.innerHTML;
+        $("#invoice_price" + count).val(price_inner);
+    }
+    
+    if (c_type == 2) {
+        var price = document.getElementById('partial_row4' + id);
+        var price_inner = price.innerHTML;
+        $("#invoice_price" + count).val(price_inner);
+    }
+    
+    if (c_type == 3) {
+        var price = document.getElementById('partial_row5' + id);
+        var price_inner = price.innerHTML;
+        $("#invoice_price" + count).val(price_inner);
+    }
 
-    var price = document.getElementById('partial_row4' + id);
-    var price_inner = price.innerHTML;
-    $("#invoice_price" + count).val(price_inner);
+    if (c_type == 4) {
+        var price = document.getElementById('partial_row6' + id);
+        var price_inner = price.innerHTML;
+        $("#invoice_price" + count).val(price_inner);
+    }
+
 
     var percent_price = ((20 / 100)) * price_inner;
     total_price_with_vat = +percent_price + +price_inner;

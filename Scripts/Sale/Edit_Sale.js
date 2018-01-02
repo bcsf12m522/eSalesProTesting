@@ -1770,3 +1770,5 @@ function view_detail_click() {
         $("#input_view_detail").val(0);
     }
 }
+
+

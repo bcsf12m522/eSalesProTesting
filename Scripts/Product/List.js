@@ -195,8 +195,69 @@ function abc4() {
 
 //---------------Data Table ---------------//
 
-$(document).ready(function () {
-    $('#product_list_tableeee').dataTable();
-});
+//$(document).ready(function () {
+//    $('#product_list_tableeee').dataTable();
+//});
 
 //---------------Data Table ---------------//
+
+
+
+//-----------------Category Modal Open----------------
+
+//function category_modal_open() {
+//    $("#create_category_modal").addClass("in").show("slow");
+//}
+
+
+
+
+//-----------------Category Modal Open----------------
+
+function printData() {
+    var divToPrint = document.getElementById("product_print_div");
+
+    $(".print_page_heading").show();
+
+    $(".print_btn_hide_cols").hide();
+    
+
+    $("#product_list_tableeee_filter").hide();
+    $("#product_list_tableeee_length").hide();
+    $("#product_list_tableeee_info").hide();
+    $("#product_list_tableeee_paginate").hide();
+
+    
+    $("#product_list_tableeee").css("border", "2px solid black");
+    $("td").css("border", "1px solid black");
+
+    $("th").css('background', '#404040');
+    $("th").css('color', '#FFF');
+
+    $("td").css('background', '#e6e6e6');
+
+    $("td").css("border", "0px solid black");
+
+    
+    
+    newWin = window.open("");
+    newWin.document.write(divToPrint.outerHTML);
+    newWin.print();
+    
+
+    $(".print_btn_hide_cols").show();
+    $(".print_page_heading").hide();
+
+
+    $("#product_list_tableeee_filter").show();
+    $("#product_list_tableeee_length").show();
+    $("#product_list_tableeee_info").show();
+    $("#product_list_tableeee_paginate").show();
+
+    newWin.close();
+
+}
+
+$('.print_btn_view').on('click', function () {
+    printData();
+})
