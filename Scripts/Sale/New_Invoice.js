@@ -700,7 +700,7 @@ function tbody_add_record(id, count) {
     //alert("count" + count);
 
     var c_type = $("#customer_type_selected").val();
-    alert("c_type " + c_type);
+    //alert("c_type " + c_type);
 
     var sku = document.getElementById('partial_row1' + id);
     $("#invoice_product_id" + count).val(id);
@@ -745,7 +745,7 @@ function tbody_add_record(id, count) {
         $("#invoice_price" + count).val(price_inner);
     }
 
-    alert("Price_inner" + price_inner);
+    //alert("Price_inner" + price_inner);
 
     var percent_price = ((20 / 100)) * price_inner;
     total_price_with_vat = +percent_price + +price_inner;
