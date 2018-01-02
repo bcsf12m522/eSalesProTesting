@@ -700,7 +700,7 @@ function tbody_add_record(id, count) {
     //alert("count" + count);
 
     var c_type = $("#customer_type_selected").val();
-    //alert("c_type " + c_type);
+    alert("c_type " + c_type);
 
     var sku = document.getElementById('partial_row1' + id);
     $("#invoice_product_id" + count).val(id);
@@ -715,30 +715,37 @@ function tbody_add_record(id, count) {
     var quantity = document.getElementById('partial_row3' + id);
     var quantity_inner = quantity.innerHTML;
     //$("#invoice_quantity" + count).val(quantity_inner);
+
+
+    var price = 0;
+    var price_inner = 0;
+
+
     if (c_type == 1) {
-        var price = document.getElementById('partial_row3' + id);
-        var price_inner = price.innerHTML;
+        price = document.getElementById('partial_row3' + id);
+        price_inner = price.innerHTML;
         $("#invoice_price" + count).val(price_inner);
     }
     
-    if (c_type == 2) {
-        var price = document.getElementById('partial_row4' + id);
-        var price_inner = price.innerHTML;
+    else if (c_type == 2) {
+        price = document.getElementById('partial_row4' + id);
+        price_inner = price.innerHTML;
         $("#invoice_price" + count).val(price_inner);
     }
     
-    if (c_type == 3) {
-        var price = document.getElementById('partial_row5' + id);
-        var price_inner = price.innerHTML;
+    else if (c_type == 3) {
+        price = document.getElementById('partial_row5' + id);
+        price_inner = price.innerHTML;
         $("#invoice_price" + count).val(price_inner);
     }
 
-    if (c_type == 4) {
-        var price = document.getElementById('partial_row6' + id);
-        var price_inner = price.innerHTML;
+    else if (c_type == 4) {
+        price = document.getElementById('partial_row6' + id);
+        price_inner = price.innerHTML;
         $("#invoice_price" + count).val(price_inner);
     }
 
+    alert("Price_inner" + price_inner);
 
     var percent_price = ((20 / 100)) * price_inner;
     total_price_with_vat = +percent_price + +price_inner;
