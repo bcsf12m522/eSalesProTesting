@@ -1195,7 +1195,6 @@
                                         <div class="col-md-2"></div>
                                     </div>
 
-                                    @*<input name="body" value="~/Sale/Print_Document/@ViewBag.invoice.Id" />*@
 
                                     <div class="clearfix"></div>
 
@@ -1204,12 +1203,7 @@
 
                                     <div class="col-md-12">
 
-                                        @*<textarea class="col-md-12 email_textarea pl-0 pr-0" id="email_textarea" name="email_textarea">
-
-                                            </textarea>*@
-                                        @*<textarea class="col-md-12 email_textarea pl-0 pr-0" id="email_textarea" name="email_textarea"></textarea>*@
-
-
+                                     
                                         <textarea name="ck_body" id="editor" class="ck_textarea">
                                             <a style="font-family:Comic Sans MS !important;font-weight:bold" href="@String.Concat(@base_url_client_testing, "/Home/Print_Document/" + @ViewBag.invoice.Id)">Click here for a copy of the Invoice for your reference.</a>
 
